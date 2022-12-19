@@ -38,4 +38,9 @@ public class RobotServiceImpl implements RobotService {
         robotRepository.deleteById(id);
 
     }
+
+    @Override
+    public Robot getRobotByModel(String model) {
+        return robotRepository.findByModel(model);
+    }
 }

@@ -13,4 +13,5 @@ public interface RobotService {
     void deleteRobotById(Long id);
 
 
+    Robot getRobotByModel(String model);
 }

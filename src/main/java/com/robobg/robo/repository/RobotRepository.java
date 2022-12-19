@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RobotRepository extends JpaRepository<Robot,Long> {
+    Robot findByModel(String model);
 
 }
