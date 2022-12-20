@@ -53,4 +53,38 @@ public class Robot {
 
     @Column(name = "voice_prompts")
     private Boolean voicePrompts;
+
+    @OneToOne
+    @JoinColumn(name = "cleaning_features_id",referencedColumnName = "id")
+    private CleaningFeatures cleaningFeatures;
+
+    @OneToOne
+    @JoinColumn(name = "mopping_features_id",referencedColumnName = "id")
+    private MoppingFeatures moppingFeatures;
+
+    @OneToOne
+    @JoinColumn(name = "batteries_id",referencedColumnName = "id")
+    private Battery battery;
+
+    @OneToOne
+    @JoinColumn(name = "controls_id",referencedColumnName = "id")
+    private Control control;
+
+    @OneToOne
+    @JoinColumn(name = "app_features_id",referencedColumnName = "id")
+    private AppFeatures appFeatures;
+
+    @OneToOne
+    @JoinColumn(name = "sensors_id",referencedColumnName = "id")
+    private Sensor sensor;
+
+    @OneToOne
+    @JoinColumn(name = "other_specifications_id",referencedColumnName = "id")
+    private OtherSpecifications otherSpecifications;
+
+    @OneToOne
+    @JoinColumn(name = "purchase_links",referencedColumnName = "id")
+    private PurchaseLink purchaseLink;
+
+
 }

@@ -3,6 +3,7 @@ package com.robobg.robo.service.impl;
 import com.robobg.robo.entity.Robot;
 import com.robobg.robo.repository.RobotRepository;
 import com.robobg.robo.service.RobotService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class RobotServiceImpl implements RobotService {
 
     private RobotRepository robotRepository;
 
+    @Autowired
     public RobotServiceImpl(RobotRepository robotRepository) {
         super();
         this.robotRepository = robotRepository;

@@ -30,6 +30,37 @@
         </ul>
     </div>
 </nav>
+<br>
+<div class ="container">
+    <div th:if="${not #lists.isEmpty(robots)}">
+        <table style="width:100%" class="table table-secondary">
+           <tr>
+               <th>Model</th>
+               <div th:each="robot : ${robots}">
+               <td th:text="${robot.model}"></td>
+               </div>
+           </tr>
+            <tr>
+                <th>Noise Level</th>
+                <div th:each="robot : ${robots}">
+                <td th:text="${robot.noiseLevel} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Mapping Sensor Type</th>
+                <div th:each="robot : ${robots}">
+                <td th:text="${robot.mappingSensorType} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Auto Dock And Recharge</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.autoDockAndRecharge} ?: 'N/A'"></td>
+                </div>
+            </tr>
+        </table>
+    </div>
+</div>
 
 
 </body>
