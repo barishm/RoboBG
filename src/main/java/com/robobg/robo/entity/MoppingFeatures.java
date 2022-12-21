@@ -32,7 +32,7 @@ public class MoppingFeatures {
     @Column(name = "auto_mop_lifting")
     private Boolean autoMopLifting;
 
-    @Column(name = "auto+_water_tank_refilling")
+    @Column(name = "auto_water_tank_refilling")
     private Boolean autoWaterTankRefilling;
 
     @Column(name = "auto_mop_washing")

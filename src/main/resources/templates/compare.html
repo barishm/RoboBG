@@ -7,6 +7,20 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
+    <style>
+table, td, th {
+  border: 2px solid;
+  height : 90px;
+  width: 20%;
+}
+
+table {
+  border-collapse: collapse;
+}
+th {
+  width: 20%;
+}
+</style>
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -33,7 +47,7 @@
 <br>
 <div class ="container">
     <div th:if="${not #lists.isEmpty(robots)}">
-        <table style="width:100%" class="table table-secondary">
+        <table style="width:100%" class="table table-striped">
            <tr>
                <th>Model</th>
                <div th:each="robot : ${robots}">
@@ -53,9 +67,9 @@
                 </div>
             </tr>
             <tr>
-                <th>Auto Dock And Recharge</th>
+                <th>High Precision Map</th>
                 <div th:each="robot : ${robots}">
-                    <td th:text="${robot.autoDockAndRecharge} ?: 'N/A'"></td>
+                    <td th:text="${robot.highPrecisionMap} ? 'YES' : 'NO'"></td>
                 </div>
             </tr>
         </table>
