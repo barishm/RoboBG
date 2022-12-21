@@ -55,21 +55,70 @@ th {
                </div>
            </tr>
             <tr>
+                <th>Mapping / Path Planning</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.mapping} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Mapping Sensor Type</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.mappingSensorType} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>High-Precision Map</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.highPrecisionMap} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Front Camera</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.frontCamera} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Recharge & Resume</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.rechargeResume} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+            <tr>
+                <th>Automatically Docks And Recharges</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.autoDockAndRecharge} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
                 <th>Noise Level</th>
                 <div th:each="robot : ${robots}">
                 <td th:text="${robot.noiseLevel} ?: 'N/A'"></td>
                 </div>
             </tr>
             <tr>
-                <th>Mapping Sensor Type</th>
+                <th>Display</th>
                 <div th:each="robot : ${robots}">
-                <td th:text="${robot.mappingSensorType} ?: 'N/A'"></td>
+                    <td th:text="${robot.display} ?: 'N/A'"></td>
                 </div>
             </tr>
             <tr>
-                <th>High Precision Map</th>
+                <th>Side Brushes</th>
                 <div th:each="robot : ${robots}">
-                    <td th:text="${robot.highPrecisionMap} ? 'YES' : 'NO'"></td>
+                    <td th:text="${robot.sideBrushes} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Voice Prompts</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.voicePrompts} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Suction Power</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.voicePrompts} ?: 'N/A'"></td>
                 </div>
             </tr>
         </table>

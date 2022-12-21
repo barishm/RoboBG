@@ -25,34 +25,34 @@ public class Robot {
     private String model;
 
     @Column
-    private Boolean mapping;
+    private String mapping;
 
     @Column(name = "mapping_sensor_type")
     private String mappingSensorType;
 
     @Column(name = "high_precision_map")
-    private Boolean highPrecisionMap;
+    private String highPrecisionMap;
 
     @Column(name = "front_camera")
-    private Boolean frontCamera;
+    private String frontCamera;
 
     @Column(name = "recharge_resume")
-    private Boolean rechargeResume;
+    private String rechargeResume;
 
     @Column(name = "auto_dock_and_recharge")
-    private Boolean autoDockAndRecharge;
+    private String autoDockAndRecharge;
 
     @Column(name = "noise_level")
     private String noiseLevel;
 
     @Column
-    private Boolean display;
+    private String display;
 
     @Column(name = "side_brushes")
-    private Integer sideBrushes;
+    private String sideBrushes;
 
     @Column(name = "voice_prompts")
-    private Boolean voicePrompts;
+    private String voicePrompts;
 
     @OneToOne
     @JoinColumn(name = "cleaning_features_id",referencedColumnName = "id")
