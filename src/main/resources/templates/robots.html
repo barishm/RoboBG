@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Robots-Review</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <style>
+table, td, th {
+  border: 2px solid;
+  height : 90px;
+  width: 20%;
+}
+
+table {
+  border-collapse: collapse;
+}
+th {
+  width: 20%;
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#"><h4>RoboBG</h4></a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/home}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/compare}">Compare</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<div class ="container">
+    <div th:if="${not #lists.isEmpty(robots)}">
+        <table style="width:100%" class="table table-striped">
+            <tr>
+                <th>Model</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.model}"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Mapping / Path Planning</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.mapping} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Mapping Sensor Type</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.mappingSensorType} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>High-Precision Map</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.highPrecisionMap} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Front Camera</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.frontCamera} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Recharge & Resume</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.rechargeResume} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+            <tr>
+                <th>Automatically Docks And Recharges</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.autoDockAndRecharge} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Noise Level</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.noiseLevel} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Display</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.display} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Side Brushes</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.sideBrushes} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Voice Prompts</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.voicePrompts} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Suction Power</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.CleaningFeatures.suctionPower} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Cleaning Area</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.CleaningFeatures.cleaningArea} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Dustbin Capacity</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.CleaningFeatures.dustbinCapacity} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Disposable Dustbag Capacity</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.CleaningFeatures.disposableDustBagCapacity} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Automatic Dirt Disposal</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.CleaningFeatures.autoDirtDisposal} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Barrier-cross Height</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.CleaningFeatures.barrierCrossHeight} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Hepa Filter</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.CleaningFeatures.hepaFilter} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Washable Filter</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.CleaningFeatures.washableFilter} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Wet Mopping</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.MoppingFeatures.wetMopping} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Electric Water Flow Control</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.MoppingFeatures.electricWaterFlowControl} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Water Tank Capacity</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.MoppingFeatures.waterTankCapacity} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Vibrating Mopping Pad</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.MoppingFeatures.vibratingMoppingPad} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Automatic Mop Lifting</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.MoppingFeatures.autoMopLifting} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Auto Water Tank Refilling</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.MoppingFeatures.autoWaterTankRefilling} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Auto Mop Washing</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.MoppingFeatures.autoMopWashing} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Battery Capacity</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.Battery.batteryCapacity} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Battery Life</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.Battery.batteryLife} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Charging Time</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.Battery.chargingTime} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Rated Power</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.Battery.ratedPower} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Scheduling</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.Control.scheduling} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>IR/RF Remote Control</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.Control.Ir_Rf_RemoteControl} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Wi-Fi / Smartphone App</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.Control.wifiSmartphoneApp} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Wi-Fi Frequency Band</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.Control.wifiFrequencyBand} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Amazon Alexa Support</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.Control.amazonAlexaSupport} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Google Assistant Support</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.Control.googleAssistantSupport} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Magnetic/Optical Virtual Walls</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.Control.magneticVirtualWalls} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Real-Time Tracking</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.AppFeatures.realTimeTracking} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Digital Blocked Areas</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.AppFeatures.digitalBlockedAreas} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Zoned Cleaning</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.AppFeatures.zonedCleaning} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Multi-Floor Maps</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.AppFeatures.multiFloorMaps} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Manual Movement Control</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.AppFeatures.manualMovementControl} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Selected Room Cleaning</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.AppFeatures.selectedRoomCleaning} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>No-Mop Zones</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.AppFeatures.noMopZones} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Carpet Boost</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.Sensor.carpetBoost} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Anti-Drop / Cliff Sensor</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.Sensor.cliffSensor} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Dirt Sensor</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.Sensor.dirtSensor} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Full Dustbin Sensor</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.Sensor.fullDustbinSensor} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Weight</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.OtherSpecifications.weight} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Width</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.OtherSpecifications.width} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Height</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.OtherSpecifications.height} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>In The Box</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.OtherSpecifications.inTheBox} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Release Date</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.OtherSpecifications.releaseDate} ?: 'N/A'"></td>
+                </div>
+            </tr>
+            <tr>
+                <th>Warranty</th>
+                <div th:each="robot : ${robots}">
+                    <td th:text="${robot.OtherSpecifications.warranty} ?: 'N/A'"></td>
+                </div>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>

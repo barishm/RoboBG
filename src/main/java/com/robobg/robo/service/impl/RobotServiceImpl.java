@@ -43,6 +43,9 @@ public class RobotServiceImpl implements RobotService {
 
     @Override
     public Robot getRobotByModel(String model) {
-        return robotRepository.findByModel(model);
+        return robotRepository.findRobotByModel(model);
     }
+
+
+
 }

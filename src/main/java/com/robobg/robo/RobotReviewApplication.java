@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RobotReviewApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(RobotReviewApplication.class, args);
 	}
 
