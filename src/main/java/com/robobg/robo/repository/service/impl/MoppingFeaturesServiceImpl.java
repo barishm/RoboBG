@@ -1,8 +1,8 @@
-package com.robobg.robo.service.impl;
+package com.robobg.robo.repository.service.impl;
 
 import com.robobg.robo.entity.MoppingFeatures;
 import com.robobg.robo.repository.MoppingFeaturesRepository;
-import com.robobg.robo.service.MoppingFeaturesService;
+import com.robobg.robo.repository.service.MoppingFeaturesService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

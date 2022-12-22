@@ -1,8 +1,8 @@
-package com.robobg.robo.service.impl;
+package com.robobg.robo.repository.service.impl;
 
 import com.robobg.robo.entity.Sensor;
 import com.robobg.robo.repository.SensorRepository;
-import com.robobg.robo.service.SensorService;
+import com.robobg.robo.repository.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

@@ -44,6 +44,7 @@
                         <input
                                 type = "text"
                                 name = "model"
+                                th:field = "*{model}"
                                 class = "form-control"
                         />
                     </div>
@@ -124,7 +125,386 @@
                         <label> suctionPower </label>
                         <input
                                 type = "text"
-                                name = "suctionPower"
+                                name = "CleaningFeatures.suctionPower"
+                                th:field = "*{CleaningFeatures.suctionPower}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> cleaningArea </label>
+                        <input
+                                type = "text"
+                                name = "CleaningFeatures.cleaningArea"
+                                th:field = "*{CleaningFeatures.cleaningArea}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> dustbinCapacity </label>
+                        <input
+                                type = "text"
+                                name = "CleaningFeatures.dustbinCapacity"
+                                th:field = "*{CleaningFeatures.dustbinCapacity}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> disposableDustBagCapacity </label>
+                        <input
+                                type = "text"
+                                name = "CleaningFeatures.disposableDustBagCapacity"
+                                th:field = "*{CleaningFeatures.disposableDustBagCapacity}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> autoDirtDisposal </label>
+                        <input
+                                type = "text"
+                                name = "CleaningFeatures.autoDirtDisposal"
+                                th:field = "*{CleaningFeatures.autoDirtDisposal}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> barrierCrossHeight </label>
+                        <input
+                                type = "text"
+                                name = "CleaningFeatures.barrierCrossHeight"
+                                th:field = "*{CleaningFeatures.barrierCrossHeight}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> hepaFilter </label>
+                        <input
+                                type = "text"
+                                name = "CleaningFeatures.hepaFilter"
+                                th:field = "*{CleaningFeatures.hepaFilter}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> washableFilter </label>
+                        <input
+                                type = "text"
+                                name = "CleaningFeatures.washableFilter"
+                                th:field = "*{CleaningFeatures.washableFilter}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                    <label> wetMopping </label>
+                    <input
+                            type = "text"
+                            name = "MoppingFeatures.wetMopping"
+                            th:field = "*{MoppingFeatures.wetMopping}"
+                            class = "form-control"
+                    />
+                    </div>
+                    <div class ="form-group">
+                        <label> electricWaterFlowControl </label>
+                        <input
+                                type = "text"
+                                name = "MoppingFeatures.electricWaterFlowControl"
+                                th:field = "*{MoppingFeatures.electricWaterFlowControl}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> waterTankCapacity </label>
+                        <input
+                                type = "text"
+                                name = "MoppingFeatures.waterTankCapacity"
+                                th:field = "*{MoppingFeatures.waterTankCapacity}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> vibratingMoppingPad </label>
+                        <input
+                                type = "text"
+                                name = "MoppingFeatures.vibratingMoppingPad"
+                                th:field = "*{MoppingFeatures.vibratingMoppingPad}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> autoMopLifting </label>
+                        <input
+                                type = "text"
+                                name = "MoppingFeatures.autoMopLifting"
+                                th:field = "*{MoppingFeatures.autoMopLifting}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> autoWaterTankRefilling </label>
+                        <input
+                                type = "text"
+                                name = "MoppingFeatures.autoWaterTankRefilling"
+                                th:field = "*{MoppingFeatures.autoWaterTankRefilling}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> autoMopWashing </label>
+                        <input
+                                type = "text"
+                                name = "MoppingFeatures.autoMopWashing"
+                                th:field = "*{MoppingFeatures.autoMopWashing}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> batteryCapacity </label>
+                        <input
+                                type = "text"
+                                name = "Battery.batteryCapacity"
+                                th:field = "*{Battery.batteryCapacity}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> batteryLife </label>
+                        <input
+                                type = "text"
+                                name = "Battery.batteryLife"
+                                th:field = "*{Battery.batteryLife}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> chargingTime </label>
+                        <input
+                                type = "text"
+                                name = "Battery.chargingTime"
+                                th:field = "*{Battery.chargingTime}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> ratedPower </label>
+                        <input
+                                type = "text"
+                                name = "Battery.ratedPower"
+                                th:field = "*{Battery.ratedPower}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> scheduling </label>
+                        <input
+                                type = "text"
+                                name = "Control.scheduling"
+                                th:field = "*{Control.scheduling}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> Ir_Rf_RemoteControl </label>
+                        <input
+                                type = "text"
+                                name = "Control.Ir_Rf_RemoteControl"
+                                th:field = "*{Control.Ir_Rf_RemoteControl}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> wifiSmartphoneApp </label>
+                        <input
+                                type = "text"
+                                name = "Control.wifiSmartphoneApp"
+                                th:field = "*{Control.wifiSmartphoneApp}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> wifiFrequencyBand </label>
+                        <input
+                                type = "text"
+                                name = "Control.wifiFrequencyBand"
+                                th:field = "*{Control.wifiFrequencyBand}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> amazonAlexaSupport </label>
+                        <input
+                                type = "text"
+                                name = "Control.amazonAlexaSupport"
+                                th:field = "*{Control.amazonAlexaSupport}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> googleAssistantSupport </label>
+                        <input
+                                type = "text"
+                                name = "Control.googleAssistantSupport"
+                                th:field = "*{Control.googleAssistantSupport}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> magneticVirtualWalls </label>
+                        <input
+                                type = "text"
+                                name = "Control.magneticVirtualWalls"
+                                th:field = "*{Control.magneticVirtualWalls}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> realTimeTracking </label>
+                        <input
+                                type = "text"
+                                name = "AppFeatures.realTimeTracking"
+                                th:field = "*{AppFeatures.realTimeTracking}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> digitalBlockedAreas </label>
+                        <input
+                                type = "text"
+                                name = "AppFeatures.digitalBlockedAreas"
+                                th:field = "*{AppFeatures.digitalBlockedAreas}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> zonedCleaning </label>
+                        <input
+                                type = "text"
+                                name = "AppFeatures.zonedCleaning"
+                                th:field = "*{AppFeatures.zonedCleaning}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> multiFloorMaps </label>
+                        <input
+                                type = "text"
+                                name = "AppFeatures.multiFloorMaps"
+                                th:field = "*{AppFeatures.multiFloorMaps}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> manualMovementControl </label>
+                        <input
+                                type = "text"
+                                name = "AppFeatures.manualMovementControl"
+                                th:field = "*{AppFeatures.manualMovementControl}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> selectedRoomCleaning </label>
+                        <input
+                                type = "text"
+                                name = "AppFeatures.selectedRoomCleaning"
+                                th:field = "*{AppFeatures.selectedRoomCleaning}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> noMopZones </label>
+                        <input
+                                type = "text"
+                                name = "AppFeatures.noMopZones"
+                                th:field = "*{AppFeatures.noMopZones}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> carpetBoost </label>
+                        <input
+                                type = "text"
+                                name = "Sensor.carpetBoost"
+                                th:field = "*{Sensor.carpetBoost}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> cliffSensor </label>
+                        <input
+                                type = "text"
+                                name = "Sensor.cliffSensor"
+                                th:field = "*{Sensor.cliffSensor}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> dirtSensor </label>
+                        <input
+                                type = "text"
+                                name = "Sensor.dirtSensor"
+                                th:field = "*{Sensor.dirtSensor}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> fullDustbinSensor </label>
+                        <input
+                                type = "text"
+                                name = "Sensor.fullDustbinSensor"
+                                th:field = "*{Sensor.fullDustbinSensor}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> weight </label>
+                        <input
+                                type = "text"
+                                name = "OtherSpecifications.weight"
+                                th:field = "*{OtherSpecifications.weight}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> width </label>
+                        <input
+                                type = "text"
+                                name = "OtherSpecifications.width"
+                                th:field = "*{OtherSpecifications.width}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> height </label>
+                        <input
+                                type = "text"
+                                name = "OtherSpecifications.height"
+                                th:field = "*{OtherSpecifications.height}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> inTheBox </label>
+                        <input
+                                type = "text"
+                                name = "OtherSpecifications.inTheBox"
+                                th:field = "*{OtherSpecifications.inTheBox}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> releaseDate </label>
+                        <input
+                                type = "text"
+                                name = "OtherSpecifications.releaseDate"
+                                th:field = "*{OtherSpecifications.releaseDate}"
+                                class = "form-control"
+                        />
+                    </div>
+                    <div class ="form-group">
+                        <label> warranty </label>
+                        <input
+                                type = "text"
+                                name = "OtherSpecifications.warranty"
+                                th:field = "*{OtherSpecifications.warranty}"
                                 class = "form-control"
                         />
                     </div>

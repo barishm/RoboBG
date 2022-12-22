@@ -1,8 +1,8 @@
-package com.robobg.robo.service.impl;
+package com.robobg.robo.repository.service.impl;
 
 import com.robobg.robo.entity.Battery;
 import com.robobg.robo.repository.BatteryRepository;
-import com.robobg.robo.service.BatteryService;
+import com.robobg.robo.repository.service.BatteryService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

@@ -1,8 +1,8 @@
-package com.robobg.robo.service.impl;
+package com.robobg.robo.repository.service.impl;
 
 import com.robobg.robo.entity.OtherSpecifications;
 import com.robobg.robo.repository.OtherSpecificationsRepository;
-import com.robobg.robo.service.OtherSpecificationsService;
+import com.robobg.robo.repository.service.OtherSpecificationsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

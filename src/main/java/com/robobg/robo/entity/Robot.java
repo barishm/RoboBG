@@ -54,35 +54,35 @@ public class Robot {
     @Column(name = "voice_prompts")
     private String voicePrompts;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cleaning_features_id",referencedColumnName = "id")
     private CleaningFeatures cleaningFeatures;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "mopping_features_id",referencedColumnName = "id")
     private MoppingFeatures moppingFeatures;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "batteries_id",referencedColumnName = "id")
     private Battery battery;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "controls_id",referencedColumnName = "id")
     private Control control;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "app_features_id",referencedColumnName = "id")
     private AppFeatures appFeatures;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sensors_id",referencedColumnName = "id")
     private Sensor sensor;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "other_specifications_id",referencedColumnName = "id")
     private OtherSpecifications otherSpecifications;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "purchase_links",referencedColumnName = "id")
     private PurchaseLink purchaseLink;
 

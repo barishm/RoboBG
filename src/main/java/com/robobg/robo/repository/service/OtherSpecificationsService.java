@@ -1,4 +1,4 @@
-package com.robobg.robo.service;
+package com.robobg.robo.repository.service;
 
 import com.robobg.robo.entity.OtherSpecifications;
 import org.springframework.stereotype.Service;

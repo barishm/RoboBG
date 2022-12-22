@@ -1,8 +1,8 @@
-package com.robobg.robo.service.impl;
+package com.robobg.robo.repository.service.impl;
 
 import com.robobg.robo.entity.Robot;
 import com.robobg.robo.repository.RobotRepository;
-import com.robobg.robo.service.RobotService;
+import com.robobg.robo.repository.service.RobotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

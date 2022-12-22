@@ -1,8 +1,8 @@
-package com.robobg.robo.service.impl;
+package com.robobg.robo.repository.service.impl;
 
 import com.robobg.robo.entity.AppFeatures;
 import com.robobg.robo.repository.AppFeaturesRepository;
-import com.robobg.robo.service.AppFeaturesService;
+import com.robobg.robo.repository.service.AppFeaturesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

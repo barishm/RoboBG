@@ -2,7 +2,7 @@ package com.robobg.robo.controller;
 
 
 import com.robobg.robo.entity.Robot;
-import com.robobg.robo.service.RobotService;
+import com.robobg.robo.repository.service.RobotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,7 +60,7 @@ public class RobotController {
         List<Robot> list = new ArrayList<>();
         Robot robot = robotService.getRobotByModel("360 C50");
         list.add(robot);
-        robot = robotService.getRobotByModel("360 S10");
+        robot = robotService.getRobotByModel("test2");
         list.add(robot);
         model.addAttribute("robots",list);
         return "robots";
