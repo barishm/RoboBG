@@ -32,7 +32,43 @@
     </div>
 </nav>
 <br>
+<div class = "container">
+    <div class = "row">
+        <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class = "text-center"> Compare Robots </h1>
+            <div class = "card-body">
+                <form th:action="@{/robots}" method="get">
+                    <div class ="form-group">
+                        <label> Robot #1 </label>
+                        <input
+                                type = "text"
+                                name = "model1"
+                                class = "form-control"
+                                placeholder="Enter Robot Model"
+                        />
+                    </div>
 
+                    <div class ="form-group">
+                        <label> Robot #2 </label>
+                        <input
+                                type = "text"
+                                name = "model2"
+                                class = "form-control"
+                                placeholder="Enter Robot Model"
+                        />
+                    </div>
+
+                    <div class = "box-footer">
+                        <button type="submit" class = "btn btn-outline-dark">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 </body>

@@ -5,9 +5,7 @@ import com.robobg.robo.entity.Robot;
 import com.robobg.robo.repository.service.RobotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,11 +54,12 @@ public class RobotController {
 
 
     @GetMapping("/robots")
-    public String listRobots(Model model) {
+    public String listRobots(Model model, @RequestParam String model1, @RequestParam String model2) {
+
         List<Robot> list = new ArrayList<>();
-        Robot robot = robotService.getRobotByModel("360 C50");
+        Robot robot = robotService.getRobotByModel(model1);
         list.add(robot);
-        robot = robotService.getRobotByModel("test2");
+        robot = robotService.getRobotByModel(model2);
         list.add(robot);
         model.addAttribute("robots",list);
         return "robots";
