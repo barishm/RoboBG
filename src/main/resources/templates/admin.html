@@ -32,7 +32,39 @@
     </div>
 </nav>
 <br>
+<div class ="container">
+    <div class = "row">
+        <h1> All Robots </h1>
+    </div>
 
+    <div class = "row">
+        <div class = "col-lg-3">
+            <a th:href = "@{/admin/new}" class = "btn btn-outline-dark btn-sm mb-3"> Add Robot</a>
+        </div>
+    </div>
+    <table class = "table table-striped table-bordered">
+        <thead class = "table-dark">
+        <tr>
+            <th>ID</th>
+            <th>MODEL</th>
+            <th> Actions </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each = "robot: ${robots}">
+            <td th:text = "${robot.id}"></td>
+            <td th:text = "${robot.model}"></td>
+            <td>
+                <a th:href = "@{/admin/{id}(id=${robot.id})}"
+                   class = "btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
 
 
 </body>
