@@ -65,6 +65,12 @@ public class RobotController {
         return "robots";
     }
 
+    @GetMapping("/admin/{id}")
+    public String deleteRobot(@PathVariable Long id) {
+        robotService.deleteRobotById(id);
+        return "redirect:/admin";
+    }
+
 
 
 
