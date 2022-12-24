@@ -7,6 +7,19 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
+    <style>
+table, td, th {
+  height : 90px;
+  width: 20%;
+}
+
+table {
+  border-collapse: collapse;
+}
+th {
+  width: 20%;
+}
+</style>
 
 </head>
 <body>
@@ -34,7 +47,7 @@
 <br>
 <div class ="container">
     <div th:if="${not #lists.isEmpty(robots)}">
-        <table style="width:100%" class="table table-light">
+        <table style="width:100%" class="table table-striped">
             <tr>
                 <th>Model</th>
                 <div th:each="robot : ${robots}">

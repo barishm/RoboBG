@@ -3,12 +3,15 @@ package com.robobg.robo.controller;
 
 import com.robobg.robo.entity.Robot;
 import com.robobg.robo.repository.service.RobotService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 
 @org.springframework.stereotype.Controller
@@ -54,16 +57,19 @@ public class RobotController {
 
 
     @GetMapping("/robots")
-    public String listRobots(Model model, @RequestParam String model1, @RequestParam String model2) {
-
+    public String listRobots(Model model, @RequestParam Map<String, String> params) {
         List<Robot> list = new ArrayList<>();
-        Robot robot = robotService.getRobotByModel(model1);
-        list.add(robot);
-        robot = robotService.getRobotByModel(model2);
-        list.add(robot);
+        Robot robot;
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            robot = robotService.getRobotByModel(entry.getValue());
+            list.add(robot);
+        }
         model.addAttribute("robots",list);
         return "robots";
     }
+
+
+
 
     @GetMapping("/admin/{id}")
     public String deleteRobot(@PathVariable Long id) {
