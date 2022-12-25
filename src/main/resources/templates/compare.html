@@ -7,9 +7,20 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+	$(document).ready(function(){
+		$("#addField").click(function(){
+    		$("#firstduplicate 					.duplicate").clone().find('input').val('').end().find('textarea').val('').end().appendTo("#cloneplace");
+  });
+    $("#removeField").click(function(){
+    $("#cloneplace .duplicate").last().remove();
+  });
+});
+</script>
 </head>
 <body>
+
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <!-- Brand -->
     <a class="navbar-brand" href="#"><h4>RoboBG</h4></a>
@@ -38,27 +49,39 @@
             <h1 class = "text-center"> Compare Robots </h1>
             <div class = "card-body">
                 <form th:action="@{/robots}" method="get">
-                    <div class ="form-group">
-                        <input
-                                type = "text"
-                                name = "model1"
-                                class = "form-control"
-                                placeholder="Enter Robot Model"
-                        />
+                    <div id="firstduplicate">
+                        <div class="duplicate">
+                            <div class ="form-group">
+                                <input
+                                        type = "text"
+                                        name = "data"
+                                        class = "form-control"
+                                        placeholder="Enter Robot Model"
+                                />
+                            </div>
+                        </div>
                     </div>
 
                     <div class ="form-group">
                         <input
                                 type = "text"
-                                name = "model2"
+                                name = "data"
                                 class = "form-control"
                                 placeholder="Enter Robot Model"
                         />
+                    </div>
+                    <div id="cloneplace">
                     </div>
 
                     <div class = "box-footer">
                         <button type="submit" class = "btn btn-outline-dark">
                             Submit
+                        </button>
+                        <button type="button" class ="btn btn-outline-dark" id="addField">
+                            Add
+                        </button>
+                        <button type="button" class ="btn btn-outline-dark" id="removeField">
+                            Remove
                         </button>
                     </div>
                 </form>
@@ -67,7 +90,6 @@
         </div>
     </div>
 </div>
-
 
 </body>
 </html>
