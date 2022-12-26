@@ -7,17 +7,21 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/31c3612559.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script type="text/javascript">
+    var cloneLimit = 3;
 	$(document).ready(function(){
 		$("#addField").click(function(){
-    		$("#firstduplicate 					.duplicate").clone().find('input').val('').end().find('textarea').val('').end().appendTo("#cloneplace");
-  });
-    $("#removeField").click(function(){
-    $("#cloneplace .duplicate").last().remove();
-  });
-});
-</script>
+		    if ($('#cloneplace .duplicate').length <= cloneLimit){
+    		    $("#firstduplicate .duplicate").clone().find('input').val('').end().find('textarea').val('').end().appendTo("#cloneplace");
+    		    }
+        });
+        $("#removeField").click(function(){
+            $("#cloneplace .duplicate").last().remove();
+        });
+    });
+    </script>
 </head>
 <body>
 
@@ -53,22 +57,34 @@
                         <div class="duplicate">
                             <div class ="form-group">
                                 <input
+                                        list="robots"
                                         type = "text"
                                         name = "data"
                                         class = "form-control"
                                         placeholder="Enter Robot Model"
                                 />
+                                <datalist id="robots">
+                                    <div th:each="robot : ${robots}">
+                                        <option th:value="${robot.model}"></option>
+                                    </div>
+                                </datalist>
                             </div>
                         </div>
                     </div>
 
                     <div class ="form-group">
                         <input
+                                list="robots"
                                 type = "text"
                                 name = "data"
                                 class = "form-control"
                                 placeholder="Enter Robot Model"
                         />
+                        <datalist>
+                            <div th:each="robot : ${robots}">
+                                <option th:value="${robot.model}"></option>
+                            </div>
+                        </datalist>
                     </div>
                     <div id="cloneplace">
                     </div>
@@ -78,14 +94,13 @@
                             Submit
                         </button>
                         <button type="button" class ="btn btn-outline-dark" id="addField">
-                            Add
+                            <i class="fa-sharp fa-solid fa-plus"></i>
                         </button>
                         <button type="button" class ="btn btn-outline-dark" id="removeField">
-                            Remove
+                            <i class="fa-sharp fa-solid fa-trash-can"></i>
                         </button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

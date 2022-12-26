@@ -21,9 +21,7 @@ public class RobotController {
         this.robotService = robotService;
     }
 
-    @GetMapping("/compare") public String compare() {
-        return "compare";
-    }
+
     @GetMapping("/home") public String home() {
         return "home";
     }
@@ -31,8 +29,12 @@ public class RobotController {
         model.addAttribute("robots",robotService.getAllRobots());
         return "admin";
     }
+    @GetMapping("/compare") public String comparePage(Model model) {
+        model.addAttribute("robots",robotService.getAllRobots());
+        return "compare";
+    }
     @GetMapping("/admin/new")
-    public String createStudentForm(Model model) {
+    public String createRobotForm(Model model) {
 
         Robot robot = new Robot();
         model.addAttribute("robot", robot);
