@@ -23,11 +23,13 @@
             $("#cloneplace .duplicate").last().remove();
         });
     });
+
+
     </script>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <!-- Brand -->
     <a class="navbar-brand" href="#"><h4>RoboBG</h4></a>
 
@@ -49,23 +51,38 @@
     </div>
 </nav>
 <br>
-<div class = "container">
-    <div class = "row">
-        <div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-            <h1 class = "text-center"> Compare Robots </h1>
-            <div class = "card-body">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5 container justify-content-sm-center">
+            <h1 class="text-center"> Robots to compare: </h1>
+            <div class="card-body">
                 <form th:action="@{/robots}" method="get">
+                    <div class="form-group">
+                        <input
+                                list="robots"
+                                type="text"
+                                name="data"
+                                class="form-control"
+                                placeholder="Choose a robot from the list"
+                        />
+                        <datalist id="robots">
+                            <div th:each="robot : ${robots}">
+                                <option th:value="${robot.model}"></option>
+                            </div>
+                        </datalist>
+                    </div>
                     <div id="firstduplicate">
                         <div class="duplicate">
-                            <div class ="form-group">
+                            <p class="text-muted text-center"><strong>vs.</strong></p>
+                            <div class="form-group">
                                 <input
                                         list="robots"
-                                        type = "text"
-                                        name = "data"
-                                        class = "form-control"
-                                        placeholder="Enter Robot Model"
+                                        type="text"
+                                        name="data"
+                                        class="form-control"
+                                        placeholder="Choose a robot from the list"
                                 />
-                                <datalist id="robots">
+                                <datalist>
                                     <div th:each="robot : ${robots}">
                                         <option th:value="${robot.model}"></option>
                                     </div>
@@ -74,32 +91,17 @@
                         </div>
                     </div>
 
-                    <div class ="form-group">
-                        <input
-                                list="robots"
-                                type = "text"
-                                name = "data"
-                                class = "form-control"
-                                placeholder="Enter Robot Model"
-                        />
-                        <datalist>
-                            <div th:each="robot : ${robots}">
-                                <option th:value="${robot.model}"></option>
-                            </div>
-                        </datalist>
-                    </div>
-                    <div id="cloneplace">
-                    </div>
+                    <div id="cloneplace"></div>
 
-                    <div class = "box-footer">
-                        <button type="submit" class = "btn btn-outline-dark">
-                            Submit
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-outline-dark">
+                            Compare
                         </button>
-                        <button type="button" class ="btn btn-outline-dark" id="addField">
-                            <i class="fa-sharp fa-solid fa-plus"></i>
+                        <button type="button" class="btn btn-outline-dark" id="addField">
+                            <i class="fa-solid fa-plus"></i>
                         </button>
-                        <button type="button" class ="btn btn-outline-dark" id="removeField">
-                            <i class="fa-sharp fa-solid fa-trash-can"></i>
+                        <button type="button" class="btn btn-outline-dark" id="removeField">
+                            <i class="fa-solid fa-minus"></i>
                         </button>
                     </div>
                 </form>

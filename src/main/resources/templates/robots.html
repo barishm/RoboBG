@@ -7,6 +7,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/31c3612559.js" crossorigin="anonymous"></script>
     <style>
 table, td, th {
   height : 90px;
@@ -19,11 +20,13 @@ table {
 th {
   width: 20%;
 }
-</style>
+
+
+    </style>
 
 </head>
 <body>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <!-- Brand -->
     <a class="navbar-brand" href="#"><h4>RoboBG</h4></a>
 
@@ -45,7 +48,7 @@ th {
     </div>
 </nav>
 <br>
-<div class ="container">
+<div class="container">
     <div th:if="${not #lists.isEmpty(robots)}">
         <table style="width:100%" class="table table-striped">
             <tr>
@@ -55,7 +58,11 @@ th {
                 </div>
             </tr>
             <tr>
-                <th>MAPPING / PATH PLANNING</th>
+                <th>MAPPING / PATH PLANNING
+                    <span>
+                        <i class="fa-solid fa-circle-info"></i>
+                    </span>
+                </th>
                 <div th:each="robot : ${robots}">
                     <td th:text="${robot.mapping} ?: 'N/A'"></td>
                 </div>
