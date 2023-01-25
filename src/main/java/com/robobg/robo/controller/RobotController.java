@@ -29,9 +29,9 @@ public class RobotController {
         model.addAttribute("robots",robotService.getAllRobots());
         return "admin";
     }
-    @GetMapping("/compare") public String comparePage(Model model) {
+    @GetMapping("") public String comparePage(Model model) {
         model.addAttribute("robots",robotService.getAllRobots());
-        return "compare";
+        return "index";
     }
     @GetMapping("/admin/new")
     public String createRobotForm(Model model) {
@@ -75,11 +75,5 @@ public class RobotController {
         robotService.deleteRobotById(id);
         return "redirect:/admin";
     }
-
-
-
-
-
-
 
 }
