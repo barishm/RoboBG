@@ -4,6 +4,7 @@ package com.robobg.robo.controller;
 import com.robobg.robo.entity.Robot;
 import com.robobg.robo.repository.service.RobotService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@org.springframework.stereotype.Controller
+
+@Controller
+@RequestMapping("")
 public class RobotController {
     private RobotService robotService;
 
@@ -22,16 +25,13 @@ public class RobotController {
     }
 
 
-    @GetMapping("/home") public String home() {
-        return "home";
-    }
     @GetMapping("/admin") public String adminPage(Model model) {
         model.addAttribute("robots",robotService.getAllRobots());
         return "admin";
     }
-    @GetMapping("") public String comparePage(Model model) {
+    @GetMapping("") public String index(Model model) {
         model.addAttribute("robots",robotService.getAllRobots());
-        return "index";
+        return "";
     }
     @GetMapping("/admin/new")
     public String createRobotForm(Model model) {
