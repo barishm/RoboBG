@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("")
+@RequestMapping("/")
 public class RobotController {
     private RobotService robotService;
 
@@ -29,9 +29,9 @@ public class RobotController {
         model.addAttribute("robots",robotService.getAllRobots());
         return "admin";
     }
-    @GetMapping("") public String index(Model model) {
+    @GetMapping("/") public String index(Model model) {
         model.addAttribute("robots",robotService.getAllRobots());
-        return "";
+        return "/";
     }
     @GetMapping("/admin/new")
     public String createRobotForm(Model model) {
