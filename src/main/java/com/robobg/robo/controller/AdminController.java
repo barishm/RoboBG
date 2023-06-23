@@ -34,6 +34,11 @@ public class AdminController {
         robotService.saveRobot(robot);
     }
 
+    @PutMapping
+    public void updateRobot(@RequestBody Robot robot){
+        robotService.saveRobot(robot);
+    }
+
 
 
 

@@ -45,7 +45,6 @@ public class RobotServiceImpl implements RobotService {
     @Override
     public void deleteRobotById(Long id) {
         robotRepository.deleteById(id);
-
     }
 
     private RobotIdModelDTO convertEntityToDto(Robot robot) {
@@ -55,9 +54,4 @@ public class RobotServiceImpl implements RobotService {
 
         return robotIdModelDTO;
     }
-
-
-
-
-
 }
