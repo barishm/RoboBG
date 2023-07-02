@@ -1,0 +1,13 @@
+.choose-robot {
+  max-width: 213px;
+  margin: 20px;
+  margin-right: 10px;
+}
+.add-button {
+  margin: 20px;
+  margin-left: 0px;
+}
+
+.compare-container {
+  display: flex;
+}
