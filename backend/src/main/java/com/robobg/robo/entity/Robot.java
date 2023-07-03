@@ -54,35 +54,35 @@ public class Robot {
     @Column(name = "voice_prompts")
     private String voicePrompts;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "cleaning_features_id",referencedColumnName = "id")
     private CleaningFeatures cleaningFeatures;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "mopping_features_id",referencedColumnName = "id")
     private MoppingFeatures moppingFeatures;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "batteries_id",referencedColumnName = "id")
     private Battery battery;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "controls_id",referencedColumnName = "id")
     private Control control;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "app_features_id",referencedColumnName = "id")
     private AppFeatures appFeatures;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "sensors_id",referencedColumnName = "id")
     private Sensor sensor;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "other_specifications_id",referencedColumnName = "id")
     private OtherSpecifications otherSpecifications;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "purchase_links",referencedColumnName = "id")
     private PurchaseLink purchaseLink;
 

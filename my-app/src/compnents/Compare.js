@@ -1,10 +1,11 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect,useRef } from "react";
 
 const Compare = () => {
     const [Ids , setIds] = useState([]);
     const [Model,setModel] = useState(null)
     const [IdAndModel , setIdAndModel] = useState([]);
     const [Robots,setRobots] = useState([]);
+    const modelInputRef = useRef(null);
 
     
     useEffect(() => {
@@ -27,7 +28,6 @@ const Compare = () => {
             const url = `http://localhost:8000/robots?${idsQuery}`;
             const response = await fetch(url);
             const jsonData = await response.json();
-            console.log(jsonData);
             setRobots(jsonData);
         } catch (error) {
             console.log('Error fetching data:', error);
@@ -39,10 +39,13 @@ const Compare = () => {
 
 
     function handleAdd() {
-    const foundItem = IdAndModel.find(item => item.model === Model);
+        
+        const foundItem = IdAndModel.find(item => item.model === Model);
         if (foundItem && !Ids.includes(foundItem.id)) {
             setIds([...Ids, foundItem.id]);
         }
+        setModel("");
+        modelInputRef.current.value = "";
     }
     useEffect(() => {
         if (Ids.length > 0) {
@@ -53,7 +56,7 @@ const Compare = () => {
     if (Robots.length > 0) {
         tbl = <div className="compare-container">
               {Robots.map((item) => (
-              <div key={item.id}>
+              <div key={item.id} className="compare-robot">
                   <div className="compare-fields">{item.model}</div>
                   <div className="compare-fields">{item.mapping}</div>
                   <div className="compare-fields">{item.mappingSensorType}</div>
@@ -65,8 +68,51 @@ const Compare = () => {
                   <div className="compare-fields">{item.display}</div>
                   <div className="compare-fields">{item.sideBrushes}</div>
                   <div className="compare-fields">{item.voicePrompts}</div>
-                  <div className="compare-fields">{item.CleaningFeatures.suctionPower}</div>
-                  
+                  <div className="compare-fields">{item.cleaningFeatures.suctionPower}</div>
+                  <div className="compare-fields">{item.cleaningFeatures.cleaningArea}</div>
+                  <div className="compare-fields">{item.cleaningFeatures.dustbinCapacity}</div>
+                  <div className="compare-fields">{item.cleaningFeatures.disposableDustBagCapacity}</div>
+                  <div className="compare-fields">{item.cleaningFeatures.autoDirtDisposal}</div>
+                  <div className="compare-fields">{item.cleaningFeatures.barrierCrossHeight}</div>
+                  <div className="compare-fields">{item.cleaningFeatures.hepaFilter}</div>
+                  <div className="compare-fields">{item.cleaningFeatures.washableFilter}</div>
+                  <div className="compare-fields">{item.moppingFeatures.electricWaterFlowControl}</div>
+                  <div className="compare-fields">{item.moppingFeatures.waterTankCapacity}</div>
+                  <div className="compare-fields">{item.moppingFeatures.vibratingMoppingPad}</div>
+                  <div className="compare-fields">{item.moppingFeatures.autoMopLifting}</div>
+                  <div className="compare-fields">{item.moppingFeatures.autoWaterTankRefilling}</div>
+                  <div className="compare-fields">{item.moppingFeatures.autoMopWashing}</div>
+                  <div className="compare-fields">{item.moppingFeatures.wetMopping}</div>
+                  <div className="compare-fields">{item.battery.batteryCapacity}</div>
+                  <div className="compare-fields">{item.battery.batteryLife}</div>
+                  <div className="compare-fields">{item.battery.chargingTime}</div>
+                  <div className="compare-fields">{item.battery.ratedPower}</div>
+                  <div className="compare-fields">{item.control.scheduling}</div>
+                  <div className="compare-fields">{item.control.Ir_Rf_RemoteControl}</div>
+                  <div className="compare-fields">{item.control.wifiSmartphoneApp}</div>
+                  <div className="compare-fields">{item.control.wifiFrequencyBand}</div>
+                  <div className="compare-fields">{item.control.amazonAlexaSupport}</div>
+                  <div className="compare-fields">{item.control.googleAssistantSupport}</div>
+                  <div className="compare-fields">{item.control.magneticVirtualWalls}</div>
+                  <div className="compare-fields">{item.appFeatures.realTimeTracking}</div>
+                  <div className="compare-fields">{item.appFeatures.digitalBlockedAreas}</div>
+                  <div className="compare-fields">{item.appFeatures.zonedCleaning}</div>
+                  <div className="compare-fields">{item.appFeatures.multiFloorMaps}</div>
+                  <div className="compare-fields">{item.appFeatures.manualMovementControl}</div>
+                  <div className="compare-fields">{item.appFeatures.selectedRoomCleaning}</div>
+                  <div className="compare-fields">{item.appFeatures.noMopZones}</div>
+                  <div className="compare-fields">{item.sensor.carpetBoost}</div>
+                  <div className="compare-fields">{item.sensor.cliffSensor}</div>
+                  <div className="compare-fields">{item.sensor.dirtSensor}</div>
+                  <div className="compare-fields">{item.sensor.fullDustbinSensor}</div>
+                  <div className="compare-fields">{item.otherSpecifications.weight}</div>
+                  <div className="compare-fields">{item.otherSpecifications.width}</div>
+                  <div className="compare-fields">{item.otherSpecifications.height}</div>
+                  <div className="compare-fields">{item.otherSpecifications.inTheBox}</div>
+                  <div className="compare-fields">{item.otherSpecifications.releaseDate}</div>
+                  <div className="compare-fields">{item.otherSpecifications.warranty}</div>
+                  <div className="compare-fields">{item.purchaseLink.amazon}</div>
+                  <div className="compare-fields">{item.purchaseLink.aliexpress}</div>
               </div>
               ))}
               </div>
@@ -80,7 +126,7 @@ const Compare = () => {
     return (
         <div>
             <div style={{ display: "flex" }}>
-                <input className="form-control choose-robot" list="datalistOptions" id="exampleDataList" placeholder="Choose robot from the list" onChange={(e)=>setModel(e.target.value)}/>
+                <input ref={modelInputRef} className="form-control choose-robot" list="datalistOptions" id="exampleDataList" placeholder="Choose robot from the list" onChange={(e)=>setModel(e.target.value)}/>
                 <button type="button" className="btn btn-secondary add-button" onClick={handleAdd}>Add</button>
             </div>
             <datalist id="datalistOptions">
