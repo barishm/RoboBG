@@ -15,3 +15,33 @@
 .compare-robot {
   border: 1px solid black;
 }
+
+.cdu-container {
+  max-width: 460px;
+  margin: 20px auto;
+  padding: 15px;
+  border: 1px solid black;
+}
+
+.cdu-container .form-control-sm {
+  margin: 6px auto;
+  max-width: 400px;
+}
+
+.select-div {
+  margin: auto auto;
+}
+
+.select-div button {
+  max-height: 50px;
+  margin: auto auto;
+}
+
+.form-inputs {
+  margin: 6px auto;
+}
+
+.three-buttons button {
+  margin-right: 25px;
+  margin-top: 20px;
+}

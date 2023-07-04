@@ -11,7 +11,7 @@ const Compare = () => {
     useEffect(() => {
         const fetchIdAndModel = async () => {
             try {
-                const response = await fetch('http://localhost:8000/');
+                const response = await fetch('http://localhost:8000/compare');
                 const jsonData = await response.json();
                 setIdAndModel(jsonData);
             } catch (error) {

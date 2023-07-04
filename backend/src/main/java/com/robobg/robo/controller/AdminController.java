@@ -10,6 +10,7 @@ import java.awt.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/admin")
 public class AdminController {
     private RobotService robotService;
@@ -25,7 +26,7 @@ public class AdminController {
     }
 
     @DeleteMapping
-    public void deleteRobotById (Long id) {
+    public void deleteRobotById (@RequestParam("id") Long id) {
         robotService.deleteRobotById(id);
     }
 
