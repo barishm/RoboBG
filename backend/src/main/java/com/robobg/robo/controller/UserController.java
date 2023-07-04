@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/")
+@RequestMapping("/compare")
 public class UserController {
     private RobotService robotService;
 
