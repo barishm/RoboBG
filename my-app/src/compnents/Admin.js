@@ -5,6 +5,9 @@ const  Admin = () => {
     const [Id , setId] = useState(null);
     const modelInputRef = useRef(null);
     const [Model,setModel] = useState(null);
+    const [CreateButton,setCreateButton] = useState(false);
+    const [UpdateButton,setUpdateButton] = useState(true);
+    const [CancelButton,setCancelButton] = useState(true);
     const [FormData,setFormData] = useState({
         model: "",
         mapping: "",
@@ -94,29 +97,42 @@ const  Admin = () => {
           }
         }
         return newObj;
-      }
-
-    useEffect(() => {
-        const fetchIdAndModel = async () => {
-            try {
-                const response = await fetch('http://localhost:8000/compare');
-                const jsonData = await response.json();
-                setIdAndModel(jsonData);
-            } catch (error) {
-                console.log('Error fetching data:', error);
+    }
+    function setNullFieldsToEmptyString(obj) {
+        for (const key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (typeof obj[key] === 'object' && obj[key] !== null) {
+                    setNullFieldsToEmptyString(obj[key]); // Recursively check nested objects
+                } else if (obj[key] === null) {
+                    obj[key] = ''; // Set null field to an empty string
+                }
             }
-        };
+        }
+    }
 
+    //Gets all robots ids and model names
+    useEffect(() => {
         fetchIdAndModel();
     }, []);
+    const fetchIdAndModel = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/get');
+            const jsonData = await response.json();
+            setIdAndModel(jsonData);
+        } catch (error) {
+            console.log('Error fetching data:', error);
+        }
+    };
 
+
+    // Deleting Robot
     const DeleteRobot = async () => {
         fetch(`http://localhost:8000/admin?id=${Id}`,{method: 'DELETE'})
         .then((response) => {
             if(!response.ok) {
                 throw new Error('Something went wrong');
             }
-            return response.json()
+            fetchIdAndModel();
         })
         .catch((e) => {
             console.log(e);
@@ -127,20 +143,7 @@ const  Admin = () => {
             DeleteRobot();
         }
       }, [Id]);
-
-    const CreateRobot = async () => {
-        fetch('http://localhost:8000/admin',{method: 'POST',headers: {"Content-type": "application/json"},
-        body: JSON.stringify(FormData)
-        }).then(() => {
-            console.log('new robot added')
-            resetFormData();
-        })
-    }
-    function createHandler(e) {
-        CreateRobot();
-    }
-
-    function handleDelete() {
+      function handleDelete() {
         const foundItem = IdAndModel.find(item => item.model === Model);
         if(foundItem){
             setId(foundItem.id);
@@ -148,6 +151,81 @@ const  Admin = () => {
         setModel("");
         modelInputRef.current.value = "";
     }
+
+    
+    // Creating new robot
+    const CreateRobot = async () => {
+        fetch('http://localhost:8000/admin',{method: 'POST',headers: {"Content-type": "application/json"},
+        body: JSON.stringify(FormData)
+        }).then(() => {
+            console.log('new robot added')
+            resetFormData();
+            fetchIdAndModel();
+        })
+    }
+    function createHandler() {
+        CreateRobot();
+    }
+
+    // Update Robot
+    function handleUpdate () {
+        const foundItem = IdAndModel.find(item => item.model === Model);
+        if(foundItem){
+            setCreateButton(true);
+            setUpdateButton(false);
+            setCancelButton(false);
+            const fetchRobotById = async () => {
+                try {
+                    const url = `http://localhost:8000/get/robot?id=${foundItem.id}`;
+                    const response = await fetch(url);
+                    const jsonData = await response.json();
+                    setNullFieldsToEmptyString(jsonData);
+                    setFormData(jsonData);
+
+                } catch (error) {
+                    console.log('Error fetching data:', error);
+                }
+            };
+            fetchRobotById();
+        }
+      }
+      const UpdateRobot = async () => {
+        try {
+          const response = await fetch('http://localhost:8000/admin/update', {
+            method: 'PUT',
+            headers: {
+              "Content-type": "application/json"
+            },
+            body: JSON.stringify(FormData)
+          });
+      
+          if (response.ok) {
+            console.log('robot updated');
+            resetFormData();
+            setCreateButton(false);
+            setUpdateButton(true);
+            setCancelButton(true);
+            fetchIdAndModel();
+          } else {
+            console.log('Error: ' + response.status);
+            // Handle the error case if needed
+          }
+        } catch (error) {
+          console.log('Error:', error);
+          // Handle the error case if needed
+        }
+      };
+      function confirmUpdate() {
+        UpdateRobot();
+        resetFormData();
+      }
+      function CancelHandle() {
+            resetFormData();
+            setCreateButton(false);
+            setUpdateButton(true);
+            setCancelButton(true);
+      }
+
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -189,16 +267,14 @@ const  Admin = () => {
         }));
       }
 
-    useEffect(() => {
-        console.log(FormData.moppingFeatures.autoWaterTankRefilling);
-      }, [FormData]);
 
     return(
-        <div className="cdu-container">
+        <div className="cdu-container shadow-sm p-3 mb-5 bg-body-tertiary rounded">
             <div className="select-div" style={{ display: "flex" }}>
                 <input ref={modelInputRef} className="form-control choose-robot" list="datalistOptions" id="exampleDataList" placeholder="Choose robot from the list" onChange={(e)=>setModel(e.target.value)}/>
-                <button type="button" className="btn btn-secondary update-button">Update</button>
-                <button type="button" className="btn btn-secondary delete-button" onClick={handleDelete}>Delete</button>
+                <button type="button" className="btn btn-secondary update-button" onClick={handleUpdate}>Update</button>
+                <button type="button" className="btn btn-secondary cancel-update-button" disabled={CancelButton} onClick={CancelHandle}>Cancel</button>
+                <button type="button" className="btn btn-danger delete-button" onClick={handleDelete}>Delete</button>
                 <datalist id="datalistOptions">
             {IdAndModel.map((item) => (
                     <option key={item.id} value={item.model} />
@@ -217,7 +293,7 @@ const  Admin = () => {
             <input className="form-control form-control-sm" type="text" name="display" onChange={handleChange} value={FormData.display} placeholder="Display" aria-label=".form-control-sm example"/>
             <input className="form-control form-control-sm" type="text" name="sideBrushes" onChange={handleChange} value={FormData.sideBrushes} placeholder="Side Brushes" aria-label=".form-control-sm example"/>
             <input className="form-control form-control-sm" type="text" name="voicePrompts" onChange={handleChange} value={FormData.voicePrompts} placeholder="Voice Prompts" aria-label=".form-control-sm example"/>
-            <input className="form-control form-control-sm" type="text" name="suctionPower" onChange={handleChange} value={FormData.cleaningFeatures.suctionPower} placeholder="Suction Powerdel" aria-label=".form-control-sm example"/>
+            <input className="form-control form-control-sm" type="text" name="suctionPower" onChange={handleChange} value={FormData.cleaningFeatures.suctionPower} placeholder="Suction Power" aria-label=".form-control-sm example"/>
             <input className="form-control form-control-sm" type="text" name="cleaningArea" onChange={handleChange} value={FormData.cleaningFeatures.cleaningArea} placeholder="Cleaning Area" aria-label=".form-control-sm example"/>
             <input className="form-control form-control-sm" type="text" name="dustbinCapacity" onChange={handleChange} value={FormData.cleaningFeatures.dustbinCapacity} placeholder="Dustbin Capacity" aria-label=".form-control-sm example"/>
             <input className="form-control form-control-sm" type="text" name="disposableDustBagCapacity" onChange={handleChange} value={FormData.cleaningFeatures.disposableDustBagCapacity} placeholder="Disposable Dust Bag Capacity" aria-label=".form-control-sm example"/>
@@ -257,16 +333,15 @@ const  Admin = () => {
             <input className="form-control form-control-sm" type="text" name="weight" onChange={handleChange} value={FormData.otherSpecifications.weight} placeholder="Weight" aria-label=".form-control-sm example"/>
             <input className="form-control form-control-sm" type="text" name="width" onChange={handleChange} value={FormData.otherSpecifications.width} placeholder="Width" aria-label=".form-control-sm example"/>
             <input className="form-control form-control-sm" type="text" name="height" onChange={handleChange} value={FormData.otherSpecifications.height} placeholder="Height" aria-label=".form-control-sm example"/>
-            <input className="form-control form-control-sm" type="text" name="inTheBox" onChange={handleChange} value={FormData.otherSpecifications.inTheBox} placeholder="In The Box" aria-label=".form-control-sm example"/>
+            <textarea className="form-control form-control-sm" type="text" name="inTheBox" onChange={handleChange} value={FormData.otherSpecifications.inTheBox} placeholder="In The Box" aria-label=".form-control-sm example"/>
             <input className="form-control form-control-sm" type="text" name="releaseDate" onChange={handleChange} value={FormData.otherSpecifications.releaseDate} placeholder="Release Date" aria-label=".form-control-sm example"/>
             <input className="form-control form-control-sm" type="text" name="warranty" onChange={handleChange} value={FormData.otherSpecifications.warranty} placeholder="Warranty" aria-label=".form-control-sm example"/>
             <input className="form-control form-control-sm" type="text" name="amazon" onChange={handleChange} value={FormData.purchaseLink.amazon} placeholder="Amazon" aria-label=".form-control-sm example"/>
             <input className="form-control form-control-sm" type="text" name="aliexpress" onChange={handleChange} value={FormData.purchaseLink.aliexpress} placeholder="Aliexpress" aria-label=".form-control-sm example"/>
             </div>
-            <div className="three-buttons">
-                <button type="button" className="btn btn-secondary create-button" onClick={createHandler}>Create</button>
-                <button type="button" className="btn btn-secondary confirm-update-button" disabled>Confirm Update</button>
-                <button type="button" className="btn btn-secondary cancel-update-button" disabled>Cancel Update</button>
+            <div className="two-buttons">
+                <button type="button" className="btn btn-success create-button"disabled={CreateButton} onClick={createHandler}>Create</button>
+                <button type="button" className="btn btn-secondary confirm-update-button" disabled={UpdateButton} onClick={confirmUpdate}>Confirm Update</button>
             </div>
         </div>
     );

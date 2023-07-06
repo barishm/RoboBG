@@ -11,5 +11,5 @@ public class RobotReviewApplication {
 
 		SpringApplication.run(RobotReviewApplication.class, args);
 	}
-
+	
 }

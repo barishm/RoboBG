@@ -17,10 +17,9 @@
 }
 
 .cdu-container {
-  max-width: 460px;
+  max-width: 550px;
   margin: 20px auto;
   padding: 15px;
-  border: 1px solid black;
 }
 
 .cdu-container .form-control-sm {
@@ -41,7 +40,6 @@
   margin: 6px auto;
 }
 
-.three-buttons button {
-  margin-right: 25px;
-  margin-top: 20px;
+.two-buttons > button{
+  margin: 13px 70px;
 }

@@ -9,11 +9,11 @@ import java.util.Optional;
 
 @Service
 public interface RobotService {
-    List<RobotIdModelDTO> getAllRobots();
+    Optional<List<RobotIdModelDTO>> getAllRobots();
     Robot saveRobot(Robot robot);
     Optional<Robot> getRobotById(Long id);
     void deleteRobotById(Long id);
-    List<Robot> findByIdIn(List<Long> ids);
+    Optional<List<Robot>> findByIdIn(List<Long> ids);
 
 
 

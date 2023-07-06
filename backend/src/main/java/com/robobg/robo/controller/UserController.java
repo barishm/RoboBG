@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/compare")
+@RequestMapping("/get")
 public class UserController {
     private RobotService robotService;
 
@@ -20,12 +21,17 @@ public class UserController {
     }
 
     @GetMapping
-    public List<RobotIdModelDTO> getRobotsIdAndModel() {
+    public Optional<List<RobotIdModelDTO>> getRobotsIdAndModel() {
         return robotService.getAllRobots();
     }
 
     @GetMapping("/robots")
-    public List<Robot> getAllRobotsByIds(@RequestParam("ids") List<Long> ids){
+    public Optional<List<Robot>> getAllRobotsByIds(@RequestParam("ids") List<Long> ids){
         return robotService.findByIdIn(ids);
+    }
+
+    @GetMapping("/robot")
+    public Optional<Robot> getRobotById(@RequestParam("id") Long id){
+        return robotService.getRobotById(id);
     }
 }

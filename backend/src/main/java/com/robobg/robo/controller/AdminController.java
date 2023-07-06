@@ -20,11 +20,6 @@ public class AdminController {
         this.robotService = robotService;
     }
 
-    @GetMapping
-    public List<RobotIdModelDTO> getRobotsIdAndModel() {
-        return robotService.getAllRobots();
-    }
-
     @DeleteMapping
     public void deleteRobotById (@RequestParam("id") Long id) {
         robotService.deleteRobotById(id);
@@ -35,7 +30,7 @@ public class AdminController {
         robotService.saveRobot(robot);
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public void updateRobot(@RequestBody Robot robot){
         robotService.saveRobot(robot);
     }
