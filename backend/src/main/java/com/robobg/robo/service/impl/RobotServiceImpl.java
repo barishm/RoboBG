@@ -23,13 +23,13 @@ public class RobotServiceImpl implements RobotService {
         this.robotRepository = robotRepository;
     }
     @Override
-    public List<Robot> findByIdIn(List<Long> ids) {
+    public Optional<List<Robot>> findByIdIn(List<Long> ids) {
         return robotRepository.findByIdIn(ids);
     }
 
     @Override
-    public List<RobotIdModelDTO> getAllRobots() {
-        return robotRepository.findAll().stream().map(this::convertEntityToDto).collect(Collectors.toList());
+    public Optional<List<RobotIdModelDTO>> getAllRobots() {
+        return Optional.of(robotRepository.findAll().stream().map(this::convertEntityToDto).collect(Collectors.toList()));
     }
 
     @Override

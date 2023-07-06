@@ -1,19 +1,22 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import {Link} from "react-router-dom";
 
 const Header = () => {
 
     return (
-        <Navbar bg="light" data-bs-theme="light">
-        <Container>
-          <Navbar.Brand href="#home">RoboBG</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Compare</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
+      <nav class="navbar navbar-expand-sm bg-body-tertiary">
+      <div class="container-fluid">
+        <Link class="navbar-brand" href="#">RoboBG</Link>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <Link class="nav-link active" aria-current="page" to="/">Начало</Link>
+            <Link class="nav-link" to="/compare">Сравни Роботи</Link>
+          </div>
+        </div>
+      </div>
+    </nav>
     );
 
 

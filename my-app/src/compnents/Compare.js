@@ -6,12 +6,23 @@ const Compare = () => {
     const [IdAndModel , setIdAndModel] = useState([]);
     const [Robots,setRobots] = useState([]);
     const modelInputRef = useRef(null);
+    function setNullFieldsToEmptyString(obj) {
+        for (const key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (typeof obj[key] === 'object' && obj[key] !== null) {
+                    setNullFieldsToEmptyString(obj[key]); // Recursively check nested objects
+                } else if (obj[key] === null) {
+                    obj[key] = ''; // Set null field to an empty string
+                }
+            }
+        }
+    }
 
     
     useEffect(() => {
         const fetchIdAndModel = async () => {
             try {
-                const response = await fetch('http://localhost:8000/compare');
+                const response = await fetch('http://localhost:8000/get');
                 const jsonData = await response.json();
                 setIdAndModel(jsonData);
             } catch (error) {
@@ -25,9 +36,10 @@ const Compare = () => {
     const fetchRobotsByIds = async () => {
         try {
             const idsQuery = Ids.map(id => `ids=${id}`).join('&');
-            const url = `http://localhost:8000/robots?${idsQuery}`;
+            const url = `http://localhost:8000/get/robots?${idsQuery}`;
             const response = await fetch(url);
             const jsonData = await response.json();
+            setNullFieldsToEmptyString(jsonData);
             setRobots(jsonData);
         } catch (error) {
             console.log('Error fetching data:', error);
