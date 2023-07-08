@@ -20,12 +20,12 @@ public class AdminController {
         this.robotService = robotService;
     }
 
-    @DeleteMapping
+    @DeleteMapping("/delete")
     public void deleteRobotById (@RequestParam("id") Long id) {
         robotService.deleteRobotById(id);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public void createRobot (@RequestBody Robot robot) {
         robotService.saveRobot(robot);
     }

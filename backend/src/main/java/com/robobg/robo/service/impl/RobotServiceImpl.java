@@ -17,6 +17,7 @@ public class RobotServiceImpl implements RobotService {
 
     private RobotRepository robotRepository;
 
+
     @Autowired
     public RobotServiceImpl(RobotRepository robotRepository) {
         super();
@@ -34,6 +35,7 @@ public class RobotServiceImpl implements RobotService {
 
     @Override
     public Robot saveRobot(Robot robot) {
+        ObjectUtils.setEmptyStringsToNull(robot);
         return robotRepository.save(robot);
     }
 

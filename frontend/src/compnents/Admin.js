@@ -127,7 +127,7 @@ const  Admin = () => {
 
     // Deleting Robot
     const DeleteRobot = async () => {
-        fetch(`http://localhost:8000/admin?id=${Id}`,{method: 'DELETE'})
+        fetch(`http://localhost:8000/admin/delete?id=${Id}`,{method: 'DELETE'})
         .then((response) => {
             if(!response.ok) {
                 throw new Error('Something went wrong');
@@ -155,7 +155,7 @@ const  Admin = () => {
     
     // Creating new robot
     const CreateRobot = async () => {
-        fetch('http://localhost:8000/admin',{method: 'POST',headers: {"Content-type": "application/json"},
+        fetch('http://localhost:8000/admin/create',{method: 'POST',headers: {"Content-type": "application/json"},
         body: JSON.stringify(FormData)
         }).then(() => {
             console.log('new robot added')

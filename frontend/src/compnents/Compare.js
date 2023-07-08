@@ -4,7 +4,229 @@ const Compare = () => {
     const [Ids , setIds] = useState([]);
     const [Model,setModel] = useState(null)
     const [IdAndModel , setIdAndModel] = useState([]);
-    const [Robots,setRobots] = useState([]);
+    const [Robots,setRobots] = useState([{
+        "id": "1",
+        "model": "xiomi",
+        "mapping": "asdasd",
+        "mappingSensorType": "asda",
+        "highPrecisionMap": "sdasd",
+        "frontCamera": "asdasd",
+        "rechargeResume": "asdasd",
+        "autoDockAndRecharge": "dasd",
+        "noiseLevel": "asdas",
+        "display": "dasd",
+        "sideBrushes": "asdasd",
+        "voicePrompts": null,
+        "cleaningFeatures": {
+            "suctionPower": "asdas",
+            "cleaningArea": "dasd",
+            "dustbinCapacity": "asdasd",
+            "disposableDustBagCapacity": "asd",
+            "autoDirtDisposal": "asd",
+            "barrierCrossHeight": "asd",
+            "hepaFilter": "asd",
+            "washableFilter": "asdasd"
+        },
+        "moppingFeatures": {
+            "wetMopping": "asd",
+            "electricWaterFlowControl": "asd",
+            "waterTankCapacity": "asd",
+            "vibratingMoppingPad": "asdasd",
+            "autoMopLifting": "asda",
+            "autoWaterTankRefilling": "sdasd",
+            "autoMopWashing": "asda"
+        },
+        "battery": {
+            "batteryCapacity": "asd",
+            "batteryLife": "asd",
+            "chargingTime": "qqsd",
+            "ratedPower": "qasd"
+        },
+        "control": {
+            "scheduling": "qasd",
+            "wifiSmartphoneApp": "asd",
+            "wifiFrequencyBand": "qwasd",
+            "amazonAlexaSupport": "qwsd",
+            "googleAssistantSupport": "sdaf",
+            "magneticVirtualWalls": "qwasdf",
+            "ir_Rf_RemoteControl": "qasqd"
+        },
+        "appFeatures": {
+            "realTimeTracking": "qwwdf",
+            "digitalBlockedAreas": "fasdas",
+            "zonedCleaning": "wsdf",
+            "multiFloorMaps": "asdf",
+            "manualMovementControl": "sdf",
+            "selectedRoomCleaning": "oyfgu",
+            "noMopZones": "oyugf"
+        },
+        "sensor": {
+            "carpetBoost": "youf",
+            "cliffSensor": "outf",
+            "dirtSensor": "out",
+            "fullDustbinSensor": "fou"
+        },
+        "otherSpecifications": {
+            "weight": "fgu",
+            "width": "ofou",
+            "height": "yfg",
+            "inTheBox": "ougouy",
+            "releaseDate": "ou",
+            "warranty": "gou"
+        },
+        "purchaseLink": {
+        "amazon": "amazon link",
+            "aliexpress": "aeling",
+        }
+    },{
+        "id": "2",
+        "model": "iphone",
+        "mapping": "asdasd",
+        "mappingSensorType": "asda",
+        "highPrecisionMap": "sdasd",
+        "frontCamera": "asdasd",
+        "rechargeResume": "asdasd",
+        "autoDockAndRecharge": "dasd",
+        "noiseLevel": "asdas",
+        "display": "dasd",
+        "sideBrushes": "asdasd",
+        "voicePrompts": null,
+        "cleaningFeatures": {
+            "suctionPower": "asdas",
+            "cleaningArea": "dasd",
+            "dustbinCapacity": "asdasd",
+            "disposableDustBagCapacity": "asd",
+            "autoDirtDisposal": "asd",
+            "barrierCrossHeight": "asd",
+            "hepaFilter": "asd",
+            "washableFilter": "asdasd"
+        },
+        "moppingFeatures": {
+            "wetMopping": "asd",
+            "electricWaterFlowControl": "asd",
+            "waterTankCapacity": "asd",
+            "vibratingMoppingPad": "asdasd",
+            "autoMopLifting": "asda",
+            "autoWaterTankRefilling": "sdasd",
+            "autoMopWashing": "asda"
+        },
+        "battery": {
+            "batteryCapacity": "asd",
+            "batteryLife": "asd",
+            "chargingTime": "qqsd",
+            "ratedPower": "qasd"
+        },
+        "control": {
+            "scheduling": "qasd",
+            "wifiSmartphoneApp": "asd",
+            "wifiFrequencyBand": "qwasd",
+            "amazonAlexaSupport": "qwsd",
+            "googleAssistantSupport": "sdaf",
+            "magneticVirtualWalls": "qwasdf",
+            "ir_Rf_RemoteControl": "qasqd"
+        },
+        "appFeatures": {
+            "realTimeTracking": "qwwdf",
+            "digitalBlockedAreas": "fasdas",
+            "zonedCleaning": "wsdf",
+            "multiFloorMaps": "asdf",
+            "manualMovementControl": "sdf",
+            "selectedRoomCleaning": "oyfgu",
+            "noMopZones": "oyugf"
+        },
+        "sensor": {
+            "carpetBoost": "youf",
+            "cliffSensor": "outf",
+            "dirtSensor": "out",
+            "fullDustbinSensor": "fou"
+        },
+        "otherSpecifications": {
+            "weight": "fgu",
+            "width": "ofou",
+            "height": "yfg",
+            "inTheBox": "ougouy",
+            "releaseDate": "ou",
+            "warranty": "gou"
+        },
+        "purchaseLink": {
+        "amazon": "amazon link",
+            "aliexpress": "aeling",
+        }
+    },{
+        "id": "3",
+        "model": "samsung",
+        "mapping": "asdasd",
+        "mappingSensorType": "asda",
+        "highPrecisionMap": "sdasd",
+        "frontCamera": "asdasd",
+        "rechargeResume": "asdasd",
+        "autoDockAndRecharge": "dasd",
+        "noiseLevel": "asdas",
+        "display": "dasd",
+        "sideBrushes": "asdasd",
+        "voicePrompts": null,
+        "cleaningFeatures": {
+            "suctionPower": "asdas",
+            "cleaningArea": "dasd",
+            "dustbinCapacity": "asdasd",
+            "disposableDustBagCapacity": "asd",
+            "autoDirtDisposal": "asd",
+            "barrierCrossHeight": "asd",
+            "hepaFilter": "asd",
+            "washableFilter": "asdasd"
+        },
+        "moppingFeatures": {
+            "wetMopping": "asd",
+            "electricWaterFlowControl": "asd",
+            "waterTankCapacity": "asd",
+            "vibratingMoppingPad": "asdasd",
+            "autoMopLifting": "asda",
+            "autoWaterTankRefilling": "sdasd",
+            "autoMopWashing": "asda"
+        },
+        "battery": {
+            "batteryCapacity": "asd",
+            "batteryLife": "asd",
+            "chargingTime": "qqsd",
+            "ratedPower": "qasd"
+        },
+        "control": {
+            "scheduling": "qasd",
+            "wifiSmartphoneApp": "asd",
+            "wifiFrequencyBand": "qwasd",
+            "amazonAlexaSupport": "qwsd",
+            "googleAssistantSupport": "sdaf",
+            "magneticVirtualWalls": "qwasdf",
+            "ir_Rf_RemoteControl": "qasqd"
+        },
+        "appFeatures": {
+            "realTimeTracking": "qwwdf",
+            "digitalBlockedAreas": "fasdas",
+            "zonedCleaning": "wsdf",
+            "multiFloorMaps": "asdf",
+            "manualMovementControl": "sdf",
+            "selectedRoomCleaning": "oyfgu",
+            "noMopZones": "oyugf"
+        },
+        "sensor": {
+            "carpetBoost": "youf",
+            "cliffSensor": "outf",
+            "dirtSensor": "out",
+            "fullDustbinSensor": "fou"
+        },
+        "otherSpecifications": {
+            "weight": "fgu",
+            "width": "ofou",
+            "height": "yfg",
+            "inTheBox": "ougouyasdasdasdasdafasdasdfasdsadsadsadfasdsad",
+            "releaseDate": "ou",
+            "warranty": "gou"
+        },
+        "purchaseLink": {
+        "amazon": "amazon link",
+            "aliexpress": "aeling",
+        }
+    }]);
     const modelInputRef = useRef(null);
     function setNullFieldsToEmptyString(obj) {
         for (const key in obj) {
@@ -130,11 +352,6 @@ const Compare = () => {
               </div>
         
       }  
-
-    
-    
-    
-
     return (
         <div>
             <div style={{ display: "flex" }}>
