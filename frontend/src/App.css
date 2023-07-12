@@ -3,25 +3,43 @@
   margin: 20px;
   margin-right: 10px;
 }
+
+.login-form {
+  max-width: 300px;
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.add-div {
+  margin-top: 30px;
+  justify-content: center;
+}
 .add-button {
   margin: 20px;
   margin-left: 0px;
 }
 
-.compare-container {
-  display: flex;
-  justify-content: center;
+.table-container {
+  max-width: 700px;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-.compare-robot {
-  
-}
-.compare-fields {
-  border: 1px solid black;
+td {
   text-align: center;
-  height: 80px;
-  width: 80px;
-  padding: 25px 0;
+  max-width: 80px;
+}
+
+th {
+  max-width: 60px;
+  word-break: break-all;
+}
+
+.itb-col {
+  height: 100px;
+  word-break: break-all;
 }
 
 .cdu-container {

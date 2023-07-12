@@ -1,19 +1,23 @@
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 
     return (
-      <nav class="navbar navbar-expand-sm bg-body-tertiary">
-      <div class="container-fluid">
-        <Link class="navbar-brand" href="#">RoboBG</Link>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <div className="container-fluid">
+        <a className="navbar-brand" href="#">RoboBG</a>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <Link class="nav-link active" aria-current="page" to="/">Начало</Link>
-            <Link class="nav-link" to="/compare">Сравни Роботи</Link>
-          </div>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/Compare">Compare</a>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
