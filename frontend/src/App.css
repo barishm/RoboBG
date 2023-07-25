@@ -6,13 +6,13 @@
 
 .login-form {
   max-width: 300px;
-  margin-top: 25px;
+  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .add-div {
-  margin-top: 30px;
+  margin-top: 15px;
   justify-content: center;
 }
 .add-button {
@@ -68,4 +68,26 @@ th {
 
 .two-buttons > button{
   margin: 13px 70px;
+}
+
+.image-in-table {
+  width: 70px;
+
+}
+
+.most-popular-container {
+  display: flex;
+  justify-content: center;
+}
+
+.most-popular-child {
+  height: 150px;
+  width: 200px;
+  border: solid 1px red;
+  text-align: center;
+  margin: 10px;
+}
+
+.image-in-most-popular {
+  height: 50px;
 }

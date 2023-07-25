@@ -4,100 +4,104 @@ const  Admin = () => {
     const [IdAndModel , setIdAndModel] = useState([]);
     const [Id , setId] = useState(null);
     const modelInputRef = useRef(null);
-    const [Model,setModel] = useState(null);
+    const [Model,setModel] = useState("");
     const [CreateButton,setCreateButton] = useState(false);
     const [UpdateButton,setUpdateButton] = useState(true);
     const [CancelButton,setCancelButton] = useState(true);
     const [FormData,setFormData] = useState({
-        model: "",
-        mapping: "",
-        mappingSensorType: "",
-        highPrecisionMap: "",
-        frontCamera: "",
-        rechargeResume: "",
-        autoDockAndRecharge: "",
-        noiseLevel: "",
-        display: "",
-        sideBrushes: "",
-        voicePrompts: "",
-        cleaningFeatures: {
-            suctionPower: "",
-            cleaningArea: "",
-            dustbinCapacity: "",
-            disposableDustBagCapacity: "",
-            autoDirtDisposal: "",
-            barrierCrossHeight: "",
-            hepaFilter: "",
-            washableFilter: ""
-        },
-        moppingFeatures: {
-            wetMopping: "",
-            electricWaterFlowControl: "",
-            waterTankCapacity: "",
-            vibratingMoppingPad: "",
-            autoMopLifting: "",
-            autoWaterTankRefilling: "",
-            autoMopWashing: ""
-        },
-        battery: {
-            batteryCapacity: "",
-            batteryLife: "",
-            chargingTime: "",
-            ratedPower: ""
-        },
-        control: {
-            scheduling: "",
-            wifiSmartphoneApp: "",
-            wifiFrequencyBand: "",
-            amazonAlexaSupport: "",
-            googleAssistantSupport: "",
-            magneticVirtualWalls: "",
-            ir_Rf_RemoteControl: ""
-        },
-        appFeatures: {
-            realTimeTracking: "",
-            digitalBlockedAreas: "",
-            zonedCleaning: "",
-            multiFloorMaps: "",
-            manualMovementControl: "",
-            selectedRoomCleaning: "",
-            noMopZones: ""
-        },
-        sensor: {
-            carpetBoost: "",
-            cliffSensor: "",
-            dirtSensor: "",
-            fullDustbinSensor: ""
-        },
-        otherSpecifications: {
-            weight: "",
-            width: "",
-            height: "",
-            inTheBox: "",
-            releaseDate: "",
-            warranty: ""
-        },
-        purchaseLink: {
-            amazon: "",
-            aliexpress: ""
-        }
+      model: "",
+      image: "",
+      mostPopular: "",
+      mostCompared: "",
+      mapping: "",
+      mappingSensorType: "",
+      highPrecisionMap: "",
+      frontCamera: "",
+      rechargeResume: "",
+      autoDockAndRecharge: "",
+      noiseLevel: "",
+      display: "",
+      sideBrushes: "",
+      voicePrompts: "",
+      cleaningFeatures: {
+          suctionPower: "",
+          cleaningArea: "",
+          dustbinCapacity: "",
+          disposableDustBagCapacity: "",
+          autoDirtDisposal: "",
+          barrierCrossHeight: "",
+          hepaFilter: "",
+          washableFilter: ""
+      },
+      moppingFeatures: {
+          wetMopping: "",
+          electricWaterFlowControl: "",
+          waterTankCapacity: "",
+          vibratingMoppingPad: "",
+          autoMopLifting: "",
+          autoWaterTankRefilling: "",
+          autoMopWashing: ""
+      },
+      battery: {
+          batteryCapacity: "",
+          batteryLife: "",
+          chargingTime: "",
+          ratedPower: ""
+      },
+      control: {
+          scheduling: "",
+          wifiSmartphoneApp: "",
+          wifiFrequencyBand: "",
+          amazonAlexaSupport: "",
+          googleAssistantSupport: "",
+          magneticVirtualWalls: "",
+          ir_Rf_RemoteControl: ""
+      },
+      appFeatures: {
+          realTimeTracking: "",
+          digitalBlockedAreas: "",
+          zonedCleaning: "",
+          multiFloorMaps: "",
+          manualMovementControl: "",
+          selectedRoomCleaning: "",
+          noMopZones: ""
+      },
+      sensor: {
+          carpetBoost: "",
+          cliffSensor: "",
+          dirtSensor: "",
+          fullDustbinSensor: ""
+      },
+      otherSpecifications: {
+          weight: "",
+          width: "",
+          height: "",
+          inTheBox: "",
+          releaseDate: "",
+          warranty: ""
+      },
+      purchaseLink: {
+          amazon: "",
+          aliexpress: ""
+      }
     })
 
+
     function resetFormData() {
-        const emptyFormData = resetObjectValues(FormData);
-        setFormData(emptyFormData);
-    }
-    function resetObjectValues(obj) {
-        const newObj = {};
-        for (const key in obj) {
-          if (typeof obj[key] === 'object') {
-            newObj[key] = resetObjectValues(obj[key]);
-          } else {
-            newObj[key] = '';
-          }
+      const emptyFormData = resetObjectValues(FormData);
+      setFormData(emptyFormData);
+  }
+  function resetObjectValues(obj) {
+      const newObj = {};
+      for (const key in obj) {
+        if (typeof obj[key] === 'object') {
+          newObj[key] = resetObjectValues(obj[key]);
+        } else {
+          newObj[key] = '';
         }
-        return newObj;
-    }
+      }
+      return newObj;
+  }
     function setNullFieldsToEmptyString(obj) {
         for (const key in obj) {
             if (obj.hasOwnProperty(key)) {
@@ -110,7 +114,7 @@ const  Admin = () => {
         }
     }
 
-    //Gets all robots ids and model names
+    //Get all robots ids and model names
     useEffect(() => {
         fetchIdAndModel();
     }, []);
@@ -127,7 +131,11 @@ const  Admin = () => {
 
     // Deleting Robot
     const DeleteRobot = async () => {
-        fetch(`http://localhost:8000/admin/delete?id=${Id}`,{method: 'DELETE'})
+        fetch(`http://localhost:8000/admin/delete?id=${Id}`,{method: 'DELETE',
+        headers: {
+          "Content-type": "application/json",
+          'Authorization': `Bearer ${sessionStorage.getItem("token")}`
+        }})
         .then((response) => {
             if(!response.ok) {
                 throw new Error('Something went wrong');
@@ -155,16 +163,20 @@ const  Admin = () => {
     
     // Creating new robot
     const CreateRobot = async () => {
-        fetch('http://localhost:8000/admin/create',{method: 'POST',headers: {"Content-type": "application/json"},
+        fetch('http://localhost:8000/admin/create',{method: 'POST',
+        headers: {
+          "Content-type": "application/json",
+          'Authorization': `Bearer ${sessionStorage.getItem("token")}`
+        },
         body: JSON.stringify(FormData)
         }).then(() => {
-            console.log('new robot added')
             resetFormData();
             fetchIdAndModel();
         })
     }
     function createHandler() {
         CreateRobot();
+        setModel("");
     }
 
     // Update Robot
@@ -194,7 +206,8 @@ const  Admin = () => {
           const response = await fetch('http://localhost:8000/admin/update', {
             method: 'PUT',
             headers: {
-              "Content-type": "application/json"
+              "Content-type": "application/json",
+              'Authorization': `Bearer ${sessionStorage.getItem("token")}`
             },
             body: JSON.stringify(FormData)
           });
@@ -206,6 +219,7 @@ const  Admin = () => {
             setUpdateButton(true);
             setCancelButton(true);
             fetchIdAndModel();
+
           } else {
             console.log('Error: ' + response.status);
             // Handle the error case if needed
@@ -218,9 +232,12 @@ const  Admin = () => {
       function confirmUpdate() {
         UpdateRobot();
         resetFormData();
+        setModel("");
+        console.log(FormData);
       }
       function CancelHandle() {
             resetFormData();
+            setModel("");
             setCreateButton(false);
             setUpdateButton(true);
             setCancelButton(true);
@@ -271,7 +288,7 @@ const  Admin = () => {
     return(
         <div className="cdu-container shadow-sm p-3 mb-5 bg-body-tertiary rounded">
             <div className="select-div" style={{ display: "flex" }}>
-                <input ref={modelInputRef} className="form-control choose-robot" list="datalistOptions" id="exampleDataList" placeholder="Choose robot from the list" onChange={(e)=>setModel(e.target.value)}/>
+                <input ref={modelInputRef} className="form-control choose-robot" list="datalistOptions" id="exampleDataList" value={Model} name="Model" placeholder="Choose robot from the list" onChange={(e)=>setModel(e.target.value)}/>
                 <button type="button" className="btn btn-secondary update-button" onClick={handleUpdate}>Update</button>
                 <button type="button" className="btn btn-secondary cancel-update-button" disabled={CancelButton} onClick={CancelHandle}>Cancel</button>
                 <button type="button" className="btn btn-danger delete-button" onClick={handleDelete}>Delete</button>
@@ -283,6 +300,9 @@ const  Admin = () => {
             </div>
             <div className="form-inputs">
             <input className="form-control form-control-sm" type="text" name="model" onChange={handleChange} value={FormData.model} placeholder="Model" aria-label=".form-control-sm example"/>
+            <input className="form-control form-control-sm" type="text" name="image" onChange={handleChange} value={FormData.image} placeholder="Image" aria-label=".form-control-sm example"/>
+            <input className="form-control form-control-sm" type="number" name="mostPopular" onChange={handleChange} value={FormData.mostPopular} placeholder="Most Popular" aria-label=".form-control-sm example"/>
+            <input className="form-control form-control-sm" type="number" name="mostCompared" onChange={handleChange} value={FormData.mostCompared} placeholder="Most Compared" aria-label=".form-control-sm example"/>
             <input className="form-control form-control-sm" type="text" name="mapping" onChange={handleChange} value={FormData.mapping} placeholder="Mapping" aria-label=".form-control-sm example"/>
             <input className="form-control form-control-sm" type="text" name="mappingSensorType" onChange={handleChange} value={FormData.mappingSensorType} placeholder="Mapping Sensor Type" aria-label=".form-control-sm example"/>
             <input className="form-control form-control-sm" type="text" name="highPrecisionMap" onChange={handleChange} value={FormData.highPrecisionMap} placeholder="High Precision Map" aria-label=".form-control-sm example"/>

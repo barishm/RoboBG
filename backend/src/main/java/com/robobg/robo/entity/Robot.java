@@ -24,6 +24,15 @@ public class Robot {
     @Column(name = "model",unique = true,nullable = false)
     private String model;
 
+    @Column(name = "image")
+    private String image;
+
+    @Column(name = "most_popular")
+    private Integer mostPopular;
+
+    @Column(name = "most_compared")
+    private Integer mostCompared;
+
     @Column
     private String mapping;
 

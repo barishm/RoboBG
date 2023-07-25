@@ -18,10 +18,8 @@ const Auth = () => {
         })
         .then((res) => res.json())
         .then((result) => {
-            localStorage.setItem("token", result.token);
-            if(localStorage.getItem("token") != null && localStorage.getItem("token") != 'undefined'){
-                navigate("/admin");
-            }
+            sessionStorage.setItem("token", result.token);
+            navigate("/admin");
           })
         .catch((err) => console.log(err))
     }
@@ -30,7 +28,6 @@ const Auth = () => {
         sendRequest();
         setUsername("");
         setPassword("");
-        window.location.reload();
     }
 
     

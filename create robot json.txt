@@ -1,0 +1,77 @@
+{
+        "model": "samsung",
+        "image": null,
+        "mostPopular": null,
+        "mostCompared": null,
+        "mapping": "no",
+        "mappingSensorType": "asd",
+        "highPrecisionMap": "asdasd",
+        "frontCamera": "asd",
+        "rechargeResume": "asdas",
+        "autoDockAndRecharge": "das",
+        "noiseLevel": "dasd",
+        "display": "noasd",
+        "sideBrushes": "asd",
+        "voicePrompts": "dasd",
+        "cleaningFeatures": {
+            "suctionPower": "asdas",
+            "cleaningArea": "dasd",
+            "dustbinCapacity": "asdasd",
+            "disposableDustBagCapacity": "asda",
+            "autoDirtDisposal": "sdasd",
+            "barrierCrossHeight": "asdasd",
+            "hepaFilter": "asdasd",
+            "washableFilter": "asdasd"
+        },
+        "moppingFeatures": {
+            "wetMopping": "asdasd",
+            "electricWaterFlowControl": "asdasd",
+            "waterTankCapacity": "asdasd",
+            "vibratingMoppingPad": "asd",
+            "autoMopLifting": "asdasd",
+            "autoWaterTankRefilling": "asd",
+            "autoMopWashing": "asd"
+        },
+        "battery": {
+            "batteryCapacity": "asd",
+            "batteryLife": "asdasd",
+            "chargingTime": "asd",
+            "ratedPower": "asda"
+        },
+        "control": {
+            "scheduling": "sd",
+            "wifiSmartphoneApp": "asd",
+            "wifiFrequencyBand": "asd",
+            "amazonAlexaSupport": "asd",
+            "googleAssistantSupport": "",
+            "magneticVirtualWalls": "",
+            "ir_Rf_RemoteControl": "asdasd"
+        },
+        "appFeatures": {,
+            "realTimeTracking": "",
+            "digitalBlockedAreas": "",
+            "zonedCleaning": "",
+            "multiFloorMaps": "asdasd",
+            "manualMovementControl": "",
+            "selectedRoomCleaning": "",
+            "noMopZones": ""
+        },
+        "sensor": {
+            "carpetBoost": "",
+            "cliffSensor": "",
+            "dirtSensor": "",
+            "fullDustbinSensor": ""
+        },
+        "otherSpecifications": {
+            "weight": "",
+            "width": "",
+            "height": "",
+            "inTheBox": "asdasd",
+            "releaseDate": "",
+            "warranty": "asdasd"
+        },
+        "purchaseLink": {
+            "amazon": "",
+            "aliexpress": "asdasd"
+        }
+    }

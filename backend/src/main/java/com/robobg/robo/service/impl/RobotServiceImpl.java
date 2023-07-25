@@ -1,7 +1,7 @@
 package com.robobg.robo.service.impl;
 
 import com.robobg.robo.entity.Robot;
-import com.robobg.robo.entity.dtos.RobotIdModelDTO;
+import com.robobg.robo.entity.dtos.RobotIdModelImageDTO;
 import com.robobg.robo.repository.RobotRepository;
 import com.robobg.robo.service.RobotService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class RobotServiceImpl implements RobotService {
 
 
-    private RobotRepository robotRepository;
+    private final RobotRepository robotRepository;
 
 
     @Autowired
@@ -29,12 +29,23 @@ public class RobotServiceImpl implements RobotService {
     }
 
     @Override
-    public Optional<List<RobotIdModelDTO>> getAllRobots() {
+    public Optional<List<RobotIdModelImageDTO>> findAllMostPopular() {
+        return Optional.of(robotRepository.findAllMostPopular().stream().map(this::convertEntityToDto).collect(Collectors.toList()));
+    }
+
+    @Override
+    public Optional<List<RobotIdModelImageDTO>> findAllMostCompared() {
+        return Optional.of(robotRepository.findAllMostCompared().stream().map(this::convertEntityToDto).collect(Collectors.toList()));
+    }
+
+    @Override
+    public Optional<List<RobotIdModelImageDTO>> getAllRobots() {
         return Optional.of(robotRepository.findAll().stream().map(this::convertEntityToDto).collect(Collectors.toList()));
     }
 
     @Override
     public Robot saveRobot(Robot robot) {
+        System.out.println();
         ObjectUtils.setEmptyStringsToNull(robot);
         return robotRepository.save(robot);
     }
@@ -49,11 +60,12 @@ public class RobotServiceImpl implements RobotService {
         robotRepository.deleteById(id);
     }
 
-    private RobotIdModelDTO convertEntityToDto(Robot robot) {
-        RobotIdModelDTO robotIdModelDTO = new RobotIdModelDTO();
-        robotIdModelDTO.setId(robot.getId());
-        robotIdModelDTO.setModel(robot.getModel());
+    private RobotIdModelImageDTO convertEntityToDto(Robot robot) {
+        RobotIdModelImageDTO robotIdModelImageDTO = new RobotIdModelImageDTO();
+        robotIdModelImageDTO.setId(robot.getId());
+        robotIdModelImageDTO.setModel(robot.getModel());
+        robotIdModelImageDTO.setImage(robot.getImage());
 
-        return robotIdModelDTO;
+        return robotIdModelImageDTO;
     }
 }

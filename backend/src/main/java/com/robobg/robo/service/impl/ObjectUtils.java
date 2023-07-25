@@ -20,8 +20,6 @@ public class ObjectUtils {
                     if (str.isEmpty()) {
                         field.set(obj, null);
                     }
-                } else if (fieldValue != null) {
-                    setEmptyStringsToNull(fieldValue); // Recursively process nested objects
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();

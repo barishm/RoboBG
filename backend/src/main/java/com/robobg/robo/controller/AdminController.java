@@ -1,16 +1,13 @@
 package com.robobg.robo.controller;
 
 import com.robobg.robo.entity.Robot;
-import com.robobg.robo.entity.dtos.RobotIdModelDTO;
 import com.robobg.robo.service.RobotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
-import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping("/admin")
 public class AdminController {
     private RobotService robotService;
@@ -34,6 +31,7 @@ public class AdminController {
     public void updateRobot(@RequestBody Robot robot){
         robotService.saveRobot(robot);
     }
+
 
 
 
