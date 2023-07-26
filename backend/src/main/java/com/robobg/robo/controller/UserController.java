@@ -2,6 +2,8 @@ package com.robobg.robo.controller;
 
 import com.robobg.robo.entity.Robot;
 import com.robobg.robo.entity.dtos.RobotIdModelImageDTO;
+import com.robobg.robo.entity.dtos.RobotIdModelImageMostPopularDTO;
+import com.robobg.robo.entity.dtos.RobotIdModelMostComparedDTO;
 import com.robobg.robo.service.RobotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,12 +28,12 @@ public class UserController {
     }
 
     @GetMapping("/allMostPopular")
-    public Optional<List<RobotIdModelImageDTO>> FindAllMostPopular() {
+    public Optional<List<RobotIdModelImageMostPopularDTO>> FindAllMostPopular() {
         return robotService.findAllMostPopular();
     }
 
     @GetMapping("/allMostCompared")
-    public Optional<List<RobotIdModelImageDTO>> findAllMostCompared() {return robotService.findAllMostCompared();}
+    public Optional<List<RobotIdModelMostComparedDTO>> findAllMostCompared() {return robotService.findAllMostCompared();}
 
     @GetMapping("/robots")
     public Optional<List<Robot>> getAllRobotsByIds(@RequestParam("ids") List<Long> ids){

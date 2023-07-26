@@ -2,6 +2,8 @@ package com.robobg.robo.service;
 
 import com.robobg.robo.entity.Robot;
 import com.robobg.robo.entity.dtos.RobotIdModelImageDTO;
+import com.robobg.robo.entity.dtos.RobotIdModelImageMostPopularDTO;
+import com.robobg.robo.entity.dtos.RobotIdModelMostComparedDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +16,8 @@ public interface RobotService {
     Optional<Robot> getRobotById(Long id);
     void deleteRobotById(Long id);
     Optional<List<Robot>> findByIdIn(List<Long> ids);
-    Optional<List<RobotIdModelImageDTO>> findAllMostPopular();
+    Optional<List<RobotIdModelImageMostPopularDTO>> findAllMostPopular();
 
 
-    Optional<List<RobotIdModelImageDTO>> findAllMostCompared();
+    Optional<List<RobotIdModelMostComparedDTO>> findAllMostCompared();
 }

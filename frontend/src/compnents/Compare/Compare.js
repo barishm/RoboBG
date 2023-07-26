@@ -68,7 +68,7 @@ const Compare = (props) => {
                 ))}
             </datalist>
             </div>
-            <CompareTable props={Robots}/>
+            <CompareTable Robots={Robots} setIds={setIds} Ids={Ids} setRobots={setRobots}/>
         </div>
     );
 }

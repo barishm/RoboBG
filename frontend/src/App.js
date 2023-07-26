@@ -21,7 +21,7 @@ function App() {
         <Route element={<ProtectedRoutes/>}>
         <Route path='/admin' element={<Admin/>}/>
         </Route>
-        <Route path='/auth'  element={<Auth/>} />
+        <Route path='/auth'  element={<Auth/>}/>
       </Routes>
     </div>
   );

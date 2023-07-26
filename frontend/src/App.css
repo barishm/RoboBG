@@ -1,3 +1,10 @@
+
+#root {
+  overflow: hidden;
+  min-height: 100%;
+}
+
+
 .choose-robot {
   max-width: 213px;
   margin: 20px;
@@ -33,12 +40,12 @@ td {
 }
 
 th {
-  max-width: 60px;
+  max-width: 80px;
   word-break: break-all;
 }
 
 .itb-col {
-  height: 100px;
+  height: 80px;
   word-break: break-all;
 }
 
@@ -75,19 +82,8 @@ th {
 
 }
 
-.most-popular-container {
-  display: flex;
-  justify-content: center;
+footer {
+  margin-top: auto;
 }
 
-.most-popular-child {
-  height: 150px;
-  width: 200px;
-  border: solid 1px red;
-  text-align: center;
-  margin: 10px;
-}
 
-.image-in-most-popular {
-  height: 50px;
-}

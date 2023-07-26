@@ -1,9 +1,7 @@
 package com.robobg.robo.service.impl;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.util.Collection;
-import java.util.Map;
+
 
 public class ObjectUtils {
     public static void setEmptyStringsToNull(Object obj) {
