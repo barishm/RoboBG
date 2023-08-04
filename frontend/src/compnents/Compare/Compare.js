@@ -61,7 +61,7 @@ const Compare = (props) => {
         <div>
             <div style={{ display: "flex" }} className="add-div">
                 <input className="form-control choose-robot" value={Model} name="Model" list="datalistOptions" id="Model" placeholder="Choose robot from the list" onChange={(e)=>setModel(e.target.value)}/>
-                <button type="button" className="btn btn-secondary add-button" onClick={handleAdd}>Add</button>
+                <button type="button" className="btn btn-outline-secondary add-button" onClick={handleAdd}>Add</button>
                 <datalist id="datalistOptions">
             {IdAndModel.map((item) => (
                     <option key={item.id} value={item.model} />

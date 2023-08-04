@@ -19,7 +19,12 @@ const CompareTable = (props) => {
                 <th scope="row">Image</th>
                 {Robots.map((item) => 
                 <td key={item.id}> 
-                    <img className="image-in-table" src={item.image} value={item.id} onClick={deleteRobot}></img>
+                    <div className="image">
+                    <img className="image-in-table" src={item.image}></img>
+                    <div className="image-overlay">
+                        <i className="fa-solid fa-xmark fa-fade" style={{color: "#ff0505"}} value={item.id} onClick={deleteRobot}></i>
+                    </div>
+                    </div>
                 </td>
                 )}
             </tr>

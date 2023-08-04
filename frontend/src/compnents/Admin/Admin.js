@@ -113,6 +113,17 @@ const  Admin = () => {
             }
         }
     }
+    function setEmptyStringsToNull(obj) {
+      for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          if (typeof obj[key] === 'object' && obj[key] !== null) {
+            setEmptyStringsToNull(obj[key]); // Recursively check nested objects
+          } else if (typeof obj[key] === 'string' && obj[key].trim() === '') {
+            obj[key] = null; // Set empty string field to null
+          }
+        }
+      }
+    }
 
     //Get all robots ids and model names
     useEffect(() => {
@@ -163,6 +174,7 @@ const  Admin = () => {
     
     // Creating new robot
     const CreateRobot = async () => {
+        setEmptyStringsToNull(FormData);
         fetch('http://localhost:8000/admin/create',{method: 'POST',
         headers: {
           "Content-type": "application/json",
@@ -170,6 +182,7 @@ const  Admin = () => {
         },
         body: JSON.stringify(FormData)
         }).then(() => {
+            setNullFieldsToEmptyString(FormData);
             resetFormData();
             fetchIdAndModel();
         })
@@ -202,6 +215,7 @@ const  Admin = () => {
         }
       }
       const UpdateRobot = async () => {
+        setEmptyStringsToNull(FormData);
         try {
           const response = await fetch('http://localhost:8000/admin/update', {
             method: 'PUT',
@@ -214,16 +228,14 @@ const  Admin = () => {
       
           if (response.ok) {
             console.log('robot updated');
-            resetFormData();
-            setCreateButton(false);
-            setUpdateButton(true);
-            setCancelButton(true);
-            fetchIdAndModel();
-
           } else {
             console.log('Error: ' + response.status);
             // Handle the error case if needed
           }
+          setCreateButton(false);
+          setUpdateButton(true);
+          setCancelButton(true);
+          fetchIdAndModel();
         } catch (error) {
           console.log('Error:', error);
           // Handle the error case if needed
@@ -231,6 +243,7 @@ const  Admin = () => {
       };
       function confirmUpdate() {
         UpdateRobot();
+        setNullFieldsToEmptyString(FormData);
         resetFormData();
         setModel("");
         console.log(FormData);

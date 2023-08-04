@@ -48,8 +48,6 @@ public class RobotServiceImpl implements RobotService {
 
     @Override
     public Robot saveRobot(Robot robot) {
-        System.out.println();
-        ObjectUtils.setEmptyStringsToNull(robot);
         return robotRepository.save(robot);
     }
 

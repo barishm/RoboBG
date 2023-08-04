@@ -56,8 +56,9 @@ th {
 }
 
 .cdu-container .form-control-sm {
-  margin: 6px auto;
-  max-width: 400px;
+  max-width: 300px;
+  display: inline;
+  margin-bottom: 5px;
 }
 
 .select-div {
@@ -71,6 +72,7 @@ th {
 
 .form-inputs {
   margin: 6px auto;
+  text-align: center;
 }
 
 .two-buttons > button{
@@ -79,11 +81,34 @@ th {
 
 .image-in-table {
   width: 70px;
-
+  display: block;
+}
+.image {
+  position: relative;
+  width: 70px;
+  margin: auto;
+}
+.image-overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  opacity: 0;
+}
+.image-overlay:hover {
+  opacity: 1;
+}
+.fa-xmark {
+  font-size: 70px;
 }
 
 footer {
   margin-top: auto;
 }
 
+.admin-label{
+  margin-right: 7px;
+}
 
