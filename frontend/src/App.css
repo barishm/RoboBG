@@ -1,0 +1,144 @@
+
+#root {
+  overflow: hidden;
+  min-height: 100%;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: rgb(245, 245, 245);
+}
+
+Footer {
+  margin-top: auto;
+}
+
+.choose-robot {
+  max-width: 250px;
+  margin: 20px;
+  margin-right: 10px;
+}
+
+.login-form {
+  max-width: 300px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.add-div {
+  margin-top: 15px;
+  justify-content: center;
+}
+.add-button {
+  margin: 20px;
+  margin-left: 0px;
+}
+
+.table-container {
+  max-width: 1000px;
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+.itb-col {
+  height: 80px;
+  word-break: break-all;
+}
+
+.cdu-container {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 15px;
+}
+
+
+.select-div {
+  margin: auto auto;
+}
+
+.select-div button {
+  max-height: 50px;
+  margin: auto auto;
+}
+
+
+.two-buttons > button{
+  margin: 13px 70px;
+}
+
+.image-in-table {
+  width: 70px;
+  display: block;
+}
+.image {
+  position: relative;
+  width: 70px;
+  margin: auto;
+}
+.image-overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  opacity: 0;
+}
+.image-overlay:hover {
+  opacity: 1;
+}
+.fa-xmark {
+  font-size: 70px;
+}
+
+footer {
+  margin-top: auto;
+}
+
+.admin-label{
+  margin-right: 7px;
+}
+
+.admin-nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+
+.single-robot-container{
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 90px;
+}
+
+.single-robot-image {
+  width: 200px;
+}
+
+.text-pointer-on-hover:hover {
+  cursor: pointer;
+  color: rgb(73, 73, 73);
+}
+
+.position-custom {
+  position: absolute;
+  top: 1rem; /* Adjust as necessary */
+  right: 0.50rem; /* Adjust as necessary */
+}
+
+.bg-custom-gray {
+  background-color: rgb(220, 220, 220);
+}
+
+
+
+
+
