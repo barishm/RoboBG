@@ -3,13 +3,28 @@ import { cleanFormValues } from "../independent/utils";
 import {
   useUpdateRobotMutation,
   useGetRobotByIdQuery,
+  useLazyGetRobotByIdQuery
 } from "../../app/apiSlice";
 import Loading from "../independent/Loading";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const UpdateRobot = (props) => {
   const id = props.id;
-  const [update] = useUpdateRobotMutation();
-  const { data, isLoading, error } = useGetRobotByIdQuery({ id });
+  const [updateRobot] = useUpdateRobotMutation();
+  //const { data, isLoading, error } = useGetRobotByIdQuery({ id });
+  const [trigger,result] = useLazyGetRobotByIdQuery();
+  const { accessToken } = useSelector((state) => state.auth);
+  const {data, isLoading, error} = result;
+  useEffect(() => {
+    if (id !== null) {
+      trigger({id});
+    }
+  }, [id, trigger]);
+  const update = async (robotBody) => {
+    await updateRobot({robotBody,accessToken}).unwrap()
+    formikUpdate.resetForm();
+  }
 
   const formikUpdate = useFormik({
     enableReinitialize: true,
@@ -104,6 +119,7 @@ const UpdateRobot = (props) => {
     >
       <div class="modal-dialog">
         <div class="modal-content">
+        <form onSubmit={formikUpdate.handleSubmit}>
           <div class="modal-header">
             <h5 class="modal-title">Update Robot</h5>
             <button
@@ -132,8 +148,11 @@ const UpdateRobot = (props) => {
             <input className="form-control form-control-sm" type="text" name="model" onChange={formikUpdate.handleChange} value={formikUpdate.values.model}></input>
             </div>
             <div className="mb-3">
-            <label htmlFor="exampleFormControlInput1" className="form-label">Bests</label>
-            <input className="form-control form-control-sm" type="number" name="bests" onChange={formikUpdate.handleChange} value={formikUpdate.values.bests} aria-label=".form-control-sm example"/>
+            <label htmlFor="exampleFormControlInput1" className="form-label">One of bests</label>
+            <select className="form-control form-control-sm" name="bests" onChange={formikUpdate.handleChange} value={formikUpdate.values.bests}>
+              <option value="false">NO</option>
+              <option value="true">YES</option>
+            </select>
             </div>
             <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Mapping</label>
@@ -489,15 +508,16 @@ const UpdateRobot = (props) => {
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              className="btn btn-secondary"
               data-bs-dismiss="modal"
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary">
+            <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">
               Update
             </button>
           </div>
+          </form>
         </div>
       </div>
     </div>

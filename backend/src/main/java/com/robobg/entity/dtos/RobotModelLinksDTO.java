@@ -4,13 +4,9 @@ import com.robobg.entity.dtos.RobotDTO.PurchaseLinkDTO;
 import lombok.Data;
 
 import java.util.List;
-
 @Data
-public class RobotIdModelImageLinksDTO {
+public class RobotModelLinksDTO {
     private Long id;
     private String model;
-    private String image;
-    private Boolean bests;
     private List<PurchaseLinkDTO> purchaseLinks;
 }
-

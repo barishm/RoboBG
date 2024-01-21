@@ -2,7 +2,7 @@
 {
       	"model": "360 C50",
         "image": "https://m.media-amazon.com/images/I/71PFBQjwViL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
-        "bests": 1,
+        "bests": true,
         "mapping": true,
         "mappingSensorType": "gyroscope",
         "highPrecisionMap": false,
@@ -74,7 +74,7 @@
 {
       	"model": "360 S10",
         "image": "https://m.media-amazon.com/images/I/71PFBQjwViL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
-        "bests": 2,
+        "bests": true,
         "mapping": true,
         "mappingSensorType": "LDS",
         "highPrecisionMap": true,
@@ -146,7 +146,7 @@
   {
     "model": "360 S5 Robot Vacuum Cleaner",
     "image": "https://m.media-amazon.com/images/I/71PFBQjwViL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
-    "bests": 31,
+    "bests": true,
     "mapping": true,
     "mappingSensorType": "LDS",
     "highPrecisionMap": true,
@@ -218,7 +218,7 @@
   {
     "model": "360 S6 Robot Vacuum Cleaner",
     "image": "https://m.media-amazon.com/images/I/71PFBQjwViL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
-    "bests": 31,
+    "bests": true,
     "mapping": true,
     "mappingSensorType": "LDS",
     "highPrecisionMap": true,

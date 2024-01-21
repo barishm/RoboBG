@@ -3,6 +3,7 @@ package com.robobg.repository;
 import com.robobg.entity.Robot;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,4 +19,7 @@ public interface RobotRepository extends JpaRepository<Robot,Long> {
     Optional<Robot> findByModel(String model);
 
     boolean existsByModel(String model);
+
+    @Query("SELECT r.image FROM Robot r WHERE r.id = :id")
+    String findImageById(@Param("id") Long id);
 }

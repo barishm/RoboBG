@@ -9,7 +9,7 @@ public class RobotDTO {
     private String brand;
     private String model;
     private String image;
-    private Integer bests;
+    private Boolean bests;
     private Boolean mapping;
     private String mappingSensorType;
     private Boolean highPrecisionMap;

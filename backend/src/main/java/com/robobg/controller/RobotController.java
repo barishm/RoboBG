@@ -7,7 +7,6 @@ import com.robobg.service.PurchaseLinkService;
 import com.robobg.service.QuestionService;
 import com.robobg.service.RobotService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -28,7 +27,13 @@ public class RobotController {
     }
 
     @GetMapping("/{id}")
-    public Optional<RobotDTO> getRobotById(@PathVariable("id") Long id) {
+    public Optional<?> getRobotById(@PathVariable("id") Long id,
+                                           @RequestParam(required = false) HashSet<String> fields) {
+        if(fields != null){
+            if(fields.containsAll(Arrays.asList("model", "links"))){
+                return robotService.getAllModelsLinksById(id);
+            }
+        }
         return robotService.getRobotById(id);
     }
 

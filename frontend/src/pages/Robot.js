@@ -4,17 +4,18 @@ import { useNavigate } from "react-router-dom";
 import RobotDetails from "../components/Robot/RobotDetails";
 import QnA from '../components/Robot/QnA'
 import { useGetRobotByIdQuery, useGetRobotsModelQuery } from "../app/apiSlice";
+import Loading from "../components/independent/Loading";
 
 const Robot = (props) => {
     const setIds = props.setIds;
     const Ids = props.Ids;
     const { id } = useParams();
-    const [Robot, setRobot] = useState({});
     const [IdAndModel , setIdAndModel] = useState([]);
     const [Model,setModel] = useState("");
     const navigate = useNavigate();
-    const {data,isLoading,error} = useGetRobotByIdQuery(id);
+    const {data,isLoading,error} = useGetRobotByIdQuery({id});
     const {data: allModels,isLoading: allModelsIsLoading} = useGetRobotsModelQuery();
+    const noImage = "images/no-image.jpg";
 
     function select(e) {
         const newModel = e.target.value;
@@ -40,13 +41,13 @@ const Robot = (props) => {
           {error ? (
             <>Oh no, there was an error</>
           ) : isLoading ? (
-          <>Loading...</>
+          <><Loading/></>
           ) : data ? (
           <>
           <div className="single-robot-container p-4 shadow-sm rounded card">
             <div className="row">
               <div className="col-4">
-                <img className="single-robot-image" src={data.image} alt={data.model} />
+                <img className="single-robot-image" src={data.image || noImage} alt={data.model} />
               </div>
               <div className="col-8">
                 <h2 className="fw-border">{data.model}</h2>

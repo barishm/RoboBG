@@ -8,7 +8,7 @@ public class CreateRobotDTO {
     private Long id;
     private String brand;
     private String model;
-    private Integer bests;
+    private Boolean bests;
     private Boolean mapping;
     private String mappingSensorType;
     private Boolean highPrecisionMap;

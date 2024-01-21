@@ -33,6 +33,7 @@ const ManageRobots = () => {
       </button>
       <CreateRobot/>
       <UpdateRobot id={updateId} />
+      
 
 
 

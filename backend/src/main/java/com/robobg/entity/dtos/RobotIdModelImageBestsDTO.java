@@ -10,6 +10,6 @@ public class RobotIdModelImageBestsDTO {
     private Long id;
     private String model;
     private String image;
-    private Integer bests;
+    private Boolean bests;
     private List<PurchaseLinkDTO> purchaseLinks;
 }

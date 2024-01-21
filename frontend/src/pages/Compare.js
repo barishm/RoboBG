@@ -14,34 +14,6 @@ const Compare = (props) => {
   const [IdAndModel, setIdAndModel] = useState([]);
   const [Robots, setRobots] = useState([]);
 
-  useEffect(() => {
-    const fetchIdAndModel = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:8000/v1/robots/model-image"
-        );
-        const jsonData = await response.json();
-        setIdAndModel(jsonData);
-      } catch (error) {
-        console.log("Error fetching data:", error);
-      }
-    };
-
-    fetchIdAndModel();
-  }, []);
-
-  const fetchRobotsByIds = async () => {
-    try {
-      const idsQuery = Ids.map((id) => `ids=${id}`).join("&");
-      const url = `http://localhost:8000/v1/robots/ids?${idsQuery}`;
-      const response = await fetch(url);
-      const jsonData = await response.json();
-      setRobots(jsonData);
-    } catch (error) {
-      console.log("Error fetching data:", error);
-    }
-  };
-
   function handleAdd() {
     setModel("");
 
@@ -53,11 +25,6 @@ const Compare = (props) => {
     setModel("");
   }
 
-  useEffect(() => {
-    if (Ids.length > 0) {
-      fetchRobotsByIds();
-    }
-  }, [Ids]);
 
   function handleCompare() {
     setIds([]);

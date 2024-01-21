@@ -1,12 +1,9 @@
 package com.robobg.service.impl;
 
 import com.robobg.entity.Robot;
+import com.robobg.entity.dtos.*;
 import com.robobg.entity.dtos.RobotDTO.CreateRobotDTO;
 import com.robobg.entity.dtos.RobotDTO.RobotDTO;
-import com.robobg.entity.dtos.RobotIdModelImageDTO;
-import com.robobg.entity.dtos.RobotIdModelImageLinksDTO;
-import com.robobg.entity.dtos.RobotIdModelImageBestsDTO;
-import com.robobg.entity.dtos.RobotModelDTO;
 import com.robobg.exceptions.RobotAlreadyExistsException;
 import com.robobg.repository.RobotRepository;
 import com.robobg.service.RobotService;
@@ -45,8 +42,8 @@ public class RobotServiceImpl implements RobotService {
     @Override
     public List<RobotIdModelImageBestsDTO> findAllBests() {
         return robotRepository.findAllBests().stream()
+                .filter(robot -> Boolean.TRUE.equals(robot.getBests()))
                 .map(robot -> modelMapper.map(robot, RobotIdModelImageBestsDTO.class))
-                .sorted(Comparator.comparingInt(RobotIdModelImageBestsDTO::getBests))
                 .collect(Collectors.toList());
     }
 
@@ -64,6 +61,16 @@ public class RobotServiceImpl implements RobotService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Optional<RobotModelLinksDTO> getAllModelsLinksById(Long id) {
+        Optional<Robot> robot = robotRepository.findById(id);
+        if (robot.isPresent()) {
+            RobotModelLinksDTO robotModelLinksDTO = modelMapper.map(robot.get(), RobotModelLinksDTO.class);
+            return Optional.of(robotModelLinksDTO);
+        }
+        return Optional.empty();
+    }
+
     public List<RobotIdModelImageDTO> getAllRobotIdModelImage() {
         return robotRepository.findAll().stream()
                 .map(robot -> modelMapper.map(robot, RobotIdModelImageDTO.class))
@@ -74,10 +81,6 @@ public class RobotServiceImpl implements RobotService {
     public List<RobotIdModelImageLinksDTO> getAllRobotIdModelImageLinks() {
         return robotRepository.findAll().stream()
                 .map(robot -> modelMapper.map(robot, RobotIdModelImageLinksDTO.class))
-                .sorted(Comparator.comparingInt(dto -> {
-                    Integer bests = dto.getBests();
-                    return bests != null ? bests : Integer.MAX_VALUE;
-                }))
                 .collect(Collectors.toList());
     }
 
@@ -93,6 +96,8 @@ public class RobotServiceImpl implements RobotService {
     @Override
     public void updateRobot(CreateRobotDTO createRobotDTO) {
         Robot robot = modelMapper.map(createRobotDTO, Robot.class);
+        String image = robotRepository.findImageById(createRobotDTO.getId());
+        robot.setImage(image);
         robotRepository.save(robot);
     }
 

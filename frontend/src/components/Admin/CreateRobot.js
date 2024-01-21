@@ -18,7 +18,7 @@ const CreateRobot = () => {
         initialValues: {
             brand: "",
             model: "",
-            bests: "",
+            bests: "false",
             mapping: "null",
             mappingSensorType: "",
             highPrecisionMap: "null",
@@ -128,8 +128,11 @@ const CreateRobot = () => {
             <input className="form-control form-control-sm" type="text" name="model" onChange={formik.handleChange} value={formik.values.model}></input>
             </div>
             <div className="mb-3">
-            <label htmlFor="exampleFormControlInput1" className="form-label">Bests</label>
-            <input className="form-control form-control-sm" type="number" name="bests" onChange={formik.handleChange} value={formik.values.bests} aria-label=".form-control-sm example"/>
+            <label htmlFor="exampleFormControlInput1" className="form-label">One of bests</label>
+            <select className="form-control form-control-sm" name="bests" onChange={formik.handleChange} value={formik.values.bests}>
+              <option value="false">NO</option>
+              <option value="true">YES</option>
+            </select>
             </div>
             <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Mapping</label>

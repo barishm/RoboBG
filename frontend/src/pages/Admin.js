@@ -1,7 +1,4 @@
-import SetRobots from "../components/Admin/SetRobots"
-import UserManagement from "../components/Admin/UserManagement";
 import { useState } from "react";
-import AddPurchaseLinks from "../components/Admin/AddPurchaseLinks";
 import ManageRobots from "../components/Admin/ManageRobots"
 import ManageLinks from "../components/Admin/ManageLinks";
 import ManageUsers from "../components/Admin/ManageUsers";

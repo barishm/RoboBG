@@ -1,12 +1,9 @@
 package com.robobg.service;
 
 import com.robobg.entity.Robot;
+import com.robobg.entity.dtos.*;
 import com.robobg.entity.dtos.RobotDTO.CreateRobotDTO;
 import com.robobg.entity.dtos.RobotDTO.RobotDTO;
-import com.robobg.entity.dtos.RobotIdModelImageDTO;
-import com.robobg.entity.dtos.RobotIdModelImageLinksDTO;
-import com.robobg.entity.dtos.RobotIdModelImageBestsDTO;
-import com.robobg.entity.dtos.RobotModelDTO;
 import com.robobg.exceptions.RobotAlreadyExistsException;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
@@ -28,6 +25,8 @@ public interface RobotService {
     List<RobotDTO> getAllRobots();
 
     List<RobotModelDTO> getAllModels();
+
+    Optional<RobotModelLinksDTO> getAllModelsLinksById(Long id);
 
 
 }

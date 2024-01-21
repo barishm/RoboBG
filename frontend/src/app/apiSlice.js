@@ -115,6 +115,13 @@ export const apiSlice = createApi({
             }),
             providesTags: ['Robot'],
         }),
+        getRobotsModelLinksById: builder.query({
+            query: (id) => ({
+                url: `v1/robots/${id}?fields=model,links`,
+                method: 'GET',
+            }),
+            providesTags: ['Robot'],
+        }),
         getRobotsByIds: builder.query({
             query: (ids) => ({
                 url: `v1/robots?id=${ids}`,
@@ -153,14 +160,14 @@ export const apiSlice = createApi({
             invalidatesTags: ['Robot'],
         }),
         updateRobot: builder.mutation({
-            query: (json,token) => ({
+            query: ({robotBody, accessToken}) => ({
                 url: 'v1/admin/robots',
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${accessToken}`
                 },
-                body: {json},
+                body: robotBody,
             }),
             invalidatesTags: ['Robot'],
         }),
@@ -189,15 +196,16 @@ export const apiSlice = createApi({
 
         //Links
         createLink: builder.mutation({
-            query: (json,accessToken) => ({
+            query: ({json,accessToken}) => ({
                 url: 'v1/admin/links',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${accessToken}`
                 },
-                body: {json},
-            })
+                body: json,
+            }),
+            invalidatesTags: ['Robot'],
         }),
         deleteLink: builder.mutation({
             query: (id,token) => ({
@@ -206,7 +214,8 @@ export const apiSlice = createApi({
                 headers: {
                     'Authorization': `Bearer ${token}`
                 },
-            })
+            }),
+            invalidatesTags: ['Robot'],
         }),
     })
 })
@@ -224,6 +233,8 @@ export const {
     useGetRobotsModelImageQuery,
     useGetRobotsModelImageLinksQuery,
     useGetRobotByIdQuery,
+    useLazyGetRobotByIdQuery,
+    useLazyGetRobotsModelLinksByIdQuery,
     useGetRobotsByIdsQuery,
     useCreateRobotMutation,
     useDeleteRobotMutation,
@@ -231,5 +242,6 @@ export const {
     useGetAllUsersnamesRolesQuery,
     useUpdateUsersRoleMutation,
     useGetRobotsModelQuery,
+    useCreateLinkMutation,
 
 } = apiSlice
