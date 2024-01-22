@@ -51,7 +51,7 @@ const Compare = (props) => {
           {Ids.length < 1 ? (
             <div className="d-flex flex-column justify-content-center align-items-center mt-4">
               <h4>Robot vacuums to compare:</h4>
-              <div class="d-flex flex-column align-items-center p-3 w-100">
+              <div className="d-flex flex-column align-items-center p-3 w-100">
                 <input
                   className="form-control mb-2"
                   style={{ maxWidth: "350px" }}
@@ -88,7 +88,7 @@ const Compare = (props) => {
                 <button
                   type="submit"
                   onClick={handleCompare}
-                  class="btn btn-dark text-center"
+                  className="btn btn-dark text-center"
                 >
                   Compare
                 </button>

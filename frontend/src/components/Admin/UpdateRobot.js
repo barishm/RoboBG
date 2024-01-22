@@ -16,11 +16,15 @@ const UpdateRobot = (props) => {
   const [trigger,result] = useLazyGetRobotByIdQuery();
   const { accessToken } = useSelector((state) => state.auth);
   const {data, isLoading, error} = result;
+
+
   useEffect(() => {
     if (id !== null) {
       trigger({id});
     }
   }, [id, trigger]);
+
+  
   const update = async (robotBody) => {
     await updateRobot({robotBody,accessToken}).unwrap()
     formikUpdate.resetForm();
@@ -111,25 +115,25 @@ const UpdateRobot = (props) => {
 
   return (
     <div
-      class="modal fade"
+      className="modal fade"
       id="update"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
+      <div className="modal-dialog">
+        <div className="modal-content">
         <form onSubmit={formikUpdate.handleSubmit}>
-          <div class="modal-header">
-            <h5 class="modal-title">Update Robot</h5>
+          <div className="modal-header">
+            <h5 className="modal-title">Update Robot</h5>
             <button
               type="button"
-              class="btn-close"
+              className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
+          <div className="modal-body">
             {isLoading ? (
               <>
                 <Loading />
@@ -505,7 +509,7 @@ const UpdateRobot = (props) => {
               </>
             ) : null}
           </div>
-          <div class="modal-footer">
+          <div className="modal-footer">
             <button
               type="button"
               className="btn btn-secondary"

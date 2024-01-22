@@ -51,13 +51,13 @@ const Header = () => {
               Signed in as:
             </Navbar.Text>
               <Col xs="auto">
-              <div class="dropdown">
-                <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div className="dropdown">
+                <button className="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <strong>@{username}</strong>
                 </button>
-              <ul class="dropdown-menu">
-                <li><button class="dropdown-item" onClick={logoutUser}>Sign out</button></li>
-                <li><button class="dropdown-item" onClick={goToProfile}>Profile</button></li>
+              <ul className="dropdown-menu">
+                <li><button className="dropdown-item" onClick={logoutUser}>Sign out</button></li>
+                <li><button className="dropdown-item" onClick={goToProfile}>Profile</button></li>
               </ul>
               </div>
               </Col>

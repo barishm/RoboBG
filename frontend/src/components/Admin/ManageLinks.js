@@ -77,7 +77,7 @@ const ManageLinks = () => {
           >
             Add Link
           </button>
-          <table class="table table-success table-hover">
+          <table className="table table-success table-hover">
             <thead>
               <tr>
                 <th scope="col">#</th>

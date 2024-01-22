@@ -23,27 +23,27 @@ const AddLink = (props) => {
 
   return (
     <div
-      class="modal fade"
+      className="modal fade"
       id="addLink"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div className="modal-dialog">
         <form onSubmit={formik.handleSubmit}>
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h1 className="modal-title fs-5" id="exampleModalLabel">
               Add Link
             </h1>
             <button
               type="button"
-              class="btn-close"
+              className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
+          <div className="modal-body">
             <div className="form-inputs">
               <div className="mb-3">
                 <label
@@ -77,16 +77,16 @@ const AddLink = (props) => {
               </div>
             </div>
           </div>
-          <div class="modal-footer">
+          <div className="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              className="btn btn-secondary"
               data-bs-dismiss="modal"
               onClick={() => {formik.resetForm()}}
             >
               Close
             </button>
-            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+            <button type="submit" className="btn btn-success" data-bs-dismiss="modal">
               Add
             </button>
           </div>
