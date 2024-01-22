@@ -4,7 +4,7 @@ import {
   useUpdateRobotMutation,
   useGetRobotByIdQuery,
   useLazyGetRobotByIdQuery
-} from "../../app/apiSlice";
+} from "../../app/apis/robotApiSlice";
 import Loading from "../independent/Loading";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";

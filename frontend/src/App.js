@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 import Robots from './pages/Robots';
 import Robot from './pages/Robot';
 import Profile from './pages/Profile'
-import { useReauthMutation } from './app/apiSlice';
+import { useReauthMutation } from './app/apis/authApiSlice';
 import { jwtDecode } from "jwt-decode";
 import { useDispatch } from 'react-redux'
 import { setCredentials, logOut } from './app/authSlice'

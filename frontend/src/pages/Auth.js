@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from '../app/authSlice'
-import { useLoginMutation } from '../app/apiSlice'
 import { jwtDecode } from "jwt-decode";
+import { useLoginMutation } from "../app/apis/authApiSlice";
 
 
 const Auth = () => {

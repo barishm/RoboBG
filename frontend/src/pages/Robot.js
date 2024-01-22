@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import RobotDetails from "../components/Robot/RobotDetails";
 import QnA from '../components/Robot/QnA'
-import { useGetRobotByIdQuery, useGetRobotsModelQuery } from "../app/apiSlice";
+import { useGetRobotByIdQuery, useGetRobotsModelQuery } from "../app/apis/robotApiSlice";
 import Loading from "../components/independent/Loading";
 
 const Robot = (props) => {

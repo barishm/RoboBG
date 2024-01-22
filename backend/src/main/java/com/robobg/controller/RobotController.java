@@ -2,7 +2,6 @@ package com.robobg.controller;
 
 import com.robobg.entity.dtos.PurchaseLinkDTO;
 import com.robobg.entity.dtos.QuestionWithAnswersDTO;
-import com.robobg.entity.dtos.RobotDTO.RobotDTO;
 import com.robobg.service.PurchaseLinkService;
 import com.robobg.service.QuestionService;
 import com.robobg.service.RobotService;

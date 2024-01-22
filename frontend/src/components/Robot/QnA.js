@@ -6,7 +6,7 @@ import {
   useAnswerQuestionMutation,
   useDeleteQuestionMutation,
   useDeleteAnswerMutation,
-} from "../../app/apiSlice";
+} from "../../app/apis/qnaApiSlice";
 import { useSelector } from "react-redux";
 
 const QnA = (props) => {

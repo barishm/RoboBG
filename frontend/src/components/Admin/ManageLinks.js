@@ -1,8 +1,7 @@
 import {
   useDeleteLinkMutation,
-  useGetRobotsModelQuery,
-  useLazyGetRobotsModelLinksByIdQuery,
-} from "../../app/apiSlice";
+} from "../../app/apis/linkApiSlice";
+import { useGetRobotsModelQuery, useLazyGetRobotsModelLinksByIdQuery } from "../../app/apis/robotApiSlice";
 import { useState } from "react";
 import AddLink from "./AddLink";
 import { useSelector } from "react-redux";
@@ -11,35 +10,28 @@ const ManageLinks = () => {
   const { data: allModels } = useGetRobotsModelQuery();
   const [trigger, result] = useLazyGetRobotsModelLinksByIdQuery();
   const { data } = result;
-  const [Id, setId] = useState(null);
+  const [selectedModel, setSelectedModel] = useState(null);
   const [deleteLink] = useDeleteLinkMutation();
   const { accessToken } = useSelector((state) => state.auth);
 
   const handleInputChange = (e) => {
-    const selectedModel = allModels.find(
-      (item) => item.model === e.target.value
-    );
-    if (selectedModel) {
-      setId(selectedModel.id);
-    } else {
-      setId(null);
-    }
+    const model = allModels.find((item) => item.model === e.target.value);
+    setSelectedModel(model);
   };
 
   const handleSelect = () => {
-    if (Id !== null) {
-      trigger(Id);
+    if (selectedModel) {
+      trigger(selectedModel.id);
     }
   };
 
-  const deleteHandler = (e) => {
-    const id = e.target.value;
-    deleteLink({id,accessToken});
-  }
+  const deleteHandler = (id) => {
+    deleteLink({ id, accessToken });
+  };
 
   return (
     <div>
-      <AddLink Id={Id} />
+      <AddLink Id={selectedModel?.id} />
       <div className="d-flex">
         <input
           className="form-control"
@@ -50,13 +42,13 @@ const ManageLinks = () => {
           onChange={handleInputChange}
         />
         <datalist id="datalistOptions">
-          {allModels ? (
+          {allModels && (
             <>
               {allModels.map((item) => (
                 <option key={item.id} value={item.model} />
               ))}
             </>
-          ) : null}
+          )}
         </datalist>
         <button
           type="button"
@@ -66,7 +58,7 @@ const ManageLinks = () => {
           Select
         </button>
       </div>
-      {data ? (
+      {data && (
         <>
           <h3 className="mt-3">{data.model}</h3>
           <button
@@ -98,8 +90,7 @@ const ManageLinks = () => {
                     <button
                       type="button"
                       className="btn btn-danger btn-sm"
-                      value={item.id}
-                      onClick={deleteHandler}
+                      onClick={() => deleteHandler(item.id)}
                     >
                       Delete
                     </button>
@@ -109,7 +100,7 @@ const ManageLinks = () => {
             </tbody>
           </table>
         </>
-      ) : null}
+      )}
     </div>
   );
 };

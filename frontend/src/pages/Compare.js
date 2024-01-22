@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CompareTable from "../components/Compare/CompareTable";
-import { useGetRobotsModelQuery } from "../app/apiSlice";
+import { useGetRobotsModelQuery } from "../app/apis/robotApiSlice";
 import Loading from "../components/independent/Loading";
 const Compare = (props) => {
   const { data: allModels, isLoading: allModelsLoading } =
