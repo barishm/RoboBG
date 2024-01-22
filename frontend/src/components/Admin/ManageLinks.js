@@ -1,15 +1,19 @@
 import {
+  useDeleteLinkMutation,
   useGetRobotsModelQuery,
   useLazyGetRobotsModelLinksByIdQuery,
 } from "../../app/apiSlice";
 import { useState } from "react";
 import AddLink from "./AddLink";
+import { useSelector } from "react-redux";
 
 const ManageLinks = () => {
   const { data: allModels } = useGetRobotsModelQuery();
   const [trigger, result] = useLazyGetRobotsModelLinksByIdQuery();
   const { data } = result;
   const [Id, setId] = useState(null);
+  const [deleteLink] = useDeleteLinkMutation();
+  const { accessToken } = useSelector((state) => state.auth);
 
   const handleInputChange = (e) => {
     const selectedModel = allModels.find(
@@ -22,11 +26,16 @@ const ManageLinks = () => {
     }
   };
 
-  const handleSelect = (e) => {
+  const handleSelect = () => {
     if (Id !== null) {
       trigger(Id);
     }
   };
+
+  const deleteHandler = (e) => {
+    const id = e.target.value;
+    deleteLink({id,accessToken});
+  }
 
   return (
     <div>
@@ -37,7 +46,7 @@ const ManageLinks = () => {
           list="datalistOptions"
           id="exampleDataList"
           placeholder="Select robot from list"
-          style={{ maxWidth: "220px" }}
+          style={{ maxWidth: "250px" }}
           onChange={handleInputChange}
         />
         <datalist id="datalistOptions">
@@ -62,7 +71,7 @@ const ManageLinks = () => {
           <h3 className="mt-3">{data.model}</h3>
           <button
             type="button"
-            className="btn btn-success mb-1 ml-2 mt-1"
+            className="btn btn-success btn-sm mb-1 ml-2 mt-1"
             data-bs-toggle="modal"
             data-bs-target="#addLink"
           >
@@ -90,6 +99,7 @@ const ManageLinks = () => {
                       type="button"
                       className="btn btn-danger btn-sm"
                       value={item.id}
+                      onClick={deleteHandler}
                     >
                       Delete
                     </button>

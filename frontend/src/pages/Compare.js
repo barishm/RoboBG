@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CompareTable from "../components/Compare/CompareTable";
 import { useGetRobotsModelQuery } from "../app/apiSlice";
 import Loading from "../components/independent/Loading";
@@ -27,12 +27,10 @@ const Compare = (props) => {
 
 
   function handleCompare() {
-    setIds([]);
-    const foundItem1 = IdAndModel.find((item) => item.model === Model1);
-    const foundItem2 = IdAndModel.find((item) => item.model === Model2);
+    const foundItem1 = allModels.find((item) => item.model === Model1);
+    const foundItem2 = allModels.find((item) => item.model === Model2);
 
     if (foundItem1 && foundItem2 && foundItem1.id !== foundItem2.id) {
-      setIds([foundItem1.id, foundItem2.id]);
     } else {
       console.error(
         "Invalid selection for comparison. Please select two different robots."

@@ -124,11 +124,11 @@ export const apiSlice = createApi({
         }),
         getRobotsByIds: builder.query({
             query: (ids) => ({
-                url: `v1/robots?id=${ids}`,
-                method: 'GET',
+              url: `v1/robots?id=${ids.join(',')}`,
+              method: 'GET',
             }),
             providesTags: ['Robot'],
-        }),
+          }),
         getRobotById: builder.query({
             query: ({id}) => ({
                 url: `v1/robots/${id}`,
@@ -208,11 +208,11 @@ export const apiSlice = createApi({
             invalidatesTags: ['Robot'],
         }),
         deleteLink: builder.mutation({
-            query: (id,token) => ({
+            query: ({id,accessToken}) => ({
                 url: `v1/admin/links/${id}`,
                 method: 'DELETE',
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${accessToken}`
                 },
             }),
             invalidatesTags: ['Robot'],
@@ -243,5 +243,7 @@ export const {
     useUpdateUsersRoleMutation,
     useGetRobotsModelQuery,
     useCreateLinkMutation,
+    useDeleteLinkMutation,
 
-} = apiSlice
+} = apiSlice;
+

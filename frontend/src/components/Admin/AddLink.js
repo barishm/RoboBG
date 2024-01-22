@@ -17,6 +17,7 @@ const AddLink = (props) => {
     onSubmit: values => {
         const json = values;
         createLink({json,accessToken});
+        formik.resetForm();
       },
   });
 

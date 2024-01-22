@@ -25,7 +25,7 @@ const ManageRobots = () => {
     <div>
       <button
         type="button"
-        className="btn btn-success mb-1 ml-2 mt-3"
+        className="btn btn-success btn-sm mb-1 ml-2 mt-3"
         data-bs-toggle="modal"
         data-bs-target="#create"
       >
@@ -55,7 +55,7 @@ const ManageRobots = () => {
               {allRobots &&
                 allRobots.map((robot) => (
                   <tr key={robot.id}>
-                    <td scope="row">{robot.id}</td>
+                    <th scope="row">{robot.id}</th>
                     <td>
                       <img
                         style={{ height: "50px" }}
