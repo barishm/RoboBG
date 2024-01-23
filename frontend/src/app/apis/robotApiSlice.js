@@ -52,7 +52,7 @@ export const robotApiSlice = apiSlice.injectEndpoints({
             providesTags: ['Robot'],
           }),
         getRobotById: builder.query({
-            query: ({id}) => ({
+            query: (id) => ({
                 url: `v1/robots/${id}`,
                 method: 'GET',
             }),
@@ -104,6 +104,7 @@ export const {
     useLazyGetRobotByIdQuery,
     useLazyGetRobotsModelLinksByIdQuery,
     useGetRobotsByIdsQuery,
+    useLazyGetRobotsByIdsQuery,
     useCreateRobotMutation,
     useDeleteRobotMutation,
     useUpdateRobotMutation,

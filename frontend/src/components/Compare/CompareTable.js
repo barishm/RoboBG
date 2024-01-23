@@ -1,17 +1,24 @@
+import { useSelector } from "react-redux";
+import { deleteRobotById } from "../../app/compareSlice";
+import { useDispatch } from 'react-redux'
 
-
-const CompareTable = (props) => {
-    const Robots = props.Robots;
-    const setRobots = props.setRobots;
-    const setIds = props.setIds;
+const CompareTable = () => {
+    const { robots } = useSelector((state) => state.compare);
     let table = null;
+    const dispatch = useDispatch();
+
+    const deleteHandler = (e) => {
+        const id = parseInt(e.target.dataset.id, 10);
+        dispatch(deleteRobotById(id));
+    };
+
 
 
     const renderTableRow = (attribute, label) => {
         return (
             <tr>
-                <th scope="row">{label}</th>
-                {Robots.map((item) => {
+                <th><span className="stickycell">{label}</span></th>
+                {robots.map((item) => {
                     let value = attribute.split('.').reduce((o, i) => (o && o[i] !== null) ? o[i] : null, item);
                     return (
                         <td key={item.id}>
@@ -103,29 +110,23 @@ const CompareTable = (props) => {
         {attribute: 'warranty', label: 'Warranty'},
     ];
 
-    const deleteRobot = (e) => {
-        const idToDelete = parseInt(e.target.getAttribute('value'), 10);
-        const updatedRobots = Robots.filter((robot) => robot.id !== idToDelete);
-        setIds(updatedRobots.map((robot) => robot.id)); // Assuming you need to update the Ids state as well
-        setRobots(updatedRobots); // Update the Robots state directly
-    }
 
     const backgroundColor = 'rgb(230, 230, 230)';
-    if(Robots.length > 0) {
-        table = <div className="card mb-5"><table className="table">
+    if(robots) {
+        table = <div className="mb-5"><table className="table table-hover">
             <tbody>
                 <tr>
-                    <th scope="row" style={{ backgroundColor: backgroundColor }}>Model</th>
-                    {Robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}>{item.model}</td>
+                    <th></th>
+                    {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}>{item.model}</td>
                     )}
                 </tr>
                 <tr>
-                    <th scope="row">Image</th>
-                    {Robots.map((item) => <td key={item.id}>
-                        <div className="image">
+                    <th></th>
+                    {robots.map((item) => <td key={item.id}>
+                        <div className="image d-flex">
                             <img className="image-in-table" src={item.image}></img>
                             <div className="image-overlay">
-                                <i className="fa-solid fa-xmark fa-fade" style={{ color: "#ff0505" }} value={item.id} onClick={deleteRobot}></i>
+                                <i className="fa-solid fa-xmark" style={{ color: "#ff0505",fontSize:"25px" }} data-id={item.id} onClick={deleteHandler}></i>
                             </div>
                         </div>
                     </td>
@@ -133,38 +134,38 @@ const CompareTable = (props) => {
                 </tr>
                     {robotAttributes.map(attr => renderTableRow(attr.attribute, attr.label))}
                     <tr>
-                        <th scope="row" style={{ backgroundColor: backgroundColor }}>Cleaning Features</th>
-                        {Robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
+                        <th><span className="stickycell">Cleaning Features</span></th>
+                        {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
                     </tr>
                     {cleaningFeaturesAttributes.map(attr => renderTableRow(`cleaningFeatures.${attr.attribute}`, attr.label))}
                     <tr>
-                        <th scope="row" style={{ backgroundColor: backgroundColor }}>Mopping Features</th>
-                        {Robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
+                        <th><span className="stickycell">Mopping Features</span></th>
+                        {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
                     </tr>
                     {moppingFeaturesAttributes.map(attr => renderTableRow(`moppingFeatures.${attr.attribute}`, attr.label))}
                     <tr>
-                        <th scope="row" style={{ backgroundColor: backgroundColor }}>Battery</th>
-                        {Robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
+                        <th><span className="stickycell">Battery</span></th>
+                        {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
                     </tr>
                     {batteryAttributes.map(attr => renderTableRow(`battery.${attr.attribute}`, attr.label))}
                     <tr>
-                        <th scope="row" style={{ backgroundColor: backgroundColor }}>Control</th>
-                        {Robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
+                        <th><span className="stickycell">Control</span></th>
+                        {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
                     </tr>
                     {controlAttributes.map(attr => renderTableRow(`control.${attr.attribute}`, attr.label))}
                     <tr>
-                        <th scope="row" style={{ backgroundColor: backgroundColor }}>App Features</th>
-                        {Robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
+                        <th><span className="stickycell">App Features</span></th>
+                        {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
                     </tr>
                     {appFeaturesAttributes.map(attr => renderTableRow(`appFeatures.${attr.attribute}`, attr.label))}
                     <tr>
-                        <th scope="row" style={{ backgroundColor: backgroundColor }}>Sensor</th>
-                        {Robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
+                        <th><span className="stickycell">Sensor</span></th>
+                        {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
                     </tr>
                     {sensorsAttributes.map(attr => renderTableRow(`sensor.${attr.attribute}`, attr.label))}
                     <tr>
-                        <th scope="row" style={{ backgroundColor: backgroundColor }}>Other Specifications</th>
-                        {Robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
+                        <th><span className="stickycell">Other Specifications</span></th>
+                        {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
                     </tr>
                     {otherSpecificationsAttributes.map(attr => renderTableRow(`otherSpecifications.${attr.attribute}`, attr.label))}
                 </tbody>

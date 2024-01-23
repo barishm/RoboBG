@@ -54,11 +54,11 @@ function App() {
     <div className="App">
       <Header/>
       <Routes>
-        <Route path='/' element={<Home Ids={Ids} setIds={setIds}/>}/>
-        <Route path='/compare' element={<Compare Ids={Ids} setIds={setIds}/>}/>
-        <Route path='/robots' element={<Robots Ids={Ids} setIds={setIds}/>}/>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/compare' element={<Compare/>}/>
+        <Route path='/robots' element={<Robots/>}/>
         <Route path='/profile' element={<Profile/>}/>
-        <Route path='/robots/:id' element={<Robot Ids={Ids} setIds={setIds}/>}/>
+        <Route path='/robots/:id' element={<Robot/>}/>
         <Route path='/login'  element={<Auth/>}/>
         <Route path='/register'  element={<Register/>}/>
         <Route element={<ProtectedRoutes/>}>

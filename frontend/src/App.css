@@ -44,19 +44,6 @@ Footer {
   margin-left: auto;
 }
 
-
-.itb-col {
-  height: 80px;
-  word-break: break-all;
-}
-
-.cdu-container {
-  max-width: 700px;
-  margin: 20px auto;
-  padding: 15px;
-}
-
-
 .select-div {
   margin: auto auto;
 }
@@ -75,41 +62,14 @@ Footer {
   width: 70px;
   display: block;
 }
-.image {
-  position: relative;
-  width: 70px;
-  margin: auto;
-}
-.image-overlay{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.6);
-  opacity: 0;
-}
-.image-overlay:hover {
-  opacity: 1;
-}
-.fa-xmark {
-  font-size: 70px;
-}
+
 
 footer {
   margin-top: auto;
 }
 
-.admin-label{
-  margin-right: 7px;
-}
 
-.admin-nav {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
+
 
 
 .single-robot-container{
@@ -138,6 +98,37 @@ footer {
   background-color: rgb(220, 220, 220);
 }
 
+.table-container .stickycell {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-size: 0.8rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  background-color: rgba(0,0,0,0.1);
+  max-width: 300px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 2px 5px;
+  overflow: hidden;
+}
+
+.table-container th {
+  z-index: 10;
+}
+
+.table-container tbody th {
+  position: sticky;
+  width: 0px!important;
+  text-align: left;
+  left: 0px;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  display: table-cell;
+  background: none;
+  font-weight: normal;
+}
 
 
 

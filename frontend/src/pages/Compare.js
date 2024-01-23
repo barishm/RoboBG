@@ -1,36 +1,42 @@
 import { useState } from "react";
 import CompareTable from "../components/Compare/CompareTable";
-import { useGetRobotsModelQuery } from "../app/apis/robotApiSlice";
+import { useGetRobotsModelQuery,useLazyGetRobotByIdQuery,useLazyGetRobotsByIdsQuery } from "../app/apis/robotApiSlice";
 import Loading from "../components/independent/Loading";
-const Compare = (props) => {
+import { useDispatch } from 'react-redux'
+import { addRobot,deleteRobotById, compareTwoRobots } from "../app/compareSlice";
+import { useSelector } from "react-redux";
+
+const Compare = () => {
   const { data: allModels, isLoading: allModelsLoading } =
     useGetRobotsModelQuery();
-
-  const Ids = props.Ids;
-  const setIds = props.setIds;
+  const dispatch = useDispatch();
+  const [triggerAdd] = useLazyGetRobotByIdQuery();  
+  const [triggerCompare] = useLazyGetRobotsByIdsQuery();
+  const { robots } = useSelector((state) => state.compare);
   const [Model, setModel] = useState("");
   const [Model1, setModel1] = useState("");
   const [Model2, setModel2] = useState("");
-  const [IdAndModel, setIdAndModel] = useState([]);
-  const [Robots, setRobots] = useState([]);
 
   function handleAdd() {
-    setModel("");
-
-    const foundItem = IdAndModel.find((item) => item.model === Model);
-    if (foundItem && !Ids.includes(foundItem.id)) {
-      setIds([...Ids, foundItem.id]);
-      console.log(Ids);
+    const foundItem = allModels.find((item) => item.model === Model);
+    if (foundItem) {
+      triggerAdd(foundItem.id).then((response) => {
+        console.log("Response data:", response.data);
+        dispatch(addRobot(response.data));
+      });
     }
     setModel("");
   }
-
+ 
 
   function handleCompare() {
     const foundItem1 = allModels.find((item) => item.model === Model1);
     const foundItem2 = allModels.find((item) => item.model === Model2);
 
     if (foundItem1 && foundItem2 && foundItem1.id !== foundItem2.id) {
+      triggerCompare([foundItem1.id, foundItem2.id]).then((response) => {
+        dispatch(compareTwoRobots(response.data));
+      });
     } else {
       console.error(
         "Invalid selection for comparison. Please select two different robots."
@@ -48,7 +54,7 @@ const Compare = (props) => {
         </>
       ) : (
         <>
-          {Ids.length < 1 ? (
+          {robots.length < 1 ? (
             <div className="d-flex flex-column justify-content-center align-items-center mt-4">
               <h4>Robot vacuums to compare:</h4>
               <div className="d-flex flex-column align-items-center p-3 w-100">
@@ -108,7 +114,7 @@ const Compare = (props) => {
                 />
                 <button
                   type="button"
-                  className="btn btn-outline-dark btn-md add-button"
+                  className="btn btn-dark btn-md add-button"
                   onClick={handleAdd}
                 >
                   Add
@@ -119,12 +125,7 @@ const Compare = (props) => {
                   ))}
                 </datalist>
               </div>
-              <CompareTable
-                Robots={Robots}
-                setIds={setIds}
-                Ids={Ids}
-                setRobots={setRobots}
-              />
+              <CompareTable/>
             </>
           )}
         </>

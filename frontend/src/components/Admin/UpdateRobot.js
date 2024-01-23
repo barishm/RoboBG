@@ -20,7 +20,7 @@ const UpdateRobot = (props) => {
 
   useEffect(() => {
     if (id !== null) {
-      trigger({id});
+      trigger(id);
     }
   }, [id, trigger]);
 

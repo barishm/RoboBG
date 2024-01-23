@@ -13,7 +13,7 @@ const Robot = (props) => {
     const [IdAndModel , setIdAndModel] = useState([]);
     const [Model,setModel] = useState("");
     const navigate = useNavigate();
-    const {data,isLoading,error} = useGetRobotByIdQuery({id});
+    const {data,isLoading,error} = useGetRobotByIdQuery(id);
     const {data: allModels,isLoading: allModelsIsLoading} = useGetRobotsModelQuery();
     const noImage = "images/no-image.jpg";
 
