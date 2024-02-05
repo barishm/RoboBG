@@ -1,15 +1,15 @@
 import {
   useDeleteLinkMutation,
-} from "../../app/apis/linkApiSlice";
-import { useGetRobotsModelQuery, useLazyGetRobotsModelLinksByIdQuery } from "../../app/apis/robotApiSlice";
+} from "../../app/services/linkApiSlice";
+import { useGetRobotsModelQuery, useGetRobotsModelLinksByIdQuery } from "../../app/services/robotApiSlice";
 import { useState } from "react";
 import AddLink from "./AddLink";
 import { useSelector } from "react-redux";
 
 const ManageLinks = () => {
+  const [id,setId] = useState(null);
   const { data: allModels } = useGetRobotsModelQuery();
-  const [trigger, result] = useLazyGetRobotsModelLinksByIdQuery();
-  const { data } = result;
+  const { data } = useGetRobotsModelLinksByIdQuery( id ,{ skip: Boolean(!id) });
   const [selectedModel, setSelectedModel] = useState(null);
   const [deleteLink] = useDeleteLinkMutation();
   const { accessToken } = useSelector((state) => state.auth);
@@ -21,7 +21,7 @@ const ManageLinks = () => {
 
   const handleSelect = () => {
     if (selectedModel) {
-      trigger(selectedModel.id);
+      setId(selectedModel.id);
     }
   };
 

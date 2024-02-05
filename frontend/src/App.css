@@ -29,7 +29,7 @@ Footer {
 }
 
 .add-div {
-  margin-top: 15px;
+  margin-top: 5px;
   justify-content: center;
 }
 .add-button {
@@ -101,7 +101,7 @@ footer {
 .table-container .stickycell {
   position: absolute;
   top: 0px;
-  left: 0px;
+  left: 2px;
   font-size: 0.8rem;
   font-weight: normal;
   text-transform: uppercase;
@@ -130,6 +130,27 @@ footer {
   font-weight: normal;
 }
 
+.table>thead {
+  vertical-align: bottom;
+}
+
+thead, tbody, tr, td, th {
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+}
+
+thead {
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+td {
+  display: table-cell;
+  vertical-align: inherit;
+  min-height: 150px;
+}
 
 
 

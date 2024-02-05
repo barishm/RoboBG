@@ -1,183 +1,444 @@
 import { useSelector } from "react-redux";
 import { deleteRobotById } from "../../app/compareSlice";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
+import Loading from "../independent/Loading";
 
 const CompareTable = () => {
-    const { robots } = useSelector((state) => state.compare);
-    let table = null;
-    const dispatch = useDispatch();
+  const { robots } = useSelector((state) => state.compare);
+  const dispatch = useDispatch();
 
-    const deleteHandler = (e) => {
-        const id = parseInt(e.target.dataset.id, 10);
-        dispatch(deleteRobotById(id));
-    };
+  const deleteHandler = (e) => {
+    const id = parseInt(e.target.dataset.id, 10);
+    dispatch(deleteRobotById(id));
+  };
 
-
-
-    const renderTableRow = (attribute, label) => {
-        return (
-            <tr>
-                <th><span className="stickycell">{label}</span></th>
-                {robots.map((item) => {
-                    let value = attribute.split('.').reduce((o, i) => (o && o[i] !== null) ? o[i] : null, item);
-                    return (
-                        <td key={item.id}>
-                        {value === null ? (
-                            <span style={{ color: "grey" }}>N/A</span>
-                        ) : value === true ? (
-                            <span style={{ color: "green" }}>YES</span>
-                        ) : value === false ? (
-                            <span style={{ color: "red" }}>NO</span>
-                        ) : typeof value === 'string' && value.includes('^') ? (
-                            <span dangerouslySetInnerHTML={{ __html: value.replace(/\^(\d+)/, '<sup>$1</sup>') }} />
-                        ) : (
-                        value
-            )}
-          </td>
-                    );
-                })}
-            </tr>
-        );
-    };
-
-    const robotAttributes = [
-        { attribute: 'mapping', label: 'Mapping' },
-        { attribute: 'mappingSensorType', label: 'Mapping Sensor Type' },
-        { attribute: 'highPrecisionMap', label: 'High Precision Map' },
-        { attribute: 'frontCamera', label: 'Front Camera' },
-        { attribute: 'rechargeResume', label: 'Recharge And Resume' },
-        { attribute: 'autoDockAndRecharge', label: 'Auto Dock And Recharge' },
-        { attribute: 'noiseLevel', label: 'Noise Level' },
-        { attribute: 'display', label: 'Display' },
-        { attribute: 'sideBrushes', label: 'Side Brushes' },
-        { attribute: 'voicePrompts', label: 'Voice Prompts' },
-    ];
-    const cleaningFeaturesAttributes = [
-        { attribute: 'suctionPower', label: 'Suction Power' },
-        { attribute: 'cleaningArea', label: 'Cleaning Area' },
-        { attribute: 'dustbinCapacity', label: 'Dustbin Capacity' },
-        { attribute: 'disposableDustBagCapacity', label: 'Disposable DustBag Capacity' },
-        { attribute: 'autoDirtDisposal', label: 'Auto Dirt Disposal' },
-        { attribute: 'barrierCrossHeight', label: 'Barrier Cross Height' },
-        { attribute: 'hepaFilter', label: 'Hepa Filter' },
-        { attribute: 'washableFilter', label: 'Washable Filter' },
-    ];
-    const moppingFeaturesAttributes = [
-        {attribute: 'wetMopping', label: 'Wet Mopping'},
-        {attribute: 'electricWaterFlowControl', label: 'Electric Waterflow Control'},
-        {attribute: 'waterTankCapacity', label: 'Water Tank Capacity'},
-        {attribute: 'vibratingMoppingPad', label: 'Vibrating Mopping Pad'},
-        {attribute: 'autoMopLifting', label: 'Auto Mop Lifting'},
-        {attribute: 'autoWaterTankRefilling', label: 'Auto Water Tank Refilling'},
-        {attribute: 'autoMopWashing', label: 'Auto Mop Washing'},
-    ];
-    const batteryAttributes = [
-        {attribute: 'batteryCapacity', label: 'Battery Capacity'},
-        {attribute: 'batteryLife', label: 'Battery Life'},
-        {attribute: 'chargingTime', label: 'Charging Time'},
-        {attribute: 'ratedPower', label: 'Rated Power'},
-    ];
-    const controlAttributes = [
-        {attribute: 'scheduling', label: 'Scheduling'},
-        {attribute: 'wifiSmartphoneApp', label: 'Wifi Smartphone App'},
-        {attribute: 'wifiFrequencyBand', label: 'Wifi Frequency Band'},
-        {attribute: 'amazonAlexaSupport', label: 'Amazon Alexa Support'},
-        {attribute: 'googleAssistantSupport', label: 'Google Assistant Support'},
-        {attribute: 'magneticVirtualWalls', label: 'Magnetic Virtual Walls'},
-        {attribute: 'irRfRemoteControl', label: 'Ir Rf Remote Control'},
-    ];
-    const appFeaturesAttributes = [
-        {attribute: 'realTimeTracking', label: 'Real Time Tracking'},
-        {attribute: 'digitalBlockedAreas', label: 'Digital Blocked Areas'},
-        {attribute: 'zonedCleaning', label: 'Zoned Cleaning'},
-        {attribute: 'multiFloorMaps', label: 'Multi Floor Maps'},
-        {attribute: 'manualMovementControl', label: 'Manual Movement Control'},
-        {attribute: 'selectedRoomCleaning', label: 'Selected Room Cleaning'},
-        {attribute: 'noMopZones', label: 'No Mop Zones'},
-    ];
-    const sensorsAttributes = [
-        {attribute: 'carpetBoost', label: 'Carpet Boost'},
-        {attribute: 'cliffSensor', label: 'Cliff Sensor'},
-        {attribute: 'dirtSensor', label: 'Dirt Sensor'},
-        {attribute: 'fullDustbinSensor', label: 'Full Dustbin Sensor'},
-    ];
-    const otherSpecificationsAttributes = [
-        {attribute: 'weight', label: 'Weight'},
-        {attribute: 'width', label: 'Width'},
-        {attribute: 'height', label: 'Height'},
-        {attribute: 'inTheBox', label: 'In The Box'},
-        {attribute: 'releaseDate', label: 'Release Date'},
-        {attribute: 'warranty', label: 'Warranty'},
-    ];
-
-
-    const backgroundColor = 'rgb(230, 230, 230)';
-    if(robots) {
-        table = <div className="mb-5"><table className="table table-hover">
-            <tbody>
-                <tr>
-                    <th></th>
-                    {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}>{item.model}</td>
-                    )}
-                </tr>
-                <tr>
-                    <th></th>
-                    {robots.map((item) => <td key={item.id}>
-                        <div className="image d-flex">
-                            <img className="image-in-table" src={item.image}></img>
-                            <div className="image-overlay">
-                                <i className="fa-solid fa-xmark" style={{ color: "#ff0505",fontSize:"25px" }} data-id={item.id} onClick={deleteHandler}></i>
-                            </div>
-                        </div>
-                    </td>
-                    )}
-                </tr>
-                    {robotAttributes.map(attr => renderTableRow(attr.attribute, attr.label))}
-                    <tr>
-                        <th><span className="stickycell">Cleaning Features</span></th>
-                        {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
-                    </tr>
-                    {cleaningFeaturesAttributes.map(attr => renderTableRow(`cleaningFeatures.${attr.attribute}`, attr.label))}
-                    <tr>
-                        <th><span className="stickycell">Mopping Features</span></th>
-                        {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
-                    </tr>
-                    {moppingFeaturesAttributes.map(attr => renderTableRow(`moppingFeatures.${attr.attribute}`, attr.label))}
-                    <tr>
-                        <th><span className="stickycell">Battery</span></th>
-                        {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
-                    </tr>
-                    {batteryAttributes.map(attr => renderTableRow(`battery.${attr.attribute}`, attr.label))}
-                    <tr>
-                        <th><span className="stickycell">Control</span></th>
-                        {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
-                    </tr>
-                    {controlAttributes.map(attr => renderTableRow(`control.${attr.attribute}`, attr.label))}
-                    <tr>
-                        <th><span className="stickycell">App Features</span></th>
-                        {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
-                    </tr>
-                    {appFeaturesAttributes.map(attr => renderTableRow(`appFeatures.${attr.attribute}`, attr.label))}
-                    <tr>
-                        <th><span className="stickycell">Sensor</span></th>
-                        {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
-                    </tr>
-                    {sensorsAttributes.map(attr => renderTableRow(`sensor.${attr.attribute}`, attr.label))}
-                    <tr>
-                        <th><span className="stickycell">Other Specifications</span></th>
-                        {robots.map((item) => <td key={item.id} style={{ backgroundColor: backgroundColor }}></td>)}
-                    </tr>
-                    {otherSpecificationsAttributes.map(attr => renderTableRow(`otherSpecifications.${attr.attribute}`, attr.label))}
-                </tbody>
-                </table>
-            </div>
+  const renderRow = (field) => {
+    return robots.map((item) => {
+      let value = field.includes('.') ? getFieldByPath(item, field) : item[field];
+  
+      return (
+        <td key={item.id} style={{ height: "80px", verticalAlign: "bottom", textAlign: "left", whiteSpace: "normal" }} className="border">
+          {value === null ? (
+            <span style={{ color: "grey" }}>N/A</span>
+          ) : value === true ? (
+            <span style={{ color: "green" }}>YES</span>
+          ) : value === false ? (
+            <span style={{ color: "red" }}>NO</span>
+          ) : (
+            value
+          )}
+        </td>
+      );
+    });
+  };
+  function getFieldByPath(obj, path) {
+    const keys = path.split('.');
+    let value = obj;
+  
+    for (const key of keys) {
+      if (value && typeof value === 'object') {
+        value = value[key];
+      } else {
+        value = null;
+        break;
+      }
     }
+  
+    return value;
+  }
 
-    return (
-        <div className="table-container">
-            {table}
-        </div>
-    );
 
-}
+  return (
+    <div className="table-container">
+      {robots ? (
+        <>
+          <table class="table">
+            <thead>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row"></th>
+                {robots.map((item) => (
+                    <td key={item.id} className="border" style={{backgroundColor:"#526679",color: "#F5F5F5"}}>{item.model}</td>
+                )
+                )}
+              </tr>
+              <tr>
+                <th scope="row">
+                  
+                </th>
+                {robots.map((item) => (
+                  <td key={item.id} style={{height:"90px",verticalAlign: "bottom", textAlign: "left"}} className="border">
+                    <div className="image d-flex">
+                      <img className="image-in-table" src={item.image}></img>
+                      <div className="image-overlay ms-1">
+                        <i
+                          className="fa-solid fa-xmark"
+                          style={{ color: "#ff0505", fontSize: "25px",cursor:"pointer"}}
+                          data-id={item.id}
+                          onClick={deleteHandler}
+                        ></i>
+                      </div>
+                    </div>
+                  </td>
+                ))}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Mapping</span>
+                </th>
+                {renderRow("mapping")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Mapping Sensor Type</span>
+                </th>
+                {renderRow("mappingSensorType")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">High Precision Map</span>
+                </th>
+                {renderRow("highPrecisionMap")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Front Camera</span>
+                </th>
+                {renderRow("frontCamera")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Recharge Resume</span>
+                </th>
+                {renderRow("rechargeResume")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Auto Dock And Recharge</span>
+                </th>
+                {renderRow("autoDockAndRecharge")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Noise Level</span>
+                </th>
+                {renderRow("noiseLevel")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Display</span>
+                </th>
+                {renderRow("display")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Side Brushes</span>
+                </th>
+                {renderRow("sideBrushes")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Voice Prompts</span>
+                </th>
+                {renderRow("voicePrompts")}
+              </tr>
+              <tr>
+                <th></th>
+                <td colSpan={robots.length} style={{backgroundColor:"#526679",color: "#F5F5F5"}}>Cleaning Features</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Suction Power</span>
+                </th>
+                {renderRow("cleaningFeatures.suctionPower")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Cleaning Area</span>
+                </th>
+                {renderRow("cleaningFeatures.cleaningArea")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Dustbin Capacity</span>
+                </th>
+                {renderRow("cleaningFeatures.dustbinCapacity")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Disposable Dustbag Capacity</span>
+                </th>
+                {renderRow("cleaningFeatures.disposableDustBagCapacity")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Auto Dirt Disposal</span>
+                </th>
+                {renderRow("cleaningFeatures.autoDirtDisposal")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Barrier Cross Height</span>
+                </th>
+                {renderRow("cleaningFeatures.barrierCrossHeight")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Hepa Filter</span>
+                </th>
+                {renderRow("cleaningFeatures.hepaFilter")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Washable Filter</span>
+                </th>
+                {renderRow("cleaningFeatures.washableFilter")}
+              </tr>
+              <tr>
+                <th></th>
+                <td colSpan={robots.length} style={{backgroundColor:"#526679",color: "#F5F5F5"}}>Mopping Features</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Wet Mopping</span>
+                </th>
+                {renderRow("moppingFeatures.wetMopping")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Electric Water Flow Control</span>
+                </th>
+                {renderRow("moppingFeatures.electricWaterFlowControl")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Water Tank Capacity</span>
+                </th>
+                {renderRow("moppingFeatures.waterTankCapacity")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Vibrating Mopping Pad</span>
+                </th>
+                {renderRow("moppingFeatures.vibratingMoppingPad")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Auto Mop Lifting</span>
+                </th>
+                {renderRow("moppingFeatures.autoMopLifting")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Auto Water Tank Refilling</span>
+                </th>
+                {renderRow("moppingFeatures.autoWaterTankRefilling")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Auto Mop Washing</span>
+                </th>
+                {renderRow("moppingFeatures.autoMopWashing")}
+              </tr>
+              <tr>
+                <th></th>
+                <td colSpan={robots.length} style={{backgroundColor:"#526679",color: "#F5F5F5"}}>Battery</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Battery Capacity</span>
+                </th>
+                {renderRow("battery.batteryCapacity")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Battery Life</span>
+                </th>
+                {renderRow("battery.batteryLife")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Charging Time</span>
+                </th>
+                {renderRow("battery.chargingTime")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Rated Power</span>
+                </th>
+                {renderRow("battery.ratedPower")}
+              </tr>
+              <tr>
+                <th></th>
+                <td colSpan={robots.length} style={{backgroundColor:"#526679",color: "#F5F5F5"}}>Control</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Scheduling</span>
+                </th>
+                {renderRow("control.scheduling")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Wifi Smartphone App</span>
+                </th>
+                {renderRow("control.wifiSmartphoneApp")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Wifi Frequency Band</span>
+                </th>
+                {renderRow("control.wifiFrequencyBand")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Amazon Alexa Support</span>
+                </th>
+                {renderRow("control.amazonAlexaSupport")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Google Assistant Support</span>
+                </th>
+                {renderRow("control.googleAssistantSupport")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Magnetic Virtual Walls</span>
+                </th>
+                {renderRow("control.magneticVirtualWalls")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Ir Rf Remote Control</span>
+                </th>
+                {renderRow("control.irRfRemoteControl")}
+              </tr>
+              <tr>
+                <th></th>
+                <td colSpan={robots.length} style={{backgroundColor:"#526679",color: "#F5F5F5"}}>App Features</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Real Time Tracking</span>
+                </th>
+                {renderRow("appFeatures.realTimeTracking")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Digital Blocked Areas</span>
+                </th>
+                {renderRow("appFeatures.digitalBlockedAreas")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Zoned Cleaning</span>
+                </th>
+                {renderRow("appFeatures.zonedCleaning")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Multi Floor Maps</span>
+                </th>
+                {renderRow("appFeatures.multiFloorMaps")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Manual Movement Control</span>
+                </th>
+                {renderRow("appFeatures.manualMovementControl")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Selected Room Cleaning</span>
+                </th>
+                {renderRow("appFeatures.selectedRoomCleaning")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">No Mop Zones</span>
+                </th>
+                {renderRow("appFeatures.noMopZones")}
+              </tr>
+              <tr>
+                <th></th>
+                <td colSpan={robots.length} style={{backgroundColor:"#526679",color: "#F5F5F5"}}>Sensor</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Carpet Boost</span>
+                </th>
+                {renderRow("sensor.carpetBoost")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Cliff Sensor</span>
+                </th>
+                {renderRow("sensor.cliffSensor")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Dirt Sensor</span>
+                </th>
+                {renderRow("sensor.dirtSensor")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Full Dustbin Sensor</span>
+                </th>
+                {renderRow("sensor.fullDustbinSensor")}
+              </tr>
+              <tr>
+                <th></th>
+                <td colSpan={robots.length} style={{backgroundColor:"#526679",color: "#F5F5F5"}}>Other Specifications</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Weight</span>
+                </th>
+                {renderRow("otherSpecifications.weight")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Width</span>
+                </th>
+                {renderRow("otherSpecifications.width")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Height</span>
+                </th>
+                {renderRow("otherSpecifications.height")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">In The Box</span>
+                </th>
+                {robots.map((item) => (
+                    <td key={item.id} style={{height:"150px",verticalAlign: "bottom", textAlign: "left",width:"50px"}} className="border text-break">{item.otherSpecifications.inTheBox}</td>
+                ))}
+                
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Release Date</span>
+                </th>
+                {renderRow("otherSpecifications.releaseDate")}
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span className="stickycell">Warranty</span>
+                </th>
+                {renderRow("otherSpecifications.warranty")}
+              </tr>
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <Loading />
+      )}
+    </div>
+  );
+};
 export default CompareTable;

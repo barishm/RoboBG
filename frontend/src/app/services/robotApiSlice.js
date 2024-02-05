@@ -102,7 +102,7 @@ export const {
     useGetRobotsModelImageLinksQuery,
     useGetRobotByIdQuery,
     useLazyGetRobotByIdQuery,
-    useLazyGetRobotsModelLinksByIdQuery,
+    useGetRobotsModelLinksByIdQuery,
     useGetRobotsByIdsQuery,
     useLazyGetRobotsByIdsQuery,
     useCreateRobotMutation,

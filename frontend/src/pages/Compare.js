@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CompareTable from "../components/Compare/CompareTable";
-import { useGetRobotsModelQuery,useLazyGetRobotByIdQuery,useLazyGetRobotsByIdsQuery } from "../app/apis/robotApiSlice";
+import { useGetRobotsModelQuery,useLazyGetRobotByIdQuery,useLazyGetRobotsByIdsQuery } from "../app/services/robotApiSlice";
 import Loading from "../components/independent/Loading";
 import { useDispatch } from 'react-redux'
 import { addRobot,deleteRobotById, compareTwoRobots } from "../app/compareSlice";

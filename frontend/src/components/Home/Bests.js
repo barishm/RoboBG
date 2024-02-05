@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { useGetBestRobotsQuery } from "../../app/apis/robotApiSlice";
+import { useGetBestRobotsQuery } from "../../app/services/robotApiSlice";
 
 const Bests = (props) => {
     const setIds = props.setIds;

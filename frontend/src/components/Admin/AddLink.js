@@ -1,4 +1,4 @@
-import { useCreateLinkMutation } from "../../app/apis/linkApiSlice";
+import { useCreateLinkMutation } from "../../app/services/linkApiSlice";
 import { useFormik } from "formik";
 import { useSelector } from "react-redux";
 

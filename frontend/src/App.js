@@ -9,18 +9,17 @@ import { Routes,Route } from "react-router-dom";
 import Auth from './pages/Auth';
 import Register from './pages/Register';
 import ProtectedRoutes from './pages/ProtectedRoutes';
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Robots from './pages/Robots';
 import Robot from './pages/Robot';
 import Profile from './pages/Profile'
-import { useReauthMutation } from './app/apis/authApiSlice';
+import { useReauthMutation } from './app/services/authApiSlice';
 import { jwtDecode } from "jwt-decode";
 import { useDispatch } from 'react-redux'
 import { setCredentials, logOut } from './app/authSlice'
 function App() {
   const [reauth] = useReauthMutation()
   const dispatch = useDispatch()
-  const [Ids , setIds] = useState([]);
   let updateToken = async () => {
     try {
       if (localStorage.getItem("refreshToken")) {
@@ -40,14 +39,14 @@ function App() {
     }
   };
   useEffect(() => {
+    updateToken();
+  }, []);
+  useEffect(() => {
     const tokenInterval = setInterval(() => {
       updateToken();
     }, 900000);
     return () => clearInterval(tokenInterval);
   }, [dispatch]);
-  useEffect(() => {
-    updateToken();
-  }, []);
   
   
   return (

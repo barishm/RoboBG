@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useGetRobotsModelImageLinksQuery } from "../app/apis/robotApiSlice";
+import { useGetRobotsModelImageLinksQuery } from "../app/services/robotApiSlice";
 
 
 const Robots = (props) => {

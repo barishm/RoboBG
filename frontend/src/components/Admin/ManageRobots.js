@@ -1,4 +1,4 @@
-import { useGetRobotsModelImageQuery, useDeleteRobotMutation } from "../../app/apis/robotApiSlice";
+import { useGetRobotsModelImageQuery, useDeleteRobotMutation } from "../../app/services/robotApiSlice";
 import Loading from "../independent/Loading";
 import CreateRobot from "./CreateRobot";
 import { useSelector } from "react-redux";
