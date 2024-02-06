@@ -5,11 +5,11 @@ import { useSelector } from "react-redux";
 const AddLink = (props) => {
   const id = props.Id;
   const { accessToken } = useSelector((state) => state.auth);
+  const [createLink] = useCreateLinkMutation();
   const initialValues = id
     ? { robotId: id, name: "", link: "" }
     : { robotId: "", name: "", link: "" };
 
-  const [createLink] = useCreateLinkMutation();
 
   const formik = useFormik({
     enableReinitialize:true,

@@ -6,7 +6,6 @@ import com.robobg.service.PurchaseLinkService;
 import com.robobg.service.QuestionService;
 import com.robobg.service.RobotService;
 import org.springframework.web.bind.annotation.*;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -28,35 +27,14 @@ public class RobotController {
     @GetMapping("/{id}")
     public Optional<?> getRobotById(@PathVariable("id") Long id,
                                            @RequestParam(required = false) HashSet<String> fields) {
-        if(fields != null){
-            if(fields.containsAll(Arrays.asList("model", "links"))){
-                return robotService.getAllModelsLinksById(id);
-            }
-        }
-        return robotService.getRobotById(id);
+        return robotService.getRobotById(id,fields);
     }
 
     @GetMapping
     public List<?> getRobots(@RequestParam(required = false) HashSet<String> fields,
                              @RequestParam(required = false) List<Long> id
     ) {
-        if(fields == null && id == null){
-            return robotService.getAllRobots();
-        }
-        else if (id != null && !id.isEmpty()) {
-            return robotService.findByIdIn(id);
-        } else if (fields != null) {
-            if (fields.containsAll(Arrays.asList("model", "image", "links", "bests"))) {
-                return robotService.findAllBests();
-            } else if (fields.containsAll(Arrays.asList("model", "image", "links"))) {
-                return robotService.getAllRobotIdModelImageLinks();
-            } else if (fields.containsAll(Arrays.asList("model", "image"))) {
-                return robotService.getAllRobotIdModelImage();
-            } else if (fields.contains("model")) {
-                return robotService.getAllModels();
-            }
-        }
-        return null;
+        return robotService.getRobots(fields,id);
     }
 
     @GetMapping("/{robotId}/purchase-links")

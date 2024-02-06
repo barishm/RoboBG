@@ -11,9 +11,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -102,18 +101,7 @@ public class RobotServiceImpl implements RobotService {
     }
 
     @Override
-    public Optional<RobotDTO> getRobotById(Long id) {
-        Optional<Robot> robot = robotRepository.findById(id);
-        if (robot.isPresent()) {
-            RobotDTO robotDTO = modelMapper.map(robot.get(), RobotDTO.class);
-            return Optional.of(robotDTO);
-        }
-        return Optional.empty();
-    }
-
-    @Override
     public void deleteRobotById(Long id) throws NotFoundException {
-
         Optional<Robot> optionalRobot = robotRepository.findById(id);
         if (optionalRobot.isPresent()) {
             robotRepository.deleteById(id);
@@ -121,8 +109,43 @@ public class RobotServiceImpl implements RobotService {
         } else {
             throw new NotFoundException();
         }
+    }
 
+    @Override
+    public List<?> getRobots(HashSet<String> fields, List<Long> id) {
+        if(fields == null && id == null){
+            return getAllRobots();
+        }
+        else if (id != null && !id.isEmpty()) {
+            return findByIdIn(id);
+        } else if (fields != null) {
+            if (fields.containsAll(Arrays.asList("model", "image", "links", "bests"))) {
+                return findAllBests();
+            } else if (fields.containsAll(Arrays.asList("model", "image", "links"))) {
+                return getAllRobotIdModelImageLinks();
+            } else if (fields.containsAll(Arrays.asList("model", "image"))) {
+                return getAllRobotIdModelImage();
+            } else if (fields.contains("model")) {
+                return getAllModels();
+            }
+        }
+        return null;
+    }
 
+    @Override
+    public Optional<?> getRobotById(Long id,HashSet<String> fields) {
+        if(fields == null){
+            Optional<Robot> robot = robotRepository.findById(id);
+            if (robot.isPresent()) {
+                RobotDTO robotDTO = modelMapper.map(robot.get(), RobotDTO.class);
+                return Optional.of(robotDTO);
+            }
+        } else {
+            if(fields.containsAll(Arrays.asList("model", "links"))){
+                return getAllModelsLinksById(id);
+            }
+        }
+        return Optional.empty();
     }
 
 }

@@ -12,8 +12,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import static com.robobg.entity.Role.ADMIN;
-import static com.robobg.entity.Role.USER;
+
+import static com.robobg.entity.Role.*;
 
 
 @Configuration
@@ -37,7 +37,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/v1/admin/**").hasRole(ADMIN.name())
-                                .requestMatchers("/v1/user/**").hasAnyRole(USER.name() , ADMIN.name())
+                                .requestMatchers("/v1/moderator/**").hasAnyRole(MODERATOR.name(), ADMIN.name())
+                                .requestMatchers("/v1/user/**").hasAnyRole(USER.name() , ADMIN.name(), MODERATOR.name())
                                 .anyRequest().permitAll()
                 )
                 .sessionManagement(sessionManagement ->

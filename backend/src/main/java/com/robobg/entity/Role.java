@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public enum Role {
     ADMIN("ROLE_ADMIN", Permission.ADMIN, Permission.USER),
+    MODERATOR("ROLE_MODERATOR",Permission.USER,Permission.MODERATOR),
     USER("ROLE_USER", Permission.USER);
 
     @Getter

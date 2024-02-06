@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 public enum Permission {
 
     ADMIN("ADMIN"),
+    MODERATOR("MODERATOR"),
     USER("USER"),
     ;
     private final String permission;

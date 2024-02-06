@@ -40,6 +40,18 @@ public class DatabaseSeeder implements CommandLineRunner {
             user.setRole(Role.ADMIN);
             userRepository.save(user);
         }
+        InputStream inputStreamOfUsers = getClass().getResourceAsStream("/users.json");
+        User[] data2 = objectMapper.readValue(inputStreamOfUsers,User[].class);
+        List<User> usersToSave = Arrays.stream(data2)
+                .filter(user -> !userRepository.existsByUsername(user.getUsername()))
+                .peek(user -> {
+                    user.setPassword(passwordEncoder.encode(user.getPassword())); // Encoding password here
+                })
+                .collect(Collectors.toList());
+        if(!usersToSave.isEmpty()){
+            userRepository.saveAll(usersToSave);
+        }
+
         InputStream inputStream = getClass().getResourceAsStream("/robots.json");
         Robot[] data = objectMapper.readValue(inputStream, Robot[].class);
 
