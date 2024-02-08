@@ -38,8 +38,8 @@ const Header = () => {
             <LinkContainer to="/compare">
             <Nav.Link>Compare</Nav.Link>
             </LinkContainer>
-            {role && role === "ADMIN" && (
-              <LinkContainer to="/admin">
+            {role && role === "ADMIN" || role && role === "MODERATOR" &&(
+              <LinkContainer to="/dashboard">
                 <Nav.Link>Dashboard</Nav.Link>
               </LinkContainer>
             )}

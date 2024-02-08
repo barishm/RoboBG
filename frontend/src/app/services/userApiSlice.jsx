@@ -4,7 +4,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getAllUsers: builder.query({
             query: (accessToken) => ({
-                url: `v1/admin/users`,
+                url: `v1/moderator/users`,
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

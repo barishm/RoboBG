@@ -60,7 +60,7 @@ export const robotApiSlice = apiSlice.injectEndpoints({
         }),
         createRobot: builder.mutation({
             query: ({robotBody, accessToken}) => ({
-                url: 'v1/admin/robots',
+                url: 'v1/moderator/robots',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ export const robotApiSlice = apiSlice.injectEndpoints({
         }),
         deleteRobot: builder.mutation({
             query: ({id,accessToken}) => ({
-                url: `v1/admin/robots/${id}`,
+                url: `v1/moderator/robots/${id}`,
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ export const robotApiSlice = apiSlice.injectEndpoints({
         }),
         updateRobot: builder.mutation({
             query: ({robotBody, accessToken}) => ({
-                url: 'v1/admin/robots',
+                url: 'v1/moderator/robots',
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

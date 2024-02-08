@@ -1,11 +1,13 @@
 import { useState } from "react";
-import ManageRobots from "./components/ManageRobots"
+import ManageRobots from "./components/ManageRobots";
 import ManageLinks from "./components//ManageLinks";
 import ManageUsers from "./components/ManageUsers";
 import ManageMostCompares from "./components/ManageMostCompares";
+import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
   const [activeComponent, setActiveComponent] = useState("Robots");
+  const { username, role } = useSelector((state) => state.auth);
 
   const renderActiveComponent = () => {
     switch (activeComponent) {
@@ -16,7 +18,7 @@ const Dashboard = () => {
       case "Links":
         return <ManageLinks />;
       case "Most Compared":
-        return <ManageMostCompares/>;
+        return <ManageMostCompares />;
       default:
         return null;
     }
@@ -32,8 +34,17 @@ const Dashboard = () => {
               id="menu"
             >
               <li className="nav-item">
-                <a href="#" className="nav-link align-middle px-0" onClick={() => {setActiveComponent("Robots")}}>
-                  <i className="fa-solid fa-broom" style={{ color: "#000000" }}></i>{" "}
+                <a
+                  href="#"
+                  className="nav-link align-middle px-0"
+                  onClick={() => {
+                    setActiveComponent("Robots");
+                  }}
+                >
+                  <i
+                    className="fa-solid fa-broom"
+                    style={{ color: "#000000" }}
+                  ></i>{" "}
                   <span className="ms-1 d-none d-md-inline text-bg-light">
                     Manage Robots
                   </span>
@@ -44,26 +55,53 @@ const Dashboard = () => {
                   href="#submenu1"
                   data-bs-toggle="collapse"
                   className="nav-link px-0 align-middle"
-                  onClick={() => {setActiveComponent("Links")}}
+                  onClick={() => {
+                    setActiveComponent("Links");
+                  }}
                 >
-                  <i className="fa-solid fa-link" style={{ color: "#000000" }}></i>{" "}
+                  <i
+                    className="fa-solid fa-link"
+                    style={{ color: "#000000" }}
+                  ></i>{" "}
                   <span className="ms-1 d-none d-md-inline text-bg-light">
                     Manage Links
                   </span>{" "}
                 </a>
               </li>
+              {role && role === "ADMIN" && (
+                <>
+                  <li>
+                    <a
+                      href="#"
+                      className="nav-link px-0 align-middle"
+                      onClick={() => {
+                        setActiveComponent("Users");
+                      }}
+                    >
+                      <i
+                        className="fa-solid fa-user"
+                        style={{ color: "#000000" }}
+                      ></i>{" "}
+                      <span className="ms-1 d-none d-md-inline text-bg-light">
+                        Manage Users
+                      </span>
+                    </a>
+                  </li>
+                </>
+              )}
               <li>
-                <a href="#" className="nav-link px-0 align-middle" onClick={() => {setActiveComponent("Users")}}>
-                  <i className="fa-solid fa-user" style={{ color: "#000000" }}></i>{" "}
+                <a
+                  href="#"
+                  className="nav-link px-0 align-middle"
+                  onClick={() => {
+                    setActiveComponent("Most Compared");
+                  }}
+                >
+                  <i
+                    className="fa-solid fa-star"
+                    style={{ color: "#000000" }}
+                  ></i>{" "}
                   <span className="ms-1 d-none d-md-inline text-bg-light">
-                    Manage Users
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="nav-link px-0 align-middle" onClick={() => {setActiveComponent("Most Compared")}}>
-                    <i className="fa-solid fa-star" style={{ color: "#000000" }}></i>{" "}
-                    <span className="ms-1 d-none d-md-inline text-bg-light">
                     Manage Most Compares
                   </span>
                 </a>
@@ -71,11 +109,9 @@ const Dashboard = () => {
             </ul>
           </div>
         </div>
-        <div className="col py-3">
-          {renderActiveComponent()}
-          </div>
+        <div className="col py-3">{renderActiveComponent()}</div>
       </div>
     </div>
   );
-}
+};
 export default Dashboard;

@@ -61,7 +61,7 @@ function App() {
         <Route path='/login'  element={<Login/>}/>
         <Route path='/register'  element={<Register/>}/>
         <Route element={<ProtectedRoutes/>}>
-        <Route path='/admin' element={<Dashboard/>}/>
+        <Route path='/dashboard' element={<Dashboard/>}/>
         </Route>
       </Routes>
       <Footer/>

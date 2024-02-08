@@ -9,21 +9,19 @@ import {
   const ManageLinks = () => {
     const [id,setId] = useState(null);
     const { data: allModels } = useGetRobotsModelQuery();
-    const { data } = useGetRobotsModelLinksByIdQuery( id ,{ skip: Boolean(!id) });
     const [selectedModel, setSelectedModel] = useState(null);
+    const { data } = useGetRobotsModelLinksByIdQuery( id ,{ skip: Boolean(!id) });
     const [deleteLink] = useDeleteLinkMutation();
     const { accessToken } = useSelector((state) => state.auth);
   
     const handleInputChange = (e) => {
       const model = allModels.find((item) => item.model === e.target.value);
       setSelectedModel(model);
-    };
-  
-    const handleSelect = () => {
-      if (selectedModel) {
-        setId(selectedModel.id);
+      if(model?.id) {
+        setId(model.id);
       }
     };
+  
   
     const deleteHandler = (id) => {
       deleteLink({ id, accessToken });
@@ -50,13 +48,6 @@ import {
               </>
             )}
           </datalist>
-          <button
-            type="button"
-            className="btn btn-primary ms-2"
-            onClick={handleSelect}
-          >
-            Select
-          </button>
         </div>
         {data && (
           <>

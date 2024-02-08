@@ -4,7 +4,7 @@ export const linkApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         createLink: builder.mutation({
             query: ({json,accessToken}) => ({
-                url: 'v1/admin/links',
+                url: 'v1/moderator/links',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ export const linkApiSlice = apiSlice.injectEndpoints({
         }),
         deleteLink: builder.mutation({
             query: ({id,accessToken}) => ({
-                url: `v1/admin/links/${id}`,
+                url: `v1/moderator/links/${id}`,
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
