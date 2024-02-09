@@ -3,6 +3,9 @@
   overflow: hidden;
   min-height: 100%;
 }
+hr.solid {
+  border-top: 3px solid #bbb;
+}
 
 .App {
   display: flex;

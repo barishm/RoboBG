@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 const ProtectedRoutes = () => {
   const {role} = useSelector((state) => state.auth);
 
-  if (role && role === 'ADMIN' || role && role === 'MODERATOR') {
+  if ((role && role === 'ADMIN') || (role && role === 'MODERATOR')) {
     return <Outlet />;
   }
   

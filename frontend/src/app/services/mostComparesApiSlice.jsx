@@ -11,7 +11,7 @@ export const mostComparesApiSlice = apiSlice.injectEndpoints({
         }),
         updateMostCompares: builder.mutation({
             query: ({jsonBody, accessToken}) => ({
-                url:`v1/admin/users`,
+                url:`v1/moderator/most-compares`,
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export const mostComparesApiSlice = apiSlice.injectEndpoints({
         }),
         createMostCompares: builder.mutation({
             query: ({jsonBody, accessToken}) => ({
-                url:`v1/admin/users`,
+                url:`v1/moderator/most-compares`,
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export const mostComparesApiSlice = apiSlice.injectEndpoints({
         }),
         deleteMostCompares: builder.mutation({
             query: ({id, accessToken}) => ({
-                url:`v1/admin/users/${id}`,
+                url:`v1/moderator/most-compares/${id}`,
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

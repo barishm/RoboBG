@@ -40,17 +40,17 @@ public class MostComparedServiceImpl implements MostComparedService {
     @Override
     public void createMostCompared(CreateMostComparedDTO createMostComparedDTO) {
         MostCompared mostCompared = new MostCompared();
-        long robot1Id = createMostComparedDTO.getRobot1();
-        long robot2Id = createMostComparedDTO.getRobot2();
-        long robot3Id = createMostComparedDTO.getRobot3();
-        if(robot1Id != 0 && robot2Id != 0 && robot3Id != 0){
-            Optional<Robot> robot1 = robotRepository.findById(robot1Id);
-            Optional<Robot> robot2 = robotRepository.findById(robot2Id);
-            Optional<Robot> robot3 = robotRepository.findById(robot2Id);
-            if(robot1.isPresent() && robot2.isPresent() && robot3.isPresent()){
-                Robot robotOne = robot1.get();
-                Robot robotTwo = robot2.get();
-                Robot robotThree = robot3.get();
+        String robot1 = createMostComparedDTO.getRobot1();
+        String robot2 = createMostComparedDTO.getRobot2();
+        String robot3 = createMostComparedDTO.getRobot3();
+        if(robot1 != null && robot2 != null && robot3 != null){
+            Optional<Robot> robot1opt = robotRepository.findByModel(robot1);
+            Optional<Robot> robot2opt = robotRepository.findByModel(robot2);
+            Optional<Robot> robot3opt = robotRepository.findByModel(robot3);
+            if(robot1opt.isPresent() && robot2opt.isPresent() && robot3opt.isPresent()){
+                Robot robotOne = robot1opt.get();
+                Robot robotTwo = robot2opt.get();
+                Robot robotThree = robot3opt.get();
                 mostCompared.setRobot1(robotOne);
                 mostCompared.setRobot2(robotTwo);
                 mostCompared.setRobot3(robotThree);
@@ -60,12 +60,12 @@ public class MostComparedServiceImpl implements MostComparedService {
                 System.out.println("Robot not found!");
             }
 
-        } else if(robot1Id != 0 && robot2Id != 0){
-            Optional<Robot> robot1 = robotRepository.findById(robot1Id);
-            Optional<Robot> robot2 = robotRepository.findById(robot2Id);
-            if(robot1.isPresent() && robot2.isPresent()){
-                Robot robotOne = robot1.get();
-                Robot robotTwo = robot2.get();
+        } else if(robot1 != null && robot2 != null){
+            Optional<Robot> robot1opt = robotRepository.findByModel(robot1);
+            Optional<Robot> robot2opt = robotRepository.findByModel(robot2);
+            if(robot1opt.isPresent() && robot2opt.isPresent()){
+                Robot robotOne = robot1opt.get();
+                Robot robotTwo = robot2opt.get();
                 mostCompared.setRobot1(robotOne);
                 mostCompared.setRobot2(robotTwo);
                 mostCompared.setOrder(createMostComparedDTO.getOrder());
@@ -82,17 +82,17 @@ public class MostComparedServiceImpl implements MostComparedService {
     public void updateMostCompared(UpdateMostComparedDTO updateMostComparedDTO) {
         MostCompared mostCompared = new MostCompared();
         mostCompared.setId(updateMostComparedDTO.getId());
-        long robot1Id = updateMostComparedDTO.getRobot1();
-        long robot2Id = updateMostComparedDTO.getRobot2();
-        long robot3Id = updateMostComparedDTO.getRobot3();
-        if(robot1Id != 0 && robot2Id != 0 && robot3Id != 0){
-            Optional<Robot> robot1 = robotRepository.findById(robot1Id);
-            Optional<Robot> robot2 = robotRepository.findById(robot2Id);
-            Optional<Robot> robot3 = robotRepository.findById(robot2Id);
-            if(robot1.isPresent() && robot2.isPresent() && robot3.isPresent()){
-                Robot robotOne = robot1.get();
-                Robot robotTwo = robot2.get();
-                Robot robotThree = robot3.get();
+        String robot1 = updateMostComparedDTO.getRobot1();
+        String robot2 = updateMostComparedDTO.getRobot2();
+        String robot3 = updateMostComparedDTO.getRobot3();
+        if(robot1 != null && robot2 != null && robot3 != null){
+            Optional<Robot> robot1opt = robotRepository.findByModel(robot1);
+            Optional<Robot> robot2opt = robotRepository.findByModel(robot2);
+            Optional<Robot> robot3opt = robotRepository.findByModel(robot3);
+            if(robot1opt.isPresent() && robot2opt.isPresent() && robot3opt.isPresent()){
+                Robot robotOne = robot1opt.get();
+                Robot robotTwo = robot2opt.get();
+                Robot robotThree = robot3opt.get();
                 mostCompared.setRobot1(robotOne);
                 mostCompared.setRobot2(robotTwo);
                 mostCompared.setRobot3(robotThree);
@@ -102,12 +102,12 @@ public class MostComparedServiceImpl implements MostComparedService {
                 System.out.println("Robot not found!");
             }
 
-        } else if(robot1Id != 0 && robot2Id != 0){
-            Optional<Robot> robot1 = robotRepository.findById(robot1Id);
-            Optional<Robot> robot2 = robotRepository.findById(robot2Id);
-            if(robot1.isPresent() && robot2.isPresent()){
-                Robot robotOne = robot1.get();
-                Robot robotTwo = robot2.get();
+        } else if(robot1 != null && robot2 != null){
+            Optional<Robot> robot1opt = robotRepository.findByModel(robot1);
+            Optional<Robot> robot2opt = robotRepository.findByModel(robot2);
+            if(robot1opt.isPresent() && robot2opt.isPresent()){
+                Robot robotOne = robot1opt.get();
+                Robot robotTwo = robot2opt.get();
                 mostCompared.setRobot1(robotOne);
                 mostCompared.setRobot2(robotTwo);
                 mostCompared.setOrder(updateMostComparedDTO.getOrder());
