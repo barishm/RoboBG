@@ -20,8 +20,11 @@ Footer {
 
 .choose-robot {
   max-width: 250px;
-  margin: 20px;
+  max-height: 40px;
   margin-right: 10px;
+}
+.add-button {
+  margin-left: 0px;
 }
 
 .login-form {
@@ -34,10 +37,6 @@ Footer {
 .add-div {
   margin-top: 5px;
   justify-content: center;
-}
-.add-button {
-  margin: 20px;
-  margin-left: 0px;
 }
 
 .table-container {

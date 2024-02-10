@@ -1,16 +1,38 @@
 import { useSelector } from "react-redux";
-import { deleteRobotById } from "../../../app/redux/compareSlice";
+import { addRobot,deleteRobotById } from "../../../app/redux/compareSlice";
 import { useDispatch } from "react-redux";
 import Loading from "../../../components/Loading";
+import { useGetRobotsModelQuery,useLazyGetRobotByIdQuery } from "../../../app/services/robotApiSlice";
+import { useState } from "react";
 
 const CompareTable = () => {
+  const lang = useSelector((state) => state.language.lang);
   const { robots } = useSelector((state) => state.compare);
   const dispatch = useDispatch();
+  const { data: allModels } =
+    useGetRobotsModelQuery();
+  const [Model, setModel] = useState("");
+  const [triggerAdd] = useLazyGetRobotByIdQuery();
+
+
 
   const deleteHandler = (e) => {
     const id = parseInt(e.target.dataset.id, 10);
     dispatch(deleteRobotById(id));
   };
+
+
+
+  function handleAdd() {
+    const foundItem = allModels.find((item) => item.model === Model);
+    if (foundItem) {
+      triggerAdd(foundItem.id).then((response) => {
+        console.log("Response data:", response.data);
+        dispatch(addRobot(response.data));
+      });
+    }
+    setModel("");
+  }
 
   const renderRow = (field) => {
     return robots.map((item) => {
@@ -52,6 +74,30 @@ const CompareTable = () => {
     <div className="table-container">
       {robots ? (
         <>
+          <div style={{ display: "flex" }} className="mb-1 mt-5" >
+                <input
+                  className="form-control form-control-sm choose-robot"
+                  value={Model}
+                  name="Model"
+                  list="datalistOptions"
+                  id="Model"
+                  placeholder="Choose robot from the list"
+                  onChange={(e) => setModel(e.target.value)}
+                />
+                <button
+                  type="button"
+                  className="btn btn-dark btn-sm add-button"
+                  onClick={handleAdd}
+                  style={{backgroundColor:"#526679",color: "#F5F5F5"}}
+                >
+                  {lang === "en" ? <>Add</> : <>Добави</>}
+                </button>
+                <datalist id="datalistOptions">
+                  {allModels.map((item) => (
+                    <option key={item.id} value={item.model} />
+                  ))}
+                </datalist>
+              </div>
           <table class="table">
             <thead>
             </thead>

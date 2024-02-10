@@ -3,12 +3,18 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logOut } from "../app/redux/authSlice";
+import { setLanguage } from "../app/redux/languageSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const { username, role } = useSelector((state) => state.auth);
+  const lang = useSelector((state) => state.language.lang);
 
   const navigate = useNavigate();
+
+  const handleChangeLanguage = (language) => {
+    dispatch(setLanguage(language));
+  };
 
   const handleLogin = () => {
     navigate("/login"); // Navigate to /login
@@ -30,28 +36,31 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <LinkContainer to="/">
-              <Nav.Link>Home</Nav.Link>
+              <Nav.Link>{lang === "en" ? <>Home</> : <>Начало</>}</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/robots">
-              <Nav.Link>All Robots</Nav.Link>
+              <Nav.Link>{lang === "en" ? <>All Robots</> : <>Всички роботи</>}</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/compare">
-              <Nav.Link>Compare</Nav.Link>
+              <Nav.Link>{lang === "en" ? <>Compare</> : <>Сравни</>}</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/contact">
+              <Nav.Link>{lang === "en" ? <>Contact us</> : <>Контакти</>}</Nav.Link>
             </LinkContainer>
             {(role === "ADMIN" || role === "MODERATOR") && (
               <LinkContainer to="/dashboard">
-                <Nav.Link>Dashboard</Nav.Link>
+                <Nav.Link>{lang === "en" ? <>Dashboard</> : <>Табло за управление</>}</Nav.Link>
               </LinkContainer>
             )}
           </Nav>
           <Nav className="ms-auto">
             {username ? (
               <>
-                <Navbar.Text className="me-3">Signed in as:</Navbar.Text>
-                <Col xs="auto">
+                <Navbar.Text >{lang === "en" ? <>Signed in as:</> : <>Вписан като:</>}</Navbar.Text>
+                <Col xs="auto" style={{ display: "flex", alignItems: "center" }} className="ms-2">
                   <div className="dropdown">
                     <button
-                      className="btn btn-dark dropdown-toggle"
+                      className="btn btn-dark dropdown-toggle btn-sm rounded-3"
                       type="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
@@ -61,12 +70,12 @@ const Header = () => {
                     <ul className="dropdown-menu">
                       <li>
                         <button className="dropdown-item" onClick={logoutUser}>
-                          Sign out
+                        {lang === "en" ? <>Sign out</> : <>Отписване</>}
                         </button>
                       </li>
                       <li>
                         <button className="dropdown-item" onClick={goToProfile}>
-                          Profile
+                        {lang === "en" ? <>Profile</> : <>Профил</>}
                         </button>
                       </li>
                     </ul>
@@ -75,11 +84,26 @@ const Header = () => {
               </>
             ) : (
               <Col xs="auto">
-                <Button variant="dark" onClick={handleLogin}>
-                  Sign In
+                <Button variant="dark" size="sm" className="rounded-3" onClick={handleLogin}>
+                {lang === "en" ? <>Sign in</> : <>Впиши се</>}
                 </Button>
               </Col>
             )}
+            <div className="dropdown" style={{ display: "flex", alignItems: "center" }}>
+            <button className="btn btn-dark btn-sm ms-2 rounded-3 dropdown-toggle" data-bs-toggle="dropdown"><i className="fa-solid fa-globe" style={{color:"#ffffff"}}></i>{lang === "en" ? <> English</> : <> Български</>}</button>
+            <ul className="dropdown-menu">
+              {lang === "en" ? <li>
+                        <button className="dropdown-item" onClick={() => handleChangeLanguage('bg')}>
+                          Български
+                        </button>
+                      </li> : <li>
+                        <button className="dropdown-item" onClick={() => handleChangeLanguage('en')}>
+                          English
+                        </button>
+                      </li>}
+                    </ul>
+            </div>
+            
           </Nav>
         </Navbar.Collapse>
       </Container>

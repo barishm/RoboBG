@@ -16,6 +16,7 @@ import { useReauthMutation } from './app/services/authApiSlice'
 import { jwtDecode } from "jwt-decode";
 import { useDispatch } from 'react-redux'
 import { setCredentials, logOut } from './app/redux/authSlice'
+import Contact from './pages/Contact/Contact'
 
 function App() {
   const [reauth] = useReauthMutation()
@@ -57,6 +58,7 @@ function App() {
         <Route path='/compare' element={<Compare/>}/>
         <Route path='/robots' element={<Robots/>}/>
         <Route path='/robots/:id' element={<Robot/>}/>
+        <Route path='/contact' element={<Contact/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/login'  element={<Login/>}/>
         <Route path='/register'  element={<Register/>}/>

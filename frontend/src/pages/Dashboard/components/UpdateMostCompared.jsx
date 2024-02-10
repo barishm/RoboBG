@@ -15,9 +15,9 @@ const UpdateMostCompared = (props) => {
     initialValues: {
       id: mostCompared?.id,
       order: mostCompared?.order,
-      robot1: mostCompared?.robot1.model,
-      robot2: mostCompared?.robot2.model,
-      robot3: mostCompared?.robot3.model,
+      robot1: mostCompared?.robot1?.model,
+      robot2: mostCompared?.robot2?.model,
+      robot3: mostCompared?.robot3?.model,
     },
     onSubmit: (values) => {
       const jsonBody = values;
