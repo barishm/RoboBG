@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux";
 
+
 const Contact = () => {
     const lang = useSelector((state) => state.language.lang);
+
 
 
 
@@ -13,33 +15,35 @@ const Contact = () => {
           <div className="card shadow-sm" style={{ borderRadius: "1rem" }}>
             <div className="card-body p-5 pb-3 text-center">
               <div className="mb-md-3 mt-md-2 pb-3">
-                <form>
+                <form action="https://formsubmit.co/barismassive@gmail.com" method="POST">
                   <h2 className="fw-bold mb-3">{lang === "en" ? <>Contact us</> : <>Свържете се с нас</>}</h2>
-                  <div className="form-outline form-white mb-4">
+                  <div className="form-outline form-white mb-3">
                     <input
-                      type="name"
+                      type="text"
+                      name="name"
                       required
                       className="form-control form-control-md"
                       placeholder={lang === "en" ? "Name" : "Име"}
                     />
                   </div>
-
-                  <div className="form-outline form-white mb-3">
+                  <div className="form-outline form-white mb-4">
                     <input
-                      type="subject"
+                      type="email"
+                      name="email"
                       required
                       className="form-control form-control-md"
-                      placeholder={lang === "en" ? "Subject" : "Тема"}
+                      placeholder={lang === "en" ? "Email" : "Имейл"}
                     />
                   </div>
 
                   <div className="form-outline form-white mb-3">
                     <textarea
-                      type="textarea"
+                      type="text"
+                      name="message"
                       required
                       className="form-control form-control-md"
                       placeholder={lang === "en" ? "Message" : "Съобщение"}
-                      style={{ height: "150px" }}
+                      style={{ height: "180px" }}
                     />
                   </div>
 
@@ -49,6 +53,8 @@ const Contact = () => {
                   >
                     {lang === "en" ? "Submit" : "Изпращане"}
                   </button>
+                  <input type="hidden" name="_captcha" value="false"></input>
+                  <input type="hidden" name="_next" value="http://localhost:5173/contact"></input>
                 </form>
               </div>
             </div>

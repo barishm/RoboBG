@@ -4,8 +4,10 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "../../app/redux/authSlice";
 import { jwtDecode } from "jwt-decode";
 import { useLoginMutation } from "../../app/services/authApiSlice";
+import { useSelector } from "react-redux";
 
 const Login = () => {
+  const lang = useSelector((state) => state.language.lang);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -43,9 +45,9 @@ const Login = () => {
             <div className="card-body p-5 text-center">
               <div className="mb-md-3 mt-md-2 pb-3">
                 <form onSubmit={handleSubmit}>
-                  <h2 className="fw-bold mb-3">Sign in</h2>
+                  <h2 className="fw-bold mb-3">{lang === "en" ? "Sign in" : "Впиши се"}</h2>
                   <p className="mb-3">
-                    Please enter your username and password!
+                    {lang === "en" ? "Please enter your username and password!" : "Моля, въведете вашето потребителско име и парола!"}
                   </p>
 
                   <div className="form-outline form-white mb-4">
@@ -59,7 +61,7 @@ const Login = () => {
                       }}
                       className="form-control form-control-md"
                     />
-                    <label className="form-label">Username</label>
+                    <label className="form-label">{lang === "en" ? "Username" : "Потребителско име"}</label>
                   </div>
 
                   <div className="form-outline form-white mb-3">
@@ -74,7 +76,7 @@ const Login = () => {
                       name="password"
                       className="form-control form-control-md"
                     />
-                    <label className="form-label">Password</label>
+                    <label className="form-label">{lang === "en" ? "Password" : "Парола"}</label>
                   </div>
 
                   <button
@@ -88,9 +90,9 @@ const Login = () => {
 
               <div>
                 <p className="mb-0">
-                  Don't have an account?{" "}
+                {lang === "en" ? "Don't have an account?" : "Нямате акаунт?"}{" "}
                   <a href="/register" className="fw-bold">
-                    Sign Up
+                    {lang === "en" ? "Sign Up" : "Регистрирай се"}
                   </a>
                 </p>
               </div>
