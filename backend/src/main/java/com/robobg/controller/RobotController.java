@@ -31,10 +31,9 @@ public class RobotController {
     }
 
     @GetMapping
-    public List<?> getRobots(@RequestParam(required = false) HashSet<String> fields,
-                             @RequestParam(required = false) List<Long> id
+    public List<?> getRobots(@RequestParam(required = false) HashSet<String> fields
     ) {
-        return robotService.getRobots(fields,id);
+        return robotService.getRobots(fields);
     }
 
     @GetMapping("/{robotId}/purchase-links")

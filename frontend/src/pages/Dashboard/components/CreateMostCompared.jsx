@@ -1,12 +1,16 @@
 import { useFormik } from "formik";
 import { useSelector } from "react-redux";
-import { useGetRobotsModelQuery } from "../../../app/services/robotApiSlice";
+import { useGetAllRobotsQuery } from "../../../app/services/robotApiSlice";
 import { useCreateMostComparesMutation } from "../../../app/services/mostComparesApiSlice";
 import { cleanFormValues } from "../../../helpers/utils";
 
 const CreateMostCompared = () => {
+  const queryParams = {
+    fields: "model"
+  }
+  
     const { accessToken } = useSelector((state) => state.auth);
-    const { data: allModels } = useGetRobotsModelQuery();
+    const { data: allModels } = useGetAllRobotsQuery(queryParams);
     const [CreateMostCompared] = useCreateMostComparesMutation();
 
     const create = async (jsonBody) => {

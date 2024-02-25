@@ -112,13 +112,10 @@ public class RobotServiceImpl implements RobotService {
     }
 
     @Override
-    public List<?> getRobots(HashSet<String> fields, List<Long> id) {
-        if(fields == null && id == null){
+    public List<?> getRobots(HashSet<String> fields) {
+        if(fields == null){
             return getAllRobots();
-        }
-        else if (id != null && !id.isEmpty()) {
-            return findByIdIn(id);
-        } else if (fields != null) {
+        }else {
             if (fields.containsAll(Arrays.asList("model", "image", "links", "bests"))) {
                 return findAllBests();
             } else if (fields.containsAll(Arrays.asList("model", "image", "links"))) {

@@ -7,10 +7,13 @@ const compareSlice = createSlice({
     },
     reducers: {
         addRobot: (state, action) => {
-            return {
-                ...state,
-                robots: [...state.robots, action.payload]
-            };
+            const existingRobot = state.robots.find(robot => robot.id === action.payload.id);
+            if(!existingRobot) {
+                return {
+                    ...state,
+                    robots: [...state.robots, action.payload]
+                };
+            }
         },
         deleteRobotById: (state, action) => {
             const idToDelete = action.payload;
@@ -19,10 +22,7 @@ const compareSlice = createSlice({
         deleteAllRobots: (state) => {
             state.robots = [];
         },
-        compareTwoRobots: (state, action) => {
-            state.robots = action.payload;
-        },
     }
 })
-export const { addRobot, deleteRobotById,deleteAllRobots,compareTwoRobots } = compareSlice.actions
+export const { addRobot, deleteRobotById,deleteAllRobots } = compareSlice.actions
 export default compareSlice.reducer

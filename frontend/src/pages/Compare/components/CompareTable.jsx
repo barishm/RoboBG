@@ -2,15 +2,17 @@ import { useSelector } from "react-redux";
 import { addRobot,deleteRobotById } from "../../../app/redux/compareSlice";
 import { useDispatch } from "react-redux";
 import Loading from "../../../components/Loading";
-import { useGetRobotsModelQuery,useLazyGetRobotByIdQuery } from "../../../app/services/robotApiSlice";
+import { useLazyGetRobotByIdQuery, useGetAllRobotsQuery } from "../../../app/services/robotApiSlice";
 import { useState } from "react";
 
 const CompareTable = () => {
+  const queryParams = {
+    fields: "model"
+  }
   const lang = useSelector((state) => state.language.lang);
   const { robots } = useSelector((state) => state.compare);
   const dispatch = useDispatch();
-  const { data: allModels } =
-    useGetRobotsModelQuery();
+  const { data: allModels } = useGetAllRobotsQuery(queryParams);
   const [Model, setModel] = useState("");
   const [triggerAdd] = useLazyGetRobotByIdQuery();
 
@@ -26,7 +28,8 @@ const CompareTable = () => {
   function handleAdd() {
     const foundItem = allModels.find((item) => item.model === Model);
     if (foundItem) {
-      triggerAdd(foundItem.id).then((response) => {
+      const id = foundItem.id;
+      triggerAdd({id}).then((response) => {
         console.log("Response data:", response.data);
         dispatch(addRobot(response.data));
       });
@@ -76,7 +79,7 @@ const CompareTable = () => {
         <>
           <div style={{ display: "flex" }} className="mb-1 mt-5" >
                 <input
-                  className="form-control form-control-sm choose-robot"
+                  className="form-control choose-robot"
                   value={Model}
                   name="Model"
                   list="datalistOptions"
@@ -86,9 +89,8 @@ const CompareTable = () => {
                 />
                 <button
                   type="button"
-                  className="btn btn-dark btn-sm add-button"
+                  className="btn btn-dark add-button"
                   onClick={handleAdd}
-                  style={{backgroundColor:"#526679",color: "#F5F5F5"}}
                 >
                   {lang === "en" ? <>Add</> : <>Добави</>}
                 </button>
@@ -98,14 +100,14 @@ const CompareTable = () => {
                   ))}
                 </datalist>
               </div>
-          <table class="table">
+          <table className="table">
             <thead>
             </thead>
             <tbody>
             <tr>
                 <th scope="row"></th>
                 {robots.map((item) => (
-                    <td key={item.id} className="border" style={{backgroundColor:"#526679",color: "#F5F5F5"}}>{item.model}</td>
+                    <td key={item.id} className="border" style={{backgroundColor:"#212529",color: "#F5F5F5"}}>{item.model}</td>
                 )
                 )}
               </tr>
@@ -191,7 +193,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th></th>
-                <td colSpan={robots.length} style={{backgroundColor:"#526679",color: "#F5F5F5"}}>Cleaning Features</td>
+                <td colSpan={robots.length} style={{backgroundColor:"#212529",color: "#F5F5F5"}}>Cleaning Features</td>
               </tr>
               <tr>
                 <th scope="row">
@@ -243,7 +245,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th></th>
-                <td colSpan={robots.length} style={{backgroundColor:"#526679",color: "#F5F5F5"}}>Mopping Features</td>
+                <td colSpan={robots.length} style={{backgroundColor:"#212529",color: "#F5F5F5"}}>Mopping Features</td>
               </tr>
               <tr>
                 <th scope="row">
@@ -289,7 +291,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th></th>
-                <td colSpan={robots.length} style={{backgroundColor:"#526679",color: "#F5F5F5"}}>Battery</td>
+                <td colSpan={robots.length} style={{backgroundColor:"#212529",color: "#F5F5F5"}}>Battery</td>
               </tr>
               <tr>
                 <th scope="row">
@@ -317,7 +319,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th></th>
-                <td colSpan={robots.length} style={{backgroundColor:"#526679",color: "#F5F5F5"}}>Control</td>
+                <td colSpan={robots.length} style={{backgroundColor:"#212529",color: "#F5F5F5"}}>Control</td>
               </tr>
               <tr>
                 <th scope="row">
@@ -363,7 +365,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th></th>
-                <td colSpan={robots.length} style={{backgroundColor:"#526679",color: "#F5F5F5"}}>App Features</td>
+                <td colSpan={robots.length} style={{backgroundColor:"#212529",color: "#F5F5F5"}}>App Features</td>
               </tr>
               <tr>
                 <th scope="row">
@@ -409,7 +411,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th></th>
-                <td colSpan={robots.length} style={{backgroundColor:"#526679",color: "#F5F5F5"}}>Sensor</td>
+                <td colSpan={robots.length} style={{backgroundColor:"#212529",color: "#F5F5F5"}}>Sensor</td>
               </tr>
               <tr>
                 <th scope="row">
@@ -437,7 +439,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th></th>
-                <td colSpan={robots.length} style={{backgroundColor:"#526679",color: "#F5F5F5"}}>Other Specifications</td>
+                <td colSpan={robots.length} style={{backgroundColor:"#212529",color: "#F5F5F5"}}>Other Specifications</td>
               </tr>
               <tr>
                 <th scope="row">

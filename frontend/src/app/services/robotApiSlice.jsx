@@ -3,58 +3,18 @@ import { apiSlice } from "./apiSlice";
 export const robotApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getAllRobots: builder.query({
-            query: () => ({
+            query: (queryParams) => ({
                 url: `v1/robots`,
                 method: 'GET',
+                params: {...queryParams}
             }),
             providesTags: ['Robot'],
         }),
-        getBestRobots: builder.query({
-            query: () => ({
-                url: `v1/robots?fields=model,image,bests,links`,
-                method: 'GET',
-            }),
-            providesTags: ['Robot'],
-        }),
-        getRobotsModel: builder.query({
-            query: () => ({
-                url: `v1/robots?fields=model`,
-                method: 'GET',
-            }),
-            providesTags: ['Robot'],
-        }),
-        getRobotsModelImage: builder.query({
-            query: () => ({
-                url: `v1/robots?fields=model,image`,
-                method: 'GET',
-            }),
-            providesTags: ['Robot'],
-        }),
-        getRobotsModelImageLinks: builder.query({
-            query: () => ({
-              url: `v1/robots?fields=model,image,links`,
-              method: 'GET',
-            }),
-            providesTags: ['Robot'],
-        }),
-        getRobotsModelLinksById: builder.query({
-            query: (id) => ({
-                url: `v1/robots/${id}?fields=model,links`,
-                method: 'GET',
-            }),
-            providesTags: ['Robot'],
-        }),
-        getRobotsByIds: builder.query({
-            query: (ids) => ({
-              url: `v1/robots?id=${ids.join(',')}`,
-              method: 'GET',
-            }),
-            providesTags: ['Robot'],
-          }),
         getRobotById: builder.query({
-            query: (id) => ({
+            query: ({id,queryParams}) => ({
                 url: `v1/robots/${id}`,
                 method: 'GET',
+                params: {...queryParams}
             }),
             providesTags: ['Robot'],
         }),
@@ -97,16 +57,9 @@ export const robotApiSlice = apiSlice.injectEndpoints({
 })
 export const {
     useGetAllRobotsQuery,
-    useGetBestRobotsQuery,
-    useGetRobotsModelImageQuery,
-    useGetRobotsModelImageLinksQuery,
     useGetRobotByIdQuery,
     useLazyGetRobotByIdQuery,
-    useGetRobotsModelLinksByIdQuery,
-    useGetRobotsByIdsQuery,
-    useLazyGetRobotsByIdsQuery,
     useCreateRobotMutation,
     useDeleteRobotMutation,
     useUpdateRobotMutation,
-    useGetRobotsModelQuery,
 } = robotApiSlice;

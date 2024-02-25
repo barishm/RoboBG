@@ -1,20 +1,23 @@
 import { useState } from "react";
 import {
-  useGetRobotsModelQuery,
-  useLazyGetRobotsByIdsQuery,
+  useGetAllRobotsQuery,
+  useLazyGetRobotByIdQuery,
 } from "../../../app/services/robotApiSlice";
 import { useDispatch } from "react-redux";
-import { compareTwoRobots } from "../../../app/redux/compareSlice";
+import { addRobot } from "../../../app/redux/compareSlice";
 import { useSelector } from "react-redux";
 import Loading from "../../../components/Loading";
 
 const CompareForm = () => {
+  const queryParams = {
+    fields: "model"
+  }
   const lang = useSelector((state) => state.language.lang);
   const { data: allModels, isLoading: allModelsLoading } =
-    useGetRobotsModelQuery();
+  useGetAllRobotsQuery(queryParams);
   const dispatch = useDispatch();
-  const [triggerCompare] = useLazyGetRobotsByIdsQuery();
-  const { robots } = useSelector((state) => state.compare);
+  const [triggerCompare1] = useLazyGetRobotByIdQuery();
+  const [triggerComapre2] = useLazyGetRobotByIdQuery();
   const [Model1, setModel1] = useState("");
   const [Model2, setModel2] = useState("");
 
@@ -23,9 +26,14 @@ const CompareForm = () => {
     const foundItem2 = allModels.find((item) => item.model === Model2);
 
     if (foundItem1 && foundItem2 && foundItem1.id !== foundItem2.id) {
-      triggerCompare([foundItem1.id, foundItem2.id]).then((response) => {
-        dispatch(compareTwoRobots(response.data));
+      let id = foundItem1.id;
+      triggerCompare1({id}).then((response) => {
+        dispatch(addRobot(response.data));
       });
+      id = foundItem2.id;
+      triggerComapre2({id}).then((response) => {
+        dispatch(addRobot(response.data));
+      })
     } else {
       console.error(
         "Invalid selection for comparison. Please select two different robots."

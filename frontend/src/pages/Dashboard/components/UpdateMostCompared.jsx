@@ -1,13 +1,16 @@
 import { useFormik } from "formik";
 import { useSelector } from "react-redux";
 import { useUpdateMostComparesMutation } from "../../../app/services/mostComparesApiSlice";
-import { useGetRobotsModelQuery } from "../../../app/services/robotApiSlice";
+import { useGetAllRobotsQuery } from "../../../app/services/robotApiSlice";
 
 const UpdateMostCompared = (props) => {
+  const queryParams = {
+    fields: "model,image"
+  }
   const { accessToken } = useSelector((state) => state.auth);
   const mostCompared = props.updateEntity;
   const setMostCompared = props.setUpdateEntity;
-  const { data: allModels } = useGetRobotsModelQuery();
+  const { data: allModels } = useGetAllRobotsQuery(queryParams);
   const [updateMostCompared] = useUpdateMostComparesMutation();
 
   const formik = useFormik({

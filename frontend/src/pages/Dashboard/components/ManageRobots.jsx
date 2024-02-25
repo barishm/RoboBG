@@ -1,4 +1,4 @@
-import { useGetRobotsModelImageQuery, useDeleteRobotMutation } from "../../../app/services/robotApiSlice";
+import { useDeleteRobotMutation, useGetAllRobotsQuery } from "../../../app/services/robotApiSlice";
 import Loading from "../../../components/Loading";
 import CreateRobot from "./CreateRobot";
 import { useSelector } from "react-redux";
@@ -7,8 +7,11 @@ import { useState } from "react";
 
 
 const ManageRobots = () => {
+  const queryParams = {
+    fields: "model,image"
+  }
   const { data: allRobots, isLoading: allRobotsLoading } =
-  useGetRobotsModelImageQuery();
+  useGetAllRobotsQuery(queryParams);
   const [deleteRobot] = useDeleteRobotMutation() 
   const noImage = "images/no-image.jpg";
   const { accessToken } = useSelector((state) => state.auth);

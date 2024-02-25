@@ -28,7 +28,7 @@ public interface RobotService {
     Optional<RobotModelLinksDTO> getAllModelsLinksById(Long id);
     Optional<?> getRobotById(Long id,HashSet<String> fields);
 
-    List<?> getRobots(HashSet<String> fields, List<Long> id);
+    List<?> getRobots(HashSet<String> fields);
 
 
 }

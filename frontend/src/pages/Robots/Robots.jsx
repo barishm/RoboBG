@@ -1,11 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import { useGetRobotsModelImageLinksQuery } from "../../app/services/robotApiSlice";
+import { useGetAllRobotsQuery } from "../../app/services/robotApiSlice";
 import { useSelector } from "react-redux";
 
 const Robots = () => {
+  const queryParams = {
+    fields: "model,image,links"
+  }
+
   const lang = useSelector((state) => state.language.lang);
   const navigate = useNavigate();
-  const { data, isLoading } = useGetRobotsModelImageLinksQuery();
+  const { data, isLoading } = useGetAllRobotsQuery(queryParams);
   const noImage = "images/no-image.jpg";
 
   const details = (robotId) => {
