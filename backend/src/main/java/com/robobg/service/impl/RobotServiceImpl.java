@@ -11,7 +11,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,13 +22,15 @@ public class RobotServiceImpl implements RobotService {
 
 
     private final RobotRepository robotRepository;
+    private final S3Service s3Service;
     private final ModelMapper modelMapper;
 
 
     @Autowired
-    public RobotServiceImpl(RobotRepository robotRepository, ModelMapper modelMapper) {
+    public RobotServiceImpl(RobotRepository robotRepository, S3Service s3Service, ModelMapper modelMapper) {
         super();
         this.robotRepository = robotRepository;
+        this.s3Service = s3Service;
         this.modelMapper = modelMapper;
     }
 
@@ -70,6 +74,7 @@ public class RobotServiceImpl implements RobotService {
         return Optional.empty();
     }
 
+
     public List<RobotIdModelImageDTO> getAllRobotIdModelImage() {
         return robotRepository.findAll().stream()
                 .map(robot -> modelMapper.map(robot, RobotIdModelImageDTO.class))
@@ -112,6 +117,19 @@ public class RobotServiceImpl implements RobotService {
     }
 
     @Override
+    public void uploadRobotImage(Long robotId, MultipartFile file) throws IOException {
+        boolean b = robotRepository.existsById(robotId);
+        if(b) {
+            s3Service.putObject(
+                    "robot-review-robot-images",
+                    "%s".formatted(robotId),
+                    file.getBytes()
+            );
+        }
+
+    }
+
+    @Override
     public List<?> getRobots(HashSet<String> fields) {
         if(fields == null){
             return getAllRobots();
@@ -128,7 +146,6 @@ public class RobotServiceImpl implements RobotService {
         }
         return null;
     }
-
     @Override
     public Optional<?> getRobotById(Long id,HashSet<String> fields) {
         if(fields == null){
@@ -144,5 +161,4 @@ public class RobotServiceImpl implements RobotService {
         }
         return Optional.empty();
     }
-
 }

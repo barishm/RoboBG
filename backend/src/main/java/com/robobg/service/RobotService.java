@@ -6,7 +6,9 @@ import com.robobg.entity.dtos.RobotDTO.RobotDTO;
 import com.robobg.exceptions.RobotAlreadyExistsException;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -26,9 +28,12 @@ public interface RobotService {
     List<RobotModelDTO> getAllModels();
 
     Optional<RobotModelLinksDTO> getAllModelsLinksById(Long id);
+
     Optional<?> getRobotById(Long id,HashSet<String> fields);
 
     List<?> getRobots(HashSet<String> fields);
 
+
+    void uploadRobotImage(Long robotId, MultipartFile file) throws IOException;
 
 }

@@ -3,6 +3,7 @@ package com.robobg.controller;
 import com.robobg.entity.dtos.CreateMostComparedDTO;
 import com.robobg.entity.dtos.PurchaseLinkCreateDTO;
 import com.robobg.entity.dtos.RobotDTO.CreateRobotDTO;
+import com.robobg.entity.dtos.RobotDTO.UploadRobotImageDTO;
 import com.robobg.entity.dtos.UpdateMostComparedDTO;
 import com.robobg.entity.dtos.UserIdUsernameRoleDTO;
 import com.robobg.exceptions.RobotAlreadyExistsException;
@@ -13,7 +14,9 @@ import com.robobg.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -77,6 +80,13 @@ public class ModeratorController {
     @DeleteMapping("/most-compares/{id}")
     public void deleteMostCompared(@PathVariable Long id){
         mostComparedService.deleteMostCompared(id);
+    }
+
+    @PostMapping("/robots/{robotId}/image")
+    public void uploadRobotImage(@PathVariable("robotId") Long robotId,
+                                 @RequestParam("file")MultipartFile file) throws IOException {
+        robotService.uploadRobotImage(robotId,file);
+
     }
 
 
