@@ -1,10 +1,12 @@
 package com.robobg.service.impl;
 
+import com.robobg.entity.MostCompared;
 import com.robobg.entity.Robot;
 import com.robobg.entity.dtos.*;
 import com.robobg.entity.dtos.RobotDTO.CreateRobotDTO;
 import com.robobg.entity.dtos.RobotDTO.RobotDTO;
 import com.robobg.exceptions.RobotAlreadyExistsException;
+import com.robobg.repository.MostComparedRepository;
 import com.robobg.repository.RobotRepository;
 import com.robobg.service.RobotService;
 import org.modelmapper.ModelMapper;
@@ -109,8 +111,10 @@ public class RobotServiceImpl implements RobotService {
     public void deleteRobotById(Long id) throws NotFoundException {
         Optional<Robot> optionalRobot = robotRepository.findById(id);
         if (optionalRobot.isPresent()) {
-            robotRepository.deleteById(id);
             Robot robot = optionalRobot.get();
+            String fileName = robot.getImage().substring(64);
+            s3Service.deleteObjectFromBucket("robot-review-robot-images",fileName);
+            robotRepository.deleteById(id);
         } else {
             throw new NotFoundException();
         }
@@ -118,15 +122,48 @@ public class RobotServiceImpl implements RobotService {
 
     @Override
     public void uploadRobotImage(Long robotId, MultipartFile file) throws IOException {
-        boolean b = robotRepository.existsById(robotId);
-        if(b) {
-            s3Service.putObject(
-                    "robot-review-robot-images",
-                    "%s".formatted(robotId),
-                    file.getBytes()
-            );
+        Optional<Robot> robotOptional = robotRepository.findById(robotId);
+        if (robotOptional.isEmpty()) {
+            throw new IllegalArgumentException("Robot with ID " + robotId + " does not exist.");
         }
 
+        String extension = getExtensionOfFile(file);
+        String contentType = determineContentType(extension);
+        String objectKey = "Robot%s.%s".formatted(robotId, extension);
+
+        if (contentType.isEmpty()) {
+            throw new IllegalArgumentException("Unsupported file type.");
+        }
+
+        s3Service.putObject(
+                "robot-review-robot-images",
+                objectKey,
+                file.getBytes(),
+                contentType
+        );
+        Robot robot = robotOptional.get();
+        robot.setImage("https://robot-review-robot-images.s3.eu-central-1.amazonaws.com/" + objectKey);
+        robotRepository.save(robot);
+    }
+
+    private String getExtensionOfFile(MultipartFile file) {
+        String fileName = file.getOriginalFilename();
+        if (fileName == null || !fileName.contains(".")) {
+            return "";
+        }
+        return fileName.substring(fileName.lastIndexOf(".") + 1);
+    }
+    private String determineContentType(String extension) {
+        switch (extension.toLowerCase()) {
+            case "png":
+                return "image/png";
+            case "jpg":
+                return "image/jpg";
+            case "jpeg":
+                return "image/jpeg";
+            default:
+                return ""; // Unsupported type
+        }
     }
 
     @Override
