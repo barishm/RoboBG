@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 const UpdateRobot = (props) => {
   const id = props.id;
   const [updateRobot] = useUpdateRobotMutation();
-  const { data } = useGetRobotByIdQuery( id ,{ skip: Boolean(!id) });
+  const { data } = useGetRobotByIdQuery( {id} ,{ skip: Boolean(!id) });
   const [robotData, setRobotData] = useState();
   const { accessToken } = useSelector((state) => state.auth);
 

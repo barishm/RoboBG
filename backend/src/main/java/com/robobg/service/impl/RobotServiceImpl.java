@@ -1,12 +1,10 @@
 package com.robobg.service.impl;
 
-import com.robobg.entity.MostCompared;
 import com.robobg.entity.Robot;
 import com.robobg.entity.dtos.*;
 import com.robobg.entity.dtos.RobotDTO.CreateRobotDTO;
 import com.robobg.entity.dtos.RobotDTO.RobotDTO;
 import com.robobg.exceptions.RobotAlreadyExistsException;
-import com.robobg.repository.MostComparedRepository;
 import com.robobg.repository.RobotRepository;
 import com.robobg.service.RobotService;
 import org.modelmapper.ModelMapper;

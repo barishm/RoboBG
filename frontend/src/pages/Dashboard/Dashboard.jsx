@@ -4,6 +4,7 @@ import ManageLinks from "./components//ManageLinks";
 import ManageUsers from "./components/ManageUsers";
 import ManageMostCompares from "./components/ManageMostCompares";
 import { useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Dashboard = () => {
   const [activeComponent, setActiveComponent] = useState("Robots");
@@ -26,6 +27,7 @@ const Dashboard = () => {
 
   return (
     <div className="container-fluid">
+      <ToastContainer/>
       <div className="row flex-nowrap">
         <div className="col-auto col-md-auto col-xl-2 px-sm-2 px-0 bg-body-tertiary">
           <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">

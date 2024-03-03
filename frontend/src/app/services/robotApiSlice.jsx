@@ -53,6 +53,18 @@ export const robotApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['Robot'],
         }),
+        uploadRobotImage: builder.mutation({
+            query: ({id,accessToken,formData}) => ({
+                url: `v1/moderator/robots/${id}/image`,
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                },
+                body: formData,
+                formData:true
+            }),
+            invalidatesTags: ['Robot'],
+        }),
     })
 })
 export const {
@@ -62,4 +74,5 @@ export const {
     useCreateRobotMutation,
     useDeleteRobotMutation,
     useUpdateRobotMutation,
+    useUploadRobotImageMutation,
 } = robotApiSlice;
