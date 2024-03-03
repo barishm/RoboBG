@@ -2,6 +2,7 @@ package com.robobg.controller;
 
 import com.robobg.entity.dtos.PurchaseLinkDTO;
 import com.robobg.entity.dtos.QuestionWithAnswersDTO;
+import com.robobg.entity.dtos.RobotIdModelImageBestsDTO;
 import com.robobg.service.PurchaseLinkService;
 import com.robobg.service.QuestionService;
 import com.robobg.service.RobotService;
@@ -34,6 +35,11 @@ public class RobotController {
     public List<?> getRobots(@RequestParam(required = false) HashSet<String> fields
     ) {
         return robotService.getRobots(fields);
+    }
+
+    @GetMapping("/bests")
+    public List<RobotIdModelImageBestsDTO> getBestRobots(){
+        return robotService.findAllBests();
     }
 
     @GetMapping("/{robotId}/purchase-links")

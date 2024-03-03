@@ -22,6 +22,9 @@ public class Robot {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "brand",nullable = false)
+    private String brand;
+
     @Column(name = "model",unique = true,nullable = false)
     private String model;
 

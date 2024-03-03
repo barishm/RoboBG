@@ -18,6 +18,14 @@ export const robotApiSlice = apiSlice.injectEndpoints({
             }),
             providesTags: ['Robot'],
         }),
+        getBestRobots: builder.query({
+            query: () => ({
+                url: 'v1/robots/bests',
+                method: "GET",
+
+            }),
+            providesTags: ['Robot'],
+        }),
         createRobot: builder.mutation({
             query: ({robotBody, accessToken}) => ({
                 url: 'v1/moderator/robots',
@@ -71,6 +79,7 @@ export const {
     useGetAllRobotsQuery,
     useGetRobotByIdQuery,
     useLazyGetRobotByIdQuery,
+    useGetBestRobotsQuery,
     useCreateRobotMutation,
     useDeleteRobotMutation,
     useUpdateRobotMutation,

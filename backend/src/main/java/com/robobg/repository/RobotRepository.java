@@ -11,15 +11,10 @@ import java.util.Optional;
 
 @Repository
 public interface RobotRepository extends JpaRepository<Robot,Long> {
-
-    List<Robot> findByIdIn(List<Long> ids);
     @Query("FROM Robot r WHERE r.bests IS NOT NULL")
     List<Robot> findAllBests();
-
     Optional<Robot> findByModel(String model);
-
     boolean existsByModel(String model);
-
     @Query("SELECT r.image FROM Robot r WHERE r.id = :id")
     String findImageById(@Param("id") Long id);
 }

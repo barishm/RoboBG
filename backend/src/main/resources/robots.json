@@ -1,5 +1,6 @@
 [
-{
+  {
+        "brand": "360",
       	"model": "360 C50",
         "bests": true,
         "mapping": true,
@@ -71,6 +72,7 @@
        	}
 },
 {
+        "brand": "360",
       	"model": "360 S10",
         "bests": true,
         "mapping": true,
@@ -142,6 +144,7 @@
        	}
 },
   {
+    "brand": "360",
     "model": "360 S5 Robot Vacuum Cleaner",
     "bests": true,
     "mapping": true,
@@ -213,6 +216,7 @@
     }
   },
   {
+    "brand": "360",
     "model": "360 S6 Robot Vacuum Cleaner",
     "bests": true,
     "mapping": true,

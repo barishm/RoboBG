@@ -34,14 +34,6 @@ public class RobotServiceImpl implements RobotService {
         this.modelMapper = modelMapper;
     }
 
-    public List<RobotDTO> findByIdIn(List<Long> ids) {
-        List<Robot> robots = robotRepository.findByIdIn(ids);
-
-        return robots.stream()
-                .map(robot -> modelMapper.map(robot, RobotDTO.class))
-                .collect(Collectors.toList());
-    }
-
     @Override
     public List<RobotIdModelImageBestsDTO> findAllBests() {
         return robotRepository.findAllBests().stream()
@@ -152,16 +144,12 @@ public class RobotServiceImpl implements RobotService {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
     private String determineContentType(String extension) {
-        switch (extension.toLowerCase()) {
-            case "png":
-                return "image/png";
-            case "jpg":
-                return "image/jpg";
-            case "jpeg":
-                return "image/jpeg";
-            default:
-                return ""; // Unsupported type
-        }
+        return switch (extension.toLowerCase()) {
+            case "png" -> "image/png";
+            case "jpg" -> "image/jpg";
+            case "jpeg" -> "image/jpeg";
+            default -> ""; // Unsupported type
+        };
     }
 
     @Override
@@ -169,9 +157,7 @@ public class RobotServiceImpl implements RobotService {
         if(fields == null){
             return getAllRobots();
         }else {
-            if (fields.containsAll(Arrays.asList("model", "image", "links", "bests"))) {
-                return findAllBests();
-            } else if (fields.containsAll(Arrays.asList("model", "image", "links"))) {
+            if (fields.containsAll(Arrays.asList("model", "image", "links"))) {
                 return getAllRobotIdModelImageLinks();
             } else if (fields.containsAll(Arrays.asList("model", "image"))) {
                 return getAllRobotIdModelImage();
