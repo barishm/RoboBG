@@ -3,6 +3,7 @@ package com.robobg.service;
 import com.robobg.entity.dtos.*;
 import com.robobg.entity.dtos.RobotDTO.CreateRobotDTO;
 import com.robobg.entity.dtos.RobotDTO.RobotDTO;
+import com.robobg.entity.dtos.RobotDTO.RobotResponse;
 import com.robobg.exceptions.RobotAlreadyExistsException;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,8 @@ import java.util.Optional;
 
 @Service
 public interface RobotService {
-    List<RobotIdModelImageDTO> getAllRobotIdModelImage();
-    List<RobotIdModelImageLinksDTO> getAllRobotIdModelImageLinks();
+    RobotResponse getAllRobotIdModelImage(int page, String model, String brand);
+    RobotResponse getAllRobotIdModelImageLinks(int page, String model, String brand);
     void saveRobot(CreateRobotDTO robot) throws RobotAlreadyExistsException;
     void updateRobot(CreateRobotDTO robot);
     void deleteRobotById(Long id) throws ChangeSetPersister.NotFoundException;
@@ -24,13 +25,13 @@ public interface RobotService {
 
     List<RobotDTO> getAllRobots();
 
-    List<RobotModelDTO> getAllModels();
+    RobotResponse getAllModels();
 
     Optional<RobotModelLinksDTO> getAllModelsLinksById(Long id);
 
     Optional<?> getRobotById(Long id,HashSet<String> fields);
 
-    List<?> getRobots(HashSet<String> fields);
+    RobotResponse getRobots(HashSet<String> fields, int page, String model, String brand);
 
 
     void uploadRobotImage(Long robotId, MultipartFile file) throws IOException;

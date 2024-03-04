@@ -1,16 +1,35 @@
 import { useNavigate } from "react-router-dom";
 import { useGetAllRobotsQuery } from "../../app/services/robotApiSlice";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const Robots = () => {
+  const [Page, setPage] = useState(0);
+  const [Model, setModel] = useState("");
+  const [Brand, setBrand] = useState("");
   const queryParams = {
-    fields: "model,image,links"
-  }
+    fields: "model,image,links",
+    page: Page,
+    model: Model,
+    brand: Brand,
+  };
 
   const lang = useSelector((state) => state.language.lang);
   const navigate = useNavigate();
   const { data, isLoading } = useGetAllRobotsQuery(queryParams);
   const noImage = "images/no-image.jpg";
+  const isLast = data?.last;
+
+  const nextPage = () => {
+    if(!isLast){
+      setPage(Page+1);
+    }
+  }
+  const prevPage = () => {
+    if(Page !== 0) {
+      setPage(Page-1);
+    }
+  }
 
   const details = (robotId) => {
     navigate("/robots/" + robotId);
@@ -28,9 +47,9 @@ const Robots = () => {
         <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
           {isLoading ? (
             <>Loading...</>
-          ) : data ? (
+          ) : data.content ? (
             <>
-              {data.map((item) => (
+              {data.content.map((item) => (
                 <div className="col mb-5" key={item.id}>
                   <div className="card h-100 shadow-sm bg-body-tertiary rounded">
                     <img
@@ -81,6 +100,27 @@ const Robots = () => {
             </>
           ) : null}
         </div>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous" onClick={prevPage}>
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <span class="page-link" href="#">
+              {Page+1}
+            </span>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next" onClick={nextPage}>
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
       </div>
     </section>
   );

@@ -22,8 +22,8 @@ const CompareForm = () => {
   const [Model2, setModel2] = useState("");
 
   function handleCompare() {
-    const foundItem1 = allModels.find((item) => item.model === Model1);
-    const foundItem2 = allModels.find((item) => item.model === Model2);
+    const foundItem1 = allModels.content.find((item) => item.model === Model1);
+    const foundItem2 = allModels.content.find((item) => item.model === Model2);
 
     if (foundItem1 && foundItem2 && foundItem1.id !== foundItem2.id) {
       let id = foundItem1.id;
@@ -65,7 +65,7 @@ const CompareForm = () => {
                 onChange={(e) => setModel1(e.target.value)}
               />
               <datalist id="datalistOptions1">
-                {allModels.map((item) => (
+                {allModels.content.map((item) => (
                   <option key={item.id} value={item.model} />
                 ))}
               </datalist>
@@ -81,7 +81,7 @@ const CompareForm = () => {
                 onChange={(e) => setModel2(e.target.value)}
               />
               <datalist id="datalistOptions2">
-                {allModels.map((item) => (
+                {allModels.content.map((item) => (
                   <option key={item.id} value={item.model} />
                 ))}
               </datalist>

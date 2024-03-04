@@ -26,7 +26,7 @@ const CompareTable = () => {
 
 
   function handleAdd() {
-    const foundItem = allModels.find((item) => item.model === Model);
+    const foundItem = allModels.content.find((item) => item.model === Model);
     if (foundItem) {
       const id = foundItem.id;
       triggerAdd({id}).then((response) => {
@@ -95,7 +95,7 @@ const CompareTable = () => {
                   {lang === "en" ? <>Add</> : <>Добави</>}
                 </button>
                 <datalist id="datalistOptions">
-                  {allModels.map((item) => (
+                  {allModels.content.map((item) => (
                     <option key={item.id} value={item.model} />
                   ))}
                 </datalist>

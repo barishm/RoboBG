@@ -84,7 +84,7 @@ const UpdateMostCompared = (props) => {
           <datalist id="datalistOptions1">
             {allModels && (
               <>
-                {allModels.map((item) => (
+                {allModels.content.map((item) => (
                   <option key={item.id} value={item.model} />
                 ))}
               </>
@@ -104,7 +104,7 @@ const UpdateMostCompared = (props) => {
           <datalist id="datalistOptions2">
             {allModels && (
               <>
-                {allModels.map((item) => (
+                {allModels.content.map((item) => (
                   <option key={item.id} value={item.model} />
                 ))}
               </>
@@ -124,7 +124,7 @@ const UpdateMostCompared = (props) => {
           <datalist id="datalistOptions3">
             {allModels && (
               <>
-                {allModels.map((item) => (
+                {allModels.content.map((item) => (
                   <option key={item.id} value={item.model} />
                 ))}
               </>

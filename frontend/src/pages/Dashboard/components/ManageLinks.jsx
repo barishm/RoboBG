@@ -18,7 +18,7 @@ import {
     const { accessToken } = useSelector((state) => state.auth);
   
     const handleInputChange = (e) => {
-      const model = allModels.find((item) => item.model === e.target.value);
+      const model = allModels.content.find((item) => item.model === e.target.value);
       setSelectedModel(model);
       if(model?.id) {
         setId(model.id);
@@ -45,7 +45,7 @@ import {
           <datalist id="datalistOptions">
             {allModels && (
               <>
-                {allModels.map((item) => (
+                {allModels.content.map((item) => (
                   <option key={item.id} value={item.model} />
                 ))}
               </>

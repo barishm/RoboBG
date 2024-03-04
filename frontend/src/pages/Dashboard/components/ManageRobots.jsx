@@ -10,8 +10,12 @@ import { useState } from "react";
 import UploadRobotImage from "./UploadRobotImage";
 
 const ManageRobots = () => {
+  const [Page, setPage] = useState(0);
+  const [Model, setModel] = useState("");
   const queryParams = {
     fields: "model,image",
+    page: Page,
+    model: Model,
   };
   const { data: allRobots, isLoading: allRobotsLoading } =
     useGetAllRobotsQuery(queryParams);
@@ -21,15 +25,46 @@ const ManageRobots = () => {
   const { accessToken } = useSelector((state) => state.auth);
   const [updateId, setUpdateId] = useState(null);
   const [uploadImageId, setUploadImageId] = useState(null);
+  const isLast = allRobots?.last;
 
   const deleteHandler = (e) => {
     const id = e.target.value;
     deleteRobot({ id, accessToken });
   };
 
+  const nextPage = () => {
+    if(!isLast){
+      setPage(Page+1);
+    }
+  }
+  const prevPage = () => {
+    if(Page !== 0) {
+      setPage(Page-1);
+    }
+  }
+
   return (
     <div>
-      <CreateRobot />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          marginBottom: "10px",
+          maxWidth: "500px",
+        }}
+      >
+        <CreateRobot />
+        <input
+          className="form-control form-control-sm"
+          value={Model}
+          onChange={(e) => {
+            setModel(e.target.value);
+          }}
+          type="text"
+          placeholder="Search by model"
+          aria-label=".form-control-sm example"
+        ></input>
+      </div>
       <UpdateRobot id={updateId} />
       <UploadRobotImage id={uploadImageId} />
 
@@ -37,7 +72,7 @@ const ManageRobots = () => {
         <Loading />
       ) : (
         <>
-          <table className="table table-success table-hover">
+          <table className="table table-light table-hover">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -49,7 +84,7 @@ const ManageRobots = () => {
             </thead>
             <tbody>
               {allRobots &&
-                allRobots.map((robot) => (
+                allRobots.content.map((robot) => (
                   <tr key={robot.id}>
                     <th scope="row">{robot.id}</th>
                     <td>
@@ -101,6 +136,27 @@ const ManageRobots = () => {
           </table>
         </>
       )}
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous" onClick={prevPage}>
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <span class="page-link" href="#">
+              {Page+1}
+            </span>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next" onClick={nextPage}>
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      </div>
     </div>
   );
 };
