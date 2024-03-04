@@ -42,6 +42,7 @@ public class RobotServiceImpl implements RobotService {
     public List<RobotIdModelImageBestsDTO> findAllBests() {
         return robotRepository.findAllBests().stream()
                 .filter(robot -> Boolean.TRUE.equals(robot.getBests()))
+                .limit(8)
                 .map(robot -> modelMapper.map(robot, RobotIdModelImageBestsDTO.class))
                 .collect(Collectors.toList());
     }
@@ -73,9 +74,9 @@ public class RobotServiceImpl implements RobotService {
     }
 
 
-    public RobotResponse getAllRobotIdModelImage(int page, String model, String brand) {
+    public RobotResponse getAllRobotIdModelImage(int page, String model, List<String> brands) {
         Pageable pageable = PageRequest.of(page,12);
-        Page<Robot> robots = robotRepository.findByModelContainsAndBrandContains(pageable,model,brand);
+        Page<Robot> robots = robotRepository.findByModelContainsAndBrandIn(pageable,model,brands);
         List<Robot> listOfRobots = robots.getContent();
         List<RobotIdModelImageDTO> content = listOfRobots.stream().map(robot -> modelMapper.map(robot,RobotIdModelImageDTO.class)).collect(Collectors.toList());
         RobotResponse robotResponse = new RobotResponse();
@@ -87,9 +88,9 @@ public class RobotServiceImpl implements RobotService {
     }
 
     @Override
-    public RobotResponse getAllRobotIdModelImageLinks(int page, String model, String brand) {
+    public RobotResponse getAllRobotIdModelImageLinks(int page, String model, List<String> brands) {
         Pageable pageable = PageRequest.of(page,12);
-        Page<Robot> robots = robotRepository.findByModelContainsAndBrandContains(pageable,model,brand);
+        Page<Robot> robots = robotRepository.findByModelContainsAndBrandIn(pageable,model,brands);
         List<Robot> listOfRobots = robots.getContent();
         List<RobotIdModelImageLinksDTO> content = listOfRobots.stream().map(robot -> modelMapper.map(robot,RobotIdModelImageLinksDTO.class)).collect(Collectors.toList());
         RobotResponse robotResponse = new RobotResponse();
@@ -122,8 +123,11 @@ public class RobotServiceImpl implements RobotService {
         Optional<Robot> optionalRobot = robotRepository.findById(id);
         if (optionalRobot.isPresent()) {
             Robot robot = optionalRobot.get();
-            String fileName = robot.getImage().substring(64);
-            s3Service.deleteObjectFromBucket("robot-review-robot-images",fileName);
+            String imageUrl = robot.getImage();
+            if(imageUrl != null) {
+                String fileName = imageUrl.substring(64);
+                s3Service.deleteObjectFromBucket("robot-review-robot-images",fileName);
+            }
             robotRepository.deleteById(id);
         } else {
             throw new NotFoundException();
@@ -173,11 +177,14 @@ public class RobotServiceImpl implements RobotService {
     }
 
     @Override
-    public RobotResponse getRobots(HashSet<String> fields, int page, String model, String brand) {
+    public RobotResponse getRobots(HashSet<String> fields, int page, String model, List<String> brands) {
+        if(brands.isEmpty()){
+            brands.addAll(List.of("360","SAMSUNG","Roborock","Xiaomi","Eufy"));
+        }
         if (fields.containsAll(Arrays.asList("model", "image", "links"))) {
-            return getAllRobotIdModelImageLinks(page,model,brand);
+            return getAllRobotIdModelImageLinks(page,model,brands);
         } else if (fields.containsAll(Arrays.asList("model", "image"))) {
-            return getAllRobotIdModelImage(page,model,brand);
+            return getAllRobotIdModelImage(page,model,brands);
         } else if (fields.contains("model")) {
             return getAllModels();
         }

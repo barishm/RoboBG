@@ -19,5 +19,5 @@ public interface RobotRepository extends JpaRepository<Robot,Long> {
     boolean existsByModel(String model);
     @Query("SELECT r.image FROM Robot r WHERE r.id = :id")
     String findImageById(@Param("id") Long id);
-    Page<Robot> findByModelContainsAndBrandContains(Pageable page, String model, String brand);
+    Page<Robot> findByModelContainsAndBrandIn(Pageable page, String model, List<String> brands);
 }

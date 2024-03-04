@@ -36,9 +36,9 @@ public class RobotController {
     public RobotResponse getRobots(@RequestParam(required = false) HashSet<String> fields,
                                    @RequestParam(defaultValue = "0") int page,
                                    @RequestParam(defaultValue = "") String model,
-                                   @RequestParam(defaultValue = "") String brand
+                                   @RequestParam(defaultValue = "") List<String> brands
     ) {
-        return robotService.getRobots(fields,page,model,brand);
+        return robotService.getRobots(fields,page,model,brands);
     }
 
     @GetMapping("/bests")

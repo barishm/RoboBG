@@ -1,6 +1,7 @@
 import { useCreateLinkMutation } from "../../../app/services/linkApiSlice";
 import { useFormik } from "formik";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const AddLink = (props) => {
   const id = props.Id;
@@ -20,6 +21,13 @@ const AddLink = (props) => {
         formik.resetForm();
       },
   });
+
+  useEffect(() => {
+    // Code to run when `id` changes
+    console.log(`Id has changed to: ${id}`);
+    // You can call any function here that needs to run when Id changes
+  }, [id]);
+
 
   return (
     <div
