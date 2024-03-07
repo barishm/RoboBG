@@ -8,7 +8,8 @@ import { useState } from "react";
 const CompareTable = () => {
   const queryParams = {
     fields: "model"
-  }
+  };
+  const noImage = "images/no-image.jpg";
   const lang = useSelector((state) => state.language.lang);
   const { robots } = useSelector((state) => state.compare);
   const dispatch = useDispatch();
@@ -118,7 +119,7 @@ const CompareTable = () => {
                 {robots.map((item) => (
                   <td key={item.id} style={{height:"90px",verticalAlign: "bottom", textAlign: "left"}} className="border">
                     <div className="image d-flex">
-                      <img className="image-in-table" src={item.image}></img>
+                      <img className="image-in-table" src={item.image || noImage} alt="..."></img>
                       <div className="image-overlay ms-1">
                         <i
                           className="fa-solid fa-xmark"

@@ -4,9 +4,10 @@ import {
   useLazyGetRobotByIdQuery,
 } from "../../../app/services/robotApiSlice";
 import { useDispatch } from "react-redux";
-import { addRobot } from "../../../app/redux/compareSlice";
+import { addRobot,deleteAllRobots  } from "../../../app/redux/compareSlice";
 import { useSelector } from "react-redux";
 import Loading from "../../../components/Loading";
+import { useNavigate } from "react-router-dom";
 
 const CompareForm = () => {
   const queryParams = {
@@ -20,12 +21,14 @@ const CompareForm = () => {
   const [triggerComapre2] = useLazyGetRobotByIdQuery();
   const [Model1, setModel1] = useState("");
   const [Model2, setModel2] = useState("");
+  const navigate = useNavigate();
 
   function handleCompare() {
     const foundItem1 = allModels.content.find((item) => item.model === Model1);
     const foundItem2 = allModels.content.find((item) => item.model === Model2);
 
     if (foundItem1 && foundItem2 && foundItem1.id !== foundItem2.id) {
+      dispatch(deleteAllRobots());
       let id = foundItem1.id;
       triggerCompare1({id}).then((response) => {
         dispatch(addRobot(response.data));
@@ -34,6 +37,7 @@ const CompareForm = () => {
       triggerComapre2({id}).then((response) => {
         dispatch(addRobot(response.data));
       })
+      navigate("/compare");
     } else {
       console.error(
         "Invalid selection for comparison. Please select two different robots."

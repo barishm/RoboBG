@@ -31,6 +31,9 @@ public class UserServiceImpl implements UserService {
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
+            if(user.getRole().getRoleName().equals("ROLE_ADMIN")){
+                throw new IllegalArgumentException("Something went wrong!");
+            }
             user.setRole(Role.valueOf(userIdUsernameRoleDTO.getRole()));
             userRepository.save(user);
         } else {

@@ -152,7 +152,7 @@ const Robots = () => {
             </nav>
           </div>
         </div>
-        <div className="col-12 col-md-12 col-lg-3" style={{marginTop:"66px"}}>
+        <div className="col-12 col-md-12 col-lg-3" style={{marginTop:"68px"}}>
              <div className="card d-none d-lg-block">
               <div class="card-header">
                 Filters

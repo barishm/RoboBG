@@ -6,47 +6,20 @@ const Footer = () => {
                     <a
                         data-mdb-ripple-init
                         className="btn btn-link btn-floating btn-lg text-body m-1"
-                        href="#!"
+                        href="https://www.facebook.com/groups/795791053941687"
+                        target="_blank"
                         role="button"
                         data-mdb-ripple-color="dark"
                     >
                         <i className="fab fa-facebook-f"></i>
                     </a>
 
-                    <a
-                        data-mdb-ripple-init
-                        className="btn btn-link btn-floating btn-lg text-body m-1"
-                        href="#!"
-                        role="button"
-                        data-mdb-ripple-color="dark"
-                    >
-                        <i className="fab fa-twitter"></i>
-                    </a>
 
                     <a
                         data-mdb-ripple-init
                         className="btn btn-link btn-floating btn-lg text-body m-1"
-                        href="#!"
-                        role="button"
-                        data-mdb-ripple-color="dark"
-                    >
-                        <i className="fab fa-google"></i>
-                    </a>
-
-                    <a
-                        data-mdb-ripple-init
-                        className="btn btn-link btn-floating btn-lg text-body m-1"
-                        href="#!"
-                        role="button"
-                        data-mdb-ripple-color="dark"
-                    >
-                        <i className="fab fa-instagram"></i>
-                    </a>
-
-                    <a
-                        data-mdb-ripple-init
-                        className="btn btn-link btn-floating btn-lg text-body m-1"
-                        href="#!"
+                        href="https://www.linkedin.com/in/bar%C4%B1%C5%9F-mehmed-b8b944243/"
+                        target="_blank"
                         role="button"
                         data-mdb-ripple-color="dark"
                     >
@@ -56,7 +29,8 @@ const Footer = () => {
                     <a
                         data-mdb-ripple-init
                         className="btn btn-link btn-floating btn-lg text-body m-1"
-                        href="#!"
+                        href="https://github.com/barishm"
+                        target="_blank"
                         role="button"
                         data-mdb-ripple-color="dark"
                     >
