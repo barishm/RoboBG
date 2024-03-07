@@ -20,13 +20,10 @@ public class MostCompared {
     @Column(name = "order_")
     private Integer order;
 
-    @OneToOne
-    private Robot robot1;
+    private Long robot1;
 
-    @OneToOne
-    private Robot robot2;
+    private Long robot2;
 
-    @OneToOne
-    private Robot robot3;
+    private Long robot3;
 
 }

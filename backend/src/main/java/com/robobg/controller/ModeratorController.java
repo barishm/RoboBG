@@ -1,10 +1,9 @@
 package com.robobg.controller;
 
-import com.robobg.entity.dtos.CreateMostComparedDTO;
-import com.robobg.entity.dtos.PurchaseLinkCreateDTO;
+import com.robobg.entity.dtos.RobotDTO.CreateMostComparedDTO;
+import com.robobg.entity.dtos.RobotDTO.CreatePurchaseLinkDTO;
 import com.robobg.entity.dtos.RobotDTO.CreateRobotDTO;
-import com.robobg.entity.dtos.RobotDTO.UploadRobotImageDTO;
-import com.robobg.entity.dtos.UpdateMostComparedDTO;
+import com.robobg.entity.dtos.RobotDTO.UpdateMostComparedDTO;
 import com.robobg.entity.dtos.UserIdUsernameRoleDTO;
 import com.robobg.exceptions.RobotAlreadyExistsException;
 import com.robobg.service.MostComparedService;
@@ -58,8 +57,8 @@ public class ModeratorController {
 
 
     @PostMapping("/links")
-    public void createPurchaseLink(@RequestBody PurchaseLinkCreateDTO purchaseLinkCreateDTO){
-        purchaseLinkService.createPurchaseLink(purchaseLinkCreateDTO);
+    public void createPurchaseLink(@RequestBody CreatePurchaseLinkDTO createPurchaseLinkDTO){
+        purchaseLinkService.createPurchaseLink(createPurchaseLinkDTO);
     }
 
     @DeleteMapping("/links/{id}")
@@ -67,17 +66,17 @@ public class ModeratorController {
         purchaseLinkService.deletePurchaseLink(id);
     }
 
-    @PostMapping("/most-compares")
+    @PostMapping("/most-compared")
     public void createMostCompared(@RequestBody CreateMostComparedDTO createMostComparedDTO){
         mostComparedService.createMostCompared(createMostComparedDTO);
     }
 
-    @PutMapping("/most-compares")
+    @PutMapping("/most-compared")
     public void updateMostCompared(@RequestBody UpdateMostComparedDTO updateMostComparedDTO){
         mostComparedService.updateMostCompared(updateMostComparedDTO);
     }
 
-    @DeleteMapping("/most-compares/{id}")
+    @DeleteMapping("/most-compared/{id}")
     public void deleteMostCompared(@PathVariable Long id){
         mostComparedService.deleteMostCompared(id);
     }

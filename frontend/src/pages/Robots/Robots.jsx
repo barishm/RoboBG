@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetAllRobotsQuery } from "../../app/services/robotApiSlice";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import PopularComparisons from "../Compare/components/PopularComparisons";
 
 const Robots = () => {
   const [Page, setPage] = useState(0);
@@ -48,9 +49,9 @@ const Robots = () => {
   };
 
   return (
-    <section className="pt-5">
+    <section className="mt-5">
       <div className="container d-flex">
-        <div className="col-12 col-md-8 col-lg-9">
+        <div className="col-12 col-md-12 col-lg-9">
           <h3
             className="fw-bolder"
             style={{ marginTop: "10px", textAlign: "center" }}
@@ -64,7 +65,7 @@ const Robots = () => {
           {isLoading ? (
             <>Loading...</>
           ) : data.content ? (
-            <div className="col-12 d-flex flex-wrap justify-content-center">
+            <div className="col-12 d-flex flex-wrap justify-content-evenly">
               {data.content.map((item) => (
                 <div
                   className="col-6 col-sm-4 col-md-4 col-lg-3 m-3"
@@ -151,14 +152,12 @@ const Robots = () => {
             </nav>
           </div>
         </div>
-        <div className="col-12 col-md-4 col-lg-3" style={{marginTop:"65px"}}>
-          <div className="accordion d-none d-md-block mb-3">
-             <div className="card">
+        <div className="col-12 col-md-12 col-lg-3" style={{marginTop:"66px"}}>
+             <div className="card d-none d-lg-block">
               <div class="card-header">
                 Filters
               </div>
-              <div  className="card-body p-2">
-                <div className="accordion-body">
+              <div  className="card-body p-4">
                   <form id="filters">
                     <div>
                     <label for="id_title" class="form-label">
@@ -201,14 +200,21 @@ const Robots = () => {
                         Eufy
                         </label>
                       </div>
+                      <div className="form-check">
+                      <input type="checkbox" className="form-check-input" name="brand_name" value="bObsweep" onChange={handleCheckboxChange} ></input>
+                        <label for="id_brand_name_0" class="form-check-label">
+                        bObsweep
+                        </label>
+                      </div>
                       </div>
                     </div>
                   </form>
-                </div>
               </div>
              </div>
+             <div className="d-none d-lg-block">
+             <PopularComparisons/>
+             </div>
           </div>
-        </div>
       </div>
     </section>
   );

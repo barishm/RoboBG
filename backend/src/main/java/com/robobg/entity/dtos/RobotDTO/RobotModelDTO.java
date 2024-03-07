@@ -1,4 +1,4 @@
-package com.robobg.entity.dtos;
+package com.robobg.entity.dtos.RobotDTO;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package com.robobg.controller;
 
-import com.robobg.entity.dtos.MostComparedDTO;
+import com.robobg.entity.dtos.RobotDTO.MostComparedDTO;
 import com.robobg.service.MostComparedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/v1/most-compares")
+@RequestMapping("/v1/most-compared")
 public class MostComparedController {
     private final MostComparedService mostComparedService;
 

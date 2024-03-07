@@ -1,16 +1,10 @@
 package com.robobg.service;
 
-import com.robobg.entity.dtos.PurchaseLinkCreateDTO;
-import com.robobg.entity.dtos.PurchaseLinkDTO;
+import com.robobg.entity.dtos.RobotDTO.CreatePurchaseLinkDTO;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public interface PurchaseLinkService {
-    List<PurchaseLinkDTO> findPurchaseLinksByRobotId(Long robotId);
-
-    void createPurchaseLink(PurchaseLinkCreateDTO purchaseLinkCreateDTO);
-
+    void createPurchaseLink(CreatePurchaseLinkDTO createPurchaseLinkDTO);
     void deletePurchaseLink(Long id);
 }

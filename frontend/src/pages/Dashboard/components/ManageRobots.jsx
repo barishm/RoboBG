@@ -49,6 +49,10 @@ const ManageRobots = () => {
     const id = e.target.value;
     deleteRobot({ id, accessToken });
   };
+  const deleteLinkHandler = (e) => {
+    const id = e.target.value
+    deleteLink({ id, accessToken });
+  }
 
   const nextPage = () => {
     if (!isLast) {
@@ -60,12 +64,6 @@ const ManageRobots = () => {
       setPage(Page - 1);
     }
   };
-
-
-  const deleteLinkHandler = (e) => {
-    const id = e.target.value
-    deleteLink({ id, accessToken });
-  }
 
   return (
     <div>

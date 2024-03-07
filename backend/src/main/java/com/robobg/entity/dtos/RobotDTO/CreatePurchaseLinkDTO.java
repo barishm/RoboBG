@@ -1,9 +1,9 @@
-package com.robobg.entity.dtos;
+package com.robobg.entity.dtos.RobotDTO;
 
 import lombok.Data;
 
 @Data
-public class PurchaseLinkCreateDTO {
+public class CreatePurchaseLinkDTO {
     private Long id;
     private Long robotId;
     private String name;

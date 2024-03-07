@@ -15,31 +15,37 @@ const Bests = () => {
   };
 
   return (
-    <section className="pt-5">
-      <h3
-        className="fw-bolder"
-        style={{ marginTop: "10px", textAlign: "center" }}
-      >
-        {lang === "en" ? <>Best Robot Vacuum Cleaners</> : <>Най-добри роботи</>}
-      </h3>
-      <div className="container px-4 px-lg-5 mt-4">
-        <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+    <div>
+                <h3
+            className="fw-bolder"
+            style={{ marginTop: "10px", textAlign: "center" }}
+          >
+            {lang === "en" ? (
+              <>Best Robot Vacuum Cleaners</>
+            ) : (
+              <>Най-добри роботи</>
+            )}
+          </h3>
           {isLoading ? (
             <>Loading...</>
           ) : data ? (
-            <>
+            <div className="col-12 d-flex flex-wrap justify-content-evenly">
               {data.map((item) => (
-                <div className="col mb-5" key={item.id}>
+                <div
+                  className="col-6 col-sm-4 col-md-4 col-lg-3 m-3"
+                  style={{maxWidth:"200px"}}
+                  key={item.id}
+                >
                   <div className="card h-100 shadow-sm bg-body-tertiary rounded">
                     <img
-                      className="card-img-top"
+                      className="rounded-top"
                       value={item.id}
                       style={{ cursor: "pointer" }}
                       onClick={() => details(item.id)}
                       src={item.image || noImage}
                       alt="..."
                     />
-                    <div className="card-body" style={{ maxHeight: "80px" }}>
+                    <div className="card-body">
                       <div className="text-center">
                         <h5
                           className="fw-bolder"
@@ -76,11 +82,9 @@ const Bests = () => {
                   </div>
                 </div>
               ))}
-            </>
+            </div>
           ) : null}
-        </div>
-      </div>
-    </section>
+    </div>
   );
 };
 export default Bests;

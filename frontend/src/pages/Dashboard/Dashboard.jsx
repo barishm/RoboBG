@@ -1,8 +1,7 @@
 import { useState } from "react";
 import ManageRobots from "./components/ManageRobots";
-import ManageLinks from "./components//ManageLinks";
 import ManageUsers from "./components/ManageUsers";
-import ManageMostCompares from "./components/ManageMostCompares";
+import ManageMostCompared from "./components/ManageMostCompared";
 import { useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -16,10 +15,8 @@ const Dashboard = () => {
         return <ManageRobots />;
       case "Users":
         return <ManageUsers />;
-      case "Links":
-        return <ManageLinks />;
       case "Most Compared":
-        return <ManageMostCompares />;
+        return <ManageMostCompared />;
       default:
         return null;
     }
@@ -50,24 +47,6 @@ const Dashboard = () => {
                   <span className="ms-1 d-none d-md-inline text-bg-light">
                     Manage Robots
                   </span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#submenu1"
-                  data-bs-toggle="collapse"
-                  className="nav-link px-0 align-middle"
-                  onClick={() => {
-                    setActiveComponent("Links");
-                  }}
-                >
-                  <i
-                    className="fa-solid fa-link"
-                    style={{ color: "#000000" }}
-                  ></i>{" "}
-                  <span className="ms-1 d-none d-md-inline text-bg-light">
-                    Manage Links
-                  </span>{" "}
                 </a>
               </li>
               {role && role === "ADMIN" && (

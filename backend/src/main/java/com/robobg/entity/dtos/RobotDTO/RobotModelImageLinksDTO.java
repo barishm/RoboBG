@@ -1,4 +1,4 @@
-package com.robobg.entity.dtos;
+package com.robobg.entity.dtos.RobotDTO;
 
 import com.robobg.entity.dtos.RobotDTO.PurchaseLinkDTO;
 import lombok.Data;
@@ -6,11 +6,10 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class RobotIdModelImageLinksDTO {
+public class RobotModelImageLinksDTO {
     private Long id;
     private String model;
     private String image;
-    private Boolean bests;
     private List<PurchaseLinkDTO> purchaseLinks;
 }
 

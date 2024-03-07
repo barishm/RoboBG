@@ -1,48 +1,58 @@
-import { useFormik } from "formik";
 import { useSelector } from "react-redux";
 import { useGetAllRobotsQuery } from "../../../app/services/robotApiSlice";
 import { useCreateMostComparesMutation } from "../../../app/services/mostComparesApiSlice";
-import { cleanFormValues } from "../../../helpers/utils";
-
+import { useState } from "react";
 const CreateMostCompared = () => {
   const queryParams = {
-    fields: "model"
-  }
-  
-    const { accessToken } = useSelector((state) => state.auth);
-    const { data: allModels } = useGetAllRobotsQuery(queryParams);
-    const [CreateMostCompared] = useCreateMostComparesMutation();
+    fields: "model",
+  };
+  const initialState = {
+    order: "",
+    robot1: "",
+    robot2: "",
+    robot3: "",
+  };
+  const [MostCompared, setMostCompared] = useState(initialState);
 
-    const create = async (jsonBody) => {
-        await CreateMostCompared({jsonBody, accessToken}).unwrap();
-    }
+  const { accessToken } = useSelector((state) => state.auth);
+  const { data: allModels } = useGetAllRobotsQuery(queryParams);
+  const [CreateMostCompared] = useCreateMostComparesMutation();
+
+  const create = async () => {
+    const findIdByModel = (model) => {
+      const robot = allModels.content.find((item) => item.model === model);
+      return robot ? Number(robot.id) : null;
+    };
+
+    const { order, robot1, robot2, robot3 } = MostCompared;
+
+    const robot1Id = findIdByModel(robot1);
+    const robot2Id = findIdByModel(robot2);
+    const robot3Id = findIdByModel(robot3);
+
+    const jsonBody = {
+      order: Number(order), 
+      robot1: robot1Id,
+      robot2: robot2Id,
+      robot3: robot3Id,
+    };
+    await CreateMostCompared({ jsonBody, accessToken }).unwrap();
+    resetMostComparedState();
+  };
+  const resetMostComparedState = () => {
+    setMostCompared(initialState);
+  };
 
 
-    const formik = useFormik({
-        enableReinitialize:true,
-        initialValues: {
-            order:"",
-            robot1:"",
-            robot2:"",
-            robot3:""
-        },
-        onSubmit: values => {
-            const jsonBody = cleanFormValues(values);
-            create(jsonBody);
-            formik.resetForm();
-          },
-      });
-
-    return(
-        <div
-        className="modal fade"
-        id="create"
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-        <form onSubmit={formik.handleSubmit}>
+  return (
+    <div
+      className="modal fade"
+      id="create"
+      tabIndex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="exampleModalLabel">
@@ -53,6 +63,7 @@ const CreateMostCompared = () => {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
+              onClick={resetMostComparedState}
             ></button>
           </div>
           <div className="modal-body">
@@ -68,69 +79,89 @@ const CreateMostCompared = () => {
                   className="form-control form-control-sm"
                   type="number"
                   name="order"
-                  onChange={formik.handleChange}
-                  value={formik.values.order}
+                  onChange={(e) => {
+                    setMostCompared({
+                      ...MostCompared,
+                      [e.target.name]: e.target.value,
+                    });
+                  }}
+                  value={MostCompared.order}
                 ></input>
               </div>
               <div className="mb-3">
-              <input
-            className="form-control"
-            list="datalistOptions1"
-            id="exampleDataList1"
-            placeholder="Select 1st robot from list"
-            name="robot1"
-            onChange={formik.handleChange}
-            value={formik.values.robot1}
-          />
-          <datalist id="datalistOptions1">
-            {allModels && (
-              <>
-                {allModels.content.map((item) => (
-                  <option key={item.id} value={item.model} />
-                ))}
-              </>
-            )}
-          </datalist>
+                <input
+                  className="form-control"
+                  list="datalistOptions1"
+                  id="exampleDataList1"
+                  placeholder="Select 1st robot from list"
+                  name="robot1"
+                  onChange={(e) => {
+                    setMostCompared({
+                      ...MostCompared,
+                      [e.target.name]: e.target.value,
+                    });
+                  }}
+                  value={MostCompared.robot1}
+                />
+                <datalist id="datalistOptions1">
+                  {allModels && (
+                    <>
+                      {allModels.content.map((item) => (
+                        <option key={item.id} value={item.model}></option>
+                      ))}
+                    </>
+                  )}
+                </datalist>
               </div>
               <div className="mb-3">
-              <input
-            className="form-control"
-            list="datalistOptions2"
-            id="exampleDataList2"
-            placeholder="Select 2nd robot from list"
-            name="robot2"
-            onChange={formik.handleChange}
-            value={formik.values.robot2}
-          />
-          <datalist id="datalistOptions2">
-            {allModels && (
-              <>
-                {allModels.content.map((item) => (
-                  <option key={item.id} value={item.model} />
-                ))}
-              </>
-            )}
-          </datalist>
+                <input
+                  className="form-control"
+                  list="datalistOptions2"
+                  id="exampleDataList2"
+                  placeholder="Select 2nd robot from list"
+                  name="robot2"
+                  onChange={(e) => {
+                    setMostCompared({
+                      ...MostCompared,
+                      [e.target.name]: e.target.value,
+                    });
+                  }}
+                  value={MostCompared.robot2}
+                />
+                <datalist id="datalistOptions2">
+                  {allModels && (
+                    <>
+                      {allModels.content.map((item) => (
+                        <option key={item.id} value={item.model}></option>
+                      ))}
+                    </>
+                  )}
+                </datalist>
               </div>
               <div className="mb-3">
-              <input
-            className="form-control"
-            list="datalistOptions3"
-            id="exampleDataList3"
-            placeholder="Select 3th robot from list"
-            name="robot3"
-            onChange={formik.handleChange}
-            value={formik.values.robot3}
-          />
-          <datalist id="datalistOptions3">
-            {allModels && (
-              <>
-                {allModels.content.map((item) => (
-                  <option key={item.id} value={item.model} />
-                ))}
-              </>
-            )}
-          </datalist>
+                <input
+                  className="form-control"
+                  list="datalistOptions3"
+                  id="exampleDataList3"
+                  placeholder="Select 3th robot from list"
+                  name="robot3"
+                  onChange={(e) => {
+                    setMostCompared({
+                      ...MostCompared,
+                      [e.target.name]: e.target.value,
+                    });
+                  }}
+                  value={MostCompared.robot3}
+                />
+                <datalist id="datalistOptions3">
+                  {allModels && (
+                    <>
+                      {allModels.content.map((item) => (
+                        <option key={item.id} value={item.model}></option>
+                      ))}
+                    </>
+                  )}
+                </datalist>
               </div>
             </div>
           </div>
@@ -139,19 +170,23 @@ const CreateMostCompared = () => {
               type="button"
               className="btn btn-secondary"
               data-bs-dismiss="modal"
-              onClick={() => {formik.resetForm()}}
+              onClick={resetMostComparedState}
             >
               Close
             </button>
-            <button type="submit" className="btn btn-success" data-bs-dismiss="modal">
+            <button
+              type="submit"
+              className="btn btn-success"
+              data-bs-dismiss="modal"
+              onClick={create}
+            >
               Add
             </button>
           </div>
         </div>
-        </form>
       </div>
-      </div>
-    );
-}
+    </div>
+  );
+};
 
 export default CreateMostCompared;

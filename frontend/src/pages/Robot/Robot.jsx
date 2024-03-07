@@ -118,7 +118,7 @@ const Robot = () => {
                   ) : (
                     <>
                       <datalist id="datalistOptions">
-                        {allModels.map((item) => (
+                        {allModels.content.map((item) => (
                           <option key={item.id} value={item.model} />
                         ))}
                       </datalist>

@@ -1,12 +1,10 @@
 package com.robobg.service.impl;
 
 import com.robobg.entity.Robot;
-import com.robobg.entity.dtos.*;
-import com.robobg.entity.dtos.RobotDTO.CreateRobotDTO;
-import com.robobg.entity.dtos.RobotDTO.RobotDTO;
-import com.robobg.entity.dtos.RobotDTO.RobotResponse;
+import com.robobg.entity.dtos.RobotDTO.*;
 import com.robobg.exceptions.RobotAlreadyExistsException;
 import com.robobg.repository.RobotRepository;
+import com.robobg.service.MostComparedService;
 import com.robobg.service.RobotService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,22 +25,24 @@ public class RobotServiceImpl implements RobotService {
     private final RobotRepository robotRepository;
     private final S3Service s3Service;
     private final ModelMapper modelMapper;
+    private final MostComparedService mostComparedService;
 
 
     @Autowired
-    public RobotServiceImpl(RobotRepository robotRepository, S3Service s3Service, ModelMapper modelMapper) {
+    public RobotServiceImpl(RobotRepository robotRepository, S3Service s3Service, ModelMapper modelMapper, MostComparedService mostComparedService) {
         super();
         this.robotRepository = robotRepository;
         this.s3Service = s3Service;
         this.modelMapper = modelMapper;
+        this.mostComparedService = mostComparedService;
     }
 
     @Override
-    public List<RobotIdModelImageBestsDTO> findAllBests() {
+    public List<RobotModelImageLinksDTO> findAllBests() {
         return robotRepository.findAllBests().stream()
                 .filter(robot -> Boolean.TRUE.equals(robot.getBests()))
                 .limit(8)
-                .map(robot -> modelMapper.map(robot, RobotIdModelImageBestsDTO.class))
+                .map(robot -> modelMapper.map(robot, RobotModelImageLinksDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -58,41 +57,25 @@ public class RobotServiceImpl implements RobotService {
     public RobotResponse getAllModels() {
         RobotResponse robotResponse = new RobotResponse();
         robotResponse.setContent(robotRepository.findAll().stream()
-                .map(robot -> modelMapper.map(robot,RobotModelDTO.class))
+                .map(robot -> modelMapper.map(robot, RobotModelDTO.class))
                 .collect(Collectors.toList()));
         return robotResponse;
     }
 
-    @Override
-    public Optional<RobotModelLinksDTO> getAllModelsLinksById(Long id) {
-        Optional<Robot> robot = robotRepository.findById(id);
-        if (robot.isPresent()) {
-            RobotModelLinksDTO robotModelLinksDTO = modelMapper.map(robot.get(), RobotModelLinksDTO.class);
-            return Optional.of(robotModelLinksDTO);
-        }
-        return Optional.empty();
-    }
 
 
-    public RobotResponse getAllRobotIdModelImage(int page, String model, List<String> brands) {
-        Pageable pageable = PageRequest.of(page,12);
-        Page<Robot> robots = robotRepository.findByModelContainsAndBrandIn(pageable,model,brands);
-        List<Robot> listOfRobots = robots.getContent();
-        List<RobotIdModelImageDTO> content = listOfRobots.stream().map(robot -> modelMapper.map(robot,RobotIdModelImageDTO.class)).collect(Collectors.toList());
-        RobotResponse robotResponse = new RobotResponse();
-        robotResponse.setContent(content);
-        robotResponse.setPageNo(robots.getNumber());
-        robotResponse.setTotalPages(robots.getTotalPages());
-        robotResponse.setLast(robots.isLast());
-        return robotResponse;
-    }
 
     @Override
     public RobotResponse getAllRobotIdModelImageLinks(int page, String model, List<String> brands) {
         Pageable pageable = PageRequest.of(page,12);
-        Page<Robot> robots = robotRepository.findByModelContainsAndBrandIn(pageable,model,brands);
+        Page<Robot> robots;
+        if(brands.isEmpty()){
+            robots = robotRepository.findByModelContainsAndOrderByBests(pageable,model);
+        } else {
+            robots = robotRepository.findByModelContainsAndBrandInAndOrderByBests(pageable,model,brands);
+        }
         List<Robot> listOfRobots = robots.getContent();
-        List<RobotIdModelImageLinksDTO> content = listOfRobots.stream().map(robot -> modelMapper.map(robot,RobotIdModelImageLinksDTO.class)).collect(Collectors.toList());
+        List<RobotModelImageLinksDTO> content = listOfRobots.stream().map(robot -> modelMapper.map(robot, RobotModelImageLinksDTO.class)).collect(Collectors.toList());
         RobotResponse robotResponse = new RobotResponse();
         robotResponse.setContent(content);
         robotResponse.setPageNo(robots.getNumber());
@@ -128,6 +111,7 @@ public class RobotServiceImpl implements RobotService {
                 String fileName = imageUrl.substring(64);
                 s3Service.deleteObjectFromBucket("robot-review-robot-images",fileName);
             }
+            mostComparedService.deleteMostComparedEntityIfRobotWithIdExist(id);
             robotRepository.deleteById(id);
         } else {
             throw new NotFoundException();
@@ -178,30 +162,19 @@ public class RobotServiceImpl implements RobotService {
 
     @Override
     public RobotResponse getRobots(HashSet<String> fields, int page, String model, List<String> brands) {
-        if(brands.isEmpty()){
-            brands.addAll(List.of("360","SAMSUNG","Roborock","Xiaomi","Eufy"));
-        }
         if (fields.containsAll(Arrays.asList("model", "image", "links"))) {
             return getAllRobotIdModelImageLinks(page,model,brands);
-        } else if (fields.containsAll(Arrays.asList("model", "image"))) {
-            return getAllRobotIdModelImage(page,model,brands);
-        } else if (fields.contains("model")) {
+        }else if (fields.contains("model")) {
             return getAllModels();
         }
         return null;
     }
     @Override
-    public Optional<?> getRobotById(Long id,HashSet<String> fields) {
-        if(fields == null){
-            Optional<Robot> robot = robotRepository.findById(id);
-            if (robot.isPresent()) {
-                RobotDTO robotDTO = modelMapper.map(robot.get(), RobotDTO.class);
-                return Optional.of(robotDTO);
-            }
-        } else {
-            if(fields.containsAll(Arrays.asList("model", "links"))){
-                return getAllModelsLinksById(id);
-            }
+    public Optional<RobotDTO> getRobotById(Long id) {
+        Optional<Robot> robot = robotRepository.findById(id);
+        if (robot.isPresent()) {
+            RobotDTO robotDTO = modelMapper.map(robot.get(), RobotDTO.class);
+            return Optional.of(robotDTO);
         }
         return Optional.empty();
     }

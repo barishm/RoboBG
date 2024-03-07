@@ -19,5 +19,11 @@ public interface RobotRepository extends JpaRepository<Robot,Long> {
     boolean existsByModel(String model);
     @Query("SELECT r.image FROM Robot r WHERE r.id = :id")
     String findImageById(@Param("id") Long id);
-    Page<Robot> findByModelContainsAndBrandIn(Pageable page, String model, List<String> brands);
+    @Query("SELECT r FROM Robot r WHERE r.model LIKE %:model% AND r.brand IN :brands ORDER BY CASE WHEN r.bests = TRUE THEN 0 ELSE 1 END, r.brand, r.model")
+    Page<Robot> findByModelContainsAndBrandInAndOrderByBests(Pageable page, String model, List<String> brands);
+    @Query("SELECT r.model FROM Robot r WHERE r.id = :id")
+    String findModelById(Long id);
+
+    @Query("SELECT r FROM Robot r WHERE r.model LIKE %:model% ORDER BY CASE WHEN r.bests = TRUE THEN 0 ELSE 1 END, r.brand, r.model")
+    Page<Robot> findByModelContainsAndOrderByBests(Pageable page,String model);
 }
