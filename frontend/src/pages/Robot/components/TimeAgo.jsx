@@ -41,7 +41,7 @@ const TimeAgo = ({ createTime }) => {
     return () => clearInterval(intervalId);
   }, [createTime]);
 
-  return <span style={{ fontSize: '14px' }}>&nbsp;&nbsp;{timeAgo}</span>;
+  return <span style={{ fontSize: '14px' }}>&nbsp;{timeAgo}</span>;
 };
 
 export default TimeAgo;

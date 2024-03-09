@@ -71,16 +71,6 @@ footer {
 }
 
 
-
-
-
-.single-robot-container{
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 90px;
-}
-
 .single-robot-image {
   width: 200px;
 }
@@ -153,3 +143,12 @@ td {
   vertical-align: inherit;
   min-height: 150px;
 }
+
+
+.top-right {
+  position: absolute;
+  top: 0;
+  right: 0; 
+  padding: 5px; 
+}
+
