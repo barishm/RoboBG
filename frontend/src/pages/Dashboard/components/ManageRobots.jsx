@@ -1,15 +1,17 @@
 import {
   useDeleteRobotMutation,
-  useGetAllRobotsQuery
+  useGetAllRobotsQuery,
+  useUploadRobotImageMutation
 } from "../../../app/services/robotApiSlice";
 import {useCreateLinkMutation,useDeleteLinkMutation} from "../../../app/services/linkApiSlice"
 import Loading from "../../../components/Loading";
 import CreateRobot from "./CreateRobot";
 import { useSelector } from "react-redux";
 import UpdateRobot from "./UpdateRobot";
-import { useState } from "react";
-import UploadRobotImage from "./UploadRobotImage";
+import { useState,useEffect } from "react";
 import { useFormik } from "formik";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ManageRobots = () => {
   const [Page, setPage] = useState(0);
@@ -23,13 +25,36 @@ const ManageRobots = () => {
   const [robotId,setRobotId] = useState(null);
   const [createLink] = useCreateLinkMutation();
   const [deleteLink] = useDeleteLinkMutation();
-
   const [deleteRobot] = useDeleteRobotMutation();
   const noImage = "images/no-image.jpg";
   const { accessToken } = useSelector((state) => state.auth);
   const [updateId, setUpdateId] = useState(null);
   const [uploadImageId, setUploadImageId] = useState(null);
   const isLast = allRobots?.last;
+  const [file, setFile] = useState(null);
+  const [inputKey, setInputKey] = useState(Date.now());
+  const [uploadImage, { isSuccess, isError, error }] = useUploadRobotImageMutation();
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Image uploaded successfully!");
+    } else if (isError) {
+      toast.error(`Failed to upload image: ${error?.data?.error || 'Unknown error'}`);
+    }
+  }, [isSuccess, isError, error]);
+
+  const handleUploadImage = async () => {
+    const formData = new FormData();
+    let id = Number(uploadImageId);
+    if (file && uploadImageId) {
+      formData.append("file", file);
+      await uploadImage({id,accessToken,formData})
+    }
+    resetForm();
+  };
+  const resetForm = () => {
+    setFile(null);
+    setInputKey(Date.now());
+  };
 
   const formik = useFormik({
     enableReinitialize:true,
@@ -45,7 +70,7 @@ const ManageRobots = () => {
       },
   });
 
-  const deleteHandler = (e) => {
+  const deleteRobotHandler = (e) => {
     const id = e.target.value;
     deleteRobot({ id, accessToken });
   };
@@ -77,7 +102,6 @@ const ManageRobots = () => {
       >
         <CreateRobot />
         <UpdateRobot id={updateId} />
-        <UploadRobotImage id={uploadImageId} />
         <input
           className="form-control form-control-sm"
           value={Model}
@@ -121,7 +145,7 @@ const ManageRobots = () => {
                         className="btn btn-light btn-sm ms-1"
                         value={robot.id}
                         onClick={(e) => {
-                          setUploadImageId(e.target.value);
+                          setUploadImageId(e.currentTarget.value);
                         }}
                         data-bs-toggle="modal"
                         data-bs-target="#uploadImage"
@@ -180,7 +204,7 @@ const ManageRobots = () => {
                         type="button"
                         className="btn btn-danger btn-sm"
                         value={robot.id}
-                        onClick={deleteHandler}
+                        onClick={deleteRobotHandler}
                       >
                         Delete
                       </button>
@@ -297,6 +321,72 @@ const ManageRobots = () => {
           </div>
         </div>
         </form>
+      </div>
+    </div>
+
+    {/* upload image modal */}
+    <div
+      className="modal fade"
+      id="uploadImage"
+      tabIndex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">
+                Upload Image
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                onClick={resetForm}
+              ></button>
+            </div>
+            <div className="modal-body">
+              <div className="form-inputs">
+                <div className="mb-3">
+                  <label
+                    htmlFor="exampleFormControlInput1"
+                    className="form-label"
+                  >
+                    Image
+                  </label>
+                  <input
+                    key={inputKey}
+                    className="form-control form-control-sm"
+                    id="fileInput"
+                    type="file"
+                    name="file"
+                    onChange={(e) => {
+                      setFile(e.target.files[0]);
+                    }}
+                  ></input>
+                </div>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+                onClick={resetForm}
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                className="btn btn-success"
+                data-bs-dismiss="modal"
+                onClick={handleUploadImage}
+              >
+                Upload
+              </button>
+            </div>
+          </div>
       </div>
     </div>
     </div>

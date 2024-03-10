@@ -2,6 +2,8 @@ package com.robobg.entity.dtos.RobotDTO;
 
 import lombok.Data;
 
+import java.util.List;
+
 
 @Data
 public class RobotDTO {
@@ -27,4 +29,5 @@ public class RobotDTO {
     private AppFeaturesDTO appFeatures;
     private SensorDTO sensor;
     private OtherSpecificationsDTO otherSpecifications;
+    private List<PurchaseLinkDTO> purchaseLinks;
 }

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const UploadRobotImage = (props) => {
-  let id = props.id;
+  let id = props.RobotId;
   const { accessToken } = useSelector((state) => state.auth);
   const [file, setFile] = useState(null);
   const [inputKey, setInputKey] = useState(Date.now());
@@ -17,9 +17,6 @@ const UploadRobotImage = (props) => {
       toast.error(`Failed to upload image: ${error?.data?.error || 'Unknown error'}`);
     }
   }, [isSuccess, isError, error]);
-
-  useEffect(() => {
-  }, [id]);
 
   const handleUploadImage = async () => {
     const formData = new FormData();

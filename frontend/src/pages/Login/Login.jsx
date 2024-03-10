@@ -38,12 +38,9 @@ const Login = () => {
   };
 
   return (
-    <div className="container py-5 h-100">
-      <div className="row d-flex justify-content-center align-items-center h-100">
-        <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div className="card shadow-sm" style={{ borderRadius: "1rem" }}>
+    <div className="container mt-5">
+          <div className="card shadow-sm" style={{ borderRadius: "1rem",maxWidth:"500px",marginLeft:"auto",marginRight:"auto" }}>
             <div className="card-body p-5 text-center">
-              <div className="mb-md-3 mt-md-2 pb-3">
                 <form onSubmit={handleSubmit}>
                   <h2 className="fw-bold mb-3">{lang === "en" ? "Sign in" : "Впиши се"}</h2>
                   <p className="mb-3">
@@ -80,26 +77,24 @@ const Login = () => {
                   </div>
 
                   <button
-                    className="btn btn-outline-dark btn-md px-5"
+                    className="btn btn-outline-dark btn-md mt-3"
                     type="submit"
+                    style={{width:"100px"}}
                   >
                     Login
                   </button>
                 </form>
-              </div>
 
-              <div>
+              <div className="mt-3">
                 <p className="mb-0">
                 {lang === "en" ? "Don't have an account?" : "Нямате акаунт?"}{" "}
-                  <a href="/register" className="fw-bold">
+                  <a href="#" onClick={() => navigate("/register")} className="fw-bold">
                     {lang === "en" ? "Sign Up" : "Регистрирай се"}
                   </a>
                 </p>
               </div>
             </div>
           </div>
-        </div>
-      </div>
     </div>
   );
 };

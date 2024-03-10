@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Register = () => {
   const [Username, setUsername] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+  const lang = useSelector((state) => state.language.lang);
+
 
 
 
@@ -37,14 +40,11 @@ const Register = () => {
     navigate("/login");
   };
   return (
-    <div className="container py-5 h-100">
-      <div className="row d-flex justify-content-center align-items-center h-100">
-        <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div className="card shadow-sm" style={{ borderRadius: "1rem" }}>
+    <div className="container mt-5">
+          <div className="card shadow-sm" style={{ borderRadius: "1rem",maxWidth:"500px",marginLeft:"auto",marginRight:"auto" }}>
             <div className="card-body p-5 text-center">
-              <div className="mb-md-3 mt-md-1 pb-3">
                 <form>
-                  <h2 className="fw-bold mb-3">Sign up</h2>
+                  <h2 className="fw-bold mb-4">{lang === "en" ? "Sign up" : "Регистрирай се"}</h2>
 
                   <div className="form-outline form-white mb-4">
                     <input
@@ -53,7 +53,7 @@ const Register = () => {
                       onChange={(e) => setUsername(e.target.value)}
                       className="form-control form-control-md"
                     />
-                    <label className="form-label">Username</label>
+                    <label className="form-label">{lang === "en" ? "Username" : "Потребителско име"}</label>
                   </div>
 
                   <div className="form-outline form-white mb-3">
@@ -64,10 +64,10 @@ const Register = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       className="form-control form-control-md"
                     />
-                    <label className="form-label">Password</label>
+                    <label className="form-label">{lang === "en" ? "Password" : "Парола"}</label>
                   </div>
 
-                  <div className="form-outline form-white mb-5">
+                  <div className="form-outline form-white mb-4">
                     <input
                       type="password"
                       autoComplete="new-password"
@@ -75,7 +75,7 @@ const Register = () => {
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       className="form-control form-control-md"
                     />
-                    <label className="form-label">Confirm Password</label>
+                    <label className="form-label">{lang === "en" ? "Confirm Password" : "Потвърди парола"}</label>
                   </div>
 
                   <button
@@ -83,15 +83,12 @@ const Register = () => {
                     onClick={() => inputHandler()}
                     type="submit"
                   >
-                    Register
+                    {lang === "en" ? "Register" : "Регистрирай се"}
                   </button>
                 </form>
-              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
   );
 };
 
