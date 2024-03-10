@@ -87,7 +87,7 @@
       "voicePrompts":true,
       "cleaningFeatures":{
          "suctionPower":"330 Pa",
-         "cleaningArea":"200 m^2",
+         "cleaningArea":"200",
          "dustbinCapacity":"500 ml",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
@@ -159,7 +159,7 @@
       "voicePrompts":true,
       "cleaningFeatures":{
          "suctionPower":"2000 Pa",
-         "cleaningArea":"150 m^2",
+         "cleaningArea":"150",
          "dustbinCapacity":"550 ml",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
@@ -231,7 +231,7 @@
       "voicePrompts":true,
       "cleaningFeatures":{
          "suctionPower":"1800 Pa",
-         "cleaningArea":"200 m^2",
+         "cleaningArea":"200",
          "dustbinCapacity":"400 ml",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
@@ -303,7 +303,7 @@
       "voicePrompts":true,
       "cleaningFeatures":{
          "suctionPower":"1800 Pa",
-         "cleaningArea":"200 m^2",
+         "cleaningArea":"200",
          "dustbinCapacity":"400 ml",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
@@ -375,7 +375,7 @@
       "voicePrompts":true,
       "cleaningFeatures":{
          "suctionPower":"1800 Pa",
-         "cleaningArea":"200 m^2",
+         "cleaningArea":"200",
          "dustbinCapacity":"400 ml",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
@@ -447,7 +447,7 @@
       "voicePrompts":true,
       "cleaningFeatures":{
          "suctionPower":"1800 Pa",
-         "cleaningArea":"200 m^2",
+         "cleaningArea":"200",
          "dustbinCapacity":"400 ml",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
@@ -519,7 +519,7 @@
       "voicePrompts":true,
       "cleaningFeatures":{
          "suctionPower":"1800 Pa",
-         "cleaningArea":"200 m^2",
+         "cleaningArea":"200",
          "dustbinCapacity":"400 ml",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
@@ -591,7 +591,7 @@
       "voicePrompts":true,
       "cleaningFeatures":{
          "suctionPower":"1800 Pa",
-         "cleaningArea":"200 m^2",
+         "cleaningArea":"200",
          "dustbinCapacity":"400 ml",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
@@ -663,7 +663,7 @@
       "voicePrompts":true,
       "cleaningFeatures":{
          "suctionPower":"1800 Pa",
-         "cleaningArea":"200 m^2",
+         "cleaningArea":"200",
          "dustbinCapacity":"400 ml",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
@@ -807,7 +807,7 @@
       "voicePrompts":true,
       "cleaningFeatures":{
          "suctionPower":"1800 Pa",
-         "cleaningArea":"200 m^2",
+         "cleaningArea":"200",
          "dustbinCapacity":"400 ml",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
@@ -879,7 +879,7 @@
       "voicePrompts":true,
       "cleaningFeatures":{
          "suctionPower":"1800 Pa",
-         "cleaningArea":"200 m^2",
+         "cleaningArea":"200",
          "dustbinCapacity":"400 ml",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
@@ -951,7 +951,7 @@
       "voicePrompts":true,
       "cleaningFeatures":{
          "suctionPower":"1800 Pa",
-         "cleaningArea":"200 m^2",
+         "cleaningArea":"200",
          "dustbinCapacity":"400 ml",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
@@ -1023,7 +1023,7 @@
       "voicePrompts":true,
       "cleaningFeatures":{
          "suctionPower":"1800 Pa",
-         "cleaningArea":"200 m^2",
+         "cleaningArea":"200",
          "dustbinCapacity":"400 ml",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,

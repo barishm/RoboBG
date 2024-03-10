@@ -11,7 +11,6 @@ import {
 import Loading from "../../components/Loading";
 import { addRobot } from "../../app/redux/compareSlice";
 import { useDispatch } from "react-redux";
-import PopularComparisons from "../Compare/components/PopularComparisons";
 
 const Robot = () => {
   const [Tab,setTab] = useState("Specs");
@@ -64,7 +63,7 @@ const Robot = () => {
         </>
       ) : data ? (
         <>
-          <div className="container p-4 mt-4">
+          <div className="container-md p-4 mt-4">
             <div className="row">
               <div className="col-12 shadow-sm rounded card p-5" style={{maxWidth:"900px",marginRight:"auto",marginLeft:"auto"}}>
                 <div className="row">
@@ -152,7 +151,7 @@ const Robot = () => {
                       </a>
                     </li>
                   </ul>
-                  {Tab === "Specs" ? <RobotDetails Robot={data} /> : <QnA Id={id} />}
+                  {Tab === "Specs" ? <RobotDetails robot={data} /> : <QnA Id={id} />}
                 </div>
               </div>
               <div className="col-12">

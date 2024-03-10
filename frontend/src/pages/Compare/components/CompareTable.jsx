@@ -123,7 +123,7 @@ const CompareTable = () => {
                       <div className="image-overlay ms-1">
                         <i
                           className="fa-solid fa-xmark"
-                          style={{ color: "#ff0505", fontSize: "25px",cursor:"pointer"}}
+                          style={{ color: "#D60000", fontSize: "25px",cursor:"pointer"}}
                           data-id={item.id}
                           onClick={deleteHandler}
                         ></i>

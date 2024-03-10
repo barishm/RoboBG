@@ -21,7 +21,7 @@ const YoutubeVideos = () => {
       ) : data ? (
         <div className="row">
           {data.items.map((item) => (
-            <div className="col-6 mt-4 d-flex justify-content-center">
+            <div className="col-12 col-md-6 mt-4 d-flex justify-content-center" key={item.id.videoId}>
               <iframe
                 width="400"
                 height="225"

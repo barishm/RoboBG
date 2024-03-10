@@ -216,7 +216,7 @@ const CreateRobot = () => {
             <input className="form-control form-control-sm" type="text" name="cleaningFeatures.suctionPower" onChange={formik.handleChange} value={formik.values.cleaningFeatures.suctionPower} aria-label=".form-control-sm example"/>
             </div>
             <div className="mb-3">
-            <label htmlFor="exampleFormControlInput1" className="form-label">Cleaning Area</label>
+            <label htmlFor="exampleFormControlInput1" className="form-label">Cleaning Area (m&sup2;)</label>
             <input className="form-control form-control-sm" type="text" name="cleaningFeatures.cleaningArea" onChange={formik.handleChange} value={formik.values.cleaningFeatures.cleaningArea} aria-label=".form-control-sm example"/>
             </div>
             <div className="mb-3">

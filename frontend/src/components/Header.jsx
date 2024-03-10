@@ -56,26 +56,16 @@ const Header = () => {
           <Nav className="ms-auto">
             {username ? (
               <>
-                <Navbar.Text >{lang === "en" ? <>Signed in as:</> : <>Вписан като:</>}</Navbar.Text>
-                <Col xs="auto" style={{ display: "flex", alignItems: "center" }} className="ms-2">
+                <Col xs="auto" style={{ display: "flex", alignItems: "center" }}>
                   <div className="dropdown">
-                    <button
-                      className="btn btn-dark dropdown-toggle btn-sm rounded-3"
-                      type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <strong>@{username}</strong>
-                    </button>
+                    <img className="dropdown-toggle rounded-3 me-md-1" data-bs-toggle="dropdown" aria-expanded="false"  style={{width:"45px",height:"45px",cursor: 'pointer'}} src="images/user2.jpg" />
                     <ul className="dropdown-menu">
+                      <li>
+                        <span class="dropdown-item-text">@{username}</span>
+                      </li>
                       <li>
                         <button className="dropdown-item" onClick={logoutUser}>
                         {lang === "en" ? <>Sign out</> : <>Отписване</>}
-                        </button>
-                      </li>
-                      <li>
-                        <button className="dropdown-item" onClick={goToProfile}>
-                        {lang === "en" ? <>Profile</> : <>Профил</>}
                         </button>
                       </li>
                     </ul>
@@ -84,23 +74,23 @@ const Header = () => {
               </>
             ) : (
               <Col xs="auto">
-                <Button variant="dark" size="sm" className="rounded-3" onClick={handleLogin}>
+                <Button variant="light" size="md" className="rounded-5 mb-2 mb-md-0 me-md-2" onClick={handleLogin}>
                 {lang === "en" ? <>Sign in</> : <>Впиши се</>}
                 </Button>
               </Col>
             )}
             <div className="dropdown" style={{ display: "flex", alignItems: "center" }}>
-            <button className="btn btn-dark btn-sm ms-2 rounded-3 dropdown-toggle" data-bs-toggle="dropdown"><i className="fa-solid fa-globe" style={{color:"#ffffff"}}></i>{lang === "en" ? <> English</> : <> Български</>}</button>
+            <button className="btn btn-light rounded-5 dropdown-toggle" data-bs-toggle="dropdown"><i className="fa-solid fa-globe" style={{color:"rgb(60,60,60)"}}></i></button>
             <ul className="dropdown-menu">
-              {lang === "en" ? <li>
+              <li>
                         <button className="dropdown-item" onClick={() => handleChangeLanguage('bg')}>
                           Български
                         </button>
-                      </li> : <li>
+                      </li> <li>
                         <button className="dropdown-item" onClick={() => handleChangeLanguage('en')}>
                           English
                         </button>
-                      </li>}
+                      </li>
                     </ul>
             </div>
             
