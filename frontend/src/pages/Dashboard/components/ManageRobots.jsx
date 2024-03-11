@@ -125,9 +125,7 @@ const ManageRobots = () => {
                 <th scope="col">#</th>
                 <th scope="col">Image</th>
                 <th scope="col">Model</th>
-                <th scope="col">Links</th>
-                <th scope="col">Update</th>
-                <th scope="col">Delete</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -155,9 +153,9 @@ const ManageRobots = () => {
                     </td>
                     <td>{robot.model}</td>
                     <td>
-                      <div class="dropdown">
+                    <div class="dropdown me-2" style={{display:"inline"}}>
                         <button
-                          class="btn btn-secondary btn-sm dropdown-toggle"
+                          class="btn btn-secondary dropdown-toggle"
                           type="button"
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
@@ -176,7 +174,7 @@ const ManageRobots = () => {
                               <a class="dropdown-item" href={link.link}>
                                 {link.name}
                               </a>
-                              <button className="btn btn-light btn-sm m-1" value={link.id} onClick={deleteLinkHandler}>
+                              <button className="btn btn-light m-1" value={link.id} onClick={deleteLinkHandler}>
                                 <i className="fa-solid fa-trash mt-2 me-2 ms-2"></i>
                               </button>
                               </span>
@@ -184,11 +182,9 @@ const ManageRobots = () => {
                           ))}
                         </ul>
                       </div>
-                    </td>
-                    <td>
                       <button
                         type="button"
-                        className="btn btn-primary btn-sm"
+                        className="btn btn-primary me-2"
                         value={robot.id}
                         onClick={(e) => {
                           setUpdateId(e.target.value);
@@ -198,11 +194,9 @@ const ManageRobots = () => {
                       >
                         Update
                       </button>
-                    </td>
-                    <td>
                       <button
                         type="button"
-                        className="btn btn-danger btn-sm"
+                        className="btn btn-danger me-2"
                         value={robot.id}
                         onClick={deleteRobotHandler}
                       >

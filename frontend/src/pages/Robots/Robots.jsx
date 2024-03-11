@@ -3,6 +3,7 @@ import { useGetAllRobotsQuery } from "../../app/services/robotApiSlice";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import PopularComparisons from "../Compare/components/PopularComparisons";
+import Loading from "../../components/Loading";
 
 const Robots = () => {
   const [Page, setPage] = useState(0);
@@ -57,13 +58,13 @@ const Robots = () => {
             style={{ marginTop: "10px", textAlign: "center" }}
           >
             {lang === "en" ? (
-              <>All Robot Vacuum Cleaners</>
+              "All Robot Vacuum Cleaners"
             ) : (
-              <>Всички роботи</>
+              "Всички роботи"
             )}
           </h3>
           {isLoading ? (
-            <>Loading...</>
+            <><Loading/></>
           ) : data.content ? (
             <div className="col-12 d-flex flex-wrap justify-content-evenly">
               {data.content.map((item) => (
@@ -101,7 +102,7 @@ const Robots = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
-                          Check price
+                          {lang === "en" ? ("Check price") : ("Проверка на цена")}
                         </button>
                         <ul className="dropdown-menu">
                           {item.purchaseLinks.length > 0 &&

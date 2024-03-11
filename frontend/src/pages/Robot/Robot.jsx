@@ -11,6 +11,7 @@ import {
 import Loading from "../../components/Loading";
 import { addRobot } from "../../app/redux/compareSlice";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Robot = () => {
   const [Tab,setTab] = useState("Specs");
@@ -18,6 +19,7 @@ const Robot = () => {
     fields: "model",
   };
   const dispatch = useDispatch();
+  const lang = useSelector((state) => state.language.lang);
 
   const [triggerCompare] = useLazyGetRobotByIdQuery();
 
@@ -98,7 +100,7 @@ const Robot = () => {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      Check price
+                      {lang === "en" ? ("Check price") : ("Проверка на цена")}
                     </button>
                     <ul className="dropdown-menu">
                       {data.purchaseLinks &&
@@ -155,7 +157,6 @@ const Robot = () => {
                 </div>
               </div>
               <div className="col-12">
-              
               </div>
             </div>
           </div>

@@ -27,15 +27,20 @@ public class AuthenticationService {
     public AuthenticationResponse register(RegisterRequest request) {
         if (request.getPassword().equals(request.getConfirmPassword())) {
             if (userRepository.findByUsername(request.getUsername()).isEmpty()) {
-                var user = User.builder()
-                        .username(request.getUsername())
-                        .password(passwordEncoder.encode(request.getPassword()))
-                        .role(Role.USER)
-                        .build();
-                userRepository.save(user);
-                var jwtToken = jwtService.generateToken(user);
-                var refreshToken = jwtService.generateRefreshToken(user);
-                return AuthenticationResponse.builder().accessToken(jwtToken).refreshToken(refreshToken).build();
+                if(userRepository.findByEmail(request.getEmail()).isEmpty()){
+                    var user = User.builder()
+                            .username(request.getUsername())
+                            .email(request.getEmail())
+                            .password(passwordEncoder.encode(request.getPassword()))
+                            .role(Role.USER)
+                            .build();
+                    userRepository.save(user);
+                    var jwtToken = jwtService.generateToken(user);
+                    var refreshToken = jwtService.generateRefreshToken(user);
+                    return AuthenticationResponse.builder().accessToken(jwtToken).refreshToken(refreshToken).build();
+                } else {
+                    throw new IllegalArgumentException("Email already exists");
+                }
             } else {
                 throw new IllegalArgumentException("Username already exists");
             }

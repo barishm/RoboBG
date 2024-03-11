@@ -1,43 +1,50 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useRegisterMutation } from "../../app/services/authApiSlice";
+import { jwtDecode } from "jwt-decode";
+import { useDispatch } from "react-redux";
 
 const Register = () => {
-  const [Username, setUsername] = useState("");
-  const [Password, setPassword] = useState("");
-  const [ConfirmPassword, setConfirmPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [email,setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const lang = useSelector((state) => state.language.lang);
+  const [register] = useRegisterMutation();
+  const dispatch = useDispatch();
 
 
 
 
-  const sendRequest = () => {
-    fetch("http://localhost:8000/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: Username,
-        password: Password,
-        confirmPassword: ConfirmPassword,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        sessionStorage.setItem("token", result.token);
-        navigate("/login");
-      })
-      .catch((err) => console.log(err));
+  const sendRequest = async () => {
+      try {
+        await register({ username,email, password, confirmPassword }).unwrap();
+        setSuccessMessage("Account is created successfully!");
+        setErrorMessage("");
+        setUsername("");
+        setPassword("");
+        setTimeout(() => {
+          navigate("/");
+        }, 5000);
+      } catch (err) {
+        setErrorMessage(err.data ? err.data.message : "An error occurred during registration.");
+        setSuccessMessage(""); 
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 2000);
+      }
   };
 
   const inputHandler = () => {
     sendRequest();
     setUsername("");
     setPassword("");
+    setEmail("");
     setConfirmPassword("");
-    navigate("/login");
   };
   return (
     <div className="container mt-5">
@@ -45,22 +52,40 @@ const Register = () => {
             <div className="card-body p-5 text-center">
                 <form>
                   <h2 className="fw-bold mb-4">{lang === "en" ? "Sign up" : "Регистрирай се"}</h2>
-
+                  {errorMessage && (
+                    <div className="alert alert-danger" role="alert">
+                      {errorMessage}
+                    </div>
+                      )}
+                  {successMessage && (
+                  <div className="alert alert-success" role="alert">
+                    {successMessage}
+                    </div>
+                    )}
                   <div className="form-outline form-white mb-4">
                     <input
                       type="username"
-                      value={Username}
+                      value={username}
                       onChange={(e) => setUsername(e.target.value)}
                       className="form-control form-control-md"
                     />
                     <label className="form-label">{lang === "en" ? "Username" : "Потребителско име"}</label>
+                  </div>
+                  <div className="form-outline form-white mb-4">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="form-control form-control-md"
+                    />
+                    <label className="form-label">{lang === "en" ? "Email" : "Е-поща"}</label>
                   </div>
 
                   <div className="form-outline form-white mb-3">
                     <input
                       type="password"
                       autoComplete="new-password"
-                      value={Password}
+                      value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="form-control form-control-md"
                     />
@@ -71,7 +96,7 @@ const Register = () => {
                     <input
                       type="password"
                       autoComplete="new-password"
-                      value={ConfirmPassword}
+                      value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       className="form-control form-control-md"
                     />

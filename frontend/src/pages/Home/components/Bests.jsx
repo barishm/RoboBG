@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetBestRobotsQuery } from "../../../app/services/robotApiSlice";
 import { useSelector } from "react-redux";
+import Loading from "../../../components/Loading";
 
 const Bests = () => {
   const lang = useSelector((state) => state.language.lang);
@@ -21,13 +22,13 @@ const Bests = () => {
         style={{ marginTop: "10px", textAlign: "center" }}
       >
         {lang === "en" ? (
-          <>Best Robot Vacuum Cleaners</>
+          "Best Robot Vacuum Cleaners"
         ) : (
-          <>Най-добри роботи</>
+          "Най-добри роботи"
         )}
       </h3>
       {isLoading ? (
-        <>Loading...</>
+        <><Loading/></>
       ) : data ? (
         <div className="col-12 d-flex flex-wrap justify-content-evenly">
           {data.map((item) => (
@@ -65,7 +66,7 @@ const Bests = () => {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      Check price
+                      {lang === "en" ? ("Check price") : ("Проверка на цена")}
                     </button>
                     <ul className="dropdown-menu">
                       {item.purchaseLinks.length > 0 &&

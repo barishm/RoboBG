@@ -21,6 +21,8 @@ const QnA = (props) => {
   const [deleteAnswerr] = useDeleteAnswerMutation();
   const { username, role, accessToken } = useSelector((state) => state.auth);
   const [hoveredAnswerId, setHoveredAnswerId] = useState(null);
+  const [invalidQuestion, setInvalidQuestion] = useState(false);
+  const [invalidAnswer, setInvalidAnswer] = useState(false);
 
   const [showAnswerInputs, setShowAnswerInputs] = useState({});
   const toggleAnswerInput = (commentId) => {
@@ -52,8 +54,8 @@ const QnA = (props) => {
       authorUsername: username,
       text: answerTexts[questionId],
     };
-    if (!answerBody.text) {
-      console.error("Answer text is empty");
+    if (answerBody.text.length < 5 || answerBody.text.length > 120) {
+      setInvalidAnswer(true);
       return;
     }
     try {
@@ -71,12 +73,18 @@ const QnA = (props) => {
       authorUsername: username,
       text: questionText,
     };
-    try {
-      await askQuestion({ questionBody, accessToken: accessToken });
-      setQuestionText("");
-      hideAllAnswerInputs();
-    } catch (error) {
-      console.error("Error creating question:", error);
+    if (questionBody.text.length < 5 || questionBody.text.length > 120) {
+      setInvalidQuestion(true);
+      return;
+    } else {
+      setInvalidQuestion(false);
+      try {
+        await askQuestion({ questionBody, accessToken: accessToken });
+        setQuestionText("");
+        hideAllAnswerInputs();
+      } catch (error) {
+        console.error("Error creating question:", error);
+      }
     }
   };
 
@@ -97,12 +105,15 @@ const QnA = (props) => {
       {username !== null && (
         <>
           <textarea
-            className="form-control"
+            className={`form-control ${invalidQuestion ? "is-invalid" : ""}`}
             aria-label="With textarea"
             value={questionText}
             placeholder="Enter Your question here"
             onChange={(event) => setQuestionText(event.target.value)}
           ></textarea>
+          <div class="invalid-feedback">
+            Question must contain 5-120 characters.
+          </div>
           <button
             type="button"
             class="btn btn-dark btn-sm mt-2 mb-4"
@@ -221,13 +232,18 @@ const QnA = (props) => {
               {showAnswerInputs[comment.id] && (
                 <div>
                   <textarea
-                    className="form-control"
+                    className={`form-control ${
+                      invalidAnswer ? "is-invalid" : ""
+                    }`}
                     aria-label="With textarea"
                     value={answerTexts[comment.id] || ""}
                     onChange={(event) =>
                       handleAnswerTextChange(comment.id, event.target.value)
                     }
                   ></textarea>
+                  <div class="invalid-feedback">
+                    Asnwer must contain 5-120 characters.
+                  </div>
                   <button
                     type="button"
                     className="btn btn-outline-dark btn-sm mt-2"
