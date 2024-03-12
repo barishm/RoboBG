@@ -41,7 +41,7 @@ public class RobotServiceImpl implements RobotService {
     public List<RobotModelImageLinksDTO> findAllBests() {
         return robotRepository.findAllBests().stream()
                 .filter(robot -> Boolean.TRUE.equals(robot.getBests()))
-                .limit(8)
+                .limit(9)
                 .map(robot -> modelMapper.map(robot, RobotModelImageLinksDTO.class))
                 .collect(Collectors.toList());
     }

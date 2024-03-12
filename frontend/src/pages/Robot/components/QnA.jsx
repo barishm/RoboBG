@@ -8,6 +8,7 @@ import {
   useDeleteAnswerMutation,
 } from "../../../app/services/qnaApiSlice";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const QnA = (props) => {
   const id = props.Id;
@@ -23,6 +24,7 @@ const QnA = (props) => {
   const [hoveredAnswerId, setHoveredAnswerId] = useState(null);
   const [invalidQuestion, setInvalidQuestion] = useState(false);
   const [invalidAnswer, setInvalidAnswer] = useState(false);
+  const navigate = useNavigate();
 
   const [showAnswerInputs, setShowAnswerInputs] = useState({});
   const toggleAnswerInput = (commentId) => {
@@ -54,6 +56,7 @@ const QnA = (props) => {
       authorUsername: username,
       text: answerTexts[questionId],
     };
+    isUserLoggedIn();
     if (answerBody.text.length < 5 || answerBody.text.length > 120) {
       setInvalidAnswer(true);
       return;
@@ -73,6 +76,7 @@ const QnA = (props) => {
       authorUsername: username,
       text: questionText,
     };
+    isUserLoggedIn();
     if (questionBody.text.length < 5 || questionBody.text.length > 120) {
       setInvalidQuestion(true);
       return;
@@ -87,6 +91,11 @@ const QnA = (props) => {
       }
     }
   };
+  const isUserLoggedIn = () => {
+    if(username === null) {
+      navigate("/login");
+    }
+  }
 
   function deleteQuestion(event) {
     const id = event.target.getAttribute("value");
@@ -102,27 +111,24 @@ const QnA = (props) => {
       <h5 className="fw-bolder" style={{ marginBottom: "20px" }}>
         Questions & answers
       </h5>
-      {username !== null && (
-        <>
-          <textarea
-            className={`form-control ${invalidQuestion ? "is-invalid" : ""}`}
-            aria-label="With textarea"
-            value={questionText}
-            placeholder="Enter Your question here"
-            onChange={(event) => setQuestionText(event.target.value)}
-          ></textarea>
-          <div class="invalid-feedback">
-            Question must contain 5-120 characters.
-          </div>
-          <button
-            type="button"
-            class="btn btn-dark btn-sm mt-2 mb-4"
-            onClick={handleQuestion}
-          >
-            Ask Question
-          </button>
-        </>
-      )}
+      <textarea
+        className={`form-control ${invalidQuestion ? "is-invalid" : ""}`}
+        aria-label="With textarea"
+        value={questionText}
+        placeholder="Enter Your question here"
+        onChange={(event) => setQuestionText(event.target.value)}
+        onFocus={isUserLoggedIn}
+      ></textarea>
+      <div className="invalid-feedback">
+        Question must contain 5-120 characters.
+      </div>
+      <button
+        type="button"
+        className="btn btn-dark btn-sm mt-2 mb-4"
+        onClick={handleQuestion}
+      >
+        Ask Question
+      </button>
       {allQuestionsLoading ? (
         <>Loading...</>
       ) : (
@@ -215,20 +221,18 @@ const QnA = (props) => {
                   ))}
                 </div>
               )}
-              {username && (
-                <button
-                  onClick={() => toggleAnswerInput(comment.id)}
-                  className="btn btn-outline-light mb-2"
-                  style={{
-                    border: "none",
-                    color: "black",
-                    borderRadius: "15px",
-                  }}
-                  type="button"
-                >
-                  Reply
-                </button>
-              )}
+              <button
+                onClick={() => toggleAnswerInput(comment.id)}
+                className="btn btn-outline-light mb-2"
+                style={{
+                  border: "none",
+                  color: "black",
+                  borderRadius: "15px",
+                }}
+                type="button"
+              >
+                Reply
+              </button>
               {showAnswerInputs[comment.id] && (
                 <div>
                   <textarea
@@ -240,8 +244,9 @@ const QnA = (props) => {
                     onChange={(event) =>
                       handleAnswerTextChange(comment.id, event.target.value)
                     }
+                    onFocus={isUserLoggedIn}
                   ></textarea>
-                  <div class="invalid-feedback">
+                  <div className="invalid-feedback">
                     Asnwer must contain 5-120 characters.
                   </div>
                   <button

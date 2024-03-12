@@ -13,6 +13,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [login] = useLoginMutation();
   const dispatch = useDispatch();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +34,10 @@ const Login = () => {
       setPassword("");
       navigate("/");
     } catch (err) {
-      console.log(err);
+      setErrorMessage("Incorrect username or password");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 2000);
     }
   };
 
@@ -46,6 +50,11 @@ const Login = () => {
                   <p className="mb-3">
                     {lang === "en" ? "Please enter your username and password!" : "Моля, въведете вашето потребителско име и парола!"}
                   </p>
+                  {errorMessage && (
+                    <div className="alert alert-danger" role="alert">
+                      {errorMessage}
+                    </div>
+                      )}
 
                   <div className="form-outline form-white mb-4">
                     <input

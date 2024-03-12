@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useRegisterMutation } from "../../app/services/authApiSlice";
-import { jwtDecode } from "jwt-decode";
-import { useDispatch } from "react-redux";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -15,12 +13,34 @@ const Register = () => {
   const navigate = useNavigate();
   const lang = useSelector((state) => state.language.lang);
   const [register] = useRegisterMutation();
-  const dispatch = useDispatch();
+  const [invalidUsername,setInvalidUsername] = useState(false);
+  const [invalidEmail,setInvalidEmail] = useState(false);
+  const [invalidPassword,setInvalidPassword] = useState(false);
+  const isEmailInvalid = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,7}$/;
+    return !emailRegex.test(email);
+  };
 
 
 
 
-  const sendRequest = async () => {
+  const sendRequest = async (e) => {
+    let dontContinue = false;
+    if(username.length < 5 || username.length > 15) {
+      setInvalidUsername(true);
+      dontContinue = true;
+    }
+    if(isEmailInvalid(email)){
+      setInvalidEmail(true);
+      dontContinue = true;
+    }
+    if(password.length < 6 || password.length > 20){
+      setInvalidPassword(true);
+      dontContinue = true;
+    }
+    if(dontContinue) {
+      return
+    }
       try {
         await register({ username,email, password, confirmPassword }).unwrap();
         setSuccessMessage("Account is created successfully!");
@@ -67,8 +87,11 @@ const Register = () => {
                       type="username"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
-                      className="form-control form-control-md"
+                      className={`form-control form-control-md ${invalidUsername ? "is-invalid" : ""}`}
                     />
+                    <div class="invalid-feedback">
+                      Username must contain 6-20 Characters.
+                    </div>
                     <label className="form-label">{lang === "en" ? "Username" : "Потребителско име"}</label>
                   </div>
                   <div className="form-outline form-white mb-4">
@@ -76,8 +99,11 @@ const Register = () => {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="form-control form-control-md"
+                      className={`form-control form-control-md ${invalidEmail ? "is-invalid" : ""}`}
                     />
+                    <div className="invalid-feedback">
+                      Email is not valid.
+                    </div>
                     <label className="form-label">{lang === "en" ? "Email" : "Е-поща"}</label>
                   </div>
 
@@ -87,8 +113,11 @@ const Register = () => {
                       autoComplete="new-password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="form-control form-control-md"
+                      className={`form-control form-control-md ${invalidPassword ? "is-invalid" : ""}`}
                     />
+                    <div className="invalid-feedback">
+                      Password must contain 6-20 Characters.
+                    </div>
                     <label className="form-label">{lang === "en" ? "Password" : "Парола"}</label>
                   </div>
 
@@ -98,15 +127,18 @@ const Register = () => {
                       autoComplete="new-password"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="form-control form-control-md"
+                      className={`form-control form-control-md ${invalidPassword ? "is-invalid" : ""}`}
                     />
+                    <div className="invalid-feedback">
+                      Password must contain 6-20 Characters.
+                    </div>
                     <label className="form-label">{lang === "en" ? "Confirm Password" : "Потвърди парола"}</label>
                   </div>
 
                   <button
                     className="btn btn-outline-dark btn-md px-5"
                     onClick={() => inputHandler()}
-                    type="submit"
+                    type="button"
                   >
                     {lang === "en" ? "Register" : "Регистрирай се"}
                   </button>

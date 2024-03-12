@@ -10,6 +10,7 @@ import com.robobg.service.AnswerService;
 import com.robobg.service.QuestionService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/answers")
-    public ResponseEntity<String> createAnswer(@RequestBody AnswerCreateDTO answerCreateDTO, HttpServletRequest request) throws EntityNotFoundException {
+    public ResponseEntity<String> createAnswer(@Valid @RequestBody AnswerCreateDTO answerCreateDTO, HttpServletRequest request) throws EntityNotFoundException {
         String token = extractJwtFromRequest(request);
         String tokenUsername = jwtService.extractUsername(token);
         String requestUsername = answerCreateDTO.getAuthorUsername();
@@ -77,7 +78,7 @@ public class UserController {
     }
 
     @PostMapping("/questions")
-    public ResponseEntity<String> createQuestion(@RequestBody QuestionCreateDTO questionCreateDTO, HttpServletRequest request) throws EntityNotFoundException {
+    public ResponseEntity<String> createQuestion(@Valid @RequestBody QuestionCreateDTO questionCreateDTO, HttpServletRequest request) throws EntityNotFoundException {
         String token = extractJwtFromRequest(request);
         String tokenUsername = jwtService.extractUsername(token);
         String requestUsername = questionCreateDTO.getAuthorUsername();

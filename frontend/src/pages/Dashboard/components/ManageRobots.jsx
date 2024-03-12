@@ -221,11 +221,11 @@ const ManageRobots = () => {
                 aria-label="Previous"
                 onClick={prevPage}
               >
-                <span aria-hidden="true">&laquo;</span>
+                <span aria-hidden="true" style={{color:"black"}}>&laquo;</span>
               </a>
             </li>
             <li class="page-item">
-              <span class="page-link" href="#">
+              <span class="page-link" href="#" style={{color:"black"}}>
                 {Page + 1}
               </span>
             </li>
@@ -236,7 +236,7 @@ const ManageRobots = () => {
                 aria-label="Next"
                 onClick={nextPage}
               >
-                <span aria-hidden="true">&raquo;</span>
+                <span aria-hidden="true" style={{color:"black"}}>&raquo;</span>
               </a>
             </li>
           </ul>

@@ -39,11 +39,11 @@ const Robots = () => {
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
-    
+
     if (checked) {
-      setBrands(prev => [...prev, value]);
+      setBrands((prev) => [...prev, value]);
     } else {
-      setBrands(prev => prev.filter(brand => brand !== value));
+      setBrands((prev) => prev.filter((brand) => brand !== value));
     }
     setPage(0);
     console.log(Brands);
@@ -57,20 +57,157 @@ const Robots = () => {
             className="fw-bolder"
             style={{ marginTop: "10px", textAlign: "center" }}
           >
-            {lang === "en" ? (
-              "All Robot Vacuum Cleaners"
-            ) : (
-              "Всички роботи"
-            )}
+            {lang === "en" ? "All Robot Vacuum Cleaners" : "Всички роботи"}
+            <br></br>
+            <button
+            className="btn btn-light mt-3 d-lg-none"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasExample"
+            aria-controls="offcanvasExample"
+          >
+            Filters
+          </button>
           </h3>
+
+
+          <div
+            class="offcanvas offcanvas-start"
+            tabindex="-1"
+            id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel"
+          >
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+                Filters
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="offcanvas-body">
+            <form id="filters">
+                <div>
+                  <label for="id_title" class="form-label">
+                    By model name
+                  </label>
+                  <input
+                    type="text"
+                    name="title"
+                    value={Model}
+                    onChange={(e) => {
+                      setModel(e.target.value);
+                      setPage(0);
+                    }}
+                    class="textinput textInput form-control"
+                    id="id_title"
+                  ></input>
+                </div>
+                <div className="mt-3">
+                  <label class="form-label">Brand Name</label>
+                  <div className="card p-2">
+                    <div className="form-check">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="brand_name"
+                        checked={Brands.includes("360")}
+                        value="360"
+                        onChange={handleCheckboxChange}
+                      ></input>
+                      <label for="id_brand_name_0" class="form-check-label">
+                        360
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="brand_name"
+                        checked={Brands.includes("Xiaomi")}
+                        value="Xiaomi"
+                        onChange={handleCheckboxChange}
+                      ></input>
+                      <label for="id_brand_name_0" class="form-check-label">
+                        Xiaomi
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="brand_name"
+                        checked={Brands.includes("Roborock")}
+                        value="Roborock"
+                        onChange={handleCheckboxChange}
+                      ></input>
+                      <label for="id_brand_name_0" class="form-check-label">
+                        Roborock
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="brand_name"
+                        checked={Brands.includes("SAMSUNG")}
+                        value="SAMSUNG"
+                        onChange={handleCheckboxChange}
+                      ></input>
+                      <label for="id_brand_name_0" class="form-check-label">
+                        SAMSUNG
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="brand_name"
+                        checked={Brands.includes("Eufy")}
+                        value="Eufy"
+                        onChange={handleCheckboxChange}
+                      ></input>
+                      <label for="id_brand_name_0" class="form-check-label">
+                        Eufy
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="brand_name"
+                        checked={Brands.includes("bObsweep")}
+                        value="bObsweep"
+                        onChange={handleCheckboxChange}
+                      ></input>
+                      <label for="id_brand_name_0" class="form-check-label">
+                        bObsweep
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <button
+                type="button"
+                className="btn btn-light mt-3"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              >Apply</button>
+            </div>
+          </div>
           {isLoading ? (
-            <><Loading/></>
+            <>
+              <Loading />
+            </>
           ) : data.content ? (
             <div className="col-12 d-flex flex-wrap justify-content-evenly">
               {data.content.map((item) => (
                 <div
                   className="col-6 col-sm-4 col-md-4 col-lg-3 m-3"
-                  style={{maxWidth:"200px"}}
+                  style={{}}
                   key={item.id}
                 >
                   <div className="card h-100 shadow-sm bg-body-tertiary rounded">
@@ -102,7 +239,7 @@ const Robots = () => {
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
-                          {lang === "en" ? ("Check price") : ("Проверка на цена")}
+                          {lang === "en" ? "Check price" : "Проверка на цена"}
                         </button>
                         <ul className="dropdown-menu">
                           {item.purchaseLinks.length > 0 &&
@@ -131,11 +268,13 @@ const Robots = () => {
                     aria-label="Previous"
                     onClick={prevPage}
                   >
-                    <span aria-hidden="true">&laquo;</span>
+                    <span aria-hidden="true" style={{ color: "black" }}>
+                      &laquo;
+                    </span>
                   </a>
                 </li>
                 <li class="page-item">
-                  <span class="page-link" href="#">
+                  <span class="page-link" href="#" style={{ color: "black" }}>
                     {Page + 1}
                   </span>
                 </li>
@@ -146,76 +285,129 @@ const Robots = () => {
                     aria-label="Next"
                     onClick={nextPage}
                   >
-                    <span aria-hidden="true">&raquo;</span>
+                    <span aria-hidden="true" style={{ color: "black" }}>
+                      &raquo;
+                    </span>
                   </a>
                 </li>
               </ul>
             </nav>
           </div>
         </div>
-        <div className="col-12 col-md-12 col-lg-3" style={{marginTop:"68px"}}>
-             <div className="card d-none d-lg-block">
-              <div class="card-header">
-                Filters
-              </div>
-              <div  className="card-body p-4">
-                  <form id="filters">
-                    <div>
-                    <label for="id_title" class="form-label">
-                      By model name
-                    </label>
-                    <input type="text" name="title" value={Model} onChange={(e) => {setModel(e.target.value); setPage(0)}} class="textinput textInput form-control" id="id_title"></input>
-                    </div>
-                    <div className="mt-3">
-                      <label class="form-label">
-                        Brand Name
-                      </label>
-                      <div className="card p-2">
-                      <div className="form-check">
-                      <input type="checkbox" className="form-check-input" name="brand_name" value="360" onChange={handleCheckboxChange} ></input>
-                        <label for="id_brand_name_0" class="form-check-label">
+        <div
+          className="col-12 col-md-12 col-lg-3"
+          style={{ marginTop: "68px" }}
+        >
+          <div className="card d-none d-lg-block">
+            <div class="card-header">Filters</div>
+            <div className="card-body p-4">
+              <form id="filters">
+                <div>
+                  <label for="id_title" class="form-label">
+                    By model name
+                  </label>
+                  <input
+                    type="text"
+                    name="title"
+                    value={Model}
+                    onChange={(e) => {
+                      setModel(e.target.value);
+                      setPage(0);
+                    }}
+                    class="textinput textInput form-control"
+                    id="id_title"
+                  ></input>
+                </div>
+                <div className="mt-3">
+                  <label class="form-label">Brand Name</label>
+                  <div className="card p-2">
+                    <div className="form-check">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="brand_name"
+                        checked={Brands.includes("360")}
+                        value="360"
+                        onChange={handleCheckboxChange}
+                      ></input>
+                      <label for="id_brand_name_0" class="form-check-label">
                         360
-                        </label>
-                      </div>
-                      <div className="form-check">
-                      <input type="checkbox" className="form-check-input" name="brand_name" value="Xiaomi" onChange={handleCheckboxChange} ></input>
-                        <label for="id_brand_name_0" class="form-check-label">
-                        Xiaomi
-                        </label>
-                      </div>
-                      <div className="form-check">
-                      <input type="checkbox" className="form-check-input" name="brand_name" value="Roborock" onChange={handleCheckboxChange} ></input>
-                        <label for="id_brand_name_0" class="form-check-label">
-                        Roborock
-                        </label>
-                      </div>
-                      <div className="form-check">
-                      <input type="checkbox" className="form-check-input" name="brand_name" value="SAMSUNG" onChange={handleCheckboxChange} ></input>
-                        <label for="id_brand_name_0" class="form-check-label">
-                        SAMSUNG
-                        </label>
-                      </div>
-                      <div className="form-check">
-                      <input type="checkbox" className="form-check-input" name="brand_name" value="Eufy" onChange={handleCheckboxChange} ></input>
-                        <label for="id_brand_name_0" class="form-check-label">
-                        Eufy
-                        </label>
-                      </div>
-                      <div className="form-check">
-                      <input type="checkbox" className="form-check-input" name="brand_name" value="bObsweep" onChange={handleCheckboxChange} ></input>
-                        <label for="id_brand_name_0" class="form-check-label">
-                        bObsweep
-                        </label>
-                      </div>
-                      </div>
+                      </label>
                     </div>
-                  </form>
-              </div>
-             </div>
-             <div className="d-none d-lg-block">
-             <PopularComparisons/>
-             </div>
+                    <div className="form-check">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="brand_name"
+                        checked={Brands.includes("Xiaomi")}
+                        value="Xiaomi"
+                        onChange={handleCheckboxChange}
+                      ></input>
+                      <label for="id_brand_name_0" class="form-check-label">
+                        Xiaomi
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="brand_name"
+                        checked={Brands.includes("Roborock")}
+                        value="Roborock"
+                        onChange={handleCheckboxChange}
+                      ></input>
+                      <label for="id_brand_name_0" class="form-check-label">
+                        Roborock
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="brand_name"
+                        checked={Brands.includes("SAMSUNG")}
+                        value="SAMSUNG"
+                        onChange={handleCheckboxChange}
+                      ></input>
+                      <label for="id_brand_name_0" class="form-check-label">
+                        SAMSUNG
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="brand_name"
+                        checked={Brands.includes("Eufy")}
+                        value="Eufy"
+                        onChange={handleCheckboxChange}
+                      ></input>
+                      <label for="id_brand_name_0" class="form-check-label">
+                        Eufy
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="brand_name"
+                        checked={Brands.includes("bObsweep")}
+                        value="bObsweep"
+                        onChange={handleCheckboxChange}
+                      ></input>
+                      <label for="id_brand_name_0" class="form-check-label">
+                        bObsweep
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
+          <div className="d-none d-lg-block">
+            <PopularComparisons />
+          </div>
+        </div>
       </div>
     </section>
   );

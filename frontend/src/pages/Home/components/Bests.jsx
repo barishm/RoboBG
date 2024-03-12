@@ -34,7 +34,7 @@ const Bests = () => {
           {data.map((item) => (
             <div
               className="col-6 col-sm-4 col-md-4 col-lg-3 m-3"
-              style={{ maxWidth: "200px" }}
+              style={{}}
               key={item.id}
             >
               <div className="card h-100 shadow-sm bg-body-tertiary rounded">
