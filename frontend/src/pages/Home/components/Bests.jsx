@@ -3,17 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { useGetBestRobotsQuery } from "../../../app/services/robotApiSlice";
 import { useSelector } from "react-redux";
 import Loading from "../../../components/Loading";
+import Error from "../../../components/Error";
 
 const Bests = () => {
   const lang = useSelector((state) => state.language.lang);
   const navigate = useNavigate();
   const noImage = "images/no-image.jpg";
 
-  const { data, isLoading } = useGetBestRobotsQuery();
+  const { data, isLoading, isError } = useGetBestRobotsQuery();
 
   const details = (robotId) => {
     navigate("/robots/" + robotId);
   };
+
+  if (isError) {
+    return <Error />;
+  }
 
   return (
     <div>
@@ -29,6 +34,8 @@ const Bests = () => {
       </h3>
       {isLoading ? (
         <><Loading/></>
+      ) : isError ? (
+        <></>
       ) : data ? (
         <div className="col-12 d-flex flex-wrap justify-content-evenly">
           {data.map((item) => (

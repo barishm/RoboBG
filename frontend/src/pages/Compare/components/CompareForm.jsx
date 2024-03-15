@@ -8,13 +8,14 @@ import { addRobot,deleteAllRobots  } from "../../../app/redux/compareSlice";
 import { useSelector } from "react-redux";
 import Loading from "../../../components/Loading";
 import { useNavigate } from "react-router-dom";
+import Error from "../../../components/Error";
 
 const CompareForm = () => {
   const queryParams = {
     fields: "model"
   }
   const lang = useSelector((state) => state.language.lang);
-  const { data: allModels, isLoading: allModelsLoading } =
+  const { data: allModels, isLoading: allModelsLoading, isError } =
   useGetAllRobotsQuery(queryParams);
   const dispatch = useDispatch();
   const [triggerCompare1] = useLazyGetRobotByIdQuery();
@@ -53,8 +54,9 @@ const CompareForm = () => {
         <>
           <Loading />
         </>
-      ) : (
-        <>
+      ) : isError ? (
+        <></>
+      ) : allModels ? (
           <div className="d-flex flex-column justify-content-center align-items-center mt-4">
             <h4>{lang === "en" ? <>Robot vacuums to compare:</> : <>Роботи за сравнение:</>}</h4>
             <div className="d-flex flex-column align-items-center p-3 w-100">
@@ -100,8 +102,7 @@ const CompareForm = () => {
               </button>
             </div>
           </div>
-        </>
-      )}
+      ) : <></>}
     </div>
   );
 };

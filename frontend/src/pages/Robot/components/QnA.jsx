@@ -57,7 +57,7 @@ const QnA = (props) => {
       text: answerTexts[questionId],
     };
     isUserLoggedIn();
-    if (answerBody.text.length < 5 || answerBody.text.length > 120) {
+    if (answerBody.text.length < 5 || answerBody.text.length > 300) {
       setInvalidAnswer(true);
       return;
     }
@@ -77,7 +77,7 @@ const QnA = (props) => {
       text: questionText,
     };
     isUserLoggedIn();
-    if (questionBody.text.length < 5 || questionBody.text.length > 120) {
+    if (questionBody.text.length < 5 || questionBody.text.length > 300) {
       setInvalidQuestion(true);
       return;
     } else {
@@ -120,7 +120,7 @@ const QnA = (props) => {
         onFocus={isUserLoggedIn}
       ></textarea>
       <div className="invalid-feedback">
-        Question must contain 5-120 characters.
+        Question must contain 5-300 characters.
       </div>
       <button
         type="button"
@@ -247,7 +247,7 @@ const QnA = (props) => {
                     onFocus={isUserLoggedIn}
                   ></textarea>
                   <div className="invalid-feedback">
-                    Asnwer must contain 5-120 characters.
+                    Asnwer must contain 5-300 characters.
                   </div>
                   <button
                     type="button"

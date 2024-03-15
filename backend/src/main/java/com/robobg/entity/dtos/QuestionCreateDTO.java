@@ -12,6 +12,6 @@ public class QuestionCreateDTO {
     private String authorUsername;
     @NotBlank
     @NotNull
-    @Size(min = 5,max = 120)
+    @Size(min = 5,max = 300)
     private String text;
 }

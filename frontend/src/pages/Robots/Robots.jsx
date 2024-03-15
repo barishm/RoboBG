@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import PopularComparisons from "../Compare/components/PopularComparisons";
 import Loading from "../../components/Loading";
+import Error from "../../components/Error";
 
 const Robots = () => {
   const [Page, setPage] = useState(0);
@@ -18,7 +19,7 @@ const Robots = () => {
 
   const lang = useSelector((state) => state.language.lang);
   const navigate = useNavigate();
-  const { data, isLoading } = useGetAllRobotsQuery(queryParams);
+  const { data, isLoading, isError } = useGetAllRobotsQuery(queryParams);
   const noImage = "images/no-image.jpg";
   const isLast = data?.last;
 
@@ -48,6 +49,9 @@ const Robots = () => {
     setPage(0);
     console.log(Brands);
   };
+  if (isError) {
+    return <Error />;
+  }
 
   return (
     <section className="mt-5">

@@ -1,7 +1,9 @@
 import { useGetLatestVideosQuery } from "../../../app/services/youtubeApiSlice";
 import { useSelector } from "react-redux";
+import Error from "../../../components/Error";
+
 const YoutubeVideos = () => {
-  const { data, isLoading } = useGetLatestVideosQuery();
+  const { data, isLoading, isError } = useGetLatestVideosQuery();
   const lang = useSelector((state) => state.language.lang);
 
   return (
@@ -18,15 +20,17 @@ const YoutubeVideos = () => {
       </h3>
       {isLoading ? (
         <>Loading...</>
+      ) :isError ? (
+        <Error/>
       ) : data ? (
         <div className="row">
           {data.items.map((item) => (
-            <div className="col-12 col-md-6 mt-4 d-flex justify-content-center" key={item.id.videoId}>
+            <div className="col-12 col-md-6 mt-4 d-flex justify-content-center" key={item.snippet.resourceId.videoId}>
               <iframe
                 width="400"
                 height="225"
                 style={{ borderRadius: "10px" }}
-                src={`https://www.youtube.com/embed/${item.id.videoId}`}
+                src={`https://www.youtube.com/embed/${item.snippet.resourceId.videoId}`}
               ></iframe>
             </div>
           ))}

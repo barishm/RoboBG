@@ -7,10 +7,10 @@ import com.robobg.entity.Role;
 import com.robobg.entity.User;
 import com.robobg.repository.RobotRepository;
 import com.robobg.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +22,10 @@ public class DatabaseSeeder implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
     private final ObjectMapper objectMapper;
     private final RobotRepository robotRepository;
+    @Value("${ADMIN_USERNAME}")
+    private String adminUsername;
+    @Value("${ADMIN_PASSWORD}")
+    private String adminPassword;
 
 
     public DatabaseSeeder(UserRepository userRepository, PasswordEncoder passwordEncoder, ObjectMapper objectMapper, RobotRepository robotRepository) {
@@ -33,23 +37,12 @@ public class DatabaseSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if(userRepository.findByUsername("admin").isEmpty()) {
+        if(userRepository.findByUsername(adminUsername).isEmpty()) {
             User user = new User();
-            user.setUsername("admin");
-            user.setPassword(passwordEncoder.encode("123456"));
+            user.setUsername(adminUsername);
+            user.setPassword(passwordEncoder.encode(adminPassword));
             user.setRole(Role.ADMIN);
             userRepository.save(user);
-        }
-        InputStream inputStreamOfUsers = getClass().getResourceAsStream("/users.json");
-        User[] data2 = objectMapper.readValue(inputStreamOfUsers,User[].class);
-        List<User> usersToSave = Arrays.stream(data2)
-                .filter(user -> !userRepository.existsByUsername(user.getUsername()))
-                .peek(user -> {
-                    user.setPassword(passwordEncoder.encode(user.getPassword())); // Encoding password here
-                })
-                .collect(Collectors.toList());
-        if(!usersToSave.isEmpty()){
-            userRepository.saveAll(usersToSave);
         }
 
         InputStream inputStream = getClass().getResourceAsStream("/robots.json");
