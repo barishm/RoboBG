@@ -25,7 +25,7 @@ export const robotApiSlice = apiSlice.injectEndpoints({
 
             }),
             providesTags: ['Robot'],
-            keepUnusedDataFor: 999,
+            keepUnusedDataFor: 60*60*24,
         }),
         createRobot: builder.mutation({
             query: ({robotBody, accessToken}) => ({

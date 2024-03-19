@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useRegisterMutation } from "../../app/services/authApiSlice";
@@ -20,6 +20,15 @@ const Register = () => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,7}$/;
     return !emailRegex.test(email);
   };
+
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
 
 
@@ -68,7 +77,7 @@ const Register = () => {
   };
   return (
     <div className="container mt-5">
-          <div className="card shadow-sm" style={{ borderRadius: "1rem",maxWidth:"500px",marginLeft:"auto",marginRight:"auto" }}>
+          <div className={screenSize > 767 ? "card shadow-sm" : ""} style={{ borderRadius: "1rem",maxWidth:"500px",marginLeft:"auto",marginRight:"auto" }}>
             <div className="card-body p-5 text-center">
                 <form>
                   <h2 className="fw-bold mb-4">{lang === "en" ? "Sign up" : "Регистрирай се"}</h2>
@@ -88,6 +97,7 @@ const Register = () => {
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
                       className={`form-control form-control-md ${invalidUsername ? "is-invalid" : ""}`}
+                      style={screenSize > 767 ? {} : {backgroundColor:"rgb(245,245,245)"}}
                     />
                     <div class="invalid-feedback">
                       Username must contain 6-20 Characters.
@@ -100,6 +110,7 @@ const Register = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className={`form-control form-control-md ${invalidEmail ? "is-invalid" : ""}`}
+                      style={screenSize > 767 ? {} : {backgroundColor:"rgb(245,245,245)"}}
                     />
                     <div className="invalid-feedback">
                       Email is not valid.
@@ -114,6 +125,7 @@ const Register = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className={`form-control form-control-md ${invalidPassword ? "is-invalid" : ""}`}
+                      style={screenSize > 767 ? {} : {backgroundColor:"rgb(245,245,245)"}}
                     />
                     <div className="invalid-feedback">
                       Password must contain 6-20 Characters.
@@ -128,6 +140,7 @@ const Register = () => {
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       className={`form-control form-control-md ${invalidPassword ? "is-invalid" : ""}`}
+                      style={screenSize > 767 ? {} : {backgroundColor:"rgb(245,245,245)"}}
                     />
                     <div className="invalid-feedback">
                       Password must contain 6-20 Characters.
@@ -136,7 +149,7 @@ const Register = () => {
                   </div>
 
                   <button
-                    className="btn btn-outline-dark btn-md px-5"
+                    className="btn btn-dark btn-md px-5"
                     onClick={() => inputHandler()}
                     type="button"
                   >

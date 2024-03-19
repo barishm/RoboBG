@@ -80,6 +80,11 @@ footer {
   color: rgb(73, 73, 73);
 }
 
+#blackPlaceholder::placeholder {
+  color: black;
+  opacity: 1;
+}
+
 .position-custom {
   position: absolute;
   top: 1rem; /* Adjust as necessary */

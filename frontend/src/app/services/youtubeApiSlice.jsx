@@ -9,6 +9,7 @@ export const youtubeApiSlice = apiSlice.injectEndpoints({
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                keepUnusedDataFor: 60*60*24,
             }),
         })
     })
