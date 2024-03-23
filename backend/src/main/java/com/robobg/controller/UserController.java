@@ -1,7 +1,6 @@
 package com.robobg.controller;
 
 import com.robobg.config.JwtService;
-import com.robobg.entity.Answer;
 import com.robobg.entity.Question;
 import com.robobg.entity.dtos.AnswerCreateDTO;
 import com.robobg.entity.dtos.QuestionCreateDTO;
@@ -16,12 +15,11 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@CrossOrigin(origins = "https://robot-review.netlify.app/")
+@CrossOrigin(origins = "https://robobg.netlify.app/")
 @RequestMapping("/v1/user")
 public class UserController {
     private final QuestionService questionService;
     private final AnswerService answerService;
-
     private final JwtService jwtService;
 
     public UserController(QuestionService questionService, AnswerService answerService, JwtService jwtService) {
@@ -32,68 +30,25 @@ public class UserController {
 
     @PostMapping("/answers")
     public ResponseEntity<String> createAnswer(@Valid @RequestBody AnswerCreateDTO answerCreateDTO, HttpServletRequest request) throws EntityNotFoundException {
-        String token = extractJwtFromRequest(request);
-        String tokenUsername = jwtService.extractUsername(token);
-        String requestUsername = answerCreateDTO.getAuthorUsername();
-        if (!tokenUsername.equals(requestUsername)) {
-            return ResponseEntity.status(HttpServletResponse.SC_FORBIDDEN).body("Invalid user");
-        }
-        answerService.createAnswer(answerCreateDTO);
+        answerService.createAnswer(answerCreateDTO,request);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/answers/{id}")
     public ResponseEntity<String> deleteAnswer(@PathVariable Long id, HttpServletRequest request) throws EntityNotFoundException {
-        String token = extractJwtFromRequest(request);
-        String tokenUsername = jwtService.extractUsername(token);
-        Answer answer = answerService.findById(id);
-        String authorUsername = answer.getAuthor().getUsername();
-        String tokenRole = jwtService.extractRole(token);
-        if("ADMIN".equals(tokenRole)){
-            answerService.deleteAnswer(id);
-            return ResponseEntity.ok().build();
-        } else if (tokenUsername.equals(authorUsername)) {
-            answerService.deleteAnswer(id);
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.status(HttpServletResponse.SC_FORBIDDEN).body("Invalid user");
-        }
+        answerService.deleteAnswer(id,request);
+        return ResponseEntity.ok().build();
     }
     @DeleteMapping("/questions/{id}")
     public ResponseEntity<String> deleteQuestion(@PathVariable Long id, HttpServletRequest request) throws EntityNotFoundException {
-        String token = extractJwtFromRequest(request);
-        String tokenUsername = jwtService.extractUsername(token);
-        String tokenRole = jwtService.extractRole(token);
-        Question question = questionService.findById(id);
-        String authorUsername = question.getAuthor().getUsername();
-        if("ADMIN".equals(tokenRole)){
-            questionService.deleteQuestion(id);
-            return ResponseEntity.ok().build();
-        } else if (tokenUsername.equals(authorUsername)) {
-            questionService.deleteQuestion(id);
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.status(HttpServletResponse.SC_FORBIDDEN).body("Invalid user");
-        }
+        questionService.deleteQuestion(id,request);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/questions")
     public ResponseEntity<String> createQuestion(@Valid @RequestBody QuestionCreateDTO questionCreateDTO, HttpServletRequest request) throws EntityNotFoundException {
-        String token = extractJwtFromRequest(request);
-        String tokenUsername = jwtService.extractUsername(token);
-        String requestUsername = questionCreateDTO.getAuthorUsername();
-        if (!tokenUsername.equals(requestUsername)) {
-            return ResponseEntity.status(HttpServletResponse.SC_FORBIDDEN).body("Invalid user");
-        }
-        questionService.createQuestion(questionCreateDTO);
+        questionService.createQuestion(questionCreateDTO,request);
         return ResponseEntity.ok().build();
     }
 
-    private String extractJwtFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
 }

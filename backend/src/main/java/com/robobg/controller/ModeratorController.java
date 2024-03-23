@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://robot-review.netlify.app/")
+@CrossOrigin(origins = "https://robobg.netlify.app/")
 @RequestMapping("/v1/moderator")
 public class ModeratorController {
     private final RobotService robotService;

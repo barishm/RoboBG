@@ -20,8 +20,7 @@ const Contact = () => {
             className={screenSize > 767 ? "card shadow-sm" : ""}
             style={{ borderRadius: "1rem" }}
           >
-            <div className="card-body p-5 pb-3 text-center">
-              <div className="mb-md-3 mt-md-2 pb-3">
+            <div className="card-body p-3 p-md-5 text-center">
                 <form
                   action="https://formsubmit.co/barismassive@gmail.com"
                   method="POST"
@@ -62,7 +61,7 @@ const Contact = () => {
                   </div>
 
                   <button
-                    className="btn btn-dark btn-md px-5 mt-2"
+                    className="btn btn-dark btn-md px-5 mt-4"
                     type="submit"
                   >
                     {lang === "en" ? "Submit" : "Изпращане"}
@@ -74,7 +73,6 @@ const Contact = () => {
                     value="http://localhost:5173/contact"
                   ></input>
                 </form>
-              </div>
             </div>
           </div>
         </div>
