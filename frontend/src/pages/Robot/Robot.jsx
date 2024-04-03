@@ -69,7 +69,7 @@ const Robot = () => {
             <div className="row">
               <div className="col-12 shadow-sm rounded card p-5" style={{maxWidth:"900px",marginRight:"auto",marginLeft:"auto"}}>
                 <div className="row">
-                  <div className="col-12 col-md-4 mb-4">
+                  <div className="col-8 col-md-4 mb-4">
                     <img
                       style={{ maxWidth: "100%", height: "auto" }}
                       src={data.image || noImage}
@@ -91,11 +91,10 @@ const Robot = () => {
                     </button>
                     <button
                       type="button"
-                      className="btn btn-warning btn dropdown-toggle"
+                      className="btn btn-warning btn dropdown-toggle ms-4"
                       style={{
                         marginTop: "20px",
                         marginBottom: "10px",
-                        marginLeft: "30px",
                       }}
                       data-bs-toggle="dropdown"
                       aria-expanded="false"

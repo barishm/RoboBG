@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useGetAllRobotsQuery } from "../../app/services/robotApiSlice";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PopularComparisons from "../Compare/components/PopularComparisons";
 import Loading from "../../components/Loading";
 import Error from "../../components/Error";
@@ -64,25 +64,26 @@ const Robots = () => {
             {lang === "en" ? "All Robot Vacuum Cleaners" : "Всички роботи"}
             <br></br>
             <button
-            className="btn btn-light mt-3 d-lg-none"
+            className="btn btn-dark mt-3 d-lg-none"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasExample"
             aria-controls="offcanvasExample"
           >
+            <i class="fa-solid fa-filter fa-sm"></i>&nbsp;
             Filters
           </button>
           </h3>
 
 
           <div
-            class="offcanvas offcanvas-start"
+            className="offcanvas offcanvas-start"
             tabindex="-1"
             id="offcanvasExample"
             aria-labelledby="offcanvasExampleLabel"
           >
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+            <div className="offcanvas-header">
+              <h5 className="offcanvas-title" id="offcanvasExampleLabel">
                 Filters
               </h5>
               <button
@@ -92,10 +93,10 @@ const Robots = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div class="offcanvas-body">
+            <div className="offcanvas-body">
             <form id="filters">
                 <div>
-                  <label for="id_title" class="form-label">
+                  <label for="id_title" className="form-label">
                     By model name
                   </label>
                   <input
@@ -106,12 +107,12 @@ const Robots = () => {
                       setModel(e.target.value);
                       setPage(0);
                     }}
-                    class="textinput textInput form-control"
+                    className="textinput textInput form-control"
                     id="id_title"
                   ></input>
                 </div>
                 <div className="mt-3">
-                  <label class="form-label">Brand Name</label>
+                  <label className="form-label">Brand Name</label>
                   <div className="card p-2">
                     <div className="form-check">
                       <input
@@ -196,7 +197,7 @@ const Robots = () => {
               </form>
               <button
                 type="button"
-                className="btn btn-light mt-3"
+                className="btn btn-dark mt-3"
                 data-bs-dismiss="offcanvas"
                 aria-label="Close"
               >Apply</button>
@@ -210,8 +211,7 @@ const Robots = () => {
             <div className="col-12 d-flex flex-wrap justify-content-evenly">
               {data.content.map((item) => (
                 <div
-                  className="col-6 col-sm-4 col-md-4 col-lg-3 m-3"
-                  style={{}}
+                  className="col-8 col-sm-8 col-md-4 col-lg-4 col-xl-3 m-3"
                   key={item.id}
                 >
                   <div className="card h-100 shadow-sm bg-body-tertiary rounded">
@@ -235,15 +235,15 @@ const Robots = () => {
                         </h5>
                       </div>
                     </div>
-                    <div className="card-footer text-center p-4 pt-0 pb-0 mb-3 border-top-0 bg-transparent">
+                    <div className="card-footer mb-2 border-top-0 bg-transparent d-flex justify-content-evenly">
                       <div className="btn-group text-center">
                         <button
                           type="button"
-                          className="btn btn-warning btn-sm dropdown-toggle"
+                          className="btn btn-warning btn-sm dropdown-toggle rounded-5"
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
-                          {lang === "en" ? "Check price" : "Проверка на цена"}
+                          {lang === "en" ? "Check price" : "Провери цена"}
                         </button>
                         <ul className="dropdown-menu">
                           {item.purchaseLinks.length > 0 &&
@@ -256,6 +256,9 @@ const Robots = () => {
                             ))}
                         </ul>
                       </div>
+                      <div className="mt-1">
+                        <i className="fa-regular fa-comments fa-sm"></i> <span className="">0</span>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -303,7 +306,7 @@ const Robots = () => {
           style={{ marginTop: "68px" }}
         >
           <div className="card d-none d-lg-block">
-            <div class="card-header">Filters</div>
+            <div className="card-header p-3"> <h5 style={{marginBottom:"0px"}}> <i class="fa-solid fa-filter fa-sm"></i> Filters</h5></div>
             <div className="card-body p-4">
               <form id="filters">
                 <div>

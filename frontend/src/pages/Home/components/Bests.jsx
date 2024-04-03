@@ -33,20 +33,16 @@ const Bests = () => {
         )}
       </h3>
       {isLoading ? (
-        <><Loading/></>
+        <Loading />
       ) : isError ? (
         <></>
       ) : data ? (
-        <div className="col-12 d-flex flex-wrap justify-content-evenly">
+        <div className="row d-flex justify-content-evenly">
           {data.map((item) => (
-            <div
-              className="col-6 col-sm-4 col-md-4 col-lg-3 m-3"
-              style={{}}
-              key={item.id}
-            >
-              <div className="card h-100 shadow-sm bg-body-tertiary rounded">
+            <div key={item.id} className="col-6 col-sm-4 col-md-4 col-lg-3 mb-3 ">
+              <div className="card shadow-sm bg-body-tertiary rounded">
                 <img
-                  className="rounded-top"
+                  className="card-img-top rounded-top"
                   value={item.id}
                   style={{ cursor: "pointer" }}
                   onClick={() => details(item.id)}
@@ -56,7 +52,7 @@ const Bests = () => {
                 <div className="card-body">
                   <div className="text-center">
                     <h5
-                      className="fw-bolder"
+                      className="card-title fw-bolder"
                       onClick={() => details(item.id)}
                       value={item.id}
                       style={{ cursor: "pointer" }}
@@ -65,15 +61,15 @@ const Bests = () => {
                     </h5>
                   </div>
                 </div>
-                <div className="card-footer text-center p-4 pt-0 pb-0 mb-3 border-top-0 bg-transparent">
+                <div className="card-footer border-top-0 bg-transparent d-flex justify-content-between align-items-center">
                   <div className="btn-group text-center">
                     <button
                       type="button"
-                      className="btn btn-warning btn-sm dropdown-toggle"
+                      className="btn btn-warning btn-sm dropdown-toggle rounded-5"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      {lang === "en" ? ("Check price") : ("Проверка на цена")}
+                      {lang === "en" ? "Check price" : "Провери цена"}
                     </button>
                     <ul className="dropdown-menu">
                       {item.purchaseLinks.length > 0 &&
@@ -85,6 +81,10 @@ const Bests = () => {
                           </li>
                         ))}
                     </ul>
+                  </div>
+                  <div className="mt-1">
+                    <i className="fa-regular fa-comments fa-sm"></i>{" "}
+                    <span className="">0</span>
                   </div>
                 </div>
               </div>

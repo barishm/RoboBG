@@ -14,7 +14,7 @@ const Login = () => {
   const [login] = useLoginMutation();
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState("");
-  
+
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   useEffect(() => {
     const handleResize = () => {
@@ -51,7 +51,7 @@ const Login = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className={screenSize > 767 ? "container mt-5" : "container mt-2"}>
       <div
         className={screenSize > 767 ? "card shadow-sm" : ""}
         style={{
@@ -87,7 +87,11 @@ const Login = () => {
                   setUsername(e.target.value);
                 }}
                 className="form-control form-control-md"
-                style={screenSize > 767 ? {} : {backgroundColor:"rgb(245,245,245)"}}
+                style={
+                  screenSize > 767
+                    ? {}
+                    : { backgroundColor: "rgb(245,245,245)" }
+                }
               />
               <label className="form-label">
                 {lang === "en" ? "Username" : "Потребителско име"}
@@ -105,7 +109,11 @@ const Login = () => {
                 }}
                 name="password"
                 className="form-control form-control-md"
-                style={screenSize > 767 ? {} : {backgroundColor:"rgb(245,245,245)"}}
+                style={
+                  screenSize > 767
+                    ? {}
+                    : { backgroundColor: "rgb(245,245,245)" }
+                }
               />
               <label className="form-label">
                 {lang === "en" ? "Password" : "Парола"}

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@CrossOrigin(origins = "https://robobg.netlify.app/")
+@CrossOrigin(origins = "http://localhost:5173/")
 @RequestMapping("/v1/admin")
 public class AdminController {
     private final UserService userService;
