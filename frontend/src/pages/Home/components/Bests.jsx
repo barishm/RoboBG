@@ -37,9 +37,9 @@ const Bests = () => {
       ) : isError ? (
         <></>
       ) : data ? (
-        <div className="row d-flex justify-content-evenly">
+        <div className="row mt-4">
           {data.map((item) => (
-            <div key={item.id} className="col-6 col-sm-4 col-md-4 col-lg-3 mb-3 ">
+            <div key={item.id} className="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-3">
               <div className="card shadow-sm bg-body-tertiary rounded">
                 <img
                   className="card-img-top rounded-top"
@@ -61,7 +61,7 @@ const Bests = () => {
                     </h5>
                   </div>
                 </div>
-                <div className="card-footer border-top-0 bg-transparent d-flex justify-content-between align-items-center">
+                <div className="card-footer border-top-0 bg-transparent d-flex justify-content-evenly align-items-center mb-1">
                   <div className="btn-group text-center">
                     <button
                       type="button"
@@ -69,7 +69,7 @@ const Bests = () => {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      {lang === "en" ? "Check price" : "Провери цена"}
+                      {lang === "en" ? "Price" : "Цена"}
                     </button>
                     <ul className="dropdown-menu">
                       {item.purchaseLinks.length > 0 &&

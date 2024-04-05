@@ -15,9 +15,9 @@ const Home = (props) => {
             <Bests setIds={setIds} Ids={Ids} />
             <YoutubeVideos/>
           </div>
-          <div className="col-12 col-md-12 col-lg-3" style={{marginTop:"68px"}}>
+          <div className="col-12 col-md-12 col-lg-3" style={{marginTop:"48px",padding:"20px"}}>
              <div className="card d-none d-lg-block text-center">
-              <div className="card-body" style={{padding:"20px"}}>
+              <div className="card-body" style={{paddingBottom:"20px"}}>
                   <CompareForm/>
               </div>
              </div>

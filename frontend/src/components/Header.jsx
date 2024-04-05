@@ -31,7 +31,7 @@ const Header = () => {
   return (
     <Navbar expand="md" className="bg-white">
       <Container>
-        <Navbar.Brand href="/">RoboBG (under maintenance)</Navbar.Brand>
+        <Navbar.Brand href="/">RoboBG (beta)</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
