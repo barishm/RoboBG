@@ -14,9 +14,9 @@
       "sideBrushes":"2",
       "voicePrompts":true,
       "cleaningFeatures":{
-         "suctionPower":"2600 Pa",
+         "suctionPower":"2600",
          "cleaningArea":"150",
-         "dustbinCapacity":"510 ml",
+         "dustbinCapacity":"510",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
          "barrierCrossHeight":"15 mm",
@@ -26,14 +26,14 @@
       "moppingFeatures":{
          "wetMopping":true,
          "electricWaterFlowControl":true,
-         "waterTankCapacity":"300 ml",
+         "waterTankCapacity":"300",
          "vibratingMoppingPad":false,
          "autoMopLifting":false,
          "autoWaterTankRefilling":false,
          "autoMopWashing":false
       },
       "battery":{
-         "batteryCapacity":"2600 mAh",
+         "batteryCapacity":"2600",
          "batteryLife":"120 min",
          "chargingTime":"120 min",
          "ratedPower":null
@@ -67,8 +67,7 @@
          "width":"31.5 cm",
          "height":"7.9 cm",
          "inTheBox":"2 x Side Brushes, Power Adapter, Charge Dock, Remote Control, 2 x AAA Remote Control Battery, High Efficiency HEPA Filter, Cleaning Tool, Dust Bin, Water Tank, Mop Cloth, Multi-language User Instruction",
-         "releaseDate":"Jul 2020",
-         "warranty":"12 months"
+         "releaseDate":"2024-04-01"
       }
    },
    {
@@ -86,9 +85,9 @@
       "sideBrushes":"1",
       "voicePrompts":true,
       "cleaningFeatures":{
-         "suctionPower":"330 Pa",
+         "suctionPower":"330",
          "cleaningArea":"200",
-         "dustbinCapacity":"500 ml",
+         "dustbinCapacity":"500",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
          "barrierCrossHeight":"20 mm",
@@ -98,14 +97,14 @@
       "moppingFeatures":{
          "wetMopping":true,
          "electricWaterFlowControl":true,
-         "waterTankCapacity":"520 ml",
+         "waterTankCapacity":"520",
          "vibratingMoppingPad":false,
          "autoMopLifting":false,
          "autoWaterTankRefilling":false,
          "autoMopWashing":false
       },
       "battery":{
-         "batteryCapacity":"5000 mAh",
+         "batteryCapacity":"5000",
          "batteryLife":"180 min",
          "chargingTime":null,
          "ratedPower":"30 W"
@@ -139,8 +138,7 @@
          "width":"35 cm",
          "height":"8.5 cm",
          "inTheBox":"robot vacuum, charging dock, figure 8 cable, mopping pad, user manual, AC/DC adapter, plug adapters",
-         "releaseDate":"May 2021",
-         "warranty":"12 months"
+         "releaseDate":"2022-04-01"
       }
    },
    {
@@ -158,9 +156,9 @@
       "sideBrushes":"1",
       "voicePrompts":true,
       "cleaningFeatures":{
-         "suctionPower":"2000 Pa",
+         "suctionPower":"2000",
          "cleaningArea":"150",
-         "dustbinCapacity":"550 ml",
+         "dustbinCapacity":"550",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
          "barrierCrossHeight":"20 mm",
@@ -177,7 +175,7 @@
          "autoMopWashing":null
       },
       "battery":{
-         "batteryCapacity":"2600 mAh",
+         "batteryCapacity":"2600",
          "batteryLife":"110 min",
          "chargingTime":"120 min",
          "ratedPower":"30 W"
@@ -211,8 +209,7 @@
          "width":"35 cm",
          "height":"10 cm",
          "inTheBox":"charging base, adapter, filter, water tank, mop, cleaning tool, English manual",
-         "releaseDate":"2018",
-         "warranty":"12 months"
+         "releaseDate":"2020-04-01"
       }
    },
    {
@@ -230,9 +227,9 @@
       "sideBrushes":"2",
       "voicePrompts":true,
       "cleaningFeatures":{
-         "suctionPower":"1800 Pa",
+         "suctionPower":"1800",
          "cleaningArea":"200",
-         "dustbinCapacity":"400 ml",
+         "dustbinCapacity":"400",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
          "barrierCrossHeight":"17 mm",
@@ -242,14 +239,14 @@
       "moppingFeatures":{
          "wetMopping":true,
          "electricWaterFlowControl":true,
-         "waterTankCapacity":"80 ml",
+         "waterTankCapacity":"80",
          "vibratingMoppingPad":false,
          "autoMopLifting":false,
          "autoWaterTankRefilling":false,
          "autoMopWashing":false
       },
       "battery":{
-         "batteryCapacity":"3200 mAh",
+         "batteryCapacity":"3200",
          "batteryLife":"90 min",
          "chargingTime":"150 min",
          "ratedPower":"30 W"
@@ -283,8 +280,7 @@
          "width":"35 cm",
          "height":"10 cm",
          "inTheBox":"charging base, adapter, filter, water tank, mop, cleaning tool, English manual",
-         "releaseDate":"2018",
-         "warranty":"12 months"
+         "releaseDate":"2019-05-01"
       }
    },
    {
@@ -302,9 +298,9 @@
       "sideBrushes":"2",
       "voicePrompts":true,
       "cleaningFeatures":{
-         "suctionPower":"1800 Pa",
+         "suctionPower":"1800",
          "cleaningArea":"200",
-         "dustbinCapacity":"400 ml",
+         "dustbinCapacity":"400",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
          "barrierCrossHeight":"17 mm",
@@ -314,14 +310,14 @@
       "moppingFeatures":{
          "wetMopping":true,
          "electricWaterFlowControl":true,
-         "waterTankCapacity":"80 ml",
+         "waterTankCapacity":"80",
          "vibratingMoppingPad":false,
          "autoMopLifting":false,
          "autoWaterTankRefilling":false,
          "autoMopWashing":false
       },
       "battery":{
-         "batteryCapacity":"3200 mAh",
+         "batteryCapacity":"3200",
          "batteryLife":"90 min",
          "chargingTime":"150 min",
          "ratedPower":"30 W"
@@ -355,8 +351,7 @@
          "width":"35 cm",
          "height":"10 cm",
          "inTheBox":"charging base, adapter, filter, water tank, mop, cleaning tool, English manual",
-         "releaseDate":"2018",
-         "warranty":"12 months"
+         "releaseDate":"2019-05-01"
       }
    },
    {
@@ -374,9 +369,9 @@
       "sideBrushes":"2",
       "voicePrompts":true,
       "cleaningFeatures":{
-         "suctionPower":"1800 Pa",
+         "suctionPower":"1800",
          "cleaningArea":"200",
-         "dustbinCapacity":"400 ml",
+         "dustbinCapacity":"400",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
          "barrierCrossHeight":"17 mm",
@@ -386,14 +381,14 @@
       "moppingFeatures":{
          "wetMopping":true,
          "electricWaterFlowControl":true,
-         "waterTankCapacity":"80 ml",
+         "waterTankCapacity":"80",
          "vibratingMoppingPad":false,
          "autoMopLifting":false,
          "autoWaterTankRefilling":false,
          "autoMopWashing":false
       },
       "battery":{
-         "batteryCapacity":"3200 mAh",
+         "batteryCapacity":"3200",
          "batteryLife":"90 min",
          "chargingTime":"150 min",
          "ratedPower":"30 W"
@@ -427,8 +422,7 @@
          "width":"35 cm",
          "height":"10 cm",
          "inTheBox":"charging base, adapter, filter, water tank, mop, cleaning tool, English manual",
-         "releaseDate":"2018",
-         "warranty":"12 months"
+         "releaseDate":"2019-05-01"
       }
    },
    {
@@ -446,9 +440,9 @@
       "sideBrushes":"2",
       "voicePrompts":true,
       "cleaningFeatures":{
-         "suctionPower":"1800 Pa",
+         "suctionPower":"1800",
          "cleaningArea":"200",
-         "dustbinCapacity":"400 ml",
+         "dustbinCapacity":"400",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
          "barrierCrossHeight":"17 mm",
@@ -458,14 +452,14 @@
       "moppingFeatures":{
          "wetMopping":true,
          "electricWaterFlowControl":true,
-         "waterTankCapacity":"80 ml",
+         "waterTankCapacity":"80",
          "vibratingMoppingPad":false,
          "autoMopLifting":false,
          "autoWaterTankRefilling":false,
          "autoMopWashing":false
       },
       "battery":{
-         "batteryCapacity":"3200 mAh",
+         "batteryCapacity":"3200",
          "batteryLife":"90 min",
          "chargingTime":"150 min",
          "ratedPower":"30 W"
@@ -499,8 +493,7 @@
          "width":"35 cm",
          "height":"10 cm",
          "inTheBox":"charging base, adapter, filter, water tank, mop, cleaning tool, English manual",
-         "releaseDate":"2018",
-         "warranty":"12 months"
+         "releaseDate":"2019-05-01"
       }
    },
    {
@@ -518,9 +511,9 @@
       "sideBrushes":"2",
       "voicePrompts":true,
       "cleaningFeatures":{
-         "suctionPower":"1800 Pa",
+         "suctionPower":"1800",
          "cleaningArea":"200",
-         "dustbinCapacity":"400 ml",
+         "dustbinCapacity":"400",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
          "barrierCrossHeight":"17 mm",
@@ -530,14 +523,14 @@
       "moppingFeatures":{
          "wetMopping":true,
          "electricWaterFlowControl":true,
-         "waterTankCapacity":"80 ml",
+         "waterTankCapacity":"80",
          "vibratingMoppingPad":false,
          "autoMopLifting":false,
          "autoWaterTankRefilling":false,
          "autoMopWashing":false
       },
       "battery":{
-         "batteryCapacity":"3200 mAh",
+         "batteryCapacity":"3200",
          "batteryLife":"90 min",
          "chargingTime":"150 min",
          "ratedPower":"30 W"
@@ -571,8 +564,7 @@
          "width":"35 cm",
          "height":"10 cm",
          "inTheBox":"charging base, adapter, filter, water tank, mop, cleaning tool, English manual",
-         "releaseDate":"2018",
-         "warranty":"12 months"
+         "releaseDate":"2019-05-01"
       }
    },
    {
@@ -590,9 +582,9 @@
       "sideBrushes":"2",
       "voicePrompts":true,
       "cleaningFeatures":{
-         "suctionPower":"1800 Pa",
+         "suctionPower":"1800",
          "cleaningArea":"200",
-         "dustbinCapacity":"400 ml",
+         "dustbinCapacity":"400",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
          "barrierCrossHeight":"17 mm",
@@ -602,14 +594,14 @@
       "moppingFeatures":{
          "wetMopping":true,
          "electricWaterFlowControl":true,
-         "waterTankCapacity":"80 ml",
+         "waterTankCapacity":"80",
          "vibratingMoppingPad":false,
          "autoMopLifting":false,
          "autoWaterTankRefilling":false,
          "autoMopWashing":false
       },
       "battery":{
-         "batteryCapacity":"3200 mAh",
+         "batteryCapacity":"3200",
          "batteryLife":"90 min",
          "chargingTime":"150 min",
          "ratedPower":"30 W"
@@ -643,8 +635,7 @@
          "width":"35 cm",
          "height":"10 cm",
          "inTheBox":"charging base, adapter, filter, water tank, mop, cleaning tool, English manual",
-         "releaseDate":"2018",
-         "warranty":"12 months"
+         "releaseDate":"2019-05-01"
       }
    },
    {
@@ -662,9 +653,9 @@
       "sideBrushes":"2",
       "voicePrompts":true,
       "cleaningFeatures":{
-         "suctionPower":"1800 Pa",
+         "suctionPower":"1800",
          "cleaningArea":"200",
-         "dustbinCapacity":"400 ml",
+         "dustbinCapacity":"400",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
          "barrierCrossHeight":"17 mm",
@@ -674,14 +665,14 @@
       "moppingFeatures":{
          "wetMopping":true,
          "electricWaterFlowControl":true,
-         "waterTankCapacity":"80 ml",
+         "waterTankCapacity":"80",
          "vibratingMoppingPad":false,
          "autoMopLifting":false,
          "autoWaterTankRefilling":false,
          "autoMopWashing":false
       },
       "battery":{
-         "batteryCapacity":"3200 mAh",
+         "batteryCapacity":"3200",
          "batteryLife":"90 min",
          "chargingTime":"150 min",
          "ratedPower":"30 W"
@@ -715,8 +706,7 @@
          "width":"35 cm",
          "height":"10 cm",
          "inTheBox":"charging base, adapter, filter, water tank, mop, cleaning tool, English manual",
-         "releaseDate":"2018",
-         "warranty":"12 months"
+         "releaseDate":"2019-05-01"
       }
    },
    {
@@ -734,9 +724,9 @@
       "sideBrushes":"2",
       "voicePrompts":true,
       "cleaningFeatures":{
-         "suctionPower":"1800 Pa",
+         "suctionPower":"1800",
          "cleaningArea":"200 m^2",
-         "dustbinCapacity":"400 ml",
+         "dustbinCapacity":"400",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
          "barrierCrossHeight":"17 mm",
@@ -746,14 +736,14 @@
       "moppingFeatures":{
          "wetMopping":true,
          "electricWaterFlowControl":true,
-         "waterTankCapacity":"80 ml",
+         "waterTankCapacity":"80",
          "vibratingMoppingPad":false,
          "autoMopLifting":false,
          "autoWaterTankRefilling":false,
          "autoMopWashing":false
       },
       "battery":{
-         "batteryCapacity":"3200 mAh",
+         "batteryCapacity":"3200",
          "batteryLife":"90 min",
          "chargingTime":"150 min",
          "ratedPower":"30 W"
@@ -787,8 +777,7 @@
          "width":"35 cm",
          "height":"10 cm",
          "inTheBox":"charging base, adapter, filter, water tank, mop, cleaning tool, English manual",
-         "releaseDate":"2018",
-         "warranty":"12 months"
+         "releaseDate":"2019-05-01"
       }
    },
    {
@@ -806,9 +795,9 @@
       "sideBrushes":"2",
       "voicePrompts":true,
       "cleaningFeatures":{
-         "suctionPower":"1800 Pa",
+         "suctionPower":"1800",
          "cleaningArea":"200",
-         "dustbinCapacity":"400 ml",
+         "dustbinCapacity":"400",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
          "barrierCrossHeight":"17 mm",
@@ -818,14 +807,14 @@
       "moppingFeatures":{
          "wetMopping":true,
          "electricWaterFlowControl":true,
-         "waterTankCapacity":"80 ml",
+         "waterTankCapacity":"80",
          "vibratingMoppingPad":false,
          "autoMopLifting":false,
          "autoWaterTankRefilling":false,
          "autoMopWashing":false
       },
       "battery":{
-         "batteryCapacity":"3200 mAh",
+         "batteryCapacity":"3200",
          "batteryLife":"90 min",
          "chargingTime":"150 min",
          "ratedPower":"30 W"
@@ -859,8 +848,7 @@
          "width":"35 cm",
          "height":"10 cm",
          "inTheBox":"charging base, adapter, filter, water tank, mop, cleaning tool, English manual",
-         "releaseDate":"2018",
-         "warranty":"12 months"
+         "releaseDate":"2015-05-01"
       }
    },
    {
@@ -878,9 +866,9 @@
       "sideBrushes":"2",
       "voicePrompts":true,
       "cleaningFeatures":{
-         "suctionPower":"1800 Pa",
+         "suctionPower":"1800",
          "cleaningArea":"200",
-         "dustbinCapacity":"400 ml",
+         "dustbinCapacity":"400",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
          "barrierCrossHeight":"17 mm",
@@ -890,14 +878,14 @@
       "moppingFeatures":{
          "wetMopping":true,
          "electricWaterFlowControl":true,
-         "waterTankCapacity":"80 ml",
+         "waterTankCapacity":"80",
          "vibratingMoppingPad":false,
          "autoMopLifting":false,
          "autoWaterTankRefilling":false,
          "autoMopWashing":false
       },
       "battery":{
-         "batteryCapacity":"3200 mAh",
+         "batteryCapacity":"3200",
          "batteryLife":"90 min",
          "chargingTime":"150 min",
          "ratedPower":"30 W"
@@ -931,8 +919,7 @@
          "width":"35 cm",
          "height":"10 cm",
          "inTheBox":"charging base, adapter, filter, water tank, mop, cleaning tool, English manual",
-         "releaseDate":"2018",
-         "warranty":"12 months"
+         "releaseDate":"2019-05-01"
       }
    },
    {
@@ -950,9 +937,9 @@
       "sideBrushes":"2",
       "voicePrompts":true,
       "cleaningFeatures":{
-         "suctionPower":"1800 Pa",
+         "suctionPower":"1800",
          "cleaningArea":"200",
-         "dustbinCapacity":"400 ml",
+         "dustbinCapacity":"400",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
          "barrierCrossHeight":"17 mm",
@@ -962,14 +949,14 @@
       "moppingFeatures":{
          "wetMopping":true,
          "electricWaterFlowControl":true,
-         "waterTankCapacity":"80 ml",
+         "waterTankCapacity":"80",
          "vibratingMoppingPad":false,
          "autoMopLifting":false,
          "autoWaterTankRefilling":false,
          "autoMopWashing":false
       },
       "battery":{
-         "batteryCapacity":"3200 mAh",
+         "batteryCapacity":"3200",
          "batteryLife":"90 min",
          "chargingTime":"150 min",
          "ratedPower":"30 W"
@@ -1003,8 +990,7 @@
          "width":"35 cm",
          "height":"10 cm",
          "inTheBox":"charging base, adapter, filter, water tank, mop, cleaning tool, English manual",
-         "releaseDate":"2018",
-         "warranty":"12 months"
+         "releaseDate":"2019-05-01"
       }
    },
    {
@@ -1022,9 +1008,9 @@
       "sideBrushes":"2",
       "voicePrompts":true,
       "cleaningFeatures":{
-         "suctionPower":"1800 Pa",
+         "suctionPower":"1800",
          "cleaningArea":"200",
-         "dustbinCapacity":"400 ml",
+         "dustbinCapacity":"400",
          "disposableDustBagCapacity":null,
          "autoDirtDisposal":false,
          "barrierCrossHeight":"17 mm",
@@ -1034,14 +1020,14 @@
       "moppingFeatures":{
          "wetMopping":true,
          "electricWaterFlowControl":true,
-         "waterTankCapacity":"80 ml",
+         "waterTankCapacity":"80",
          "vibratingMoppingPad":false,
          "autoMopLifting":false,
          "autoWaterTankRefilling":false,
          "autoMopWashing":false
       },
       "battery":{
-         "batteryCapacity":"3200 mAh",
+         "batteryCapacity":"3200",
          "batteryLife":"90 min",
          "chargingTime":"150 min",
          "ratedPower":"30 W"
@@ -1075,8 +1061,7 @@
          "width":"35 cm",
          "height":"10 cm",
          "inTheBox":"charging base, adapter, filter, water tank, mop, cleaning tool, English manual",
-         "releaseDate":"2018",
-         "warranty":"12 months"
+         "releaseDate":"2019-05-01"
       }
    }
 ]

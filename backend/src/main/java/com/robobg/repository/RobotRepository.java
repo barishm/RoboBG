@@ -15,12 +15,14 @@ import java.util.Optional;
 public interface RobotRepository extends JpaRepository<Robot,Long> {
     @Query("FROM Robot r WHERE r.bests IS NOT NULL")
     List<Robot> findAllBests();
-    Optional<Robot> findByModel(String model);
     boolean existsByModel(String model);
     @Query("SELECT r.image FROM Robot r WHERE r.id = :id")
     String findImageById(@Param("id") Long id);
     @Query("SELECT r FROM Robot r WHERE r.model LIKE %:model% AND r.brand IN :brands ORDER BY CASE WHEN r.bests = TRUE THEN 0 ELSE 1 END, r.brand, r.model")
     Page<Robot> findByModelContainsAndBrandInAndOrderByBests(Pageable page, String model, List<String> brands);
+
+    @Query("SELECT r FROM Robot r JOIN r.otherSpecifications os WHERE r.model LIKE %:model% AND r.brand IN :brands AND YEAR(os.releaseDate) BETWEEN :startYear AND :endYear ORDER BY CASE WHEN r.bests = TRUE THEN 0 ELSE 1 END, r.brand, r.model")
+    Page<Robot> findByModelContainsAndBrandInAndReleaseYearBetweenAndOrderByBests(Pageable pageable, String model, List<String> brands, int startYear, int endYear);
     @Query("SELECT r.model FROM Robot r WHERE r.id = :id")
     String findModelById(Long id);
 

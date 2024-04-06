@@ -51,7 +51,7 @@ const Login = () => {
   };
 
   return (
-    <div className={screenSize > 767 ? "container mt-5" : "container mt-2"}>
+    <div className={screenSize > 767 ? "container mt-5 mb-5 " : "container mt-2"}>
       <div
         className={screenSize > 767 ? "card shadow-sm" : ""}
         style={{

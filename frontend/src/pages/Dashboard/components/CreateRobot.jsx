@@ -57,7 +57,7 @@ const CreateRobot = () => {
             control: {
                 scheduling: "null",
                 wifiSmartphoneApp: "null",
-                wifiFrequencyBand: "null",
+                wifiFrequencyBand: "",
                 amazonAlexaSupport: "null",
                 googleAssistantSupport: "null",
                 magneticVirtualWalls: "null",
@@ -83,8 +83,7 @@ const CreateRobot = () => {
                 width: "",
                 height: "",
                 inTheBox: "",
-                releaseDate: "",
-                warranty: ""
+                releaseDate: ""
             }
         },
         onSubmit: values => {
@@ -213,15 +212,24 @@ const CreateRobot = () => {
             </div>
             <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Suction Power</label>
-            <input className="form-control form-control-sm" type="text" name="cleaningFeatures.suctionPower" onChange={formik.handleChange} value={formik.values.cleaningFeatures.suctionPower} aria-label=".form-control-sm example"/>
+            <div class="input-group">
+            <input className="form-control form-control-sm" type="number" name="cleaningFeatures.suctionPower" onChange={formik.handleChange} value={formik.values.cleaningFeatures.suctionPower} aria-label=".form-control-sm example"/>
+            <span class="input-group-text">Pa</span>
+            </div>
             </div>
             <div className="mb-3">
-            <label htmlFor="exampleFormControlInput1" className="form-label">Cleaning Area (m&sup2;)</label>
+            <label htmlFor="exampleFormControlInput1" className="form-label">Cleaning Area</label>
+            <div class="input-group">
             <input className="form-control form-control-sm" type="text" name="cleaningFeatures.cleaningArea" onChange={formik.handleChange} value={formik.values.cleaningFeatures.cleaningArea} aria-label=".form-control-sm example"/>
+            <span class="input-group-text">m&sup2;</span>
+            </div>
             </div>
             <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Dustbin Capacity</label>
-            <input className="form-control form-control-sm" type="text" name="cleaningFeatures.dustbinCapacity" onChange={formik.handleChange} value={formik.values.cleaningFeatures.dustbinCapacity} aria-label=".form-control-sm example"/>
+            <div class="input-group">
+            <input className="form-control form-control-sm" type="number" name="cleaningFeatures.dustbinCapacity" onChange={formik.handleChange} value={formik.values.cleaningFeatures.dustbinCapacity} aria-label=".form-control-sm example"/>
+            <span class="input-group-text">ml</span>
+            </div>
             </div>
             <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Disposable Dust Bag Capacity</label>
@@ -273,7 +281,10 @@ const CreateRobot = () => {
             </div>
             <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Water Tank Capacity</label>
-            <input className="form-control form-control-sm" type="text" name="moppingFeatures.waterTankCapacity" onChange={formik.handleChange} value={formik.values.moppingFeatures.waterTankCapacity} aria-label=".form-control-sm example"/>
+            <div className="input-group">
+            <input className="form-control form-control-sm" type="number" name="moppingFeatures.waterTankCapacity" onChange={formik.handleChange} value={formik.values.moppingFeatures.waterTankCapacity} aria-label=".form-control-sm example"/>
+            <span class="input-group-text">ml</span>
+            </div>
             </div>
             <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Vibrating Mopping Pad</label>
@@ -348,11 +359,7 @@ const CreateRobot = () => {
             </div>
             <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Wifi Frequency Band</label>
-            <select className="form-control form-control-sm" name="control.wifiFrequencyBand" onChange={formik.handleChange} value={formik.values.control.wifiFrequencyBand}>
-              <option value="null">N/A</option>
-              <option value="true">YES</option>
-              <option value="false">NO</option>
-            </select>
+            <input className="form-control form-control-sm" type="text" name="control.wifiFrequencyBand" onChange={formik.handleChange} value={formik.values.control.wifiFrequencyBand} aria-label=".form-control-sm example"/>
             </div>
             <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Amazon Alexa Support</label>
@@ -484,11 +491,7 @@ const CreateRobot = () => {
             </div>
             <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Release Date</label>
-            <input className="form-control form-control-sm" type="text" name="otherSpecifications.releaseDate" onChange={formik.handleChange} value={formik.values.otherSpecifications.releaseDate} aria-label=".form-control-sm example"/>
-            </div>
-            <div className="mb-3">
-            <label htmlFor="exampleFormControlInput1" className="form-label">Warranty</label>
-            <input className="form-control form-control-sm" type="text" name="otherSpecifications.  warranty" onChange={formik.handleChange} value={formik.values.otherSpecifications.warranty} aria-label=".form-control-sm example"/>
+            <input className="form-control form-control-sm" type="date" name="otherSpecifications.releaseDate" onChange={formik.handleChange} value={formik.values.otherSpecifications.releaseDate} aria-label=".form-control-sm example"/>
             </div>
             </div>
             </div>

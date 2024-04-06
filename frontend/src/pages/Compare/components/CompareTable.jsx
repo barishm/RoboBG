@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import Loading from "../../../components/Loading";
 import { useLazyGetRobotByIdQuery, useGetAllRobotsQuery } from "../../../app/services/robotApiSlice";
 import { useState } from "react";
+import ReleaseDateDisplay from "../../../components/ReleaseDateDisplay";
 
 const CompareTable = () => {
   const queryParams = {
@@ -473,13 +474,9 @@ const CompareTable = () => {
                 <th scope="row">
                   <span className="stickycell">Release Date</span>
                 </th>
-                {renderRow("otherSpecifications.releaseDate")}
-              </tr>
-              <tr>
-                <th scope="row">
-                  <span className="stickycell">Warranty</span>
-                </th>
-                {renderRow("otherSpecifications.warranty")}
+                {robots.map((item) => (
+                  <td key={item.id} style={{ height: "80px", verticalAlign: "bottom", textAlign: "left", whiteSpace: "normal" }} className="border"><ReleaseDateDisplay releaseDate={item.otherSpecifications.releaseDate} /></td>
+                ))}
               </tr>
             </tbody>
           </table>

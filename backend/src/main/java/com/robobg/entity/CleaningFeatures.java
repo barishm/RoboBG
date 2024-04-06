@@ -20,13 +20,13 @@ public class CleaningFeatures {
     private Long id;
 
     @Column(name = "suction_power")
-    private String suctionPower;
+    private Integer suctionPower;
 
     @Column(name = "cleaning_area")
     private String cleaningArea;
 
     @Column(name = "dustbin_capacity")
-    private String dustbinCapacity;
+    private Integer dustbinCapacity;
 
     @Column(name = "disposable_dust_bag_capacity")
     private String disposableDustBagCapacity;

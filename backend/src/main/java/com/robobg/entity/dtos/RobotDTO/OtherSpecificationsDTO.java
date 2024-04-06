@@ -1,6 +1,7 @@
 package com.robobg.entity.dtos.RobotDTO;
 
 import lombok.Data;
+import java.time.LocalDate;
 
 @Data
 public class OtherSpecificationsDTO {
@@ -9,6 +10,5 @@ public class OtherSpecificationsDTO {
     private String width;
     private String height;
     private String inTheBox;
-    private String releaseDate;
-    private String warranty;
+    private LocalDate releaseDate;
 }

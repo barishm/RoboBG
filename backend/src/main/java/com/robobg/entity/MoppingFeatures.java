@@ -24,7 +24,7 @@ public class MoppingFeatures {
     private Boolean electricWaterFlowControl;
 
     @Column(name = "water_tank_capacity")
-    private String waterTankCapacity;
+    private Integer waterTankCapacity;
 
     @Column(name = "vibrating_mopping_pad")
     private Boolean vibratingMoppingPad;

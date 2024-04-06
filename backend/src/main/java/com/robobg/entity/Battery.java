@@ -18,7 +18,7 @@ public class Battery {
     private Long id;
 
     @Column(name = "battery_capacity")
-    private String batteryCapacity;
+    private Integer batteryCapacity;
 
     @Column(name = "battery_life")
     private String batteryLife;

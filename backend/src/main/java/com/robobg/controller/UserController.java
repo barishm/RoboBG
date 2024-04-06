@@ -1,31 +1,27 @@
 package com.robobg.controller;
 
 import com.robobg.config.JwtService;
-import com.robobg.entity.Question;
 import com.robobg.entity.dtos.AnswerCreateDTO;
 import com.robobg.entity.dtos.QuestionCreateDTO;
 import com.robobg.exceptions.EntityNotFoundException;
 import com.robobg.service.AnswerService;
 import com.robobg.service.QuestionService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@CrossOrigin(origins = "https://robobg.netlify.app/")
+@CrossOrigin(origins = "http://localhost:5173/")
 @RequestMapping("/v1/user")
 public class UserController {
     private final QuestionService questionService;
     private final AnswerService answerService;
-    private final JwtService jwtService;
 
     public UserController(QuestionService questionService, AnswerService answerService, JwtService jwtService) {
         this.questionService = questionService;
         this.answerService = answerService;
-        this.jwtService = jwtService;
     }
 
     @PostMapping("/answers")

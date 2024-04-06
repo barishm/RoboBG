@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class BatteryDTO {
     private Long id;
-    private String batteryCapacity;
+    private Integer batteryCapacity;
     private String batteryLife;
     private String chargingTime;
     private String ratedPower;

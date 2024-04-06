@@ -1,3 +1,4 @@
+import ReleaseDateDisplay from "../../../components/ReleaseDateDisplay";
 
 
 const RobotDetails = (props) => {
@@ -261,11 +262,7 @@ const RobotDetails = (props) => {
                     </tr>
                     <tr>
                         <th>Release Date</th>
-                        <td>{robot.otherSpecifications.releaseDate}</td>
-                    </tr>
-                    <tr>
-                        <th>Warranty</th>
-                        <td>{robot.otherSpecifications.warranty}</td>
+                        <td><ReleaseDateDisplay releaseDate={robot.otherSpecifications.releaseDate}/></td>
                     </tr>
                 </tbody>
             </table>

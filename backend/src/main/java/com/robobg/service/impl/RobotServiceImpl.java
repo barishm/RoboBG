@@ -15,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -72,7 +74,10 @@ public class RobotServiceImpl implements RobotService {
         if(brands.isEmpty()){
             robots = robotRepository.findByModelContainsAndOrderByBests(pageable,model);
         } else {
-            robots = robotRepository.findByModelContainsAndBrandInAndOrderByBests(pageable,model,brands);
+            int startYear = 2018;
+            int endYear = 2021;
+            robots = robotRepository.findByModelContainsAndBrandInAndReleaseYearBetweenAndOrderByBests(pageable, model, brands, startYear, endYear);
+            //robots = robotRepository.findByModelContainsAndBrandInAndOrderByBests(pageable,model,brands);
         }
         List<Robot> listOfRobots = robots.getContent();
         List<RobotModelImageLinksDTO> content = listOfRobots.stream().map(robot -> modelMapper.map(robot, RobotModelImageLinksDTO.class)).collect(Collectors.toList());
@@ -124,10 +129,18 @@ public class RobotServiceImpl implements RobotService {
         if (robotOptional.isEmpty()) {
             throw new IllegalArgumentException("Robot with ID " + robotId + " does not exist.");
         }
+        Robot robot = robotOptional.get();
+        if(robot.getImage() != null) {
+            String fileName = robot.getImage().substring(64);
+            s3Service.deleteObjectFromBucket("robot-review-robot-images",fileName);
+        }
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        String formattedTimestamp = now.format(formatter);
 
         String extension = getExtensionOfFile(file);
         String contentType = determineContentType(extension);
-        String objectKey = "Robot%s.%s".formatted(robotId, extension);
+        String objectKey = "Robot%s_%s.%s".formatted(robotId,formattedTimestamp, extension);
 
         if (contentType.isEmpty()) {
             throw new IllegalArgumentException("Unsupported file type.");
@@ -139,7 +152,6 @@ public class RobotServiceImpl implements RobotService {
                 file.getBytes(),
                 contentType
         );
-        Robot robot = robotOptional.get();
         robot.setImage("https://robot-review-robot-images.s3.eu-central-1.amazonaws.com/" + objectKey);
         robotRepository.save(robot);
     }
