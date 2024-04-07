@@ -59,7 +59,7 @@ const CompareForm = () => {
       ) : allModels ? (
           <div className="d-flex flex-column justify-content-center align-items-center mt-4">
             <h4>{lang === "en" ? <>Robot vacuums to compare:</> : <>Роботи за сравнение:</>}</h4>
-            <div className="d-flex flex-column align-items-center p-1 mb-4 w-100">
+            <div className="d-flex flex-column align-items-center p-1 mb-3 w-100">
               <input
                 className="form-control mb-2"
                 style={{ maxWidth: "350px" }}

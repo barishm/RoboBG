@@ -1,6 +1,5 @@
 package com.robobg.service;
 
-import com.robobg.entity.dtos.*;
 import com.robobg.entity.dtos.RobotDTO.CreateRobotDTO;
 import com.robobg.entity.dtos.RobotDTO.RobotDTO;
 import com.robobg.entity.dtos.RobotDTO.RobotModelImageLinksDTO;
@@ -17,7 +16,7 @@ import java.util.Optional;
 
 @Service
 public interface RobotService {
-    RobotResponse getAllRobotIdModelImageLinks(int page, String model, List<String> brands);
+    RobotResponse getAllRobotIdModelImageLinks(int page, String model, List<String> brands, int startYear, int endYear, int minDustbinCapacity, int maxDustbinCapacity, int minSuctionPower, int maxSuctionPower);
     void saveRobot(CreateRobotDTO robot) throws RobotAlreadyExistsException;
     void updateRobot(CreateRobotDTO robot);
     void deleteRobotById(Long id) throws ChangeSetPersister.NotFoundException;
@@ -29,7 +28,7 @@ public interface RobotService {
 
     Optional<RobotDTO> getRobotById(Long id);
 
-    RobotResponse getRobots(HashSet<String> fields, int page, String model, List<String> brands);
+    RobotResponse getRobots(HashSet<String> fields, int page, String model, List<String> brands,int startYear,int endYear,int minDustbinCapacity,int maxDustbinCapacity,int minSuctionPower,int maxSuctionPower);
 
 
     void uploadRobotImage(Long robotId, MultipartFile file) throws IOException;

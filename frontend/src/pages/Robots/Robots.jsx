@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useGetAllRobotsQuery } from "../../app/services/robotApiSlice";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PopularComparisons from "../Compare/components/PopularComparisons";
 import Loading from "../../components/Loading";
 import Error from "../../components/Error";
@@ -10,11 +10,75 @@ const Robots = () => {
   const [Page, setPage] = useState(0);
   const [Model, setModel] = useState("");
   const [Brands, setBrands] = useState([]);
+  const [StartYear, setStartYear] = useState(0);
+  const [EndYear, setEndYear] = useState(3000);
+  const [MinDustbinCapacity, setMinDustbinCapacity] = useState(0);
+  const [MaxDustbinCapacity, setMaxDustbinCapacity] = useState(15000);
+  const [MinSuctionPower, setMinSuctionPower] = useState(0);
+  const [MaxSuctionPower, setMaxSuctionPower] = useState(15000);
+
+  const handleGoButtonClick = () => {
+    if (document.getElementById("startYearInput").value.length > 0) {
+      const startYearValue = parseInt(
+        document.getElementById("startYearInput").value
+      );
+      setStartYear(startYearValue);
+    } else {
+      setStartYear(0);
+    }
+    if (document.getElementById("endYearInput").value.length > 0) {
+      const endYearValue = parseInt(
+        document.getElementById("endYearInput").value
+      );
+      setEndYear(endYearValue);
+    } else {
+      setEndYear(3000);
+    }
+    if (document.getElementById("minDustbinCapacityInput").value.length > 0) {
+      const minDustbinCapacityValue = parseInt(
+        document.getElementById("minDustbinCapacityInput").value
+      );
+      setMinDustbinCapacity(minDustbinCapacityValue);
+    } else {
+      setMinDustbinCapacity(0);
+    }
+    if (document.getElementById("maxDustbinCapacityInput").value.length > 0) {
+      const maxDustbinCapacityValue = parseInt(
+        document.getElementById("maxDustbinCapacityInput").value
+      );
+      setMaxDustbinCapacity(maxDustbinCapacityValue);
+    } else {
+      setMaxDustbinCapacity(15000);
+    }
+    if (document.getElementById("minSuctionPowerInput").value.length > 0) {
+      const minSuctionPowerValue = parseInt(
+        document.getElementById("minSuctionPowerInput").value
+      );
+      setMinSuctionPower(minSuctionPowerValue);
+    } else {
+      setMinSuctionPower(0);
+    }
+    if (document.getElementById("maxSuctionPowerInput").value.length > 0) {
+      const maxSuctionPowerValue = parseInt(
+        document.getElementById("maxSuctionPowerInput").value
+      );
+      setMaxSuctionPower(maxSuctionPowerValue);
+    } else {
+      setMaxSuctionPower(15000);
+    }
+  };
+
   const queryParams = {
     fields: "model,image,links",
     page: Page,
     model: Model,
     brands: Brands.join(","),
+    startYear: StartYear,
+    endYear: EndYear,
+    minDustbinCapacity: MinDustbinCapacity,
+    maxDustbinCapacity: MaxDustbinCapacity,
+    minSuctionPower: MinSuctionPower,
+    maxSuctionPower: MaxSuctionPower,
   };
 
   const lang = useSelector((state) => state.language.lang);
@@ -64,18 +128,17 @@ const Robots = () => {
             {lang === "en" ? "All Robot Vacuum Cleaners" : "Всички роботи"}
             <br></br>
             <button
-            className="btn btn-dark mt-3 d-lg-none"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasExample"
-            aria-controls="offcanvasExample"
-          >
-            <i class="fa-solid fa-filter fa-sm"></i>&nbsp;
-            Filters
-          </button>
+              className="btn btn-dark mt-3 d-lg-none"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasExample"
+              aria-controls="offcanvasExample"
+            >
+              <i class="fa-solid fa-filter fa-sm"></i>&nbsp; Filters
+            </button>
           </h3>
 
-
+          {/* Mobile Filters Start */}
           <div
             className="offcanvas offcanvas-start"
             tabindex="-1"
@@ -94,7 +157,7 @@ const Robots = () => {
               ></button>
             </div>
             <div className="offcanvas-body">
-            <form id="filters">
+              <form id="filters">
                 <div>
                   <label for="id_title" className="form-label">
                     By model name
@@ -200,9 +263,12 @@ const Robots = () => {
                 className="btn btn-dark mt-3"
                 data-bs-dismiss="offcanvas"
                 aria-label="Close"
-              >Apply</button>
+              >
+                Apply
+              </button>
             </div>
           </div>
+          {/* Mobile Filters End */}
           {isLoading ? (
             <>
               <Loading />
@@ -257,8 +323,9 @@ const Robots = () => {
                         </ul>
                       </div>
                       <div className="mt-1">
-                        <i className="fa-regular fa-comments fa-sm"></i> <span className="">0</span>
-                        </div>
+                        <i className="fa-regular fa-comments fa-sm"></i>{" "}
+                        <span className="">0</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -303,10 +370,16 @@ const Robots = () => {
         </div>
         <div
           className="col-12 col-md-12 col-lg-3"
-          style={{ marginTop: "48px",padding:"20px" }}
+          style={{ marginTop: "48px", padding: "20px" }}
         >
           <div className="card d-none d-lg-block">
-            <div className="card-header p-3"> <h5 style={{marginBottom:"0px"}}> <i class="fa-solid fa-filter fa-sm"></i> Filters</h5></div>
+            <div className="card-header p-3">
+              {" "}
+              <h5 style={{ marginBottom: "0px" }}>
+                {" "}
+                <i class="fa-solid fa-filter fa-sm"></i> Filters
+              </h5>
+            </div>
             <div className="card-body p-4">
               <form id="filters">
                 <div>
@@ -406,6 +479,90 @@ const Robots = () => {
                         bObsweep
                       </label>
                     </div>
+                  </div>
+                </div>
+                <div className="mb-3 mt-3">
+                  <label className="form-label">Release Year</label>
+                  <div className="input-group input-group-sm">
+                    <input
+                      id="startYearInput"
+                      type="number"
+                      className="form-control"
+                      placeholder="From"
+                      aria-label="From"
+                    ></input>
+                    <span className="input-group-text">-</span>
+                    <input
+                      id="endYearInput"
+                      type="number"
+                      className="form-control"
+                      placeholder="To"
+                      aria-label="To"
+                    ></input>
+                    <button
+                      className="btn btn-outline-secondary"
+                      type="button"
+                      id="button-addon1"
+                      onClick={handleGoButtonClick}
+                    >
+                      Go
+                    </button>
+                  </div>
+                </div>
+                <div className="mb-3 mt-3">
+                  <label className="form-label">Dustbin Capacity (ml)</label>
+                  <div className="input-group input-group-sm">
+                    <input
+                      id="minDustbinCapacityInput"
+                      type="number"
+                      className="form-control"
+                      placeholder="From"
+                      aria-label="From"
+                    ></input>
+                    <span className="input-group-text">-</span>
+                    <input
+                      id="maxDustbinCapacityInput"
+                      type="number"
+                      className="form-control"
+                      placeholder="To"
+                      aria-label="To"
+                    ></input>
+                    <button
+                      className="btn btn-outline-secondary"
+                      type="button"
+                      id="button-addon1"
+                      onClick={handleGoButtonClick}
+                    >
+                      Go
+                    </button>
+                  </div>
+                </div>
+                <div className="mb-3 mt-3">
+                  <label className="form-label">Suction Power (Pa)</label>
+                  <div className="input-group input-group-sm">
+                    <input
+                      id="minSuctionPowerInput"
+                      type="number"
+                      className="form-control"
+                      placeholder="From"
+                      aria-label="From"
+                    ></input>
+                    <span className="input-group-text">-</span>
+                    <input
+                      id="maxSuctionPowerInput"
+                      type="number"
+                      className="form-control"
+                      placeholder="To"
+                      aria-label="To"
+                    ></input>
+                    <button
+                      className="btn btn-outline-secondary"
+                      type="button"
+                      id="button-addon1"
+                      onClick={handleGoButtonClick}
+                    >
+                      Go
+                    </button>
                   </div>
                 </div>
               </form>

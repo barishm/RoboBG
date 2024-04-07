@@ -3,7 +3,7 @@ import { addRobot,deleteRobotById } from "../../../app/redux/compareSlice";
 import { useDispatch } from "react-redux";
 import Loading from "../../../components/Loading";
 import { useLazyGetRobotByIdQuery, useGetAllRobotsQuery } from "../../../app/services/robotApiSlice";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReleaseDateDisplay from "../../../components/ReleaseDateDisplay";
 
 const CompareTable = () => {
@@ -17,6 +17,14 @@ const CompareTable = () => {
   const { data: allModels } = useGetAllRobotsQuery(queryParams);
   const [Model, setModel] = useState("");
   const [triggerAdd] = useLazyGetRobotByIdQuery();
+
+  useEffect(() => {
+        // Initialize popovers when the component mounts
+        const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+        popoverTriggerList.map(function (popoverTriggerEl) {
+            return new window.bootstrap.Popover(popoverTriggerEl);
+        });
+  }, []);
 
 
 
@@ -135,61 +143,61 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Mapping</span>
+                  <span className="stickycell">Mapping <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}} data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" data-bs-content="Top popover"></i></span>
                 </th>
                 {renderRow("mapping")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Mapping Sensor Type</span>
+                  <span className="stickycell">Mapping Sensor Type <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}} data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" data-bs-content="Top popover"></i></span>
                 </th>
                 {renderRow("mappingSensorType")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">High Precision Map</span>
+                  <span className="stickycell">High Precision Map <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("highPrecisionMap")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Front Camera</span>
+                  <span className="stickycell">Front Camera <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("frontCamera")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Recharge Resume</span>
+                  <span className="stickycell">Recharge Resume <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("rechargeResume")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Auto Dock And Recharge</span>
+                  <span className="stickycell">Auto Dock And Recharge <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("autoDockAndRecharge")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Noise Level</span>
+                  <span className="stickycell">Noise Level <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("noiseLevel")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Display</span>
+                  <span className="stickycell">Display <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("display")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Side Brushes</span>
+                  <span className="stickycell">Side Brushes <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("sideBrushes")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Voice Prompts</span>
+                  <span className="stickycell">Voice Prompts <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("voicePrompts")}
               </tr>
@@ -199,49 +207,49 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Suction Power</span>
+                  <span className="stickycell">Suction Power <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("cleaningFeatures.suctionPower")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Cleaning Area</span>
+                  <span className="stickycell">Cleaning Area <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("cleaningFeatures.cleaningArea")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Dustbin Capacity</span>
+                  <span className="stickycell">Dustbin Capacity <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("cleaningFeatures.dustbinCapacity")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Disposable Dustbag Capacity</span>
+                  <span className="stickycell">Disposable Dustbag Capacity <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("cleaningFeatures.disposableDustBagCapacity")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Auto Dirt Disposal</span>
+                  <span className="stickycell">Auto Dirt Disposal <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("cleaningFeatures.autoDirtDisposal")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Barrier Cross Height</span>
+                  <span className="stickycell">Barrier Cross Height <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("cleaningFeatures.barrierCrossHeight")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Hepa Filter</span>
+                  <span className="stickycell">Hepa Filter <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("cleaningFeatures.hepaFilter")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Washable Filter</span>
+                  <span className="stickycell">Washable Filter <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("cleaningFeatures.washableFilter")}
               </tr>
@@ -251,43 +259,43 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Wet Mopping</span>
+                  <span className="stickycell">Wet Mopping <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("moppingFeatures.wetMopping")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Electric Water Flow Control</span>
+                  <span className="stickycell">Electric Water Flow Control <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("moppingFeatures.electricWaterFlowControl")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Water Tank Capacity</span>
+                  <span className="stickycell">Water Tank Capacity <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("moppingFeatures.waterTankCapacity")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Vibrating Mopping Pad</span>
+                  <span className="stickycell">Vibrating Mopping Pad <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("moppingFeatures.vibratingMoppingPad")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Auto Mop Lifting</span>
+                  <span className="stickycell">Auto Mop Lifting <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("moppingFeatures.autoMopLifting")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Auto Water Tank Refilling</span>
+                  <span className="stickycell">Auto Water Tank Refilling <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("moppingFeatures.autoWaterTankRefilling")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Auto Mop Washing</span>
+                  <span className="stickycell">Auto Mop Washing <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("moppingFeatures.autoMopWashing")}
               </tr>
@@ -297,25 +305,25 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Battery Capacity</span>
+                  <span className="stickycell">Battery Capacity <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("battery.batteryCapacity")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Battery Life</span>
+                  <span className="stickycell">Battery Life <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("battery.batteryLife")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Charging Time</span>
+                  <span className="stickycell">Charging Time <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("battery.chargingTime")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Rated Power</span>
+                  <span className="stickycell">Rated Power <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("battery.ratedPower")}
               </tr>
@@ -325,43 +333,43 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Scheduling</span>
+                  <span className="stickycell">Scheduling <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("control.scheduling")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Wifi Smartphone App</span>
+                  <span className="stickycell">Wifi Smartphone App <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("control.wifiSmartphoneApp")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Wifi Frequency Band</span>
+                  <span className="stickycell">Wifi Frequency Band <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("control.wifiFrequencyBand")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Amazon Alexa Support</span>
+                  <span className="stickycell">Amazon Alexa Support <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("control.amazonAlexaSupport")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Google Assistant Support</span>
+                  <span className="stickycell">Google Assistant Support <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("control.googleAssistantSupport")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Magnetic Virtual Walls</span>
+                  <span className="stickycell">Magnetic Virtual Walls <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("control.magneticVirtualWalls")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Ir Rf Remote Control</span>
+                  <span className="stickycell">Ir Rf Remote Control <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("control.irRfRemoteControl")}
               </tr>
@@ -371,43 +379,43 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Real Time Tracking</span>
+                  <span className="stickycell">Real Time Tracking <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("appFeatures.realTimeTracking")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Digital Blocked Areas</span>
+                  <span className="stickycell">Digital Blocked Areas <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("appFeatures.digitalBlockedAreas")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Zoned Cleaning</span>
+                  <span className="stickycell">Zoned Cleaning <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("appFeatures.zonedCleaning")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Multi Floor Maps</span>
+                  <span className="stickycell">Multi Floor Maps <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("appFeatures.multiFloorMaps")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Manual Movement Control</span>
+                  <span className="stickycell">Manual Movement Control <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("appFeatures.manualMovementControl")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Selected Room Cleaning</span>
+                  <span className="stickycell">Selected Room Cleaning <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("appFeatures.selectedRoomCleaning")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">No Mop Zones</span>
+                  <span className="stickycell">No Mop Zones <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("appFeatures.noMopZones")}
               </tr>
@@ -417,25 +425,25 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Carpet Boost</span>
+                  <span className="stickycell">Carpet Boost <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("sensor.carpetBoost")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Cliff Sensor</span>
+                  <span className="stickycell">Cliff Sensor <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("sensor.cliffSensor")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Dirt Sensor</span>
+                  <span className="stickycell">Dirt Sensor <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("sensor.dirtSensor")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Full Dustbin Sensor</span>
+                  <span className="stickycell">Full Dustbin Sensor <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("sensor.fullDustbinSensor")}
               </tr>
@@ -445,25 +453,25 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Weight</span>
+                  <span className="stickycell">Weight <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("otherSpecifications.weight")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Width</span>
+                  <span className="stickycell">Width <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("otherSpecifications.width")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Height</span>
+                  <span className="stickycell">Height <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {renderRow("otherSpecifications.height")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">In The Box</span>
+                  <span className="stickycell">In The Box <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {robots.map((item) => (
                     <td key={item.id} style={{height:"150px",verticalAlign: "bottom", textAlign: "left",width:"50px"}} className="border text-break">{item.otherSpecifications.inTheBox}</td>
@@ -472,7 +480,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Release Date</span>
+                  <span className="stickycell">Release Date <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}}></i></span>
                 </th>
                 {robots.map((item) => (
                   <td key={item.id} style={{ height: "80px", verticalAlign: "bottom", textAlign: "left", whiteSpace: "normal" }} className="border"><ReleaseDateDisplay releaseDate={item.otherSpecifications.releaseDate} /></td>

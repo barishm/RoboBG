@@ -32,9 +32,16 @@ public class RobotController {
     public RobotResponse getRobots(@RequestParam(required = false) HashSet<String> fields,
                                    @RequestParam(defaultValue = "0") int page,
                                    @RequestParam(defaultValue = "") String model,
-                                   @RequestParam(defaultValue = "") List<String> brands
+                                   @RequestParam(defaultValue = "") List<String> brands,
+                                   @RequestParam(defaultValue = "0") int startYear,
+                                   @RequestParam(defaultValue = "3000") int endYear,
+                                   @RequestParam(defaultValue = "0") int minDustbinCapacity,
+                                   @RequestParam(defaultValue = "15000") int maxDustbinCapacity,
+                                   @RequestParam(defaultValue = "0") int minSuctionPower,
+                                   @RequestParam(defaultValue = "15000") int maxSuctionPower
     ) {
-        return robotService.getRobots(fields,page,model,brands);
+        System.out.println();
+        return robotService.getRobots(fields,page,model,brands,startYear,endYear,minDustbinCapacity,maxDustbinCapacity,minSuctionPower,maxSuctionPower);
     }
 
     @GetMapping("/bests")

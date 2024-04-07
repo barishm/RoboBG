@@ -68,15 +68,13 @@ public class RobotServiceImpl implements RobotService {
 
 
     @Override
-    public RobotResponse getAllRobotIdModelImageLinks(int page, String model, List<String> brands) {
+    public RobotResponse getAllRobotIdModelImageLinks(int page, String model, List<String> brands, int startYear, int endYear, int minDustbinCapacity, int maxDustbinCapacity, int minSuctionPower, int maxSuctionPower) {
         Pageable pageable = PageRequest.of(page,12);
         Page<Robot> robots;
         if(brands.isEmpty()){
-            robots = robotRepository.findByModelContainsAndOrderByBests(pageable,model);
+            robots = robotRepository.findByModelContainsAndReleaseYearBetweenAndCleaningFeatures(pageable,model,startYear,endYear,minDustbinCapacity,maxDustbinCapacity,minSuctionPower,maxSuctionPower);
         } else {
-            int startYear = 2018;
-            int endYear = 2021;
-            robots = robotRepository.findByModelContainsAndBrandInAndReleaseYearBetweenAndOrderByBests(pageable, model, brands, startYear, endYear);
+            robots = robotRepository.findByModelContainsAndBrandInAndReleaseYearBetweenAndOrderByBests(pageable, model, brands, startYear, endYear,minDustbinCapacity,maxDustbinCapacity,minSuctionPower,maxSuctionPower);
             //robots = robotRepository.findByModelContainsAndBrandInAndOrderByBests(pageable,model,brands);
         }
         List<Robot> listOfRobots = robots.getContent();
@@ -173,9 +171,9 @@ public class RobotServiceImpl implements RobotService {
     }
 
     @Override
-    public RobotResponse getRobots(HashSet<String> fields, int page, String model, List<String> brands) {
+    public RobotResponse getRobots(HashSet<String> fields, int page, String model, List<String> brands,int startYear,int endYear,int minDustbinCapacity,int maxDustbinCapacity,int minSuctionPower,int maxSuctionPower) {
         if (fields.containsAll(Arrays.asList("model", "image", "links"))) {
-            return getAllRobotIdModelImageLinks(page,model,brands);
+            return getAllRobotIdModelImageLinks(page,model,brands,startYear,endYear,minDustbinCapacity,maxDustbinCapacity,minSuctionPower,maxSuctionPower);
         }else if (fields.contains("model")) {
             return getAllModels();
         }
