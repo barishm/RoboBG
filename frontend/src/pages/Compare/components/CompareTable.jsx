@@ -143,7 +143,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Mapping <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000"}} data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" data-bs-content="Top popover"></i></span>
+                  <span className="stickycell">Mapping <i className="fa-regular fa-circle-question fa-xs" style={{color:"#000000",cursor:"pointer"}} data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" data-bs-content="A technology that can be based on a camera sensor, Laser Direct Structuring (LDS) laser or a gyroscope. The robot scans out a room and creates a map. The robots with mapping provide better performance by building the most efficient path of cleaning without missing a spot"></i></span>
                 </th>
                 {renderRow("mapping")}
               </tr>

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useGetAllRobotsQuery } from "../../app/services/robotApiSlice";
+import { useGetAvailableBrandsQuery } from "../../app/services/availableBrandsApiSlice";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import PopularComparisons from "../Compare/components/PopularComparisons";
@@ -84,6 +85,7 @@ const Robots = () => {
   const lang = useSelector((state) => state.language.lang);
   const navigate = useNavigate();
   const { data, isLoading, isError } = useGetAllRobotsQuery(queryParams);
+  const { data:availableBrands, isLoading:availableBrandsIsLoading } = useGetAvailableBrandsQuery();
   const noImage = "images/no-image.jpg";
   const isLast = data?.last;
 
@@ -177,6 +179,29 @@ const Robots = () => {
                 <div className="mt-3">
                   <label className="form-label">Brand Name</label>
                   <div className="card p-2">
+                  {availableBrandsIsLoading ? (
+            <>
+              <Loading />
+            </>
+          ) : availableBrands ? (
+            <>
+              {availableBrands.map((item) => (
+                <div className="form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  name="brand_name"
+                  checked={Brands.includes(item.brand)}
+                  value={item.brand}
+                  onChange={handleCheckboxChange}
+                ></input>
+                <label for="id_brand_name_0" class="form-check-label">
+                  {item.brand}
+                </label>
+              </div>
+              ))}
+            </>
+          ) : null}
                     <div className="form-check">
                       <input
                         type="checkbox"

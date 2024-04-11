@@ -28,15 +28,17 @@ public class RobotServiceImpl implements RobotService {
     private final S3Service s3Service;
     private final ModelMapper modelMapper;
     private final MostComparedService mostComparedService;
+    private final AvailableBrandsServiceImpl availableBrandsService;
 
 
     @Autowired
-    public RobotServiceImpl(RobotRepository robotRepository, S3Service s3Service, ModelMapper modelMapper, MostComparedService mostComparedService) {
+    public RobotServiceImpl(RobotRepository robotRepository, S3Service s3Service, ModelMapper modelMapper, MostComparedService mostComparedService, AvailableBrandsServiceImpl availableBrandsService) {
         super();
         this.robotRepository = robotRepository;
         this.s3Service = s3Service;
         this.modelMapper = modelMapper;
         this.mostComparedService = mostComparedService;
+        this.availableBrandsService = availableBrandsService;
     }
 
     @Override
@@ -92,6 +94,8 @@ public class RobotServiceImpl implements RobotService {
         if (robotRepository.existsByModel(createRobotDTO.getModel())) {
             throw new RobotAlreadyExistsException("Robot already exists");
         }
+
+        availableBrandsService.increaseCount(createRobotDTO.getBrand());
         Robot robot = modelMapper.map(createRobotDTO, Robot.class);
         robotRepository.save(robot);
     }
@@ -114,6 +118,7 @@ public class RobotServiceImpl implements RobotService {
                 String fileName = imageUrl.substring(64);
                 s3Service.deleteObjectFromBucket("robot-review-robot-images",fileName);
             }
+            availableBrandsService.decreaseCount(robot.getBrand());
             mostComparedService.deleteMostComparedEntityIfRobotWithIdExist(id);
             robotRepository.deleteById(id);
         } else {
