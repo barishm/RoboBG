@@ -2,6 +2,7 @@ import { useState } from "react";
 import ManageRobots from "./components/ManageRobots";
 import ManageUsers from "./components/ManageUsers";
 import ManageMostCompared from "./components/ManageMostCompared";
+import LatestQuestions from "./components/LatestQuestions";
 import { useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -17,6 +18,8 @@ const Dashboard = () => {
         return <ManageUsers />;
       case "Most Compared":
         return <ManageMostCompared />;
+      case "Latest Questions":
+        return <LatestQuestions />;
       default:
         return null;
     }
@@ -75,6 +78,23 @@ const Dashboard = () => {
                   href="#"
                   className="nav-link px-0 align-middle"
                   onClick={() => {
+                    setActiveComponent("Latest Questions");
+                  }}
+                >
+                  <i
+                    className="fa-solid fa-question"
+                    style={{ color: "#000000" }}
+                  ></i>{" "}
+                  <span className="ms-1 d-none d-md-inline text-bg-light">
+                    Latest Questions
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="nav-link px-0 align-middle"
+                  onClick={() => {
                     setActiveComponent("Most Compared");
                   }}
                 >
@@ -83,7 +103,7 @@ const Dashboard = () => {
                     style={{ color: "#000000" }}
                   ></i>{" "}
                   <span className="ms-1 d-none d-md-inline text-bg-light">
-                    Manage Most Compares
+                    Set Most Compares
                   </span>
                 </a>
               </li>

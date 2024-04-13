@@ -212,23 +212,23 @@ const CreateRobot = () => {
             </div>
             <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Suction Power</label>
-            <div class="input-group">
+            <div className="input-group">
             <input className="form-control form-control-sm" type="number" name="cleaningFeatures.suctionPower" onChange={formik.handleChange} value={formik.values.cleaningFeatures.suctionPower} aria-label=".form-control-sm example"/>
-            <span class="input-group-text">Pa</span>
+            <span className="input-group-text">Pa</span>
             </div>
             </div>
             <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Cleaning Area</label>
-            <div class="input-group">
+            <div className="input-group">
             <input className="form-control form-control-sm" type="text" name="cleaningFeatures.cleaningArea" onChange={formik.handleChange} value={formik.values.cleaningFeatures.cleaningArea} aria-label=".form-control-sm example"/>
-            <span class="input-group-text">m&sup2;</span>
+            <span className="input-group-text">m&sup2;</span>
             </div>
             </div>
             <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Dustbin Capacity</label>
-            <div class="input-group">
+            <div className="input-group">
             <input className="form-control form-control-sm" type="number" name="cleaningFeatures.dustbinCapacity" onChange={formik.handleChange} value={formik.values.cleaningFeatures.dustbinCapacity} aria-label=".form-control-sm example"/>
-            <span class="input-group-text">ml</span>
+            <span className="input-group-text">ml</span>
             </div>
             </div>
             <div className="mb-3">
@@ -283,7 +283,7 @@ const CreateRobot = () => {
             <label htmlFor="exampleFormControlInput1" className="form-label">Water Tank Capacity</label>
             <div className="input-group">
             <input className="form-control form-control-sm" type="number" name="moppingFeatures.waterTankCapacity" onChange={formik.handleChange} value={formik.values.moppingFeatures.waterTankCapacity} aria-label=".form-control-sm example"/>
-            <span class="input-group-text">ml</span>
+            <span className="input-group-text">ml</span>
             </div>
             </div>
             <div className="mb-3">

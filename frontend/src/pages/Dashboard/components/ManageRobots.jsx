@@ -12,6 +12,7 @@ import { useState,useEffect } from "react";
 import { useFormik } from "formik";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Pagination from "../../../components/Pagination";
 
 const ManageRobots = () => {
   const [Page, setPage] = useState(0);
@@ -79,17 +80,6 @@ const ManageRobots = () => {
     deleteLink({ id, accessToken });
   }
 
-  const nextPage = () => {
-    if (!isLast) {
-      setPage(Page + 1);
-    }
-  };
-  const prevPage = () => {
-    if (Page !== 0) {
-      setPage(Page - 1);
-    }
-  };
-
   return (
     <div>
       <div
@@ -153,25 +143,25 @@ const ManageRobots = () => {
                     </td>
                     <td>{robot.model}</td>
                     <td>
-                    <div class="dropdown me-2" style={{display:"inline"}}>
+                    <div className="dropdown me-2" style={{display:"inline"}}>
                         <button
-                          class="btn btn-secondary dropdown-toggle"
+                          className="btn btn-secondary dropdown-toggle"
                           type="button"
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
                         >
                           Links
                         </button>
-                        <ul class="dropdown-menu">
+                        <ul className="dropdown-menu">
                           <li>
-                            <button class="dropdown-item" type="button" value={robot.id} onClick={(e) => {setRobotId(e.target.value)}} data-bs-toggle="modal" data-bs-target="#addLinkk">
+                            <button className="dropdown-item" type="button" value={robot.id} onClick={(e) => {setRobotId(e.target.value)}} data-bs-toggle="modal" data-bs-target="#addLinkk">
                               Add Link
                             </button>
                           </li>
                           {robot.purchaseLinks.map((link) => (
                             <li>
                               <span className="d-flex">
-                              <a class="dropdown-item" href={link.link}>
+                              <a className="dropdown-item" href={link.link}>
                                 {link.name}
                               </a>
                               <button className="btn btn-light m-1" value={link.id} onClick={deleteLinkHandler}>
@@ -209,40 +199,7 @@ const ManageRobots = () => {
           </table>
         </>
       )}
-
-      {/*pagination*/} 
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item">
-              <a
-                class="page-link"
-                href="#"
-                aria-label="Previous"
-                onClick={prevPage}
-              >
-                <span aria-hidden="true" style={{color:"black"}}>&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item">
-              <span class="page-link" href="#" style={{color:"black"}}>
-                {Page + 1}
-              </span>
-            </li>
-            <li class="page-item">
-              <a
-                class="page-link"
-                href="#"
-                aria-label="Next"
-                onClick={nextPage}
-              >
-                <span aria-hidden="true" style={{color:"black"}}>&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-
+      <Pagination Page={Page} setPage={setPage} isLast={isLast} />
 
       {/*add link modal*/} 
       <div

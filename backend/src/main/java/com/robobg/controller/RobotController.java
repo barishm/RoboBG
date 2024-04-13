@@ -40,7 +40,6 @@ public class RobotController {
                                    @RequestParam(defaultValue = "0") int minSuctionPower,
                                    @RequestParam(defaultValue = "15000") int maxSuctionPower
     ) {
-        System.out.println();
         return robotService.getRobots(fields,page,model,brands,startYear,endYear,minDustbinCapacity,maxDustbinCapacity,minSuctionPower,maxSuctionPower);
     }
 

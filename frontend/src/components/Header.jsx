@@ -61,7 +61,7 @@ const Header = () => {
                     <img className="dropdown-toggle rounded-3 me-md-1" data-bs-toggle="dropdown" aria-expanded="false"  style={{width:"45px",height:"45px",cursor: 'pointer'}} src="images/user2.jpg" />
                     <ul className="dropdown-menu">
                       <li>
-                        <span class="dropdown-item-text">@{username}</span>
+                        <span className="dropdown-item-text">@{username}</span>
                       </li>
                       <li>
                         <button className="dropdown-item" onClick={logoutUser}>

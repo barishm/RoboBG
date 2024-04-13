@@ -1,6 +1,7 @@
 package com.robobg.service;
 
 import com.robobg.entity.Question;
+import com.robobg.entity.dtos.LatestQuestionsDTO;
 import com.robobg.entity.dtos.QuestionCreateDTO;
 import com.robobg.entity.dtos.QuestionWithAnswersDTO;
 import com.robobg.exceptions.EntityNotFoundException;
@@ -15,4 +16,6 @@ public interface QuestionService {
     void createQuestion(QuestionCreateDTO questionDTO, HttpServletRequest request) throws EntityNotFoundException;
     void deleteQuestion(Long questionId, HttpServletRequest request) throws EntityNotFoundException;
     Question findById(Long id) throws EntityNotFoundException;
+
+    List<LatestQuestionsDTO> getLatestQuestions();
 }

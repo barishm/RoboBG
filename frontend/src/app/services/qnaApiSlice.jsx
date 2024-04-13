@@ -55,6 +55,17 @@ export const qnaApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['QnA'],
         }),
+        latestQuestions: builder.query({
+            query: (accessToken) => ({
+                url: `v1/moderator/questions`,
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
+                },
+            }),
+            providesTags: ['QnA'],
+        })
     })
 })
 
@@ -62,4 +73,5 @@ export const {    useGetQnaQuery,
     useAnswerQuestionMutation,
     useAskQuestionMutation,
     useDeleteQuestionMutation,
-    useDeleteAnswerMutation,} = qnaApiSlice;
+    useDeleteAnswerMutation,
+    useLatestQuestionsQuery,} = qnaApiSlice;

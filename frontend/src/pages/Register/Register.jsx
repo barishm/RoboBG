@@ -58,7 +58,7 @@ const Register = () => {
         setPassword("");
         setTimeout(() => {
           navigate("/");
-        }, 5000);
+        }, 2000);
       } catch (err) {
         setErrorMessage(err.data ? err.data.message : "An error occurred during registration.");
         setSuccessMessage(""); 
@@ -76,7 +76,7 @@ const Register = () => {
     setConfirmPassword("");
   };
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 mb-5">
           <div className={screenSize > 767 ? "card shadow-sm" : ""} style={{ borderRadius: "1rem",maxWidth:"500px",marginLeft:"auto",marginRight:"auto" }}>
             <div className="card-body p-5 text-center">
                 <form>
@@ -99,7 +99,7 @@ const Register = () => {
                       className={`form-control form-control-md ${invalidUsername ? "is-invalid" : ""}`}
                       style={screenSize > 767 ? {} : {backgroundColor:"rgb(245,245,245)"}}
                     />
-                    <div class="invalid-feedback">
+                    <div className="invalid-feedback">
                       Username must contain 6-20 Characters.
                     </div>
                     <label className="form-label">{lang === "en" ? "Username" : "Потребителско име"}</label>

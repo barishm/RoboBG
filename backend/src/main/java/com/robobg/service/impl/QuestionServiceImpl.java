@@ -5,6 +5,7 @@ import com.robobg.entity.Answer;
 import com.robobg.entity.Question;
 import com.robobg.entity.User;
 import com.robobg.entity.dtos.AnswerDTO;
+import com.robobg.entity.dtos.LatestQuestionsDTO;
 import com.robobg.entity.dtos.QuestionCreateDTO;
 import com.robobg.entity.dtos.QuestionWithAnswersDTO;
 import com.robobg.exceptions.EntityNotFoundException;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,6 +36,8 @@ public class QuestionServiceImpl implements QuestionService {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
     }
+
+
 
     @Override
     public List<QuestionWithAnswersDTO> findQuestionsByRobotId(Long robotId) {
@@ -103,6 +107,14 @@ public class QuestionServiceImpl implements QuestionService {
         } else {
             throw new EntityNotFoundException("Question not found with id: " + id);
         }
+    }
+
+    @Override
+    public List<LatestQuestionsDTO> getLatestQuestions() {
+        LocalDateTime sevenDaysAgo = LocalDateTime.now().minusDays(7);
+        List<Question> questionsLast7Days = questionRepository.findByCreateTimeAfter(sevenDaysAgo);
+        questionsLast7Days.sort(Comparator.comparing(Question::getCreateTime).reversed());
+        return questionsLast7Days.stream().map(question -> modelMapper.map(question, LatestQuestionsDTO.class)).collect(Collectors.toList());
     }
 
     private String extractJwtFromRequest(HttpServletRequest request) {
