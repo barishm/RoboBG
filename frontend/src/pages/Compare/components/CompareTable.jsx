@@ -81,7 +81,7 @@ const CompareTable = () => {
 
 
   return (
-    <div className="table-container">
+    <div className="table-container" style={{overflowX: "auto"}}>
       {robots ? (
         <>
           <div style={{ display: "flex" }} className="mb-1 mt-5" >

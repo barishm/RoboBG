@@ -70,18 +70,6 @@ import {
                 type="radio"
                 className="btn-check"
                 name="options-base"
-                id="option5"
-                autocomplete="off"
-                onChange={() => formik.setFieldValue('role', 'ROLE_ADMIN')}
-                checked={formik.values.role === "ROLE_ADMIN"}
-              ></input>
-              <label className="btn me-2" for="option5">
-                Admin
-              </label>
-              <input
-                type="radio"
-                className="btn-check"
-                name="options-base"
                 id="option7"
                 autocomplete="off"
                 onChange={() => formik.setFieldValue('role', 'ROLE_MODERATOR')}

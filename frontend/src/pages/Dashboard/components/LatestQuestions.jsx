@@ -34,7 +34,7 @@ const LatestQuestions = () => {
               </p>
               <p>
                 {question.answers.length > 0
-                  ? `This question has answers by: ${question.answers
+                  ? `This question has answers from: ${question.answers
                       .map((answer) => answer.author.username)
                       .join(", ")}`
                   : "No one has answered this question yet."}

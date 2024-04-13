@@ -9,7 +9,6 @@ import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,8 +26,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void setRole(UserIdUsernameRoleDTO userIdUsernameRoleDTO) {
+        if(!userIdUsernameRoleDTO.getRole().equals("ROLE_USER") && !userIdUsernameRoleDTO.getRole().equals("ROLE_MODERATOR")){
+            throw new IllegalArgumentException("Something went wrong");
+        }
         Optional<User> userOptional = userRepository.findById(userIdUsernameRoleDTO.getId());
-
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             if(user.getRole().getRoleName().equals("ROLE_ADMIN")){
@@ -48,8 +49,10 @@ public class UserServiceImpl implements UserService {
         List<UserIdUsernameRoleDTO> userDTOs = new ArrayList<>();
 
         for (User user : users) {
-            UserIdUsernameRoleDTO userDTO = modelMapper.map(user, UserIdUsernameRoleDTO.class);
-            userDTOs.add(userDTO);
+            if (!user.getRole().equals(Role.ADMIN)) {
+                UserIdUsernameRoleDTO userDTO = modelMapper.map(user, UserIdUsernameRoleDTO.class);
+                userDTOs.add(userDTO);
+            }
         }
 
         return userDTOs;
