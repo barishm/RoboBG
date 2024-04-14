@@ -1,10 +1,12 @@
 package com.robobg.controller;
 
 import com.robobg.entity.dtos.UserIdUsernameRoleDTO;
+import com.robobg.entity.dtos.UserUsernameEmailDTO;
 import com.robobg.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController
@@ -21,6 +23,11 @@ public class AdminController {
     @PutMapping("/users")
     public void setRole(@RequestBody UserIdUsernameRoleDTO userIdUsernameRoleDTO) {
         userService.setRole(userIdUsernameRoleDTO);
+    }
+
+    @GetMapping("/moderators")
+    public List<UserUsernameEmailDTO> getAllModerators() {
+        return userService.getAllModerators();
     }
 
 

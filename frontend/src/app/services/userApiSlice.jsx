@@ -24,10 +24,22 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 body: Userbody,
             }),
             invalidatesTags: ['User'],
+        }),
+        getAllModerators: builder.query({
+            query: (accessToken) => ({
+                url: "v1/admin/moderators",
+                method:"GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
+                },
+            }),
+            providesTags: ['User'],
         })
     })
 })
 export const {
     useGetAllUsersQuery,
-    useUpdateUserMutation
+    useUpdateUserMutation,
+    useGetAllModeratorsQuery
 } = userApiSlice;

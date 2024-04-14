@@ -148,6 +148,7 @@ const Robots = () => {
           />
           <div className="d-none d-lg-block">
             {/* <PopularComparisons/> */}
+            <PopularComparisons/>
           </div>
         </div>
       </div>

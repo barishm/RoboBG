@@ -2,7 +2,9 @@ package com.robobg.service.impl;
 
 import com.robobg.entity.Role;
 import com.robobg.entity.User;
+import com.robobg.entity.dtos.RobotDTO.RobotDTO;
 import com.robobg.entity.dtos.UserIdUsernameRoleDTO;
+import com.robobg.entity.dtos.UserUsernameEmailDTO;
 import com.robobg.repository.UserRepository;
 import com.robobg.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,7 +29,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void setRole(UserIdUsernameRoleDTO userIdUsernameRoleDTO) {
-        if(!userIdUsernameRoleDTO.getRole().equals("ROLE_USER") && !userIdUsernameRoleDTO.getRole().equals("ROLE_MODERATOR")){
+        System.out.println();
+        if(!userIdUsernameRoleDTO.getRole().equals("USER") && !userIdUsernameRoleDTO.getRole().equals("MODERATOR")){
             throw new IllegalArgumentException("Something went wrong");
         }
         Optional<User> userOptional = userRepository.findById(userIdUsernameRoleDTO.getId());
@@ -54,7 +58,13 @@ public class UserServiceImpl implements UserService {
                 userDTOs.add(userDTO);
             }
         }
-
         return userDTOs;
+    }
+
+    @Override
+    public List<UserUsernameEmailDTO> getAllModerators() {
+        return userRepository.findByRole(Role.MODERATOR).stream()
+                .map(user -> modelMapper.map(user, UserUsernameEmailDTO.class))
+                .collect(Collectors.toList());
     }
 }
