@@ -47,7 +47,6 @@ const CompareTable = () => {
   const renderRow = (field) => {
     return robots.map((item) => {
       let value = field.includes('.') ? getFieldByPath(item, field) : item[field];
-  
       return (
         <td key={item.id} style={{ height: "80px", verticalAlign: "bottom", textAlign: "left", whiteSpace: "normal" }} className="border">
           {value === null ? (
@@ -66,7 +65,6 @@ const CompareTable = () => {
   function getFieldByPath(obj, path) {
     const keys = path.split('.');
     let value = obj;
-  
     for (const key of keys) {
       if (value && typeof value === 'object') {
         value = value[key];
@@ -75,13 +73,12 @@ const CompareTable = () => {
         break;
       }
     }
-  
     return value;
   }
 
 
   return (
-    <div className="table-container" style={{overflowX: "auto"}}>
+    <div className="table-container" style={{overflowX: "auto",marginBottom:"50px"}}>
       {robots ? (
         <>
           <div style={{ display: "flex" }} className="mb-1 mt-5" >
@@ -140,7 +137,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Mapping <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Mapping <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="A technology that can be based on a camera sensor, Laser Direct Structuring (LDS) laser or a gyroscope. The robot scans out a room and creates a map. The robots with mapping provide better performance by building the most efficient path of cleaning without missing a spot" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -148,7 +145,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Mapping Sensor Type <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Mapping Sensor Type <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="There are different types of mapping technologies such as LDS based, camera based, and gyroscope/accelerometer based mapping. Some robot vacuums use combined technologies." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -156,7 +153,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">High Precision Map <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">High Precision Map <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="A high-precision map means that it is at least 98% accurate and corresponds to your real home layout" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -164,7 +161,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Front Camera <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Front Camera <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The robot equipped with a front camera and can see, recognize, and avoid objects on its way." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -172,7 +169,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Recharge Resume <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Recharge Resume <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="If the robot can't finish a job on one charge, it automatically returns to the charging dock. Resuming intends the robot to continue cleaning from the same place it left off after it's done charging. This feature is perfect for big households, when the robot is not able to clean the entire house on one charge" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -180,7 +177,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Auto Dock And Recharge <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Auto Dock And Recharge <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="When the robot vacuum finishes the job or runs low on battery, it automatically returns to the dock to recharge" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -188,7 +185,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Noise Level <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Noise Level <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="Note, some robot cleaners have a few power settings, in this field, we specify a noise level claimed by the manufacturer, in lowest power mode." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -196,7 +193,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Display <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Display <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The robot have a display that shows additional information such as battery level, errors, scheduling time, or cleaning status" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -204,7 +201,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Side Brushes <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Side Brushes <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="How many side brushes the robot comes equipped with. Side brushes help to reach corners and edges channeling all the dust and dirt to the main central brush where it gets sucked up right into the dustbin" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -212,7 +209,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Voice Prompts <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Voice Prompts <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The robot uses voice prompts to inform you about the
                   current status of the robot vacuum whether it is charging,
                   cleaning, etc." 
@@ -226,7 +223,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Suction Power <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Suction Power <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The higher the suction power, the better it performs on carpeted surface removing dust and smaller debris. A high suction power robot vacuum cleaner is more effective in getting rid of dirt hidden away in your carpets" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -234,7 +231,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Cleaning Area <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Cleaning Area <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="How much of a cleaning area the robot covers during one cleaning cycle" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -242,7 +239,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Dustbin Capacity <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Dustbin Capacity <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The dustbin size matters if you
                   have pets or a big house." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
@@ -251,7 +248,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Disposable Dustbag Capacity <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Disposable Dustbag Capacity <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The capacity of the disposable dust bag from the auto-emptying base" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -259,7 +256,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Auto Dirt Disposal <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Auto Dirt Disposal <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The robot vacuum has a special dock that automatically empties the robot's dustbin when it is docked" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -267,7 +264,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Barrier Cross Height <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Barrier Cross Height <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The height of an obstacle/carpet/threshold the robot can climb." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -275,7 +272,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Hepa Filter <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Hepa Filter <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="HEPA is an acronym that stands for High-Efficiency Particulate Air. The HEPA filter is a type of mechanical air filter; it works by forcing air through a fine mesh that traps harmful particles such as pollen, pet dander, dust mites, and tobacco smoke. A robot vacuum with HEPA filtration is safer for allergy and asthma sufferers" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -283,7 +280,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Washable Filter <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Washable Filter <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="This type of filter can be washed, so you don't need to replace it as often." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -295,7 +292,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Wet Mopping <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Wet Mopping <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The robot can do mopping and sweeping. Most of the 2-in-1 cleaners come with a water tank and a mop cloth, a few models have a single mop cloth only" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -303,7 +300,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Electric Water Flow Control <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Electric Water Flow Control <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="An electric water pump inside the robot controls the water output depending on your needs. You can change the water output mode in the app" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -311,7 +308,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Water Tank Capacity <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Water Tank Capacity <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The more water the water tank holds, the more significant cleaning area it covers before gets dry" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -319,7 +316,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Vibrating Mopping Pad <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Vibrating Mopping Pad <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The mopping pad of the robot vibrates which helps to get rid of stains from the floor" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -327,7 +324,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Auto Mop Lifting <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Auto Mop Lifting <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="Ability to automatically lift the mopping pad when a carpet is detected, so you can mop hard floors and vacuum carpets in a single clean" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -335,7 +332,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Auto Water Tank Refilling <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Auto Water Tank Refilling <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The robot supports a base that refills the water tank inside the robot with water after or during mopping." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -343,7 +340,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Auto Mop Washing <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Auto Mop Washing <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The robot washes automatically the mop during or after mopping" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -355,7 +352,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Battery Capacity <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Battery Capacity <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="A larger battery provides a longer running time on one charge." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -363,7 +360,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Battery Life <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Battery Life <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="How much time the robot can work before needs to recharge" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -371,7 +368,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Charging Time <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Charging Time <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="How much time the robot needs to recharge" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -379,7 +376,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Rated Power <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Rated Power <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="Rated power is the max power the machine can deliver under normal circumstances" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -391,7 +388,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Scheduling <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Scheduling <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The feature allows setting the robot to start cleaning automatically at a specific time" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -399,7 +396,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Wifi Smartphone App <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Wifi Smartphone App <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The robot supports Wi-Fi and has a smartphone app; it can be controlled even when you are not at home" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -407,7 +404,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Wifi Frequency Band <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Wifi Frequency Band <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="Some robot vacuums work only with 2.4 GHz wi-fi band, others can also work in 5 GHz wi-fi network" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -415,7 +412,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Amazon Alexa Support <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Amazon Alexa Support <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The robot is compatible with Alexa-enabled devices, and can be controlled by voice commands" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -423,7 +420,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Google Assistant Support <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Google Assistant Support <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The robot works with Google Home so it can be controlled via simple voice commands" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -431,7 +428,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Magnetic Virtual Walls <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Magnetic Virtual Walls <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="A physical wall barrier can be two types: magnetic tape and a block. They both work the same way by keeping the robot out of the areas you don't want to be cleaned" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -439,7 +436,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Ir Rf Remote Control <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Ir Rf Remote Control <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The IR remote control helps to manage the robot's movements, schedule it to work, start, stop, etc" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -451,7 +448,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Real Time Tracking <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Real Time Tracking <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="Ability to watch in real-time where the robot is located on the map of your house and where it has already cleaned" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -459,7 +456,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Digital Blocked Areas <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Digital Blocked Areas <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="It means the app supports creating restricted areas the robot can not cross when is vacuuming. Helpful when you don't want the robot to go to certain places" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -467,7 +464,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Zoned Cleaning <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Zoned Cleaning <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="You can make the robot clean within a particular area by setting a zone inside the app" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -475,7 +472,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Multi Floor Maps <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Multi Floor Maps <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The robot stores more than one map in memory. This feature is useful for people who live in a house with more than one level" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -483,7 +480,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Manual Movement Control <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Manual Movement Control <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="With this feature, the robot vacuum can be controlled like a radio car through the app" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -491,7 +488,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Selected Room Cleaning <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Selected Room Cleaning <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="This option allows the robot vacuum to clean a specific room (or a few rooms) by selecting this room in the app." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -499,7 +496,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">No Mop Zones <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">No Mop Zones <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="You can set virtual no-mop zones in the app to restrict the robot from going to certain places (for example with carpets) and it will avoid these areas in mopping mode" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -511,7 +508,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Carpet Boost <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Carpet Boost <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="Thanks to this feature, the robot increases suction power to maximum once its sensors recognize the carpeted surface. It helps to save battery life" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -519,7 +516,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Cliff Sensor <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Cliff Sensor <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="Cliff sensors prevent the robot from falling from stairs" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -527,7 +524,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Dirt Sensor <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Dirt Sensor <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The dirt detect feature helps the robot to provide more thoughtful cleaning by recognizing the dirtiest areas" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -535,7 +532,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Full Dustbin Sensor <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Full Dustbin Sensor <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The robot has a sensor that detects when the dustbin is full and sends a notification to the user." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -547,7 +544,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Weight <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Weight <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The total weight of the robot vacuum" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -555,7 +552,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Width <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Width <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="It refers to the robot's diameter (for round shaped robot vacuums) or width. Smaller diameter helps the robot to reach narrow places" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -563,7 +560,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Height <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Height <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="If you want to use the robot vacuum under your bed or furniture, check the gap between the floor and furniture and ensure the robot vacuum will fit under it." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -571,7 +568,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">In The Box <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">In The Box <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="What kind of accessories the package contents" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
@@ -582,7 +579,7 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Release Date <a tabindex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  <span className="stickycell">Release Date <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
                   data-bs-content="The date when the robot vacuum was released to the market" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>

@@ -146,7 +146,7 @@ const Robot = () => {
                         Specs
                       </a>
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                       <a value="Q&A" className={`nav-link ${Tab === "Q&A" ? "active" : ""}`} style={{color:"black"}} onClick={() => changeTab("Q&A")} href="#">
                         Q&A
                       </a>

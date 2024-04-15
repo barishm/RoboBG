@@ -141,7 +141,7 @@ const Filters = ({
     <>
       <div
         className="offcanvas offcanvas-start"
-        tabindex="-1"
+        tabIndex="-1"
         id="offcanvasExample"
         aria-labelledby="offcanvasExampleLabel"
       >
@@ -159,7 +159,7 @@ const Filters = ({
         <div className="offcanvas-body">
           <form id="filters">
             <div>
-              <label for="id_title" className="form-label">
+              <label htmlFor="id_title" className="form-label">
                 By model name
               </label>
               <input
@@ -193,7 +193,7 @@ const Filters = ({
                           value={item.brand}
                           onChange={handleCheckboxChange}
                         ></input>
-                        <label for="id_brand_name_0" className="form-check-label">
+                        <label htmlFor="id_brand_name_0" className="form-check-label">
                           {item.brand}{" "}
                           <span style={{ color: "grey" }}>({item.count})</span>
                         </label>
@@ -309,7 +309,7 @@ const Filters = ({
         <div className="card-body p-4">
           <form id="filters">
             <div>
-              <label for="id_title" className="form-label">
+              <label htmlFor="id_title" className="form-label">
                 By model name
               </label>
               <input
@@ -343,7 +343,7 @@ const Filters = ({
                           value={item.brand}
                           onChange={handleCheckboxChange}
                         ></input>
-                        <label for="id_brand_name_0" className="form-check-label">
+                        <label htmlFor="id_brand_name_0" className="form-check-label">
                           {item.brand}{" "}
                           <span style={{ color: "grey" }}>({item.count})</span>
                         </label>

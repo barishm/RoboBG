@@ -4,11 +4,11 @@ import ManageUsers from "./components/ManageUsers";
 import ManageMostCompared from "./components/ManageMostCompared";
 import LatestQuestions from "./components/LatestQuestions";
 import { useSelector } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 const Dashboard = () => {
   const [activeComponent, setActiveComponent] = useState("Robots");
-  const { username, role } = useSelector((state) => state.auth);
+  const { role } = useSelector((state) => state.auth);
 
   const renderActiveComponent = () => {
     switch (activeComponent) {
@@ -47,7 +47,7 @@ const Dashboard = () => {
                     className="fa-solid fa-broom"
                     style={{ color: "#000000" }}
                   ></i>{" "}
-                  <span className="ms-1 d-none d-md-inline text-bg-light">
+                  <span className="ms-1 d-none d-lg-inline text-bg-light">
                     Manage Robots
                   </span>
                 </a>
@@ -66,7 +66,7 @@ const Dashboard = () => {
                         className="fa-solid fa-user"
                         style={{ color: "#000000" }}
                       ></i>{" "}
-                      <span className="ms-1 d-none d-md-inline text-bg-light">
+                      <span className="ms-1 d-none d-lg-inline text-bg-light">
                         Manage Users
                       </span>
                     </a>
@@ -85,7 +85,7 @@ const Dashboard = () => {
                     className="fa-solid fa-question"
                     style={{ color: "#000000" }}
                   ></i>{" "}
-                  <span className="ms-1 d-none d-md-inline text-bg-light">
+                  <span className="ms-1 d-none d-lg-inline text-bg-light">
                     Latest Questions
                   </span>
                 </a>
@@ -102,7 +102,7 @@ const Dashboard = () => {
                     className="fa-solid fa-star"
                     style={{ color: "#000000" }}
                   ></i>{" "}
-                  <span className="ms-1 d-none d-md-inline text-bg-light">
+                  <span className="ms-1 d-none d-lg-inline text-bg-light">
                     Set Most Compares
                   </span>
                 </a>

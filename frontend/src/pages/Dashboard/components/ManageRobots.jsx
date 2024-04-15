@@ -1,18 +1,19 @@
 import {
   useDeleteRobotMutation,
   useGetAllRobotsQuery,
-  useUploadRobotImageMutation
 } from "../../../app/services/robotApiSlice";
-import {useCreateLinkMutation,useDeleteLinkMutation} from "../../../app/services/linkApiSlice"
+import {
+  useDeleteLinkMutation,
+} from "../../../app/services/linkApiSlice";
 import Loading from "../../../components/Loading";
 import CreateRobot from "./CreateRobot";
 import { useSelector } from "react-redux";
 import UpdateRobot from "./UpdateRobot";
-import { useState,useEffect } from "react";
-import { useFormik } from "formik";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
 import Pagination from "../../../components/Pagination";
+import UploadRobotImage from "./UploadRobotImage";
+import CreateLink from "./CreateLink";
 
 const ManageRobots = () => {
   const [Page, setPage] = useState(0);
@@ -22,63 +23,23 @@ const ManageRobots = () => {
     page: Page,
     model: Model,
   };
-  const { data: allRobots, isLoading: allRobotsLoading } = useGetAllRobotsQuery(queryParams);
-  const [robotId,setRobotId] = useState(null);
-  const [createLink] = useCreateLinkMutation();
+  const { data: allRobots, isLoading: allRobotsLoading } =
+    useGetAllRobotsQuery(queryParams);
+  const [robotId, setRobotId] = useState(null);
   const [deleteLink] = useDeleteLinkMutation();
   const [deleteRobot] = useDeleteRobotMutation();
   const noImage = "images/no-image.jpg";
   const { accessToken } = useSelector((state) => state.auth);
-  const [updateId, setUpdateId] = useState(null);
-  const [uploadImageId, setUploadImageId] = useState(null);
   const isLast = allRobots?.last;
-  const [file, setFile] = useState(null);
-  const [inputKey, setInputKey] = useState(Date.now());
-  const [uploadImage, { isSuccess, isError, error }] = useUploadRobotImageMutation();
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success("Image uploaded successfully!");
-    } else if (isError) {
-      toast.error(`Failed to upload image: ${error?.data?.error || 'Unknown error'}`);
-    }
-  }, [isSuccess, isError, error]);
-
-  const handleUploadImage = async () => {
-    const formData = new FormData();
-    let id = Number(uploadImageId);
-    if (file && uploadImageId) {
-      formData.append("file", file);
-      await uploadImage({id,accessToken,formData})
-    }
-    resetForm();
-  };
-  const resetForm = () => {
-    setFile(null);
-    setInputKey(Date.now());
-  };
-
-  const formik = useFormik({
-    enableReinitialize:true,
-    initialValues: {
-      robotId: robotId,
-      name: "", 
-      link: "" 
-    },
-    onSubmit: values => {
-        const json = values;
-        createLink({json,accessToken});
-        formik.resetForm();
-      },
-  });
 
   const deleteRobotHandler = (e) => {
     const id = e.target.value;
     deleteRobot({ id, accessToken });
   };
   const deleteLinkHandler = (e) => {
-    const id = e.target.value
+    const id = e.target.value;
     deleteLink({ id, accessToken });
-  }
+  };
 
   return (
     <div>
@@ -91,7 +52,7 @@ const ManageRobots = () => {
         }}
       >
         <CreateRobot />
-        <UpdateRobot id={updateId} />
+        <UpdateRobot id={robotId} />
         <input
           className="form-control form-control-sm"
           value={Model}
@@ -130,10 +91,10 @@ const ManageRobots = () => {
                         alt="..."
                       ></img>
                       <button
-                        className="btn btn-light btn-sm ms-1"
+                        className="btn btn-light btn-sm ms-1 mt-1"
                         value={robot.id}
                         onClick={(e) => {
-                          setUploadImageId(e.currentTarget.value);
+                          setRobotId(e.currentTarget.value);
                         }}
                         data-bs-toggle="modal"
                         data-bs-target="#uploadImage"
@@ -143,9 +104,12 @@ const ManageRobots = () => {
                     </td>
                     <td>{robot.model}</td>
                     <td>
-                    <div className="dropdown me-2" style={{display:"inline"}}>
+                      <div
+                        className="dropdown"
+                        style={{ display: "inline" }}
+                      >
                         <button
-                          className="btn btn-secondary dropdown-toggle"
+                          className="btn btn-secondary btn-sm dropdown-toggle mt-1 me-1"
                           type="button"
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
@@ -154,19 +118,33 @@ const ManageRobots = () => {
                         </button>
                         <ul className="dropdown-menu">
                           <li>
-                            <button className="dropdown-item" type="button" value={robot.id} onClick={(e) => {setRobotId(e.target.value)}} data-bs-toggle="modal" data-bs-target="#addLinkk">
+                            <button
+                              className="dropdown-item"
+                              type="button"
+                              value={robot.id}
+                              onClick={(e) => {
+                                setRobotId(e.target.value);
+                              }}
+                              data-bs-toggle="modal"
+                              data-bs-target="#addLinkk"
+                            >
                               Add Link
                             </button>
                           </li>
+                          {robot.purchaseLinks.length > 0 ? <li><hr className="dropdown-divider"></hr></li> : <></>}
                           {robot.purchaseLinks.map((link) => (
                             <li>
                               <span className="d-flex">
-                              <a className="dropdown-item" href={link.link}>
-                                {link.name}
-                              </a>
-                              <button className="btn btn-light m-1" value={link.id} onClick={deleteLinkHandler}>
-                                <i className="fa-solid fa-trash mt-2 me-2 ms-2"></i>
-                              </button>
+                                <a className="dropdown-item" href={link.link}>
+                                  {link.name}
+                                </a>
+                                <button
+                                  className="btn btn-light btn-sm me-1"
+                                  value={link.id}
+                                  onClick={deleteLinkHandler}
+                                >
+                                  DELETE
+                                </button>
                               </span>
                             </li>
                           ))}
@@ -174,10 +152,10 @@ const ManageRobots = () => {
                       </div>
                       <button
                         type="button"
-                        className="btn btn-primary me-2"
+                        className="btn btn-primary btn-sm me-1 mt-1"
                         value={robot.id}
                         onClick={(e) => {
-                          setUpdateId(e.target.value);
+                          setRobotId(e.target.value);
                         }}
                         data-bs-toggle="modal"
                         data-bs-target="#update"
@@ -186,7 +164,7 @@ const ManageRobots = () => {
                       </button>
                       <button
                         type="button"
-                        className="btn btn-danger me-2"
+                        className="btn btn-danger btn-sm me-1 mt-1"
                         value={robot.id}
                         onClick={deleteRobotHandler}
                       >
@@ -201,145 +179,11 @@ const ManageRobots = () => {
       )}
       <Pagination Page={Page} setPage={setPage} isLast={isLast} />
 
-      {/*add link modal*/} 
-      <div
-      className="modal fade"
-      id="addLinkk"
-      tabIndex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div className="modal-dialog">
-        <form onSubmit={formik.handleSubmit}>
-        <div className="modal-content">
-          <div className="modal-header">
-            <h1 className="modal-title fs-5" id="exampleModalLabel">
-              Add Link
-            </h1>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div className="modal-body">
-            <div className="form-inputs">
-              <div className="mb-3">
-                <label
-                  htmlFor="exampleFormControlInput1"
-                  className="form-label"
-                >
-                  Name
-                </label>
-                <input
-                  className="form-control form-control-sm"
-                  type="text"
-                  name="name"
-                  onChange={formik.handleChange}
-                  value={formik.values.name}
-                ></input>
-              </div>
-              <div className="mb-3">
-                <label
-                  htmlFor="exampleFormControlInput1"
-                  className="form-label"
-                >
-                  Link
-                </label>
-                <input
-                  className="form-control form-control-sm"
-                  type="text"
-                  name="link"
-                  onChange={formik.handleChange}
-                  value={formik.values.link}
-                ></input>
-              </div>
-            </div>
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-bs-dismiss="modal"
-              onClick={() => {formik.resetForm()}}
-            >
-              Close
-            </button>
-            <button type="submit" className="btn btn-success" data-bs-dismiss="modal">
-              Add
-            </button>
-          </div>
-        </div>
-        </form>
-      </div>
-    </div>
+      {/*add link modal*/}
+      <CreateLink robotId={robotId} />
 
-    {/* upload image modal */}
-    <div
-      className="modal fade"
-      id="uploadImage"
-      tabIndex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
-                Upload Image
-              </h1>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-                onClick={resetForm}
-              ></button>
-            </div>
-            <div className="modal-body">
-              <div className="form-inputs">
-                <div className="mb-3">
-                  <label
-                    htmlFor="exampleFormControlInput1"
-                    className="form-label"
-                  >
-                    Image
-                  </label>
-                  <input
-                    key={inputKey}
-                    className="form-control form-control-sm"
-                    id="fileInput"
-                    type="file"
-                    name="file"
-                    onChange={(e) => {
-                      setFile(e.target.files[0]);
-                    }}
-                  ></input>
-                </div>
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-                onClick={resetForm}
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                className="btn btn-success"
-                data-bs-dismiss="modal"
-                onClick={handleUploadImage}
-              >
-                Upload
-              </button>
-            </div>
-          </div>
-      </div>
-    </div>
+      {/* upload image modal */}
+      <UploadRobotImage RobotId={robotId} />
     </div>
   );
 };

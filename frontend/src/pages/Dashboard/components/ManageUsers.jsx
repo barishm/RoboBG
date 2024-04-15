@@ -107,9 +107,9 @@ const ManageUsers = () => {
           </form>
         </>
       )}
-      <hr class="hr" />
+      <hr className="hr" />
       <h4 className="mt-4">All Moderators</h4>
-      <table class="table mb-4">
+      <table className="table mb-4">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -118,8 +118,8 @@ const ManageUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {moderators.map((moderator) => (
-              <tr>
+          {moderators && moderators.map((moderator) => (
+              <tr key={moderator.id}>
                 <th scope="row">{moderator.id}</th>
                 <td>{moderator.username}</td>
                 <td>{moderator.email}</td>
