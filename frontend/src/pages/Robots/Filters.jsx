@@ -46,7 +46,7 @@ const Filters = ({
       );
       setEndYear(endYearValue);
     } else {
-      setEndYear(3000);
+      setEndYear(0);
     }
     if (document.getElementById("minDustbinCapacityInput").value.length > 0) {
       const minDustbinCapacityValue = parseInt(
@@ -62,7 +62,7 @@ const Filters = ({
       );
       setMaxDustbinCapacity(maxDustbinCapacityValue);
     } else {
-      setMaxDustbinCapacity(15000);
+      setMaxDustbinCapacity(0);
     }
     if (document.getElementById("minSuctionPowerInput").value.length > 0) {
       const minSuctionPowerValue = parseInt(
@@ -78,7 +78,7 @@ const Filters = ({
       );
       setMaxSuctionPower(maxSuctionPowerValue);
     } else {
-      setMaxSuctionPower(15000);
+      setMaxSuctionPower(0);
     }
     setPage(0);
     clearAllInputs();
@@ -99,7 +99,7 @@ const Filters = ({
       );
       setEndYear(endYearValue);
     } else {
-      setEndYear(3000);
+      setEndYear(0);
     }
     if (document.getElementById("minDustbinCapacityInputM").value.length > 0) {
       const minDustbinCapacityValue = parseInt(
@@ -115,7 +115,7 @@ const Filters = ({
       );
       setMaxDustbinCapacity(maxDustbinCapacityValue);
     } else {
-      setMaxDustbinCapacity(15000);
+      setMaxDustbinCapacity(0);
     }
     if (document.getElementById("minSuctionPowerInputM").value.length > 0) {
       const minSuctionPowerValue = parseInt(
@@ -131,7 +131,7 @@ const Filters = ({
       );
       setMaxSuctionPower(maxSuctionPowerValue);
     } else {
-      setMaxSuctionPower(15000);
+      setMaxSuctionPower(0);
     }
     setPage(0);
     clearAllInputs();

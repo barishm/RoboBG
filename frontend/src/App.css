@@ -176,3 +176,8 @@ td {
   border-color: grey;
 }
 
+hr.solid {
+  border-top: 1px solid grey;
+  width: 100%;
+}
+

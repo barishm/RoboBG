@@ -8,7 +8,6 @@ import { addRobot,deleteAllRobots  } from "../../../app/redux/compareSlice";
 import { useSelector } from "react-redux";
 import Loading from "../../../components/Loading";
 import { useNavigate } from "react-router-dom";
-import Error from "../../../components/Error";
 
 const CompareForm = () => {
   const queryParams = {

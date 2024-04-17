@@ -1,19 +1,19 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useGetBestRobotsQuery } from "../../../app/services/robotApiSlice";
-import { useSelector } from "react-redux";
-import Loading from "../../../components/Loading";
-import Error from "../../../components/Error";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useGetBestRobotsQuery } from '../../../app/services/robotApiSlice';
+import { useSelector } from 'react-redux';
+import Loading from '../../../components/Loading';
+import Error from '../../../components/Error';
 
 const Bests = () => {
   const lang = useSelector((state) => state.language.lang);
   const navigate = useNavigate();
-  const noImage = "images/no-image.jpg";
+  const noImage = 'images/no-image.jpg';
 
   const { data, isLoading, isError } = useGetBestRobotsQuery();
 
   const details = (robotId) => {
-    navigate("/robots/" + robotId);
+    navigate('/robots/' + robotId);
   };
 
   if (isError) {
@@ -24,13 +24,9 @@ const Bests = () => {
     <div>
       <h3
         className="fw-bolder"
-        style={{ marginTop: "10px", textAlign: "center" }}
+        style={{ marginTop: '10px', textAlign: 'center' }}
       >
-        {lang === "en" ? (
-          "Best Robot Vacuum Cleaners"
-        ) : (
-          "Най-добри роботи"
-        )}
+        {lang === 'en' ? 'Best Robot Vacuum Cleaners' : 'Най-добри роботи'}
       </h3>
       {isLoading ? (
         <Loading />
@@ -39,12 +35,15 @@ const Bests = () => {
       ) : data ? (
         <div className="row mt-4">
           {data.map((item) => (
-            <div key={item.id} className="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-3">
+            <div
+              key={item.id}
+              className="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-3"
+            >
               <div className="card shadow-sm bg-body-tertiary rounded">
                 <img
                   className="card-img-top rounded-top"
                   value={item.id}
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: 'pointer' }}
                   onClick={() => details(item.id)}
                   src={item.image || noImage}
                   alt="..."
@@ -55,7 +54,7 @@ const Bests = () => {
                       className="card-title fw-bolder"
                       onClick={() => details(item.id)}
                       value={item.id}
-                      style={{ cursor: "pointer" }}
+                      style={{ cursor: 'pointer' }}
                     >
                       {item.model}
                     </h5>
@@ -65,11 +64,20 @@ const Bests = () => {
                   <div className="btn-group text-center">
                     <button
                       type="button"
-                      className="btn btn-warning btn-sm dropdown-toggle rounded-5"
+                      className="btn btn-warning btn-sm dropdown-toggle rounded-5 d-none d-md-inline-block"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      {lang === "en" ? "Price" : "Цена"}
+                      {lang === 'en' ? 'Check price' : 'Провери цена'}
+                    </button>
+
+                    <button
+                      type="button"
+                      className="btn btn-warning btn-sm dropdown-toggle rounded-5 d-md-none"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      {lang === 'en' ? 'Price' : 'Цена'}
                     </button>
                     <ul className="dropdown-menu">
                       {item.purchaseLinks.length > 0 &&
@@ -83,7 +91,7 @@ const Bests = () => {
                     </ul>
                   </div>
                   <div className="mt-1">
-                    <i className="fa-regular fa-comments fa-sm"></i>{" "}
+                    <i className="fa-regular fa-comments fa-sm"></i>{' '}
                     <span className="">0</span>
                   </div>
                 </div>

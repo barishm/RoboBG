@@ -4,6 +4,7 @@ import com.robobg.entity.Robot;
 import com.robobg.entity.dtos.RobotDTO.*;
 import com.robobg.exceptions.RobotAlreadyExistsException;
 import com.robobg.repository.RobotRepository;
+import com.robobg.repository.RobotSpecifications;
 import com.robobg.service.MostComparedService;
 import com.robobg.service.RobotService;
 import org.modelmapper.ModelMapper;
@@ -12,6 +13,7 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
@@ -51,13 +53,6 @@ public class RobotServiceImpl implements RobotService {
     }
 
     @Override
-    public List<RobotDTO> getAllRobots() {
-        return robotRepository.findAll().stream()
-                .map(robot -> modelMapper.map(robot, RobotDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public RobotResponse getAllModels() {
         RobotResponse robotResponse = new RobotResponse();
         robotResponse.setContent(robotRepository.findAll().stream()
@@ -70,15 +65,26 @@ public class RobotServiceImpl implements RobotService {
 
 
     @Override
-    public RobotResponse getAllRobotIdModelImageLinks(int page, String model, List<String> brands, int startYear, int endYear, int minDustbinCapacity, int maxDustbinCapacity, int minSuctionPower, int maxSuctionPower) {
+    public RobotResponse getAllRobotIdModelImageLinks(int page, String model, List<String> brands, Integer startYear, Integer endYear, Integer minDustbinCapacity, Integer maxDustbinCapacity, Integer minSuctionPower, Integer maxSuctionPower) {
         Pageable pageable = PageRequest.of(page,12);
         Page<Robot> robots;
-        if(brands.isEmpty()){
-            robots = robotRepository.findByModelContainsAndReleaseYearBetweenAndCleaningFeatures(pageable,model,startYear,endYear,minDustbinCapacity,maxDustbinCapacity,minSuctionPower,maxSuctionPower);
-        } else {
-            robots = robotRepository.findByModelContainsAndBrandInAndReleaseYearBetweenAndOrderByBests(pageable, model, brands, startYear, endYear,minDustbinCapacity,maxDustbinCapacity,minSuctionPower,maxSuctionPower);
-            //robots = robotRepository.findByModelContainsAndBrandInAndOrderByBests(pageable,model,brands);
+        Specification<Robot> spec = Specification.where(null);
+        if (minSuctionPower != 0 && maxSuctionPower != 0) {
+            spec = spec.and(RobotSpecifications.hasSuctionPowerBetween(minSuctionPower, maxSuctionPower));
         }
+        if (minDustbinCapacity != 0 && maxDustbinCapacity != 0) {
+            spec = spec.and(RobotSpecifications.hasDustbinCapacityBetween(minDustbinCapacity, maxDustbinCapacity));
+        }
+        if (startYear != 0 && endYear != 0) {
+            spec = spec.and(RobotSpecifications.hasReleaseYearBetween(startYear, endYear));
+        }
+        if (model != null && !model.isEmpty()) {
+            spec = spec.and(RobotSpecifications.modelContains(model));
+        }
+        if (brands != null && !brands.isEmpty()) {
+            spec = spec.and(RobotSpecifications.brandIn(brands));
+        }
+        robots = robotRepository.findAll(spec, pageable);
         List<Robot> listOfRobots = robots.getContent();
         List<RobotModelImageLinksDTO> content = listOfRobots.stream().map(robot -> modelMapper.map(robot, RobotModelImageLinksDTO.class)).collect(Collectors.toList());
         RobotResponse robotResponse = new RobotResponse();
@@ -159,6 +165,7 @@ public class RobotServiceImpl implements RobotService {
         robotRepository.save(robot);
     }
 
+
     private String getExtensionOfFile(MultipartFile file) {
         String fileName = file.getOriginalFilename();
         if (fileName == null || !fileName.contains(".")) {
@@ -171,12 +178,14 @@ public class RobotServiceImpl implements RobotService {
             case "png" -> "image/png";
             case "jpg" -> "image/jpg";
             case "jpeg" -> "image/jpeg";
+            case "avif" -> "image/avif";
+            case "webp" -> "image/webp";
             default -> ""; // Unsupported type
         };
     }
 
     @Override
-    public RobotResponse getRobots(HashSet<String> fields, int page, String model, List<String> brands,int startYear,int endYear,int minDustbinCapacity,int maxDustbinCapacity,int minSuctionPower,int maxSuctionPower) {
+    public RobotResponse getRobots(HashSet<String> fields, int page, String model, List<String> brands,Integer startYear,Integer endYear,Integer minDustbinCapacity,Integer maxDustbinCapacity,Integer minSuctionPower,Integer maxSuctionPower) {
         if (fields.containsAll(Arrays.asList("model", "image", "links"))) {
             return getAllRobotIdModelImageLinks(page,model,brands,startYear,endYear,minDustbinCapacity,maxDustbinCapacity,minSuctionPower,maxSuctionPower);
         }else if (fields.contains("model")) {
@@ -193,4 +202,5 @@ public class RobotServiceImpl implements RobotService {
         }
         return Optional.empty();
     }
+
 }

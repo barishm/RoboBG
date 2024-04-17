@@ -16,21 +16,23 @@ import java.util.Optional;
 
 @Service
 public interface RobotService {
-    RobotResponse getAllRobotIdModelImageLinks(int page, String model, List<String> brands, int startYear, int endYear, int minDustbinCapacity, int maxDustbinCapacity, int minSuctionPower, int maxSuctionPower);
+
+    RobotResponse getAllRobotIdModelImageLinks(int page, String model, List<String> brands, Integer startYear, Integer endYear, Integer minDustbinCapacity, Integer maxDustbinCapacity, Integer minSuctionPower, Integer maxSuctionPower);
+
     void saveRobot(CreateRobotDTO robot) throws RobotAlreadyExistsException;
     void updateRobot(CreateRobotDTO robot);
     void deleteRobotById(Long id) throws ChangeSetPersister.NotFoundException;
     List<RobotModelImageLinksDTO> findAllBests();
 
-    List<RobotDTO> getAllRobots();
-
     RobotResponse getAllModels();
+
 
     Optional<RobotDTO> getRobotById(Long id);
 
-    RobotResponse getRobots(HashSet<String> fields, int page, String model, List<String> brands,int startYear,int endYear,int minDustbinCapacity,int maxDustbinCapacity,int minSuctionPower,int maxSuctionPower);
+    RobotResponse getRobots(HashSet<String> fields, int page, String model, List<String> brands,Integer startYear,Integer endYear,Integer minDustbinCapacity,Integer maxDustbinCapacity,Integer minSuctionPower,Integer maxSuctionPower);
 
 
     void uploadRobotImage(Long robotId, MultipartFile file) throws IOException;
+
 
 }

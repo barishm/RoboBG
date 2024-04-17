@@ -62,6 +62,22 @@ const CompareTable = () => {
       );
     });
   };
+  const renderStringRow = (field,addition) => {
+    return robots.map((item) => {
+      let value = field.includes('.') ? getFieldByPath(item,field) : item[field];
+      return(
+        <td key={item.id} style={{ height: "80px", verticalAlign: "bottom", textAlign: "left", whiteSpace: "normal" }} className="border">
+          {value === null ? (
+            <span style={{ color: "grey" }}>N/A</span>
+          ) : (
+            <>
+              {value} {addition === "m²" ? <>m&sup2;</> : addition}
+            </>
+          )}
+        </td>
+      )
+    });
+  }
   function getFieldByPath(obj, path) {
     const keys = path.split('.');
     let value = obj;
@@ -189,7 +205,7 @@ const CompareTable = () => {
                   data-bs-content="Note, some robot cleaners have a few power settings, in this field, we specify a noise level claimed by the manufacturer, in lowest power mode." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
-                {renderRow("noiseLevel")}
+                {renderStringRow("noiseLevel","dB")}
               </tr>
               <tr>
                 <th scope="row">
@@ -227,7 +243,7 @@ const CompareTable = () => {
                   data-bs-content="The higher the suction power, the better it performs on carpeted surface removing dust and smaller debris. A high suction power robot vacuum cleaner is more effective in getting rid of dirt hidden away in your carpets" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
-                {renderRow("cleaningFeatures.suctionPower")}
+                {renderStringRow("cleaningFeatures.suctionPower","Pa")}
               </tr>
               <tr>
                 <th scope="row">
@@ -235,7 +251,7 @@ const CompareTable = () => {
                   data-bs-content="How much of a cleaning area the robot covers during one cleaning cycle" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
-                {renderRow("cleaningFeatures.cleaningArea")}
+                {renderStringRow("cleaningFeatures.cleaningArea","m²")}
               </tr>
               <tr>
                 <th scope="row">
@@ -244,7 +260,7 @@ const CompareTable = () => {
                   have pets or a big house." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
-                {renderRow("cleaningFeatures.dustbinCapacity")}
+                {renderStringRow("cleaningFeatures.dustbinCapacity","ml")}
               </tr>
               <tr>
                 <th scope="row">
@@ -252,7 +268,7 @@ const CompareTable = () => {
                   data-bs-content="The capacity of the disposable dust bag from the auto-emptying base" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
-                {renderRow("cleaningFeatures.disposableDustBagCapacity")}
+                {renderStringRow("cleaningFeatures.disposableDustBagCapacity","L")}
               </tr>
               <tr>
                 <th scope="row">
@@ -268,7 +284,7 @@ const CompareTable = () => {
                   data-bs-content="The height of an obstacle/carpet/threshold the robot can climb." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
-                {renderRow("cleaningFeatures.barrierCrossHeight")}
+                {renderStringRow("cleaningFeatures.barrierCrossHeight","mm")}
               </tr>
               <tr>
                 <th scope="row">
@@ -312,7 +328,7 @@ const CompareTable = () => {
                   data-bs-content="The more water the water tank holds, the more significant cleaning area it covers before gets dry" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
-                {renderRow("moppingFeatures.waterTankCapacity")}
+                {renderStringRow("moppingFeatures.waterTankCapacity","ml")}
               </tr>
               <tr>
                 <th scope="row">
@@ -356,7 +372,7 @@ const CompareTable = () => {
                   data-bs-content="A larger battery provides a longer running time on one charge." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
-                {renderRow("battery.batteryCapacity")}
+                {renderStringRow("battery.batteryCapacity","mAh")}
               </tr>
               <tr>
                 <th scope="row">
@@ -364,7 +380,7 @@ const CompareTable = () => {
                   data-bs-content="How much time the robot can work before needs to recharge" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
-                {renderRow("battery.batteryLife")}
+                {renderStringRow("battery.batteryLife","min")}
               </tr>
               <tr>
                 <th scope="row">
@@ -372,7 +388,7 @@ const CompareTable = () => {
                   data-bs-content="How much time the robot needs to recharge" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
-                {renderRow("battery.chargingTime")}
+                {renderStringRow("battery.chargingTime","min")}
               </tr>
               <tr>
                 <th scope="row">
@@ -380,7 +396,7 @@ const CompareTable = () => {
                   data-bs-content="Rated power is the max power the machine can deliver under normal circumstances" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
-                {renderRow("battery.ratedPower")}
+                {renderStringRow("battery.ratedPower","W")}
               </tr>
               <tr>
                 <th></th>
@@ -408,7 +424,7 @@ const CompareTable = () => {
                   data-bs-content="Some robot vacuums work only with 2.4 GHz wi-fi band, others can also work in 5 GHz wi-fi network" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
-                {renderRow("control.wifiFrequencyBand")}
+                {renderStringRow("control.wifiFrequencyBand","GHz")}
               </tr>
               <tr>
                 <th scope="row">
@@ -548,7 +564,7 @@ const CompareTable = () => {
                   data-bs-content="The total weight of the robot vacuum" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
-                {renderRow("otherSpecifications.weight")}
+                {renderStringRow("otherSpecifications.weight","kg")}
               </tr>
               <tr>
                 <th scope="row">
@@ -556,7 +572,7 @@ const CompareTable = () => {
                   data-bs-content="It refers to the robot's diameter (for round shaped robot vacuums) or width. Smaller diameter helps the robot to reach narrow places" 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
-                {renderRow("otherSpecifications.width")}
+                {renderStringRow("otherSpecifications.width","cm")}
               </tr>
               <tr>
                 <th scope="row">
@@ -564,7 +580,8 @@ const CompareTable = () => {
                   data-bs-content="If you want to use the robot vacuum under your bed or furniture, check the gap between the floor and furniture and ensure the robot vacuum will fit under it." 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
-                {renderRow("otherSpecifications.height")}
+                
+                {renderStringRow("otherSpecifications.height","cm")}
               </tr>
               <tr>
                 <th scope="row">
@@ -573,9 +590,8 @@ const CompareTable = () => {
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {robots.map((item) => (
-                    <td key={item.id} style={{height:"150px",verticalAlign: "bottom", textAlign: "left",width:"50px"}} className="border text-break">{item.otherSpecifications.inTheBox}</td>
+                    <td key={item.id} style={{paddingTop:"30px",verticalAlign: "bottom", textAlign: "left",width:"50px"}} className="border text-break">{item.otherSpecifications.inTheBox ? item.otherSpecifications.inTheBox : 'N/A'}</td>
                 ))}
-                
               </tr>
               <tr>
                 <th scope="row">

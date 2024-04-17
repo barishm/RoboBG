@@ -33,12 +33,12 @@ public class RobotController {
                                    @RequestParam(defaultValue = "0") int page,
                                    @RequestParam(defaultValue = "") String model,
                                    @RequestParam(defaultValue = "") List<String> brands,
-                                   @RequestParam(defaultValue = "0") int startYear,
-                                   @RequestParam(defaultValue = "3000") int endYear,
-                                   @RequestParam(defaultValue = "0") int minDustbinCapacity,
-                                   @RequestParam(defaultValue = "15000") int maxDustbinCapacity,
-                                   @RequestParam(defaultValue = "0") int minSuctionPower,
-                                   @RequestParam(defaultValue = "15000") int maxSuctionPower
+                                   @RequestParam(defaultValue = "0") Integer startYear,
+                                   @RequestParam(defaultValue = "0") Integer endYear,
+                                   @RequestParam(defaultValue = "0") Integer minDustbinCapacity,
+                                   @RequestParam(defaultValue = "0") Integer maxDustbinCapacity,
+                                   @RequestParam(defaultValue = "0") Integer minSuctionPower,
+                                   @RequestParam(defaultValue = "0") Integer maxSuctionPower
     ) {
         return robotService.getRobots(fields,page,model,brands,startYear,endYear,minDustbinCapacity,maxDustbinCapacity,minSuctionPower,maxSuctionPower);
     }

@@ -1,11 +1,14 @@
-import Bests from "./components/Bests";
-import PopularComparisons from "../Compare/components/PopularComparisons";
-import CompareForm from "../Compare/components/CompareForm";
-import YoutubeVideos from "./components/YoutubeVideos";
+import Bests from './components/Bests';
+import PopularComparisons from '../Compare/components/PopularComparisons';
+import CompareForm from '../Compare/components/CompareForm';
+import YoutubeVideos from './components/YoutubeVideos';
+import HomePageCompareForm from './components/HomePageCompareForm';
+import { useSelector } from 'react-redux';
 
 const Home = (props) => {
   const setIds = props.setIds;
   const Ids = props.Ids;
+  const lang = useSelector((state) => state.language.lang);
 
   return (
     <div>
@@ -13,17 +16,20 @@ const Home = (props) => {
         <div className="container d-flex">
           <div className="col-12 col-md-12 col-lg-9">
             <Bests setIds={setIds} Ids={Ids} />
-            <YoutubeVideos/>
+            <YoutubeVideos />
           </div>
-          <div className="col-12 col-md-12 col-lg-3" style={{marginTop:"48px",padding:"20px"}}>
-             <div className="card d-none d-lg-block text-center">
-              <div className="card-body" style={{paddingBottom:"20px"}}>
-                  <CompareForm/>
+          <div
+            className="col-12 col-md-12 col-lg-3"
+            style={{ marginTop: '48px', padding: '20px' }}
+          >
+            <div className="card d-none d-lg-block text-center">
+              <div className="card-body" style={{ paddingBottom: '20px'}}s>
+                <HomePageCompareForm />
               </div>
-             </div>
-             <div className="d-none d-lg-block">
-             <PopularComparisons/>
-             </div>
+            </div>
+            <div className="d-none d-lg-block">
+              <PopularComparisons />
+            </div>
           </div>
         </div>
       </section>
