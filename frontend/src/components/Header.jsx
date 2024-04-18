@@ -1,9 +1,7 @@
-import { Navbar, Nav, Container, Button, Col } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { logOut } from "../app/redux/authSlice";
-import { setLanguage } from "../app/redux/languageSlice";
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logOut } from '../app/redux/authSlice';
+import { setLanguage } from '../app/redux/languageSlice';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -16,88 +14,221 @@ const Header = () => {
     dispatch(setLanguage(language));
   };
 
-  const handleLogin = () => {
-    navigate("/login"); // Navigate to /login
-  };
-
-  const goToProfile = () => {
-    navigate("/profile");
-  };
-
   const logoutUser = () => {
     dispatch(logOut());
   };
 
   return (
-    <Navbar expand="md" className="bg-white">
-      <Container>
-        <Navbar.Brand href="/">RoboBG</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <LinkContainer to="/">
-              <Nav.Link>{lang === "en" ? <>Home</> : <>Начало</>}</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/robots">
-              <Nav.Link>{lang === "en" ? <>All Robots</> : <>Всички роботи</>}</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/compare">
-              <Nav.Link>{lang === "en" ? <>Compare</> : <>Сравни</>}</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/contact">
-              <Nav.Link>{lang === "en" ? <>Contact us</> : <>Контакти</>}</Nav.Link>
-            </LinkContainer>
-            {(role === "ADMIN" || role === "MODERATOR") && (
-              <LinkContainer to="/dashboard">
-                <Nav.Link>{lang === "en" ? <>Dashboard</> : <>Табло за управление</>}</Nav.Link>
-              </LinkContainer>
-            )}
-          </Nav>
-          <Nav className="ms-auto">
-            {username ? (
-              <>
-                <Col xs="auto" style={{ display: "flex", alignItems: "center" }}>
-                  <div className="dropdown">
-                    <img className="dropdown-toggle rounded-3 me-md-1" data-bs-toggle="dropdown" aria-expanded="false"  style={{width:"45px",height:"45px",cursor: 'pointer'}} src="images/user2.jpg" />
-                    <ul className="dropdown-menu">
-                      <li>
-                        <span className="dropdown-item-text">@{username}</span>
-                      </li>
-                      <li>
-                        <button className="dropdown-item" onClick={logoutUser}>
-                        {lang === "en" ? <>Sign out</> : <>Отписване</>}
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </Col>
-              </>
-            ) : (
-              <Col xs="auto">
-                <Button variant="light" size="md" className="rounded-5 mb-2 mb-md-0 me-md-2" onClick={handleLogin}>
-                {lang === "en" ? <>Sign in</> : <>Впиши се</>}
-                </Button>
-              </Col>
-            )}
-            <div className="dropdown" style={{ display: "flex", alignItems: "center" }}>
-            <button className="btn btn-light rounded-5 dropdown-toggle" data-bs-toggle="dropdown"><i className="fa-solid fa-globe" style={{color:"rgb(60,60,60)"}}></i></button>
-            <ul className="dropdown-menu">
-              <li>
-                        <button className="dropdown-item" onClick={() => handleChangeLanguage('bg')}>
-                          Български
-                        </button>
-                      </li> <li>
-                        <button className="dropdown-item" onClick={() => handleChangeLanguage('en')}>
-                          English
-                        </button>
-                      </li>
-                    </ul>
+    <nav className="navbar navbar-expand-md bg-body-tertiary">
+      <div className="container">
+        <a className="navbar-brand" href="#">
+          RoboBG
+        </a>
+        <div className="d-flex align-items-center">
+          {username ? (
+            <div className="dropdown d-md-none">
+              <button
+                className="dropdown-toggle rounded-3 me-md-1 btn btn-light rounded-5"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i className="fa-solid fa-user"></i>
+              </button>
+              <ul className="dropdown-menu">
+                <li>
+                  <span className="dropdown-item-text">@{username}</span>
+                </li>
+                <li>
+                  <button className="dropdown-item" onClick={logoutUser}>
+                    {lang === 'en' ? 'Sign out' : 'Отписване'}
+                  </button>
+                </li>
+              </ul>
             </div>
-            
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+          ) : (
+            <button
+              className="btn btn-light rounded-5 d-md-none"
+              onClick={() => {
+                navigate('/login');
+              }}
+            >
+              Sign in
+            </button>
+          )}
+          <div className="dropdown-center d-md-none me-2">
+            <button
+              className="btn btn-light rounded-5 dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i className="fa-solid fa-globe"></i>
+            </button>
+            <ul
+              className="dropdown-menu dropdown-menu-end"
+              aria-labelledby="dropdownMenuButton"
+            >
+              <li>
+                <button
+                  className="dropdown-item"
+                  onClick={() => handleChangeLanguage('bg')}
+                >
+                  Български
+                </button>
+              </li>
+              <li>
+                <button
+                  className="dropdown-item"
+                  onClick={() => handleChangeLanguage('en')}
+                >
+                  English
+                </button>
+              </li>
+            </ul>
+          </div>
+          <button
+            className="navbar-toggler ms-auto"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-lg-0">
+            <li className="nav-item">
+              <a
+                className="nav-link active"
+                aria-current="page"
+                style={{cursor:"pointer"}}
+                onClick={() => {
+                  navigate('/');
+                }}
+              >
+                {lang === 'en' ? 'Home' : 'Начало'}
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className="nav-link active"
+                aria-current="page"
+                style={{cursor:"pointer"}}
+                onClick={() => {
+                  navigate('/robots');
+                }}
+              >
+                {lang === 'en' ? 'All Robots' : 'Всички роботи'}
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className="nav-link active"
+                aria-current="page"
+                style={{cursor:"pointer"}}
+                onClick={() => {
+                  navigate('/compare');
+                }}
+              >
+                {lang === 'en' ? 'Compare' : 'Сравни'}
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className="nav-link active"
+                aria-current="page"
+                style={{cursor:"pointer"}}
+                onClick={() => {
+                  navigate('/contact');
+                }}
+              >
+                {lang === 'en' ? 'Contact us' : 'Контакти'}
+              </a>
+            </li>
+            {(role === 'ADMIN' || role === 'MODERATOR') && (
+              <li className="nav-item">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  style={{cursor:"pointer"}}
+                  onClick={() => {
+                    navigate('/dashboard');
+                  }}
+                >
+                  {lang === 'en' ? 'Dashboard' : 'Панел'}
+                </a>
+              </li>
+            )}
+          </ul>
+          {username ? (
+            <div className="dropdown d-none d-md-block">
+              <button
+                className="dropdown-toggle rounded-3 me-md-1 btn btn-light rounded-5"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i className="fa-solid fa-user"></i>
+              </button>
+              <ul className="dropdown-menu">
+                <li>
+                  <span className="dropdown-item-text">@{username}</span>
+                </li>
+                <li>
+                  <button className="dropdown-item" onClick={logoutUser}>
+                    {lang === 'en' ? 'Sign out' : 'Отписване'}
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <button
+              className="btn btn-light d-none d-md-block rounded-5"
+              onClick={() => {
+                navigate('/login');
+              }}
+            >
+              Sign in
+            </button>
+          )}
+          <div className="dropdown-center d-none d-md-block">
+            <button
+              className="btn btn-light rounded-5 dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i className="fa-solid fa-globe"></i>
+            </button>
+            <ul
+              className="dropdown-menu dropdown-menu-end"
+              aria-labelledby="dropdownMenuButton"
+            >
+              <li>
+                <button
+                  className="dropdown-item"
+                  onClick={() => handleChangeLanguage('bg')}
+                >
+                  Български
+                </button>
+              </li>
+              <li>
+                <button
+                  className="dropdown-item"
+                  onClick={() => handleChangeLanguage('en')}
+                >
+                  English
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
   );
 };
 export default Header;

@@ -1,18 +1,15 @@
 import Bests from './components/Bests';
 import PopularComparisons from '../Compare/components/PopularComparisons';
-import CompareForm from '../Compare/components/CompareForm';
 import YoutubeVideos from './components/YoutubeVideos';
 import HomePageCompareForm from './components/HomePageCompareForm';
-import { useSelector } from 'react-redux';
 
 const Home = (props) => {
   const setIds = props.setIds;
   const Ids = props.Ids;
-  const lang = useSelector((state) => state.language.lang);
 
   return (
     <div>
-      <section className="mt-5">
+      <section className="mt-4">
         <div className="container d-flex">
           <div className="col-12 col-md-12 col-lg-9">
             <Bests setIds={setIds} Ids={Ids} />
@@ -23,7 +20,7 @@ const Home = (props) => {
             style={{ marginTop: '48px', padding: '20px' }}
           >
             <div className="card d-none d-lg-block text-center">
-              <div className="card-body" style={{ paddingBottom: '20px'}}s>
+              <div className="card-body" style={{ paddingBottom: '20px'}}>
                 <HomePageCompareForm />
               </div>
             </div>

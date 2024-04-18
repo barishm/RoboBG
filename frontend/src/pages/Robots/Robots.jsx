@@ -45,7 +45,7 @@ const Robots = () => {
   }
 
   return (
-    <section className="mt-5">
+    <section className="mt-4">
       <div className="container d-flex">
         <div className="col-12 col-md-12 col-lg-9">
           <h3

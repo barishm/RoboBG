@@ -133,7 +133,7 @@ const ManageRobots = () => {
                           </li>
                           {robot.purchaseLinks.length > 0 ? <li><hr className="dropdown-divider"></hr></li> : <></>}
                           {robot.purchaseLinks.map((link) => (
-                            <li>
+                            <li key={link.id}>
                               <span className="d-flex">
                                 <a className="dropdown-item" href={link.link}>
                                   {link.name}

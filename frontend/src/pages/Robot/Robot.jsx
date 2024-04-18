@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import RobotDetails from "./components/RobotDetails";
@@ -65,13 +65,14 @@ const Robot = () => {
         </>
       ) : data ? (
         <>
-          <div className="container-md p-4 mt-4">
+          <div className="container mt-4">
             <div className="row">
-              <div className="col-12 shadow-sm rounded card p-5" style={{maxWidth:"900px",marginRight:"auto",marginLeft:"auto"}}>
+              <div className="col-12 shadow-sm rounded card p-sm-5 mb-5" style={{maxWidth:"900px",marginRight:"auto",marginLeft:"auto"}}>
                 <div className="row">
                   <div className="col-8 col-md-4 mb-4">
                     <img
-                      style={{ maxWidth: "100%", height: "auto" }}
+                      className="mt-4 ms-4"
+                      style={{ maxWidth: "200px", height: "auto" }}
                       src={data.image || noImage}
                     />
                   </div>
