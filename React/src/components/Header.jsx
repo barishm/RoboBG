@@ -18,6 +18,14 @@ const Header = () => {
     dispatch(logOut());
   };
 
+  const closeCollapse = () => {
+    const navbar = document.getElementById('navbarSupportedContent');
+    const isCollapsed = navbar.classList.contains('show');
+    if (isCollapsed) {
+      navbar.classList.remove('show');
+    }
+  }
+
   return (
     <nav className="navbar navbar-expand-md bg-body-tertiary">
       <div className="container">
@@ -50,6 +58,7 @@ const Header = () => {
               className="btn btn-light rounded-5 d-md-none"
               onClick={() => {
                 navigate('/login');
+                closeCollapse();
               }}
             >
               Sign in
@@ -108,6 +117,7 @@ const Header = () => {
                 style={{cursor:"pointer"}}
                 onClick={() => {
                   navigate('/');
+                  closeCollapse();
                 }}
               >
                 {lang === 'en' ? 'Home' : 'Начало'}
@@ -120,6 +130,7 @@ const Header = () => {
                 style={{cursor:"pointer"}}
                 onClick={() => {
                   navigate('/robots');
+                  closeCollapse();
                 }}
               >
                 {lang === 'en' ? 'All Robots' : 'Всички роботи'}
@@ -132,6 +143,7 @@ const Header = () => {
                 style={{cursor:"pointer"}}
                 onClick={() => {
                   navigate('/compare');
+                  closeCollapse();
                 }}
               >
                 {lang === 'en' ? 'Compare' : 'Сравни'}
@@ -144,6 +156,7 @@ const Header = () => {
                 style={{cursor:"pointer"}}
                 onClick={() => {
                   navigate('/contact');
+                  closeCollapse();
                 }}
               >
                 {lang === 'en' ? 'Contact us' : 'Контакти'}
@@ -157,6 +170,7 @@ const Header = () => {
                   style={{cursor:"pointer"}}
                   onClick={() => {
                     navigate('/dashboard');
+                    closeCollapse();
                   }}
                 >
                   {lang === 'en' ? 'Dashboard' : 'Панел'}
@@ -189,6 +203,7 @@ const Header = () => {
               className="btn btn-light d-none d-md-block rounded-5"
               onClick={() => {
                 navigate('/login');
+                closeCollapse();
               }}
             >
               Sign in

@@ -30,11 +30,10 @@ const PopularComparisons = () => {
 
   return (
     <div
+      className="mx-3 mx-md-0"
       style={{
         marginTop: "40px",
         marginBottom: "50px",
-        marginRight: "auto",
-        marginLeft: "auto",
         textAlign: "center",
       }}
     >
