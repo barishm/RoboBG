@@ -147,7 +147,7 @@ const QnA = (props) => {
               </h6>
               {username &&
                 (role === "ADMIN" || username === comment.author.username) && (
-                  <div className="dropdown top-right">
+                  <div className="dropdown" style={{position:"absolute",top:"0",right:"0",padding:"5px"}}>
                     <i
                       className="fa-solid fa-ellipsis-vertical"
                       data-bs-toggle="dropdown"
@@ -187,7 +187,7 @@ const QnA = (props) => {
                       {username &&
                         (role === "ADMIN" ||
                           username === comment.author.username) && (
-                          <div className="dropdown top-right me-1">
+                          <div className="dropdown me-1" style={{position:"absolute",top:"0",right:"0",padding:"5px"}}>
                             {hoveredAnswerId === answer.id && (
                               <i
                                 className="fa-solid fa-ellipsis-vertical"

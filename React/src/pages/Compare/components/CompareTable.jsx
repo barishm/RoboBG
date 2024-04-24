@@ -94,12 +94,12 @@ const CompareTable = () => {
 
 
   return (
-    <div className="table-container" style={{overflowX: "auto",marginBottom:"50px"}}>
+    <div className="table-container" style={{overflowX: "auto",marginBottom:"50px",maxWidth:"1000px",marginLeft:"auto",marginRight:"auto"}}>
       {robots ? (
-        <>
-          <div style={{ display: "flex" }} className="mb-1 mt-5" >
+        <div className="table-responsive">
+          <div style={{ display: "flex",maxWidth:"300px",marginLeft:"auto",marginRight:"auto" }} className="mb-1 mt-5" >
                 <input
-                  className="form-control choose-robot"
+                  className="form-control me-2"
                   value={Model}
                   name="Model"
                   list="datalistOptions"
@@ -109,7 +109,7 @@ const CompareTable = () => {
                 />
                 <button
                   type="button"
-                  className="btn btn-dark add-button"
+                  className="btn btn-dark"
                   onClick={handleAdd}
                 >
                   {lang === "en" ? <>Add</> : <>Добави</>}
@@ -120,7 +120,7 @@ const CompareTable = () => {
                   ))}
                 </datalist>
               </div>
-          <table className="table">
+          <table className="table table-comparison" style={{width:"auto",marginLeft:"auto",marginRight:"auto"}}>
             <thead>
             </thead>
             <tbody>
@@ -138,7 +138,7 @@ const CompareTable = () => {
                 {robots.map((item) => (
                   <td key={item.id} style={{height:"90px",verticalAlign: "bottom", textAlign: "left"}} className="border">
                     <div className="image d-flex">
-                      <img className="image-in-table" src={item.image || noImage} alt="..."></img>
+                      <img src={item.image || noImage} alt="..." style={{width:"70px",display:"block"}} ></img>
                       <div className="image-overlay ms-1">
                         <i
                           className="fa-solid fa-xmark"
@@ -605,7 +605,7 @@ const CompareTable = () => {
               </tr>
             </tbody>
           </table>
-        </>
+        </div>
       ) : (
         <Loading />
       )}

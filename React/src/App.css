@@ -1,12 +1,7 @@
-
 #root {
   overflow: hidden;
   min-height: 100%;
 }
-hr.solid {
-  border-top: 3px solid #bbb;
-}
-
 .App {
   display: flex;
   flex-direction: column;
@@ -14,87 +9,7 @@ hr.solid {
   background-color: rgb(245, 245, 245);
 }
 
-Footer {
-  margin-top: auto;
-}
-
-.choose-robot {
-  max-width: 250px;
-  max-height: 40px;
-  margin-right: 10px;
-}
-.add-button {
-  margin-left: 0px;
-}
-
-.login-form {
-  max-width: 300px;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.add-div {
-  margin-top: 5px;
-  justify-content: center;
-}
-
-.table-container {
-  max-width: 1000px;
-  margin-top: 20px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.select-div {
-  margin: auto auto;
-}
-
-.select-div button {
-  max-height: 50px;
-  margin: auto auto;
-}
-
-
-.two-buttons > button{
-  margin: 13px 70px;
-}
-
-.image-in-table {
-  width: 70px;
-  display: block;
-}
-
-
-footer {
-  margin-top: auto;
-}
-
-
-.single-robot-image {
-  width: 200px;
-}
-
-.text-pointer-on-hover:hover {
-  cursor: pointer;
-  color: rgb(73, 73, 73);
-}
-
-#blackPlaceholder::placeholder {
-  color: black;
-  opacity: 1;
-}
-
-.position-custom {
-  position: absolute;
-  top: 1rem; /* Adjust as necessary */
-  right: 0.50rem; /* Adjust as necessary */
-}
-
-.bg-custom-gray {
-  background-color: rgb(220, 220, 220);
-}
-
+ /*compare table css START*/
 .table-container .stickycell {
   position: absolute;
   top: 0px;
@@ -109,11 +24,9 @@ footer {
   padding: 2px 5px;
   overflow: hidden;
 }
-
 .table-container th {
   z-index: 10;
 }
-
 .table-container tbody th {
   position: sticky;
   width: 0px!important;
@@ -125,37 +38,55 @@ footer {
   display: table-cell;
   background: none;
   font-weight: normal;
+  vertical-align: middle;
 }
-
 .table>thead {
   vertical-align: bottom;
 }
-
 thead, tbody, tr, td, th {
   border-color: inherit;
   border-style: solid;
   border-width: 0;
 }
-
 thead {
   display: table-header-group;
   vertical-align: middle;
   border-color: inherit;
 }
-
 td {
   display: table-cell;
   vertical-align: inherit;
   min-height: 150px;
 }
-
-
-.top-right {
-  position: absolute;
-  top: 0;
-  right: 0; 
-  padding: 5px; 
+th {
+  text-align: inherit;
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
 }
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.table-responsive table {
+  margin-bottom: 0 !important;
+}
+.table-responsive {
+  margin-bottom: 1rem;
+}
+.comparison-container .table-responsive {
+  margin-bottom: 0;
+}
+.table-comparison tbody td {
+  padding: 1.8rem 0.35rem 0.45rem 0.35rem !important;
+  width: 650px;
+  font-size: 0.85rem;
+}
+.table-compare td {
+  position: relative;
+}
+ /*compare table css END*/
+
 
 .form-control:focus {
   border-color: #000000; /* Remove the blue border from input fields */
@@ -168,7 +99,7 @@ td {
 
 .form-check-input:checked {
   border-color: black;
-  background-color: black; /* Change the background color to black */
+  background-color: black; /* Change the background color of check buttons to black */
 }
 .form-check-input:focus {
   outline: none;
@@ -179,5 +110,20 @@ td {
 hr.solid {
   border-top: 1px solid grey;
   width: 100%;
+}
+
+
+.text-pointer-on-hover:hover {
+  cursor: pointer;
+  color: rgb(73, 73, 73);
+}
+
+#blackPlaceholder::placeholder {
+  color: black; /* black color placeholder */
+  opacity: 1;
+}
+
+.bg-custom-gray {
+  background-color: rgb(220, 220, 220);
 }
 
