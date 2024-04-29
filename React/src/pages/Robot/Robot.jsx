@@ -50,9 +50,17 @@ const Robot = () => {
     setModel("");
   }
   const changeTab = (tabName) => {
-
     setTab(tabName);
   }
+
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
 
   return (
@@ -65,9 +73,9 @@ const Robot = () => {
         </>
       ) : data ? (
         <>
-          <div className="container mt-4">
+          <div className={screenSize > 575 ? "container mt-4" : "container"} style={screenSize > 575 ? {} : {backgroundColor:"white"}}>
             <div className="row">
-              <div className="col-12 shadow-sm rounded card p-sm-5 mb-5" style={{maxWidth:"900px",marginRight:"auto",marginLeft:"auto"}}>
+              <div className={screenSize > 575 ? 'col-12 shadow-sm rounded card p-sm-5 mb-5' : 'col-12 p-sm-5 mb-5'}  style={{maxWidth:"900px",marginRight:"auto",marginLeft:"auto"}}>
                 <div className="row">
                   <div className="col-8 col-md-4 mb-4">
                     <img
@@ -140,7 +148,7 @@ const Robot = () => {
                     </div>
                   </div>
                 </div>
-                <div className="row mt-5">
+                <div className="row mt-5 p-2">
                   <ul className="nav nav-tabs">
                     <li className="nav-item">
                       <a  className={`nav-link ${Tab === "Specs" ? "active" : ""}`} style={{color:"black"}} onClick={() => changeTab("Specs")} href="#">

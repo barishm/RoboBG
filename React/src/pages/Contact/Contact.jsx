@@ -12,9 +12,6 @@ const Contact = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const googleFormLink =
-    'https://docs.google.com/forms/d/e/1FAIpQLScw52IOJi21mYcjjQwuAMeMOslb5dmy-VAXcjpW_9Nd1rOv3w/viewform?usp=sf_link';
-
   return (
     <div
       className={

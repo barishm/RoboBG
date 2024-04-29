@@ -5,6 +5,7 @@ import Loading from "../../../components/Loading";
 import { useLazyGetRobotByIdQuery, useGetAllRobotsQuery } from "../../../app/services/robotApiSlice";
 import { useState, useEffect } from "react";
 import ReleaseDateDisplay from "../../../components/ReleaseDateDisplay";
+import SpecsRenderer from "../../../components/SpecsRenderer";
 
 const CompareTable = () => {
   const queryParams = {
@@ -52,9 +53,9 @@ const CompareTable = () => {
           {value === null ? (
             <span style={{ color: "grey" }}>N/A</span>
           ) : value === true ? (
-            <span style={{ color: "green" }}>YES</span>
+            <span style={{ color: "green" }}>{lang === "en" ? "YES" : "ДА"}</span>
           ) : value === false ? (
-            <span style={{ color: "red" }}>NO</span>
+            <span style={{ color: "red" }}>{lang === "en" ? "NO" : "НЕ"}</span>
           ) : (
             value
           )}
@@ -97,14 +98,14 @@ const CompareTable = () => {
     <div className="table-container" style={{overflowX: "auto",marginBottom:"50px",maxWidth:"1000px",marginLeft:"auto",marginRight:"auto"}}>
       {robots ? (
         <div className="table-responsive">
-          <div style={{ display: "flex",maxWidth:"300px",marginLeft:"auto",marginRight:"auto" }} className="mb-1 mt-5" >
+          <div style={{ display: "flex",maxWidth:"350px",marginLeft:"auto",marginRight:"auto" }} className="mb-1 mt-5" >
                 <input
                   className="form-control me-2"
                   value={Model}
                   name="Model"
                   list="datalistOptions"
                   id="Model"
-                  placeholder="Choose robot from the list"
+                  placeholder={lang === "en" ? "Choose robot from the list" : "Изберете робот от списъка"}
                   onChange={(e) => setModel(e.target.value)}
                 />
                 <button
@@ -112,7 +113,7 @@ const CompareTable = () => {
                   className="btn btn-dark"
                   onClick={handleAdd}
                 >
-                  {lang === "en" ? <>Add</> : <>Добави</>}
+                  {lang === "en" ? "Add" : "Добави"}
                 </button>
                 <datalist id="datalistOptions">
                   {allModels.content.map((item) => (
@@ -153,82 +154,80 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Mapping <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="A technology that can be based on a camera sensor, Laser Direct Structuring (LDS) laser or a gyroscope. The robot scans out a room and creates a map. The robots with mapping provide better performance by building the most efficient path of cleaning without missing a spot" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "mapping" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "mappingDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("mapping")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Mapping Sensor Type <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="There are different types of mapping technologies such as LDS based, camera based, and gyroscope/accelerometer based mapping. Some robot vacuums use combined technologies." 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "mappingSensorType" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "mappingSensorTypeDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("mappingSensorType")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">High Precision Map <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="A high-precision map means that it is at least 98% accurate and corresponds to your real home layout" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "highPrecisionMap" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "highPrecisionMapDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("highPrecisionMap")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Front Camera <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The robot equipped with a front camera and can see, recognize, and avoid objects on its way." 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "frontCamera" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "frontCameraDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("frontCamera")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Recharge Resume <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="If the robot can't finish a job on one charge, it automatically returns to the charging dock. Resuming intends the robot to continue cleaning from the same place it left off after it's done charging. This feature is perfect for big households, when the robot is not able to clean the entire house on one charge" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "rechargeResume" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "rechargeResumeDesc" })} 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("rechargeResume")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Auto Dock And Recharge <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="When the robot vacuum finishes the job or runs low on battery, it automatically returns to the dock to recharge" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "autoDockAndRecharge" })}  <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "autoDockAndRechargeDesc" })} 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("autoDockAndRecharge")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Noise Level <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="Note, some robot cleaners have a few power settings, in this field, we specify a noise level claimed by the manufacturer, in lowest power mode." 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "noiseLevel" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "noiseLevelDesc" })} 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderStringRow("noiseLevel","dB")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Display <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The robot have a display that shows additional information such as battery level, errors, scheduling time, or cleaning status" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "display" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "displayDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("display")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Side Brushes <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="How many side brushes the robot comes equipped with. Side brushes help to reach corners and edges channeling all the dust and dirt to the main central brush where it gets sucked up right into the dustbin" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "sideBrushes" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "sideBrushesDesc" })} 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("sideBrushes")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Voice Prompts <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The robot uses voice prompts to inform you about the
-                  current status of the robot vacuum whether it is charging,
-                  cleaning, etc." 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "voicePrompts" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "voicePromptsDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("voicePrompts")}
@@ -239,65 +238,64 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Suction Power <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The higher the suction power, the better it performs on carpeted surface removing dust and smaller debris. A high suction power robot vacuum cleaner is more effective in getting rid of dirt hidden away in your carpets" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "suctionPower" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "suctionPowerDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderStringRow("cleaningFeatures.suctionPower","Pa")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Cleaning Area <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="How much of a cleaning area the robot covers during one cleaning cycle" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "cleaningArea" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "cleaningAreaDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderStringRow("cleaningFeatures.cleaningArea","m²")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Dustbin Capacity <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The dustbin size matters if you
-                  have pets or a big house." 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "dustbinCapacity" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "dustbinCapacityDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderStringRow("cleaningFeatures.dustbinCapacity","ml")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Disposable Dustbag Capacity <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The capacity of the disposable dust bag from the auto-emptying base" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "disposableDustBagCapacity" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "disposableDustBagCapacityDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderStringRow("cleaningFeatures.disposableDustBagCapacity","L")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Auto Dirt Disposal <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The robot vacuum has a special dock that automatically empties the robot's dustbin when it is docked" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "autoDirtDisposal" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "autoDirtDisposalDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("cleaningFeatures.autoDirtDisposal")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Barrier Cross Height <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The height of an obstacle/carpet/threshold the robot can climb." 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "barrierCrossHeight" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "barrierCrossHeightDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderStringRow("cleaningFeatures.barrierCrossHeight","mm")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Hepa Filter <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="HEPA is an acronym that stands for High-Efficiency Particulate Air. The HEPA filter is a type of mechanical air filter; it works by forcing air through a fine mesh that traps harmful particles such as pollen, pet dander, dust mites, and tobacco smoke. A robot vacuum with HEPA filtration is safer for allergy and asthma sufferers" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "hepaFilter" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "hepaFilterDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("cleaningFeatures.hepaFilter")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Washable Filter <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="This type of filter can be washed, so you don't need to replace it as often." 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "washableFilter" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "washableFilterDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("cleaningFeatures.washableFilter")}
@@ -308,56 +306,56 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Wet Mopping <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The robot can do mopping and sweeping. Most of the 2-in-1 cleaners come with a water tank and a mop cloth, a few models have a single mop cloth only" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "wetMopping" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "wetMoppingDesc" })} 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("moppingFeatures.wetMopping")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Electric Water Flow Control <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="An electric water pump inside the robot controls the water output depending on your needs. You can change the water output mode in the app" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "electricWaterFlowControl" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "electricWaterFlowControlDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("moppingFeatures.electricWaterFlowControl")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Water Tank Capacity <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The more water the water tank holds, the more significant cleaning area it covers before gets dry" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "waterTankCapacity" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "waterTankCapacityDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderStringRow("moppingFeatures.waterTankCapacity","ml")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Vibrating Mopping Pad <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The mopping pad of the robot vibrates which helps to get rid of stains from the floor" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "vibratingMoppingPad" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "vibratingMoppingPadDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("moppingFeatures.vibratingMoppingPad")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Auto Mop Lifting <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="Ability to automatically lift the mopping pad when a carpet is detected, so you can mop hard floors and vacuum carpets in a single clean" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "autoMopLifting" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "autoMopLiftingDesc" })} 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("moppingFeatures.autoMopLifting")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Auto Water Tank Refilling <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The robot supports a base that refills the water tank inside the robot with water after or during mopping." 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "autoWaterTankRefilling" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "autoWaterTankRefillingDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("moppingFeatures.autoWaterTankRefilling")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Auto Mop Washing <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The robot washes automatically the mop during or after mopping" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "autoMopWashing" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "autoMopWashingDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("moppingFeatures.autoMopWashing")}
@@ -368,32 +366,32 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Battery Capacity <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="A larger battery provides a longer running time on one charge." 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "batteryCapacity" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "batteryCapacityDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderStringRow("battery.batteryCapacity","mAh")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Battery Life <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="How much time the robot can work before needs to recharge" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "batteryLife" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "batteryLifeDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderStringRow("battery.batteryLife","min")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Charging Time <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="How much time the robot needs to recharge" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "chargingTime" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "chargingTimeDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderStringRow("battery.chargingTime","min")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Rated Power <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="Rated power is the max power the machine can deliver under normal circumstances" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "ratedPower" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "ratedPowerDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderStringRow("battery.ratedPower","W")}
@@ -404,56 +402,56 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Scheduling <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The feature allows setting the robot to start cleaning automatically at a specific time" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "scheduling" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "schedulingDesc" })} 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("control.scheduling")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Wifi Smartphone App <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The robot supports Wi-Fi and has a smartphone app; it can be controlled even when you are not at home" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "wifiSmartphoneApp" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "wifiSmartphoneAppDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("control.wifiSmartphoneApp")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Wifi Frequency Band <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="Some robot vacuums work only with 2.4 GHz wi-fi band, others can also work in 5 GHz wi-fi network" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "wifiFrequencyBand" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "wifiFrequencyBandDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderStringRow("control.wifiFrequencyBand","GHz")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Amazon Alexa Support <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The robot is compatible with Alexa-enabled devices, and can be controlled by voice commands" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "amazonAlexaSupport" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "amazonAlexaSupportDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("control.amazonAlexaSupport")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Google Assistant Support <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The robot works with Google Home so it can be controlled via simple voice commands" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "googleAssistantSupport" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "googleAssistantSupportDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("control.googleAssistantSupport")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Magnetic Virtual Walls <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="A physical wall barrier can be two types: magnetic tape and a block. They both work the same way by keeping the robot out of the areas you don't want to be cleaned" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "magneticVirtualWalls" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "magneticVirtualWallsDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("control.magneticVirtualWalls")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Ir Rf Remote Control <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The IR remote control helps to manage the robot's movements, schedule it to work, start, stop, etc" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "irRfRemoteControl" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "irRfRemoteControlDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("control.irRfRemoteControl")}
@@ -464,56 +462,56 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Real Time Tracking <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="Ability to watch in real-time where the robot is located on the map of your house and where it has already cleaned" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "realTimeTracking" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "realTimeTrackingDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("appFeatures.realTimeTracking")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Digital Blocked Areas <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="It means the app supports creating restricted areas the robot can not cross when is vacuuming. Helpful when you don't want the robot to go to certain places" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "digitalBlockedAreas" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "digitalBlockedAreasDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("appFeatures.digitalBlockedAreas")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Zoned Cleaning <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="You can make the robot clean within a particular area by setting a zone inside the app" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "zonedCleaning" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "zonedCleaning" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("appFeatures.zonedCleaning")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Multi Floor Maps <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The robot stores more than one map in memory. This feature is useful for people who live in a house with more than one level" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "multiFloorMaps" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "multiFloorMapsDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("appFeatures.multiFloorMaps")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Manual Movement Control <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="With this feature, the robot vacuum can be controlled like a radio car through the app" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "manualMovementControl" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "manualMovementControlDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("appFeatures.manualMovementControl")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Selected Room Cleaning <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="This option allows the robot vacuum to clean a specific room (or a few rooms) by selecting this room in the app." 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "selectedRoomCleaning" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "selectedRoomCleaningDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("appFeatures.selectedRoomCleaning")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">No Mop Zones <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="You can set virtual no-mop zones in the app to restrict the robot from going to certain places (for example with carpets) and it will avoid these areas in mopping mode" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "noMopZones" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "noMopZonesDesc" })} 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("appFeatures.noMopZones")}
@@ -524,32 +522,32 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Carpet Boost <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="Thanks to this feature, the robot increases suction power to maximum once its sensors recognize the carpeted surface. It helps to save battery life" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "carpetBoost" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "carpetBoostDesc" })} 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("sensor.carpetBoost")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Cliff Sensor <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="Cliff sensors prevent the robot from falling from stairs" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "cliffSensor" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "cliffSensorDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("sensor.cliffSensor")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Dirt Sensor <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The dirt detect feature helps the robot to provide more thoughtful cleaning by recognizing the dirtiest areas" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "dirtSensor" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "dirtSensorDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("sensor.dirtSensor")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Full Dustbin Sensor <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The robot has a sensor that detects when the dustbin is full and sends a notification to the user." 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "fullDustbinSensor" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "fullDustbinSensorDesc" })} 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderRow("sensor.fullDustbinSensor")}
@@ -560,24 +558,24 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Weight <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The total weight of the robot vacuum" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "weight" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "weightDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderStringRow("otherSpecifications.weight","kg")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Width <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="It refers to the robot's diameter (for round shaped robot vacuums) or width. Smaller diameter helps the robot to reach narrow places" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "width" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "widthDesc" })} 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {renderStringRow("otherSpecifications.width","cm")}
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Height <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="If you want to use the robot vacuum under your bed or furniture, check the gap between the floor and furniture and ensure the robot vacuum will fit under it." 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "height" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "heightDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 
@@ -585,8 +583,8 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">In The Box <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="What kind of accessories the package contents" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "inTheBox" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "inTheBoxDesc" })}
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {robots.map((item) => (
@@ -595,8 +593,8 @@ const CompareTable = () => {
               </tr>
               <tr>
                 <th scope="row">
-                  <span className="stickycell">Release Date <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
-                  data-bs-content="The date when the robot vacuum was released to the market" 
+                  <span className="stickycell">{SpecsRenderer({ textKey: "releaseDate" })} <a tabIndex="0" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" 
+                  data-bs-content={SpecsRenderer({ textKey: "releaseDateDesc" })} 
                   style={{color:"#000000",cursor:"pointer"}}><i className="fa-regular fa-circle-question fa-xs"></i></a></span>
                 </th>
                 {robots.map((item) => (

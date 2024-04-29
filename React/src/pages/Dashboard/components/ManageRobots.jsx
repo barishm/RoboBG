@@ -1,6 +1,5 @@
 import {
-  useDeleteRobotMutation,
-  useGetAllRobotsQuery,
+  useGetAllRobotsQuery
 } from "../../../app/services/robotApiSlice";
 import {
   useDeleteLinkMutation,
@@ -14,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Pagination from "../../../components/Pagination";
 import UploadRobotImage from "./UploadRobotImage";
 import CreateLink from "./CreateLink";
+import DeleteRobot from "./DeleteRobot";
 
 const ManageRobots = () => {
   const [Page, setPage] = useState(0);
@@ -27,15 +27,10 @@ const ManageRobots = () => {
     useGetAllRobotsQuery(queryParams);
   const [robotId, setRobotId] = useState(null);
   const [deleteLink] = useDeleteLinkMutation();
-  const [deleteRobot] = useDeleteRobotMutation();
   const noImage = "images/no-image.jpg";
   const { accessToken } = useSelector((state) => state.auth);
   const isLast = allRobots?.last;
 
-  const deleteRobotHandler = (e) => {
-    const id = e.target.value;
-    deleteRobot({ id, accessToken });
-  };
   const deleteLinkHandler = (e) => {
     const id = e.target.value;
     deleteLink({ id, accessToken });
@@ -51,6 +46,7 @@ const ManageRobots = () => {
           maxWidth: "500px",
         }}
       >
+        <DeleteRobot id={robotId} />
         <CreateRobot />
         <UpdateRobot id={robotId} />
         <input
@@ -166,7 +162,10 @@ const ManageRobots = () => {
                         type="button"
                         className="btn btn-danger btn-sm me-1 mt-1"
                         value={robot.id}
-                        onClick={deleteRobotHandler}
+                        onClick={(e) => {
+                          setRobotId(e.target.value);
+                        }}
+                        data-bs-toggle="modal" data-bs-target="#DeleteRobotModal"
                       >
                         Delete
                       </button>

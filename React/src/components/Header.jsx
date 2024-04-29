@@ -29,7 +29,14 @@ const Header = () => {
   return (
     <nav className="navbar navbar-expand-md bg-body-tertiary">
       <div className="container">
-        <a className="navbar-brand" href="#">
+        <a
+          className="navbar-brand"
+          href="#"
+          onClick={() => {
+            navigate('/');
+            closeCollapse();
+          }}
+        >
           RoboBG
         </a>
         <div className="d-flex align-items-center">
@@ -114,7 +121,7 @@ const Header = () => {
               <a
                 className="nav-link active"
                 aria-current="page"
-                style={{cursor:"pointer"}}
+                style={{ cursor: 'pointer' }}
                 onClick={() => {
                   navigate('/');
                   closeCollapse();
@@ -127,7 +134,7 @@ const Header = () => {
               <a
                 className="nav-link active"
                 aria-current="page"
-                style={{cursor:"pointer"}}
+                style={{ cursor: 'pointer' }}
                 onClick={() => {
                   navigate('/robots');
                   closeCollapse();
@@ -140,7 +147,7 @@ const Header = () => {
               <a
                 className="nav-link active"
                 aria-current="page"
-                style={{cursor:"pointer"}}
+                style={{ cursor: 'pointer' }}
                 onClick={() => {
                   navigate('/compare');
                   closeCollapse();
@@ -153,7 +160,7 @@ const Header = () => {
               <a
                 className="nav-link active"
                 aria-current="page"
-                style={{cursor:"pointer"}}
+                style={{ cursor: 'pointer' }}
                 onClick={() => {
                   navigate('/contact');
                   closeCollapse();
@@ -167,7 +174,7 @@ const Header = () => {
                 <a
                   className="nav-link active"
                   aria-current="page"
-                  style={{cursor:"pointer"}}
+                  style={{ cursor: 'pointer' }}
                   onClick={() => {
                     navigate('/dashboard');
                     closeCollapse();
