@@ -83,7 +83,7 @@ const Bests = () => {
                       {item.purchaseLinks.length > 0 &&
                         item.purchaseLinks.map((link) => (
                           <li key={link.id}>
-                            <a className="dropdown-item" href={link.link}>
+                            <a className="dropdown-item" target='_blank' href={link.link}>
                               {link.name}
                             </a>
                           </li>

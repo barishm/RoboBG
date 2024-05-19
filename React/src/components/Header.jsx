@@ -79,7 +79,7 @@ const Header = () => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <i className="fa-solid fa-globe"></i>
+              {lang === "bg" ? <img className='mb-1' src="/images/bulgaria.png" alt="Bulgarian" width="18" height="18" /> : <img className='mb-1' src="/images/united-kingdom.png" alt="English" width="18" height="18" />}
             </button>
             <ul
               className="dropdown-menu dropdown-menu-end"
@@ -224,7 +224,7 @@ const Header = () => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <i className="fa-solid fa-globe"></i>
+              {lang === "bg" ? <img className='mb-1' src="/images/bulgaria.png" alt="Bulgarian" width="18" height="18" /> : <img className='mb-1' src="/images/united-kingdom.png" alt="English" width="18" height="18" />}
             </button>
             <ul
               className="dropdown-menu dropdown-menu-end"
